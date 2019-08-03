@@ -3,7 +3,6 @@
 /.sonarlint
 /.nbproject
 /.components
-/vendor
 /web/documents
 /web/Fichiers_salaries
 /web/uploads
