@@ -1,0 +1,65 @@
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        Kbh\UserBundle\Entity\User: sha512
+#        Symfony\Component\Security\Core\User\User: plaintext
+        
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_SALARIE:   ROLE_SALARIE
+        ROLE_ADMIN:   ROLE_SALARIE
+        ROLE_SUPERVISEUR: ROLE_SALARIE
+        ROLE_TOP_MANAGER: ROLE_SALARIE
+        ROLE_GESTIONNAIRE_RH: ROLE_SALARIE
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_SUPERVISEUR,ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+
+#        in_memory:
+#            memory:
+#                users:
+#                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                    superviseur: { password: supervipass, roles: [ 'ROLE_SUPERVISEUR' ] }
+#                    syndicaliste: { password: syndicpass, roles: [ 'ROLE_SYNDICALISTE' ] }
+#                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+
+    # the main part of the security, where you can set up firewalls
+    # for specific sections of your app
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+ 
+        
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+       
+
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/book/security.html#security-book-access-control-matching-options
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        -  { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        -  { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        -  { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        -  { path: ^/dashbord-admin/, role: ROLE_ADMIN }
+        -  { path: ^/dashbord-super-admin/, role: ROLE_SUPER_ADMIN }
+        -  { path: ^/dashbord-superviseur/, role: ROLE_SUPERVISEUR }
+        -  { path: ^/dashbord-top-manager/, role: ROLE_TOP_MANAGER }
+        -  { path: ^/dashbord-gestionnaire-rh/, role: ROLE_GESTIONNAIRE_RH }
+        -  { path: ^/dashbord-salarie/, role: ROLE_SALARIE }
+        

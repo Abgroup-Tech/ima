@@ -1,0 +1,16 @@
+/.idea
+/.vscode
+/.sonarlint
+/.nbproject
+/.components
+/vendor
+/web/documents
+/web/Fichiers_salaries
+/web/uploads
+/composer.lock
+/UPGRADE-2.2.md
+/UPGRADE-2.3.md
+/UPGRADE-2.4.md
+/UPGRADE.md
+/app/cache
+/app/logs

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="app,web,gestion,conges" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+        <title>{% block title %}GDC | Web application{% endblock %}</title>
+        {% block stylesheets %}
+        <link href="{{ asset('bundles/kbhgestionconges/css/app.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/kbhgestionconges/css/animate.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/bootstrap.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/font.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/icon.css') }}" type="text/css" rel="stylesheet" />        
+        <link href="{{ asset('bundles/kbhgestionconges/js/datatables/datatables.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/js/calendar/bootstrap_calendar.css') }}" type="text/css" rel="stylesheet" />    
+        <link href="{{ asset('bundles/kbhgestionconges/js/chosen/chosen.css') }}" type="text/css" rel="stylesheet" />        
+        <link href="{{ asset('bundles/kbhgestionconges/js/slider/slider.css') }}" type="text/css" rel="stylesheet" />   
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+          <!--[if lt IE 9]>
+    <script src="{{ asset('js/ie/html5shiv.js') }}"></script>
+    <script src="{{ asset('js/ie/respond.min.js') }}"></script>
+    <script src="{{ asset('js/ie/excanvas.js') }}"></script>
+  <![endif]-->
+    </head>
+    <body class="container">
+            {% block header %}
+                           <section class="vbox">
+                <header class="bg-primary header header-md navbar navbar-fixed-top-xs box-shadow">
+                  <div class="navbar-header aside-md dk" style="width: 244px;height: 64px;">
+                    <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav">
+                      <i class="fa fa-bars"></i>
+                    </a>
+                    <a href="{{path('welcome') }}" class="navbar-brand">
+                      <img src="{{ asset('bundles/kbhgestionconges/images/logo_white.png') }}" class="m-r-sm" alt="scale">
+                      <span class="hidden-nav-xs">GDC</span>
+                    </a>
+                    <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
+                      <i class="fa fa-cog"></i>
+                    </a>
+                  </div>
+                  <ul class="nav navbar-nav hidden-xs">
+
+                    <div class="col-xs-4">
+                            <div class="padder-v">
+                              <a href="#">
+                                <span class="m-b-xs block">
+                                  <i class="i i-calendar i-2x text-white-lt"></i>
+                                </span>
+
+                              </a>
+                            </div>
+                          </div>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
+
+                    <!-- Toogle de notification -->
+
+                    <!-- <li class="hidden-xs">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="i i-chat3"></i>
+                        <span class="badge badge-sm up bg-danger count">2</span>
+                      </a>
+                      <section class="dropdown-menu aside-xl animated flipInY">
+                        <section class="panel bg-white">
+                          <div class="panel-heading b-light bg-light">
+                            <strong>You have <span class="count">2</span> notifications</strong>
+                          </div>
+                          <div class="list-group list-group-alt">
+                            <a href="#" class="media list-group-item">
+                              <span class="pull-left thumb-sm">
+                                <img src="images/a0.png" alt="..." class="img-circle">
+                              </span>
+                              <span class="media-body block m-b-none">
+                                Use awesome animate.css<br>
+                                <small class="text-muted">10 minutes ago</small>
+                              </span>
+                            </a>
+                            <a href="#" class="media list-group-item">
+                              <span class="media-body block m-b-none">
+                                1.0 initial released<br>
+                                <small class="text-muted">1 hour ago</small>
+                              </span>
+                            </a>
+                          </div>
+                          <div class="panel-footer text-sm">
+                            <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                            <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                          </div>
+                        </section>
+                      </section>
+                    </li> -->
+
+
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="thumb-sm avatar pull-left">
+                          <img src="{{ asset ('bundles/kbhgestionconges/images/avatar.png') }}" alt="...">
+                        </span>
+                       {{app.user.username}}<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu animated fadeInRight">            
+                        <li>
+                          <span class="arrow top"></span>
+                          <a href="{#{{ path('parametre', { 'id': app.user.getSalarieByUser.id }) }}#}" data-toggle="ajaxModal">Parametre</a>
+                        </li>
+                        <li>
+                          <a href="{{ path('sa_salarie_show') }}">Profile</a>
+                        </li>
+            <!--             <li>
+                          <a href="#">
+                            <span class="badge bg-danger pull-right">3</span>
+                            Notifications
+                          </a>
+                        </li> -->
+                        <li>
+                          <a href="{#{{ path('aide', { 'id': entity.id }) }}#}" data-toggle="ajaxModal">Aide</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="{{ path('fos_user_security_logout') }}" >Deconnexion</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>      
+                </header>
+               <!--Fin nav horizontale-->
+
+        {% endblock %}
+        
+        {% block main %}
+            
+        {% endblock%}
+        
+        {% block javascripts %} 
+         <script src="{{ asset('bundles/kbhgestionconges/js/jquery.min.js') }}" type="text/javascript"></script>
+         <script src="{{ asset('bundles/kbhgestionconges/js/bootstrap.js') }}" type="text/javascript"></script>    
+         <script src="{{ asset('bundles/kbhgestionconges/js/app.js') }}" type="text/javascript"></script>
+          <script src="{{ asset('bundles/kbhgestionconges/js/slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+           <script src="{{ asset('bundles/kbhgestionconges/js/datatables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+          <script src="{{ asset('bundles/kbhgestionconges/js/datatables/jquery.csv-0.71.min.js') }}" type="text/javascript"></script>    
+         <script src="{{ asset('bundles/kbhgestionconges/js/datatables/demo.js') }}" type="text/javascript"></script>
+          <script src="{{ asset('bundles/kbhgestionconges/js/app.plugin.js') }}"></script>
+          <script src="{{ asset('bundles/kbhgestionconges/js/parsley/parsley.min.js') }}"></script>
+          <script src="{{ asset('bundles/kbhgestionconges/js/wizard/jquery.bootstrap.wizard.js') }}"></script>
+          <script src="{{ asset('bundles/kbhgestionconges/js/wizard/demo.js') }}"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/calendar/bootstrap_calendar.js') }}"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/calendar/demo.js') }}"></script>  
+        <script src="{{ asset('bundles/kbhgestionconges/js/datepicker/bootstrap-datepicker.js') }}"></script>
+        <!-- slider -->
+        <script src="{{ asset('bundles/kbhgestionconges/js/slider/bootstrap-slider.js') }}"></script>
+        <!-- file input -->  
+        <script src="{{ asset('bundles/kbhgestionconges/js/file-input/bootstrap-filestyle.min.js') }}"></script>
+        <!-- wysiwyg -->
+        <script src="{{ asset('bundles/kbhgestionconges/js/wysiwyg/jquery.hotkeys.js') }}"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/wysiwyg/bootstrap-wysiwyg.js') }}"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/wysiwyg/demo.js') }}"></script>
+        <!-- markdown -->
+        <script src="{{ asset('bundles/kbhgestionconges/js/markdown/epiceditor.min.js') }}"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/markdown/demo.js') }}"></script>
+
+        <script src="{{ asset('bundles/kbhgestionconges/js/chosen/chosen.jquery.min.js') }}"></script>
+  <!-- Bootstrap -->
+  <!-- App -->
+        {% endblock %}
+        
+    </body>
+</html>

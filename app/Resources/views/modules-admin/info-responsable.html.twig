@@ -1,0 +1,19 @@
+{% if entity.superviseur %}
+<div class="portlet light" style="padding: 8px 20px 0px;">
+        <!-- STAT -->
+        <div class="row list-separated profile-stat">
+            <div class="col-md-12">
+                <h4 class="profile-desc-title uppercase" style="color: #345F98;">Responsable direct</h4>
+                <span class="profile-desc-text" style="color: #345F98; text-transform: justify;">
+                    <b>Nom & prénoms: </b><br/>
+                    {{ entity.superviseur.civilite }} {{ entity.superviseur }}<br/>
+                    <b>Email: </b><br/>
+                    <a href="mailto:{{ entity.superviseur.email }}">{{ entity.superviseur.email }}</a><br/>
+                    <b>Poste: </b><br/>
+                    {{ entity.superviseur.poste }}
+                </span>
+            </div>
+        </div>
+        <!-- END STAT -->
+</div>
+{% endif %}

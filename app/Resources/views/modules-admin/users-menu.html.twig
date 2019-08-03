@@ -1,0 +1,52 @@
+<!-- SIDEBAR MENU -->
+<div class="profile-usermenu">
+        <ul class="nav">
+                <li class="active">
+                        <a href="{{ path('ad_salarie_show', {'id': entity.id }) }}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-home"></i> Informations salarie</a>
+                </li>
+                <li>
+                        <a href="{{ path('ad_salarie_edit', {'id': entity.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-pencil"></i> Editer profil </a>
+                </li>
+                <li>
+                        <a href="{{ path('ad_salarie_edit_user', {'id': entity.user.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-settings "></i> Editer paramètre d'accès </a>
+                </li>
+                <li>
+                        <a href="{{ path('ad_salarie_edit_user_pass', {'id': entity.user.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-lock-open"></i> Editer mot de passe </a>
+                </li>
+                <li>
+                    {% if entity.user.enabled == "0" %}  
+                    <a href="{{ path('ad_salarie_active_compte', {'id': entity.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                     <i class="fa fa-check-circle text-success"></i> Activer compte
+                    </a>
+                     {% endif %}
+                     {% if entity.user.enabled == "1" %}
+                     <a href="{{ path('ad_salarie_desactive_compte', {'id': entity.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 17px;">    
+                          <i class="fa fa-times-circle text-danger"></i> Désactiver compte 
+                     </a>    
+                     {% endif %} 
+                </li>
+                <li>
+                        <a href="{{ path('ad_salarie_new_role', {'id': entity.user.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-plus"></i> Ajouter nouveau role </a>
+                </li>
+                <li>
+                        <a href="{{ path('ad_salarie_delete_role', {'id': entity.user.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 17px;">
+                         <i class="fa fa-minus-circle text-danger"></i> Retirer role </a>
+                </li>
+                <li>
+                        <a href="{{ path('ad_baseDroitsSalarie_edit', {'id': entity.user.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-settings"></i> Base calcul droits </a>
+                </li>
+                {#{% if entity.droits %}
+                <li>
+                        <a href="{{ path('ad_droits_edit', {'id': entity.droits.id })}}" style="text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                        <i class="icon-puzzle text-success"></i> Editer droits </a>
+                </li>
+                {% endif %}#}
+        </ul>
+</div>
+<!-- END MENU -->

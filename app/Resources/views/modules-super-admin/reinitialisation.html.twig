@@ -1,0 +1,77 @@
+{% for item in 1..15 %}
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="{{item}}-table" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Attention !!!</h4>
+            </div>
+            <div class="modal-body">
+               
+                <div class="alert alert-danger" >
+                  {% if item == 15 or item == 11%}
+                <p>En comfirmant cette action vous risquez de reinitialiser les données.<br/>
+                    Souhaitez-vous vraiment confirmer cette action !?.</p>
+                 {% else %}
+                 <p>En comfirmant cette action vous risquez de supprimer les données des tables ayant des relations avec celle-ci.<br/>
+                    Souhaitez-vous vraiment confirmer cette action !?.</p>
+                 {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                {% if item == 1%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Absences-à-justifier' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 2%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Absences-arrêt-de-travail' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 3%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Absences' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 4%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Congés' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 5%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Demandes' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 6%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Documents' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 7%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Pièces-jointes' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 8%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Log-update-mensuel' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 9%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Log-update-annuel' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 10%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Notifications' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 11%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Etats' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 12%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Historique-des-droits' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 13%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Historique-des-activités' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 14%}
+                <a href="{{ path('sup_ad_reinitialisation_donnees', { 'table': 'Reports-de-congés' }) }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                {% if item == 15%}
+                <a href="{{ path('sup_ad_droits_transfert') }}" class="btn red" >Confirmer</a>
+                {% endif %}
+                <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+{% endfor%}

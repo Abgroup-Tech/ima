@@ -1,0 +1,17 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: ima_premium
+    database_user: ima-admin1
+    database_password: VZbqdbmdSKrdLrhC
+    mailer_transport: smtp
+    mailer_host: mail.gna-assurance.com
+    mailer_user: ima@gna-assurance.com
+    mailer_password: demoGna-assurance
+    locale: fr
+    secret: 3d795a5a32bbde55cd2ec372467a28d3
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true

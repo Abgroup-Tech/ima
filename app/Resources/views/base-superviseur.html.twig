@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="app,web,gestion,conges" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+        <title>{% block title %}IMA | Démonstration{% endblock %}</title>
+        {% block stylesheets %}
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+            <link href="{{ asset('bundles/kbhgestionconges/css/font-googleapis.css') }}" type="text/css" rel="stylesheet" /> 
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css">
+             <link href="{{ asset('bundles/kbhgestionconges/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" /> 
+            <!-- END GLOBAL MANDATORY STYLES -->
+
+                        <!-- BEGIN PAGE LEVEL STYLES -->
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/select2/select2.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+            <!-- END PAGE LEVEL STYLES -->
+
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" type="text/css" rel="stylesheet" /> 
+            
+            <!-- BEGIN PAGE LEVEL STYLES -->
+            <link href="{{ asset('bundles/kbhgestionconges/css/jquery-ui.min.css') }}" rel='stylesheet' />
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('bundles/kbhgestionconges/assets/admin/pages/css/profile.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('bundles/kbhgestionconges/assets/admin/pages/css/tasks.css') }}" rel="stylesheet" type="text/css"/>
+            <!-- END PAGE LEVEL STYLES -->
+            <!-- BEGIN THEME STYLES -->
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/css/components-rounded.css') }}" id="style_components" rel="stylesheet" type="text/css">
+            <link href="{{ asset('bundles/kbhgestionconges/assets/global/css/plugins.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('bundles/kbhgestionconges/assets/admin/layout3/css/layout.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('bundles/kbhgestionconges/assets/admin/layout3/css/themes/default.css') }}" rel="stylesheet" type="text/css" id="style_color">
+            <link href="{{ asset('bundles/kbhgestionconges/assets/admin/layout3/css/custom.css') }}" rel="stylesheet" type="text/css">
+            
+            
+            <!-- END THEME STYLES -->
+            <link rel="shortcut icon" href="favicon.ico"/>
+        {% endblock %}
+ <script src="{{ asset('bundles/kbhgestionconges/js/jquery.min.js') }}" type="text/javascript"></script>
+{#<script src="{{ asset('bundles/kbhgestionconges/js/ajaxDate.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/ajaxAbs.js') }}" type="text/javascript"></script>#}
+    </head>
+    <body>
+            {% block header %}
+ <!-- BEGIN HEADER -->
+<div class="page-header">
+        <!-- BEGIN HEADER TOP -->
+        <div class="page-header-top">
+                <div class="container">
+                        <!-- BEGIN LOGO -->
+                        <div class="page-logo" style="font-size:32px;position:relative; padding-top: 10px">
+                            <a href="{{ path('welcome') }}" style="text-decoration:inherit">
+                                <span class="caption-subject font-blue-madison bold uppercase">
+                                    <img style="margin-top: -6px !important;position: relative;" src="{{ asset('bundles/kbhgestionconges/images/logo.png')}}"/>
+                                    IMA
+                                </span> 
+								<!-- <small style="width: 100%;position: fixed;padding-left: 7px;margin-top: 7px;">PROGICIEL DE GESTION DES ABSENCES - LA POSTE</small> -->
+                            </a>
+                        </div>
+                        <!-- END LOGO -->
+                        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                        <a href="javascript:;" class="menu-toggler"></a>
+                        <!-- END RESPONSIVE MENU TOGGLER -->
+                        <!-- BEGIN TOP NAVIGATION MENU -->
+                        <div class="top-menu">
+                                <ul class="nav navbar-nav pull-right">
+                                        <!-- BEGIN NOTIFICATION DROPDOWN -->
+                                   
+                                        <!-- END NOTIFICATION DROPDOWN -->
+                                        <!-- BEGIN TODO DROPDOWN -->
+                                        <li class="dropdown dropdown-user dropdown-light">
+                                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <span class="username username-hide-mobile">Le {{ "now"|localizeddate('full', 'none') }}</span>
+                                                </a>
+                                        </li>
+                                        <!-- END TODO DROPDOWN -->
+                                        <li class="droddown dropdown-separator">
+                                                <span class="separator"></span>
+                                        </li>
+                                        <!-- BEGIN INBOX DROPDOWN -->
+                                        
+                                        <!-- END INBOX DROPDOWN -->
+                                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                                        <li class="dropdown dropdown-user dropdown-light">
+                                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                {#<img alt="" class="img-circle" src="{{ asset('bundles/kbhgestionconges/assets/admin/layout3/img/avatar9.jpg')}}">#}
+                                                <span class="username username-hide-mobile">Bienvenue, {{app.user.username}} </span><i class="icon-user"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-default">
+                                                        <li>
+                                                                <a href="{{ path('welcome') }}">
+                                                                <i class="icon-home"></i> Accueil </a>
+                                                        </li>
+                                                        <li>
+                                                                <a href="mailto:koussi@referant.com">
+                                                                <i class="icon-info"></i> Aide ?</a>
+                                                        </li>
+                                                        <li class="divider">
+                                                        </li>
+                                                       {#<li>
+                                                                <a href="extra_lock.html">
+                                                                <i class="icon-lock"></i> Verrouiller </a>
+                                                        </li>#}
+                                                        <li>
+                                                                <a href="{{ path('fos_user_security_logout') }}">
+                                                                <i class="icon-logout"></i> Me déconnecter </a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <!-- END USER LOGIN DROPDOWN -->
+                                </ul>
+                        </div>
+                        <!-- END TOP NAVIGATION MENU -->
+                </div>
+        </div>
+        <!-- END HEADER TOP -->
+        <!-- BEGIN HEADER MENU -->
+        <div class="page-header-menu">
+                <div class="container">
+                        <!-- BEGIN HEADER SEARCH BOX -->
+                        
+                        <!-- END HEADER SEARCH BOX -->
+                        <!-- BEGIN MEGA MENU -->
+                        <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+                        <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+                        <div class="hor-menu ">
+                                <ul class="nav navbar-nav">
+                                        <li>
+                                                <a href="{{ path('welcome')}}">Accueil</a>
+                                        </li>
+                                        <li class="menu-dropdown classic-menu-dropdown ">
+                                                <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                                Demandes <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-left">
+                                                        <li class=" ">
+                                                            <a href="{{ path('superviseur_demande_conge_new')}}"><i class=" icon-plane" style="margin-top: -5px"></i> Nouveau congé </a> 
+                                                        </li>
+                                                        <li class=" ">
+                                                            <a href="{{ path('superviseur_demande_absence_new')}}"><i class="icon-note"></i> Nouvelle permission </a> 
+                                                        </li>
+                                                       <li class=" ">
+                                                            <a href="{{ path('superviseur_demande_conge_for_salarie')}}"><i class="icon-envelope "></i> Congé pour collaborateur </a> 
+                                                        </li>
+                                                        <li class=" ">
+                                                            <a href="{{ path('superviseur_demande_permission_for_salarie')}}"><i class="icon-book-open"></i> absence pour collaborateur </a> 
+                                                        </li>
+                                                        <li class=" ">
+                                                           <a href="{{ path('superviseur_demandes')}}"><i class=" icon-info"></i> Historique</a> 
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="menu-dropdown classic-menu-dropdown ">
+                                                <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                                Collaborateurs <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-left">
+                                                        <li class=" ">
+                                                           <a href="{{ path('collaborateur_droits')}}"><i class="icon-docs"></i> Droits </a> 
+                                                        </li>
+                                                        <li class=" ">
+                                                            <a href="{{ path('planning')}}"><i class="icon-calendar"></i> Calendrier absences</a> 
+                                                        </li>
+                                                       <li class=" ">
+                                                           <a href="{{ path('reports')}}"><i class="icon-clock"></i> Report congé</a> 
+                                                        </li>
+                                                       {# <li class=" ">
+                                                           <a href="{{ path('collab_statistiques')}}"><i class="icon-bar-chart"></i> Statistiques</a> 
+                                                        </li>#}
+                                                </ul>
+                                        </li>
+                                        <li class="menu-dropdown classic-menu-dropdown ">
+                                                <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                                Aide ? <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-left">
+                                                        <li class=" ">
+                                                                <a href="{{ path('sup_faq') }}"><i class=" icon-globe"></i> FAQ </a> 
+                                                        </li>
+                                                        <li class=" ">
+                                                            <a href="mailto:koussi@referant.com"><i class=" icon-info"></i> Besoin d'aide ? </a> 
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                </ul>
+                        </div>
+                        <!-- END MEGA MENU -->
+                </div>
+        </div>
+        <!-- END HEADER MENU -->
+</div>
+<!-- END HEADER -->
+            {% endblock %}
+        
+        {% block main %}
+            
+        {% endblock%}
+        
+        {% block footer %}
+<!-- BEGIN PRE-FOOTER -->
+<div class="page-prefooter" style="padding-bottom: 0px;padding-top: 0px;">
+<div class="container">
+       <div class="row">
+       </div>
+</div>
+</div>
+<div class="page-footer">
+	<div class="container">
+            <center> 2015 &copy; IMA. Tous droits réservés - Pôles Compétences SARL.</center>
+	</div>
+</div>
+<div class="scroll-to-top">
+	<i class="icon-arrow-up"></i>
+</div>
+<!-- END PRE-FOOTER -->
+        {% endblock%}
+
+        {% block javascripts %} 
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/respond.min.js') }}"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/excanvas.min.js') }}"></script> 
+<![endif]-->
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery-migrate.min.js') }}" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery.cokie.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery.sparkline.min.js') }}" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/select2/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js') }}"></script>
+<!-- END PAGE LEVEL PLUGINS --> 
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/table-managed.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/table-advanced.js') }}" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery.pulsate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/holder.js') }}" type="text/javascript"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+    <script src="{{ asset('bundles/kbhgestionconges/assets/global/plugins/bootstrap-toastr/toastr.min.js') }}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+    <script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/ui-toastr.js') }}" type="text/javascript"></script>
+
+<script src="{{ asset('bundles/kbhgestionconges/assets/global/scripts/metronic.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/layout3/scripts/layout.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/layout3/scripts/demo.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/profile.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/ui-general.js') }}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script>
+jQuery(document).ready(function() {     
+  Metronic.init(); // init metronic core components
+  Layout.init(); // init current layout
+  UIGeneral.init();  
+//  Login.init();
+  Demo.init();
+  TableManaged.init();
+//  UIToastr.init();
+//  ComponentsFormTools.init();
+});
+</script>
+<!-- END JAVASCRIPTS -->
+<style>
+    .portlet.calendar .fc-event .fc-title {
+        text-align: left;
+        float: left;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 300;
+        padding: 4px;
+    }
+</style>
+ {% endblock %}      
+    </body>
+</html>

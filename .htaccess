@@ -1,0 +1,11 @@
+#RewriteEngine on
+#RewriteBase /
+#
+#RewriteCond %{REQUEST_URI} !^/web/
+#
+## Rewrites all URLS [Replace "domain" with the actual domain, without the TLD (.com, .net, .biz, etc)]
+#RewriteCond %{HTTP_HOST} ^(\.)?grhappdemo.ivolife.com\.
+#RewriteCond %{HTTP_HOST} ^(www\.)?grhappdemo.ivolife.com\.
+#
+## Rewrite all those to insert /folder
+#RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [L]

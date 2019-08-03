@@ -1,0 +1,97 @@
+<!-- BEGIN HEADER MENU -->
+<div class="page-header-menu">
+        <div class="container">
+                <!-- BEGIN HEADER SEARCH BOX -->
+                
+                <!-- END HEADER SEARCH BOX -->
+                <!-- BEGIN MEGA MENU -->
+                <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+                <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+                <div class="hor-menu ">
+                        <ul class="nav navbar-nav">
+                                <li>
+                                        <a href="{{ path('welcome')}}">Tableau de bord</a>
+                                </li>
+                                <li class="menu-dropdown  ">
+                                        <a data-hover="menu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                       Gestion entreprise<i class="fa fa-angle-down"></i>
+                                        </a>
+                                       <ul class="dropdown-menu">
+                                           <li><a href="{{ path('ad_organigrammeunite')}}"><i class="fa fa-angle-right"></i>
+                                            Liste unités </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_absencesat_new')}}"><i class="fa fa-angle-right"></i>
+                                            Nouvelle arrêt </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_absencesajustifier')}}"><i class="fa fa-angle-right"></i>
+                                            Absences à justifier</a>
+                                           </li>
+                                           <li class="dropdown-submenu  ">
+                                            <a data-hover="submenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle"><i class="fa fa-angle-right"></i>
+                                            Documents
+                                            </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="{{ path('ad_piecesJointes_show')}}"><i class="fa fa-angle-right"></i>
+                                                     Pièces jointes </a>
+                                                    </li>
+                                                    <li><a href="{{ path('ad_documents_show') }}"><i class="fa fa-angle-right"></i>
+                                                     Documents importés</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                       </ul>
+                                </li>
+                               {# <li class="menu-dropdown  ">
+                                        <a data-hover="menu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                        Gestion entreprise<i class="fa fa-angle-down"></i>
+                                        </a>
+                                       <ul class="dropdown-menu">
+                                           <li><a href="{{ path('ad_organigrammeunite')}}"><i class="fa fa-angle-right"></i>
+                                            Des unités </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_periodedepotdemandes_new') }}"><i class="fa fa-angle-right"></i>
+                                            Période de dépôt </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_periodetraitementdemandes_new') }}"><i class="fa fa-angle-right"></i>
+                                            Période de traitement </a>
+                                           </li>
+                                       </ul>
+                                </li>#}
+                                <li class="menu-dropdown  ">
+                                        <a data-hover="menu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                        Historique<i class="fa fa-angle-down"></i>
+                                        </a>
+                                       <ul class="dropdown-menu">
+                                           <li><a href="{{ path('ad_historique_event')}}"><i class="fa fa-angle-right"></i>
+                                            Des évènements </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_historique_activities') }}"><i class="fa fa-angle-right"></i>
+                                            Des activités </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_absencesat') }}"><i class="fa fa-angle-right"></i>
+                                            Arrêt de travail </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_historique_mise_ajours') }}"><i class="fa fa-angle-right"></i>
+                                            Des mises à jours </a>
+                                           </li>
+                                       </ul>
+                                </li>
+                                <li class="menu-dropdown  ">
+                                        <a data-hover="menu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                                        Paramètres <i class="fa fa-angle-down"></i>
+                                        </a>
+                                       <ul class="dropdown-menu">
+                                           <li><a href="{{ path('ad_systeme_show')}}"><i class="fa fa-angle-right"></i>
+                                            Système </a>
+                                           </li>
+                                           <li><a href="{{ path('ad_faq') }}"><i class="fa fa-angle-right"></i>
+                                            FAQ </a>
+                                           </li>
+                                       </ul>
+                                </li>
+                        </ul>
+                </div>
+                <!-- END MEGA MENU -->
+        </div>
+</div>
+<!-- END HEADER MENU -->
