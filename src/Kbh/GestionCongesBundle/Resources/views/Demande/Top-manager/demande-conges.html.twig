@@ -1,0 +1,243 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+    <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Formulaire <small> de demande</small></h1>
+                </div>
+                <!-- END PAGE TITLE -->
+            </div>
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+            <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Widget settings form goes here
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                        <a href="#">Demandes</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li class="active">
+                        Nouveau Congé
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-note font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Formulaire de demande de congé</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_1">
+                                        <p></p>
+                                        <!-- BEGIN DES RECAP DE DROITS -->
+                                        <br/>
+                                        <div class="row" style="margin-bottom: -18px !important;  border-bottom:1px solid #eaeef1; padding-bottom: 35px;">
+                                            <div class="col-lg-12">
+                                                <div class="row list-separated text-center clearfix">
+                                                    <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                        <div class="font-grey-mint font-sm">
+                                                            Cumul congés acquis
+                                                        </div>
+                                                        <div class="uppercase font-hg font-blue-sharp">
+                                                            {{ droits.CumulDroitsAcquis }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                        <div class="font-grey-mint font-sm">
+                                                            Congés pris
+                                                        </div>
+                                                        <div class="uppercase font-hg font-blue-sharp">
+                                                            {{ droits.DroitsPris }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                        <div class="font-grey-mint font-sm">
+                                                            Solde congés
+                                                        </div>
+                                                        <div class="uppercase font-hg font-blue-sharp">
+                                                            {{ droits.totalDroitsAprendre }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                         
+                                        <!-- END DES RECAP DE DROITS -->
+                                        <br/>
+                                        <!-- BEGIN CHAMP FORMULAIRE -->
+                                        <div class="row">
+                                            <div class="portlet light">
+                                                <div class="portlet-body form">
+                                                    <!-- BEGIN FORM-->
+                                                    {{ form_start(form, {'attr': {'data-validate' : 'parsley', 'class': 'form-horizontal'}}) }}
+                                                    <div class="form-body" id="form-demande">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12" style="margin-bottom:10px !important;" >
+                                                                <label class="control-label col-md-3"></label>
+                                                                <div class="col-md-6">
+                                                                 {#   {% if depot.statut == "En cours"%}
+                                                                        <div class="alert alert-success pull-in" style="margin-bottom:0px !important; text-align: center;">
+                                                                            <b>Debut de la période de demandes de congés.<br/>
+                                                                                Cette période prendra fin le : {{ depot.dateFin|date('d-m-Y') }}, Soit dans 
+                                                                                {% if nbJours < 0 %}0  jour(s){% endif %}
+                                                                                {% if nbJours >= 0 %}{{nbJours}}  jour(s).{% endif %}</b>
+                                                                            <div class="progress progress-striped active"  style="margin-top: 10px;">
+                                                                                <div class="progress-bar progress-bar-success tooltips" role="progressbar" data-placement="bottom" data-original-title="Jours écoulés : {{nbJoursTotal-nbJours}} / {{nbJoursTotal}}" aria-valuenow="40 "aria-valuemin="0" aria-valuemax="100" style="width: {{pourcentage}}%">
+                                                                                </div>
+                                                                            </div>       
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if depot.statut == "Clôturé" and traitement.statut == "En attente"%}
+                                                                        <div  class="alert alert-danger pull-in" style="margin-bottom:0px !important; text-align: center;{% if "now"|date('d-m-y') < depot.dateFin|date_modify('+2 day')|date('d-m-y') %} display:none; {%endif%}">
+                                                                            <b>Fin de la période de demandes de congés. Les demandes<br/>
+                                                                                seront traitées à partir du : {{ traitement.dateDebut|date('d-m-Y') }}</b>
+                                                                            <div class="progress progress-striped active" style="margin-top: 10px;">
+                                                                                <div class="progress-bar progress-bar-danger tooltips" role="progressbar" data-placement="bottom" data-original-title="Jours écoulés : {{nbJoursTotal-nbJours}} / {{nbJoursTotal}}" aria-valuenow="40 "aria-valuemin="0" aria-valuemax="100" style="width: {{pourcentage}}%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endif %}#}
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-md-12" style="padding-top: 18px;">
+                                                                <div class="form-group">
+
+                                                                    <label class="control-label col-md-3">Durée</label>
+                                                                    <div class="col-md-6">
+                                                                        {# <input id="nbJours" name="nbJours" min="1" type="number" step="1" class="form-control">#}
+                                                                        {{ form_widget(form.nbJoursOuvrables, {'attr': {'min': '1','class': 'form-control','type': 'number'}}) }}
+                                                                        <span class="help-block">
+                                                                            Précisez le nombre de jours ouvrables que vous désirez avoir</span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Date Départ</label>
+                                                                    <div class="col-md-6">
+                                                                        <div class="col-md-12 input-group">
+                                                                            <div class="input-icon">
+                                                                                <i class="fa fa-calendar fa-fw"></i>
+                                                                                <input id="dateDebut" class="form-control" type="date">
+                                                                                {#{{ form_widget(form.dateDebut, {'attr': {'class': 'form-control', 'type': 'date'}}) }}#}
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="help-block">
+                                                                            Précisez le jour de votre départ en congé</span>        
+                                                                    </div>
+                                                                    <span class="help-block">
+                                                                        {{ form_errors(form.dateDebut) }}</span>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                        </div> 
+                                                    </div>
+                                                    <div class="row">
+                                                        <footer class="panel-footer text-right bg-light lter">
+                                                            <input id="confirmer" type="submit" class="btn btn-success btn-s-xs" value="Soumettre"/>
+                                                        </footer>
+                                                        <span style="display: none;">{{ form_rest(form) }}</span>
+                                                        {{ form_end(form) }}
+                                                    </div>                                    
+                                                    <!-- END FORM-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PAGE CONTAINER-->
+                    </div>
+                    <!-- BEGIN PAGE CONTENT -->
+                </div>
+                <!-- END PAGE CONTENT -->
+            </div>
+            <!-- BEGIN PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTENT -->
+        <script>
+        $("document").ready( function() {
+           $("#confirmer").click(function () {
+               $('#kbh_gestioncongesbundle_demande_dateDebut').val($('#dateDebut').val());
+           });
+
+            //declenchement de la fonction au changement du nombre de jours
+//            $("#calculer").click( function() {
+//             if ($("#kbh_gestioncongesbundle_demande_dateDebut").val.length !== 0 && $("#nbJours").val.length !== 0)  {
+//                $.ajax({
+//                    type : "GET",
+//                    url : "http://www.grhappdemo.ivolife.com/web/app_dev.php/dashboard-salarie/date/"+$("#nbJours").val()+"/"+$("#kbh_gestioncongesbundle_demande_dateDebut").val(),
+//                    async:   true,
+//                                dataType: 'json',
+//                                crossDomain: true,
+//                                beforeSend : function() {
+//                                if ( $(".loading").length === 0 ) {
+//                                $("#kbh_gestioncongesbundle_demande_dateFin").parent().append('<i class="loading" style="margin-right: 7px;margin-top: -32px;"></i>');
+//                                $("#kbh_gestioncongesbundle_demande_dateRetour").parent().append('<i class="loading" style="margin-right: 7px;margin-top: -32px;"></i>');
+//                                console.log("chargement !!!");
+//                             }
+//                    },
+//                    success : function(data) {
+//                        $("#kbh_gestioncongesbundle_demande_dateFin").val(data.DateFin);
+//                        $("#kbh_gestioncongesbundle_demande_nbJoursOuvrables").val($("#nbJours").val());
+//                        $("#kbh_gestioncongesbundle_demande_dateRetour").val(data.RetourConge);
+//                       $(".loading").remove();
+//                        console.log("date : "+data.RetourConge+" okey!!!");
+//                    },
+//                    error : function() {
+//                        $("#kbh_gestioncongesbundle_demande_dateFin").val("");
+//                        $("#kbh_gestioncongesbundle_demande_nbJoursOuvrables").val("");
+//                        $("#kbh_gestioncongesbundle_demande_dateRetour").val("");
+//
+//                    $(".loading").remove();
+//                    }
+//
+//                });
+//
+//               }
+//
+//            });
+
+        });
+        </script>
+    {% endblock %}

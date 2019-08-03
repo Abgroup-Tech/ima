@@ -1,0 +1,119 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE HEAD -->
+      
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                {#<li>
+                        <a href="#">Demandes</a>
+                        <i class="fa fa-circle"></i>
+                </li>#}
+                <li class="active">
+                    Historique des évènements
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-note font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Historique des Evènements</span>
+                            </div>
+                            {#<div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config">
+                                </a>
+                            </div>#}
+                        </div>
+                        <div class="portlet-body">
+                            {# <ul class="nav nav-pills">
+                                     <li class="active">
+                                             <a href="#tab_1" data-toggle="tab">
+                                             Historique Congés</a>
+                                     </li>
+                                     <li>
+                                             <a href="#tab_2" data-toggle="tab">
+                                             Historique Permissions </a>
+                                     </li>
+                             </ul>#}
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="tab_1">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light" >
+                                            <thead>
+                                            <th>N°</th>
+                                            <th>Historique évènements</th>
+                                                {#<th width="30%">statut</th>#}
+                                            <th>Date de Réception </th>
+                                            </thead>
+                                            <tbody>
+                                                {% set num = 1%}
+                                                {% for notification in notifications %}
+                                                    {% if notification.messageValideurSuivant %}  
+                                                        <tr>
+                                                            <td>{{ num }}</td>
+                                                            <td>  <a href="{{ path('ad_absencesajustifier') }}">{{notification.messageValideurSuivant}}</a> 
+                                                                {% if notification.VuParAdmin == 0 %}<span class="badge badge-danger" style="float: right;"> nouveau </span>{% endif %}</td>
+                                                                                
+                                                            <td>{{ notification.dateEnvoi|date('d-m-Y H:i:s') }}</td>
+                                                        </tr>
+                                                    {% endif %}
+                                                      {% set num = num + 1%}   
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+            color:#345F98 !important;
+        }
+    </style>
+
+{% endblock %}

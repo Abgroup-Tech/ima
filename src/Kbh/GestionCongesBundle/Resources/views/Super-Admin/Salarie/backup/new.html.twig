@@ -1,0 +1,53 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('ad_salarie') }}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Ajouter un nouveau Salarié</h3>
+                </header>
+            <section class="scrollable wrapper">              
+              <div class="row">
+                <div class="col-lg-12">
+                  
+                    <div class="panel panel-default">
+
+                      <div class="panel-body">
+                        
+                        <div class="alert alert-info">
+                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                  <i class="fa fa-info-sign"></i><strong>Attention ! </strong> Veillez à toujours vous assurer que le nombre d'employés est inférieur au nombre maximum de salairié ...
+                                  Pour plus d'informations veuillez contacter notre service client !
+                         </div>
+                         <hr/>
+                                 <div class="padder-v text-center clearfix">                            
+                                  <div class="col-lg-6 b-r">
+                                    <div class="h3 font-bold">1800</div>
+                                    <small class="text-muted">Nombre de salariés</small>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="h3 font-bold text-danger">1850</div>
+                                    <small class="text-muted">Nombre maximum de salariés</small>
+                                  </div>
+                                </div>
+                                <hr/>
+                        <div class="line line-lg"></div>
+                        <div class="tab-pane" id="step1" style="padding-left: 300px;" >  
+                        {{ form_start(form, {'attr': {'data-validate' : 'parsley'}}) }}
+                         {{ form_rest(form) }}
+                         <br/>
+                         <button style="margin-left: 400px;" type="submit" class="btn btn-success btn-s-xs">Soumettre</button>
+                         </div>     
+                      </div>
+                    </div>
+                  {{ form_end(form) }}
+                </div>
+              </div> 
+            </section>
+       </section>           
+        </section>
+
+{% endblock %}

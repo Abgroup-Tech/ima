@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Salarie</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ entity.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Numerocnps</th>
+                <td>{{ entity.numeroCnps }}</td>
+            </tr>
+            <tr>
+                <th>Civilite</th>
+                <td>{{ entity.civilite }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ entity.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Nomprenom</th>
+                <td>{{ entity.nomprenom }}</td>
+            </tr>
+            <tr>
+                <th>Datenaissance</th>
+                <td>{{ entity.dateNaissance|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Statutmarital</th>
+                <td>{{ entity.statutMarital }}</td>
+            </tr>
+            <tr>
+                <th>Poste</th>
+                <td>{{ entity.poste }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ entity.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Dateembauche</th>
+                <td>{{ entity.dateEmbauche|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Typecontrattravail</th>
+                <td>{{ entity.typeContratTravail }}</td>
+            </tr>
+            <tr>
+                <th>Dureecontrat</th>
+                <td>{{ entity.dureeContrat }}</td>
+            </tr>
+            <tr>
+                <th>Statutemploi</th>
+                <td>{{ entity.statutEmploi }}</td>
+            </tr>
+            <tr>
+                <th>Datedepartentreprise</th>
+                <td>{{ entity.dateDepartEntreprise|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('salarie') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('salarie_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

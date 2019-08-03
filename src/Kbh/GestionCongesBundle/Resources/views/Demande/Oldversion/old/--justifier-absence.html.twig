@@ -1,0 +1,359 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Formulaires <small> des demandes</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                </div>
+        </div>    
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                                <a href="#">Demandes</a>
+                                <i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                                Justification absence
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">Formulez votre demande de justification d'absence</span>
+                                                </div>
+                                                <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                                  {#<ul class="nav nav-pills">
+                                                        <li class="active">
+                                                                <a href="#tab_1" data-toggle="tab">
+                                                                Creer une nouvelle demande </a>
+                                                        </li>
+                                                        <li>
+                                                                <a href="#tab_2" data-toggle="tab">
+                                                                Justifier une absence </a>
+                                                        </li>
+                                                </ul>#}
+                                                <div class="tab-content">
+                                                        <div class="tab-pane fade active in" id="tab_1">
+                                                                <p></p>
+                                                 <!-- BEGIN DES RECAP DE DROITS -->
+                                                         <br/>
+                                                         <div class="row" style=" border-top: 1px solid #eaeef1; border-bottom:1px solid #eaeef1; padding-bottom: 20px; padding-top: 20px;">
+                                                                <div class="col-lg-12">
+                                                                   <div class="row list-separated text-center clearfix">
+                                                                        <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                                                <div class="font-grey-mint font-sm">
+                                                                                         Permissions prises
+                                                                                </div>
+                                                                                <div class="uppercase font-hg font-blue-sharp">
+                                                                                         {{ droits.permissionsPrises }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                                                <div class="font-grey-mint font-sm">
+                                                                                         Solde permissions
+                                                                                </div>
+                                                                                <div class="uppercase font-hg font-blue-sharp">
+                                                                                         {{ droits.soldePermissions }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                                                </div>
+                                                                        </div>
+                                                                         <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                                            <div class="font-grey-mint font-sm">
+                                                                                     Solde congés
+                                                                            </div>
+                                                                            <div class="uppercase font-hg font-blue-sharp">
+                                                                                     {{ droits.totalDroitsAprendre }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                                            </div>
+                                                                        </div>        
+                                                                </div>
+                                                           </div>
+                                                    </div>                         
+                                                <!-- END DES RECAP DE DROITS -->
+                                                    <br/><br/>
+                                                <!-- BEGIN CHAMP FORMULAIRES -->
+                                                    <div class="row">
+                                                       <div class="portlet light">
+                                                               <div class="portlet-body form">
+                                                                            <!-- BEGIN FORM-->
+                                                                                {{ form_start(form, {'attr': {'data-validate' : 'parsley', 'class': 'form-horizontal'}}) }}
+                                                                                    <div class="form-body" id="form-demande">
+                                                                                           
+                                                                                            <div class="row">
+                                                                                                    <div class="col-md-6">
+                                                                                                             <div class="form-group">
+                                                                                                                    <label class="control-label col-md-3">Motif</label>
+                                                                                                                    <div class="col-md-9">
+                                                                                                                        <div class="input-group">
+                                                                                                                            <select id="btn-motif" data-required="true" class="form-control">
+                                                                                                                                    <option  value="">Choisissez un motif</option>
+                                                                                                                                    {% for types in types%}
+                                                                                                                                    <option id="motifAbs" value="{{ types.motif }}">{{ types.motif }}</option>
+                                                                                                                                     {% endfor %}
+                                                                                                                                </select>
+                                                                                                                            <span class="input-group-btn">
+                                                                                                                            <button id="rechercher" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i>Valider</button>
+                                                                                                                            </span> 
+                                                                                                                      </div>
+                                                                                                                        <span class="help-block">
+                                                                                                                        Choisisssez le motif de votre absence
+                                                                                                                    </span>        
+                                                                                                                  </div>              
+                                                                                                            </div>        
+                                                                                                    </div>
+                                                                                                    <!--/span-->
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="form-group">
+                                                                                                            <label class="control-label col-md-3">{{ form_label(form.nbJoursOuvrables, "Durée") }}</label>
+                                                                                                            <div class="col-md-9">
+                                                                                                                <input id="nbJours" name="nbJours" min="1" type="number" class="form-control" placeholder="Saisissez le nombre de jours">
+                                                                                                                 {{ form_widget(form.nbJoursOuvrables, {'attr': {'name': 'nbJoursOuvrables'}}) }}
+                                                                                                              <span class="help-block">
+                                                                                                                        Recherchez le nombre de jours correspondant
+                                                                                                               </span>         
+                                                                                                            </div>
+                                                                                                    </div>                    
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <!--/row-->
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-6">
+                                                                                                            <div class="form-group">
+                                                                                                                    <label class="control-label col-md-3">Date début</label>
+                                                                                                                    <div class="col-md-9">
+                                                                                                                        <div class="input-group">
+                                                                                                                                 <div class="input-icon">
+                                                                                                                                         <i class="fa fa-calendar fa-fw"></i>
+                                                                                                                                          {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control', 'type': 'date'}}) }}
+                                                                                                                                 </div>
+                                                                                                                                 <span class="input-group-btn">
+                                                                                                                                 <button id="calculer" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Calculer</button>
+                                                                                                                                 </span>
+                                                                                                                         </div>
+                                                                                                                          <span class="help-block">
+                                                                                                                        Précisez le jour de votre départ en congé
+                                                                                                                    </span>       
+                                                                                                                      </div>
+                                                                                                                    <span class="help-block">
+                                                                                                                            {{ form_errors(form.dateDebut) }}
+                                                                                                                    </span>
+                                                                                                               </div>
+                                                                                                            </div>
+                                                                                                    
+                                                                                                    <!--/span-->
+                                                                                                    <div class="col-md-6">
+                                                                                                            <div class="form-group">
+                                                                                                                    <label class="control-label col-md-3">Date fin</label>
+                                                                                                                    <div class="col-md-9">
+                                                                                                                                    {{ form_widget(form.dateFin, {'attr': {'class': 'form-control', 'type': 'date','readonly':'true'}}) }}
+                                                                                                                     </div>
+                                                                                                                    <span class="help-block">
+                                                                                                                    {{ form_errors(form.dateFin) }}
+                                                                                                                    </span>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                            <!--/row-->
+                                                                                            <div class="row">
+                                                                                                    {#<div class="col-md-6">
+                                                                                                            <div class="form-group">
+                                                                                                                    <label class="control-label col-md-3">Localité</label>
+                                                                                                                    <div class="col-md-9">
+                                                                                                                        {{ form_widget(form.localite, {'attr': {'class': 'form-control', 'size': '12', 'placeholder': 'Abidjan'}}) }}
+                                                                                                                    <span class="help-block">
+                                                                                                                        Précisez votre destination
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                    </div>#}
+                                                                                                    <!--/span-->
+                                                                                                     <div class="col-md-6">
+                                                                                                            <div class="form-group">
+                                                                                                                    <label class="control-label col-md-3">Date de reprise du travail </label>
+                                                                                                                    <div class="col-md-9">
+                                                                                                                                    {{ form_widget(form.dateRetour, {'attr': {'class': 'form-control', 'type': 'date','readonly':'true'}}) }}
+                                                                                                                     </div>
+                                                                                                                            <span class="help-block">
+                                                                                                                            {{ form_errors(form.dateRetour) }}</span>
+                                                                                                            </div>
+                                                                                                      </div>               
+                                                                                           </div>{#
+                                                                                           <div class="row" id="autres-motif">
+                                                                                                <div class="col-md-6">
+                                                                                                            <div class="form-group">
+                                                                                                                    <label class="control-label col-md-3">Distance</label>
+                                                                                                                    <div class="col-md-9">
+                                                                                                                            <div class="radio-list">
+                                                                                                                                    <label class="radio-inline">
+                                                                                                                                    {{ form_widget(form.distance[0], {'attr': {'size': '12'}}) }} 
+                                                                                                                                    0 km</label>
+                                                                                                                                    <label class="radio-inline">
+                                                                                                                                    {{ form_widget(form.distance[1], {'attr': {'size': '12'}}) }} 
+                                                                                                                                    - 400 km</label>
+                                                                                                                                    <label class="radio-inline">
+                                                                                                                                    {{ form_widget(form.distance[2], {'attr': {'size': '12'}}) }}
+                                                                                                                                    + 400 km</label>
+                                                                                                                            </div>
+                                                                                                                    </div>
+                                                                                                            </div>
+                                                                                                    </div>     
+                                                                                               <div class="col-lg-6" style="display:none;">
+                                                                                                   <label class="control-label col-md-3">Précisez autres motif </label>
+                                                                                                     <div  class="col-md-9">
+                                                                                                      <textarea id="explication" class="form-control" data-minwords="6" data-required="true" placeholder="Saisissez un commentaire"></textarea>
+                                                                                                         {{ form_widget(form.autreMotif, {'attr': {'size': '12','class' : 'form-control', 'data-minwords':'6', 'placeholder' : 'Saisissez un commentaire', 'data-required' : 'true'}}) }}
+                                                                                                     </div>
+                                                                                               </div>
+                                                                                           </div>     #}                                    
+                                                                                    </div>
+                                                                                    
+                                                                                            <div class="row">
+                                                                                                <footer class="panel-footer text-right bg-light lter">
+                                                                                                    <input type="submit" class="btn btn-success btn-s-xs" value="Soumettre"/>
+                                                                                                  </footer>
+                                                                                                {{ form_rest(form) }}                                                                  
+                                                                                                {{ form_end(form) }}
+                                                                                            </div>
+                                                                  
+                                                                            <!-- END FORM-->
+                                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                <!-- END CHAMP FORMULAIRES -->
+                                                        </div>
+                                                       
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<script>
+$("document").ready( function() {
+
+    //FONCTION AJAX DE RECHERCHE DE LA DUREE D'UNE PERMISSION EXCEPTIONNELLE
+    
+    $("#rechercher").click( function() {
+     if ($("#motifAbs").val.length !== null)  {
+        $.ajax({
+            type : "GET",
+               url : "http://www.grhappdemo.ivolife.com/web/app_dev.php/dashboard-salarie/absence/duree/"+$("select[id='btn-motif'] option:selected").val(),
+            beforeSend : function() {
+                        if ( $(".loading").length === 0 ) {
+                        $("#nbJours").parent().append('<i class="loading" style="margin-right: 5px;margin-top: -32px;width: 29px;position: relative;"></i>');
+                        console.log("chargement !!!");
+                     }
+            },
+            success : function(data) {
+                $("#kbh_gestioncongesbundle_demande_nbJoursOuvrables").val(data.dureeAbsence);
+                $("#kbh_gestioncongesbundle_demande_motif").val($("select[id='btn-motif'] option:selected").val());
+                $("#nbJours").val(data.dureeAbsence);
+                $(".loading").remove();
+                console.log("duree du motif :"+$("select[id='btn-motif'] option:selected").val()+" recuperee!!");
+                console.log("motif recupéré :"+$("#kbh_gestioncongesbundle_demande_motif").val()+" recuperee!!");
+            },
+            error : function() {
+                $("#kbh_gestioncongesbundle_demande_nbJoursOuvrables").val("");
+                $("#nbJours").val("");
+                $("#kbh_gestioncongesbundle_demande_motif").val("");
+                $(".loading").remove();
+            }
+            
+        });
+
+       }
+        
+    });
+    
+});
+</script>
+<script>
+$("document").ready( function() {
+
+    //FONCTION AJAX DE CALCUL AUTOMMATIQUE DES DATES DE FIN ET DE REPRISE DU TRAVAIL
+    
+    $("#calculer").click( function() {
+     if ($("#kbh_gestioncongesbundle_demande_dateDebut").val.length !== 0 && $("#nbJours").val.length !== 0)  {
+        $.ajax({
+            type : "GET",
+            url : "http://www.grhappdemo.ivolife.com/web/app_dev.php/dashboard-salarie/date/"+$("#nbJours").val()+"/"+$("#kbh_gestioncongesbundle_demande_dateDebut").val(),
+            beforeSend : function() {
+                        if ( $(".loading").length === 0 ) {
+                        $("#kbh_gestioncongesbundle_demande_dateFin").parent().append('<i class="loading" style="margin-right: 7px;margin-top: -32px;"></i>');
+                        $("#kbh_gestioncongesbundle_demande_dateRetour").parent().append('<i class="loading" style="margin-right: 7px;margin-top: -32px;"></i>');
+                        console.log("chargement !!!");
+                     }
+            },
+            success : function(data) {
+                $("#kbh_gestioncongesbundle_demande_dateFin").val(data.DateFin);
+                $("#kbh_gestioncongesbundle_demande_nbJoursOuvrables").val($("#nbJours").val());
+                $("#kbh_gestioncongesbundle_demande_dateRetour").val(data.RetourConge);                
+               $(".loading").remove();
+                console.log("date : "+data.RetourConge+" okey!!!");
+            },
+            error : function() {
+                $("#kbh_gestioncongesbundle_demande_dateFin").val("");
+                $("#kbh_gestioncongesbundle_demande_nbJoursOuvrables").val("");
+                $("#kbh_gestioncongesbundle_demande_dateRetour").val("");
+                   
+            $(".loading").remove();
+            }
+            
+        });
+
+       }
+        
+    });
+    
+});
+</script>
+    {% endblock %}

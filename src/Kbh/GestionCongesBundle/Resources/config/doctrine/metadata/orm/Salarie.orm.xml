@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Salarie" table="salarie">
+    <indexes>
+      <index name="IDX_4D3303861D64C118" columns="unite"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="UNIQ_4D3303867A9D4CE" columns="droits"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="matricule" type="string" column="matricule" length="255" nullable="false"/>
+    <field name="numerocnps" type="string" column="numeroCnps" length="255" nullable="false"/>
+    <field name="civilite" type="string" column="civilite" length="15" nullable="false"/>
+    <field name="nom" type="string" column="nom" length="255" nullable="false"/>
+    <field name="prenom" type="string" column="prenom" length="255" nullable="false"/>
+    <field name="nomprenom" type="string" column="nomprenom" length="255" nullable="false"/>
+    <field name="datenaissance" type="datetime" column="dateNaissance" nullable="false"/>
+    <field name="statutmarital" type="string" column="statutMarital" length="255" nullable="false"/>
+    <field name="poste" type="string" column="poste" length="255" nullable="false"/>
+    <field name="email" type="string" column="email" length="255" nullable="false"/>
+    <field name="telephone" type="string" column="telephone" length="255" nullable="false"/>
+    <field name="dateembauche" type="datetime" column="dateEmbauche" nullable="false"/>
+    <field name="typecontrattravail" type="string" column="typeContratTravail" length="255" nullable="false"/>
+    <field name="dureecontrat" type="integer" column="dureeContrat" nullable="true"/>
+    <field name="statutemploi" type="string" column="statutEmploi" length="255" nullable="false"/>
+    <field name="datedepartentreprise" type="datetime" column="dateDepartEntreprise" nullable="true"/>
+    <many-to-one field="unite" target-entity="Organigrammeunite">
+      <join-columns>
+        <join-column name="unite" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="droits" target-entity="Droits">
+      <join-columns>
+        <join-column name="droits" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="salarieSource" target-entity="Salarie" mapped-by="salarieTarget"/>
+  </entity>
+</doctrine-mapping>

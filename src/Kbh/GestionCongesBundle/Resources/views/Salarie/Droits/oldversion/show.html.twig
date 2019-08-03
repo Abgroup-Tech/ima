@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Droits</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ droits.id }}</td>
+            </tr>
+            <tr>
+                <th>Droitsacquisanneeencours</th>
+                <td>{{ droits.droitsAcquisAnneeEnCours }}</td>
+            </tr>
+            <tr>
+                <th>Reliquatdroitsanterieur</th>
+                <td>{{ droits.reliquatDroitsAnterieur }}</td>
+            </tr>
+            <tr>
+                <th>Cumuldroitsacquis</th>
+                <td>{{ droits.cumulDroitsAcquis }}</td>
+            </tr>
+            <tr>
+                <th>Droitspris</th>
+                <td>{{ droits.droitsPris }}</td>
+            </tr>
+            <tr>
+                <th>Totaldroitsaprendre</th>
+                <td>{{ droits.totalDroitsAprendre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</ul>
+{% endblock %}

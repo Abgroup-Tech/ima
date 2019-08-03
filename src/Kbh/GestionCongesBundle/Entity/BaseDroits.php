@@ -1,0 +1,497 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * basedroits
+ *
+ * @ORM\Table(name="basedroits_premium")
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\BaseDroitsRepository")
+ */
+class BaseDroits
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var \Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id")
+     * 
+     */
+    private $salarie;    
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anciennete", type="integer", nullable=true)
+     */
+    private $anciennete;    
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estFemmedeMoinsDe21ans", type="boolean", nullable=true)
+     */
+    private $estFemmedeMoinsDe21ans;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbEnfantsMineursAcharge", type="integer", nullable=true)
+     */
+    private $nbEnfantsMineursAcharge;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aPlusDe5ansAnciennete", type="boolean", nullable=true)
+     */
+    private $aPlusDe5ansAnciennete;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aPlusDe10ansAnciennete", type="boolean", nullable=true)
+     */
+    private $aPlusDe10ansAnciennete;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aPlusDe15ansAnciennete", type="boolean", nullable=true)
+     */
+    private $aPlusDe15ansAnciennete;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aPlusDe20ansAnciennete", type="boolean", nullable=true)
+     */
+    private $aPlusDe20ansAnciennete;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aPlusDe25ansAnciennete", type="boolean", nullable=true)
+     */
+    private $aPlusDe25ansAnciennete;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="aMedailleHonneurTravail", type="boolean", nullable=true)
+     */
+    private $aMedailleHonneurTravail;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estLogeDansEntreprise", type="boolean", nullable=true)
+     */
+    private $estLogeDansEntreprise;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estExpatrieSejour1", type="boolean", nullable=true)
+     */
+    private $estExpatrieSejour1;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estExpatrieSejourSuivant", type="boolean", nullable=true)
+     */
+    private $estExpatrieSejourSuivant;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="travailleAuMoins50hsemaine", type="boolean", nullable=true)
+     */
+    private $travailleAuMoins50hsemaine;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="joursSupAnnuel", type="integer", nullable=true)
+     */
+    private $joursSupAnnuel;
+    
+    public function __construct() {
+        $this->aPlusDe5ansAnciennete = 0;
+        $this->aPlusDe10ansAnciennete = 0;
+        $this->aPlusDe15ansAnciennete = 0;
+        $this->aPlusDe20ansAnciennete = 0;
+        $this->aPlusDe25ansAnciennete = 0;
+        $this->travailleAuMoins50hsemaine = 0;
+        $this->joursSupAnnuel = 0;
+        $this->nbEnfantsMineursAcharge = 0;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set estFemmedeMoinsDe21ans
+     *
+     * @param boolean $estFemmedeMoinsDe21ans
+     * @return BaseDroits
+     */
+    public function setEstFemmedeMoinsDe21ans($estFemmedeMoinsDe21ans)
+    {
+        $this->estFemmedeMoinsDe21ans = $estFemmedeMoinsDe21ans;
+
+        return $this;
+    }
+
+    /**
+     * Get estFemmedeMoinsDe21ans
+     *
+     * @return boolean 
+     */
+    public function getEstFemmedeMoinsDe21ans()
+    {
+        return $this->estFemmedeMoinsDe21ans;
+    }
+
+    /**
+     * Set nbEnfantsMineursAcharge
+     *
+     * @param integer $nbEnfantsMineursAcharge
+     * @return BaseDroits
+     */
+    public function setNbEnfantsMineursAcharge($nbEnfantsMineursAcharge)
+    {
+        $this->nbEnfantsMineursAcharge = $nbEnfantsMineursAcharge;
+
+        return $this;
+    }
+
+    /**
+     * Get nbEnfantsMineursAcharge
+     *
+     * @return integer 
+     */
+    public function getNbEnfantsMineursAcharge()
+    {
+        return $this->nbEnfantsMineursAcharge;
+    }
+
+    /**
+     * Set aPlusDe5ansAnciennete
+     *
+     * @param boolean $aPlusDe5ansAnciennete
+     * @return BaseDroits
+     */
+    public function setAPlusDe5ansAnciennete($aPlusDe5ansAnciennete)
+    {
+        $this->aPlusDe5ansAnciennete = $aPlusDe5ansAnciennete;
+
+        return $this;
+    }
+
+    /**
+     * Get aPlusDe5ansAnciennete
+     *
+     * @return boolean 
+     */
+    public function getAPlusDe5ansAnciennete()
+    {
+        return $this->aPlusDe5ansAnciennete;
+    }
+
+    /**
+     * Set aPlusDe10ansAnciennete
+     *
+     * @param boolean $aPlusDe10ansAnciennete
+     * @return BaseDroits
+     */
+    public function setAPlusDe10ansAnciennete($aPlusDe10ansAnciennete)
+    {
+        $this->aPlusDe10ansAnciennete = $aPlusDe10ansAnciennete;
+
+        return $this;
+    }
+
+    /**
+     * Get aPlusDe10ansAnciennete
+     *
+     * @return boolean 
+     */
+    public function getAPlusDe10ansAnciennete()
+    {
+        return $this->aPlusDe10ansAnciennete;
+    }
+
+    /**
+     * Set aPlusDe15ansAnciennete
+     *
+     * @param boolean $aPlusDe15ansAnciennete
+     * @return BaseDroits
+     */
+    public function setAPlusDe15ansAnciennete($aPlusDe15ansAnciennete)
+    {
+        $this->aPlusDe15ansAnciennete = $aPlusDe15ansAnciennete;
+
+        return $this;
+    }
+
+    /**
+     * Get aPlusDe15ansAnciennete
+     *
+     * @return boolean 
+     */
+    public function getAPlusDe15ansAnciennete()
+    {
+        return $this->aPlusDe15ansAnciennete;
+    }
+
+    /**
+     * Set aPlusDe20ansAnciennete
+     *
+     * @param boolean $aPlusDe20ansAnciennete
+     * @return BaseDroits
+     */
+    public function setAPlusDe20ansAnciennete($aPlusDe20ansAnciennete)
+    {
+        $this->aPlusDe20ansAnciennete = $aPlusDe20ansAnciennete;
+
+        return $this;
+    }
+
+    /**
+     * Get aPlusDe20ansAnciennete
+     *
+     * @return boolean 
+     */
+    public function getAPlusDe20ansAnciennete()
+    {
+        return $this->aPlusDe20ansAnciennete;
+    }
+
+    /**
+     * Set aPlusDe25ansAnciennete
+     *
+     * @param boolean $aPlusDe25ansAnciennete
+     * @return BaseDroits
+     */
+    public function setAPlusDe25ansAnciennete($aPlusDe25ansAnciennete)
+    {
+        $this->aPlusDe25ansAnciennete = $aPlusDe25ansAnciennete;
+
+        return $this;
+    }
+
+    /**
+     * Get aPlusDe25ansAnciennete
+     *
+     * @return boolean 
+     */
+    public function getAPlusDe25ansAnciennete()
+    {
+        return $this->aPlusDe25ansAnciennete;
+    }
+
+    /**
+     * Set aMedailleHonneurTravail
+     *
+     * @param boolean $aMedailleHonneurTravail
+     * @return BaseDroits
+     */
+    public function setAMedailleHonneurTravail($aMedailleHonneurTravail)
+    {
+        $this->aMedailleHonneurTravail = $aMedailleHonneurTravail;
+
+        return $this;
+    }
+
+    /**
+     * Get aMedailleHonneurTravail
+     *
+     * @return boolean 
+     */
+    public function getAMedailleHonneurTravail()
+    {
+        return $this->aMedailleHonneurTravail;
+    }
+
+    /**
+     * Set estLogeDansEntreprise
+     *
+     * @param boolean $estLogeDansEntreprise
+     * @return BaseDroits
+     */
+    public function setEstLogeDansEntreprise($estLogeDansEntreprise)
+    {
+        $this->estLogeDansEntreprise = $estLogeDansEntreprise;
+
+        return $this;
+    }
+
+    /**
+     * Get estLogeDansEntreprise
+     *
+     * @return boolean 
+     */
+    public function getEstLogeDansEntreprise()
+    {
+        return $this->estLogeDansEntreprise;
+    }
+
+    /**
+     * Set estExpatrieSejour1
+     *
+     * @param boolean $estExpatrieSejour1
+     * @return BaseDroits
+     */
+    public function setEstExpatrieSejour1($estExpatrieSejour1)
+    {
+        $this->estExpatrieSejour1 = $estExpatrieSejour1;
+
+        return $this;
+    }
+
+    /**
+     * Get estExpatrieSejour1
+     *
+     * @return boolean 
+     */
+    public function getEstExpatrieSejour1()
+    {
+        return $this->estExpatrieSejour1;
+    }
+
+    /**
+     * Set estExpatrieSejourSuivant
+     *
+     * @param boolean $estExpatrieSejourSuivant
+     * @return BaseDroits
+     */
+    public function setEstExpatrieSejourSuivant($estExpatrieSejourSuivant)
+    {
+        $this->estExpatrieSejourSuivant = $estExpatrieSejourSuivant;
+
+        return $this;
+    }
+
+    /**
+     * Get estExpatrieSejourSuivant
+     *
+     * @return boolean 
+     */
+    public function getEstExpatrieSejourSuivant()
+    {
+        return $this->estExpatrieSejourSuivant;
+    }
+
+    /**
+     * Set travailleAuMoins50hsemaine
+     *
+     * @param boolean $travailleAuMoins50hsemaine
+     * @return BaseDroits
+     */
+    public function setTravailleAuMoins50hsemaine($travailleAuMoins50hsemaine)
+    {
+        $this->travailleAuMoins50hsemaine = $travailleAuMoins50hsemaine;
+
+        return $this;
+    }
+
+    /**
+     * Get travailleAuMoins50hsemaine
+     *
+     * @return boolean 
+     */
+    public function getTravailleAuMoins50hsemaine()
+    {
+        return $this->travailleAuMoins50hsemaine;
+    }
+
+    /**
+     * Set joursSupAnnuel
+     *
+     * @param integer $joursSupAnnuel
+     * @return BaseDroits
+     */
+    public function setJoursSupAnnuel($joursSupAnnuel)
+    {
+        $this->joursSupAnnuel += $joursSupAnnuel;
+
+        return $this;
+    }
+
+    /**
+     * Get joursSupAnnuel
+     *
+     * @return integer 
+     */
+    public function getJoursSupAnnuel()
+    {
+        return $this->joursSupAnnuel;
+    }
+
+    /**
+     * Set anciennete
+     *
+     * @param integer $anciennete
+     * @return BaseDroits
+     */
+    public function setAnciennete($anciennete)
+    {
+        $this->anciennete = $anciennete;
+
+        return $this;
+    }
+
+    /**
+     * Get anciennete
+     *
+     * @return integer 
+     */
+    public function getAnciennete()
+    {
+        return $this->anciennete;
+    }
+
+    /**
+     * Set salarie
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $salarie
+     * @return BaseDroits
+     */
+    public function setSalarie(\Kbh\GestionCongesBundle\Entity\Salarie $salarie = null)
+    {
+        $this->salarie = $salarie;
+
+        return $this;
+    }
+
+    /**
+     * Get salarie
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getSalarie()
+    {
+        return $this->salarie;
+    }
+}

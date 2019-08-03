@@ -1,0 +1,30 @@
+salairemoyenjournalier:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:index" }
+
+salairemoyenjournalier_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:show" }
+
+salairemoyenjournalier_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:new" }
+
+salairemoyenjournalier_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:create" }
+    methods:  POST
+
+salairemoyenjournalier_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:edit" }
+
+salairemoyenjournalier_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:update" }
+    methods:  [POST, PUT]
+
+salairemoyenjournalier_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:SalaireMoyenJournalier:delete" }
+    methods:  [POST, DELETE]

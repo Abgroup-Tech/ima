@@ -1,0 +1,369 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">A propos</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4>GETSCA</h4>
+                            <p> Copyright GETSCA Inc. 2015.<br/> Tous droits réservés Baumoyer Technologie.<br/><br/>
+                                GETSCA est un logiciel de gestion des absences s'appuyant sur les différentes loies et conventions régissant le droit du travail</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Détails salarié
+                </li>
+            </ul>
+            <div class="row margin-top-10">
+                <div class="col-md-12">
+                    <!-- BEGIN PROFILE SIDEBAR -->
+                    <div class="profile-sidebar" style="width: 250px;">
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light profile-sidebar-portlet">
+                            <!-- SIDEBAR USERPIC -->
+                            <div class="profile-userpic">
+                               {% if entity.image %} <img src="{{ asset('uploads/' ~ entity.image.path) }}" class="img-responsive" alt="">{% endif %}
+                               {% if not entity.image %} <img src="{{ asset('uploads/avatar.png') }}" class="img-responsive" alt="">{% endif %}
+                            </div>
+                            <!-- END SIDEBAR USERPIC -->
+                            <!-- SIDEBAR USER TITLE -->
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name" style="color:#345F98;">
+                                    {{ entity.nomPrenom }} 
+                                </div>
+                                <div class="profile-usertitle-job" style="color:#345F98;">
+                                    {{ entity.poste }}
+                                </div>
+                            </div>
+                            <!-- END SIDEBAR USER TITLE -->
+                            <!-- SIDEBAR BUTTONS -->
+                            <!--  <div class="profile-userbuttons">
+                                     <a href="" class="btn btn-circle green-haze btn-sm">Permissions</a>
+                                     <a href="" class="btn btn-circle btn-danger btn-sm">Conges</a>
+                             </div> -->
+                            <!-- END SIDEBAR BUTTONS -->
+                            <!-- SIDEBAR MENU -->
+                            {% include "::modules-super-admin/users-menu.html.twig" %}
+                            <!-- END MENU -->
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                        <!-- PORTLET MAIN -->
+{#                        {% include "::modules-super-admin/info-responsable.html.twig" %}#}
+                        <!-- END PORTLET MAIN -->
+                    </div>
+                    <!-- END BEGIN PROFILE SIDEBAR -->
+                    <!-- BEGIN PROFILE CONTENT -->
+                    <div class="profile-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- BEGIN PORTLET -->
+                                <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-speech font-green-sharp"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase">Informations</span>
+                                            <span class="caption-helper"> </span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="scroller" style="height: 585px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                            <div class="general-item-list">
+                                                    <table class="table font-blue-madison">
+                                                        <thead>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Civilité
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.civilite }}
+                                                                </td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Matricule
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.matricule }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    N° CNPS
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.numeroCnps }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    statut matrimoniale
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.statutMarital }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Téléphone
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.telephone }}
+                                                                </td>
+                                                            </tr>
+                                                                <td class="bold">
+                                                                    Contrat
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.typeContratTravail }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Responsable direct
+                                                                </td>
+                                                                <td>
+                                                                    {% if entity.superviseur %}
+                                                                    {% if entity.superviseur %}{{ entity.superviseur.civilite }} {{ entity.superviseur }} {% endif %}
+                                                                    {% endif %}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Unité
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.unite }}
+                                                                </td>
+                                                            </tr>
+                                                           {% if entity.unite %} 
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Situation géographique unité
+                                                                </td>
+                                                                <td>
+                                                                    {% if entity.unite.situationGeographique %}{{ entity.unite.situationGeographique }}{% endif %}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Lieu de travail
+                                                                </td>
+                                                                <td>
+                                                                    {% if entity.unite.lieuTravail %}{{ entity.unite.lieuTravail }}{% endif %}
+                                                                </td>
+                                                            </tr>
+                                                            {% endif %}
+                                                              <tr>
+                                                                <td class="bold">
+                                                                    Email
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.email }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Statut
+                                                                </td>
+                                                                <td>
+                                                                    {% if entity.statutEmploi == "Actif"%}<span class="btn btn-circle btn green btn-sm">{{ entity.statutEmploi }}</span>{% endif %}
+                                                                    {% if entity.statutEmploi == "Inactif"%}<span class="btn btn-circle btn red btn-sm">{{ entity.statutEmploi }}</span>{% endif %}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END PORTLET -->
+                            </div>   
+                            <div class="col-md-6">
+                                <!-- BEGIN PORTLET -->
+                                <div class="portlet light" style="height:235px !important;">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="	icon-equalizer font-green-sharp"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase"> AUTRES INFORMATIONS</span>
+                                            <span class="caption-helper"> </span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="scroller" style="height: 400px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                            <div class="general-item-list">
+                                                <div class="table-responsive">
+                                                    <table class="table font-blue-madison">
+                                                        <thead>
+                                                           <tr>
+                                                                <td class="bold">
+                                                                    Username
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.user.username }}
+                                                                </td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Role utilisateur
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.user.roles[0] }}{% if entity.user.roles[1] %}, {{ entity.user.roles[1] }}{% endif%}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Dernière connection
+                                                                </td>
+                                                                <td>
+                                                                    {{ entity.user.lastLogin|date('d-m-Y') }}<br/> à {{ entity.user.lastLogin|date('H:i:s') }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END PORTLET -->
+                            </div>    
+
+                            <div class="col-md-6">
+                                <!-- BEGIN PORTLET -->
+                                <div class="portlet light" style="height:408px !important;">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-puzzle font-green-sharp"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase"> DROITS SALARIES</span>
+                                          </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="table-responsive">
+                                        {% if droits %}  
+                                            <table class="table font-blue-madison">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="bold">
+                                                          Congés acquis en {{"now"|date("Y")}}
+                                                        </td>
+                                                        <td>
+                                                            {{droits.droitsAcquisAnneeEnCours}} jours
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                     <tr>
+                                                        <td class="bold">
+                                                         Congés non pris années précédentes
+                                                        </td>
+                                                        <td>
+                                                            {{droits.reliquatDroitsAnterieur}} jours
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                        <td class="bold">
+                                                            Total Congés acquis
+                                                        </td>
+                                                        <td>
+                                                          {{droits.CumulDroitsAcquis}} jours
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">
+                                                           Congés pris en {{"now"|date("Y")}}
+                                                        </td>
+                                                        <td>
+                                                          {{droits.droitsPris}} jours 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">
+                                                           Permissions prises
+                                                        </td>
+                                                        <td>
+                                                          {{ droits.permissionsPrises }} jours
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">
+                                                           Permissions disponibles
+                                                        </td>
+                                                        <td class="text-danger bold">
+                                                           {{ droits.soldePermissions }} jours
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold">
+                                                           Solde congés
+                                                        </td>
+                                                        <td class="text-danger bold">
+                                                           {{ droits.totalDroitsAprendre }} jours
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                           {% endif %}             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- END PORTLET -->
+                        </div>
+                    </div>
+                    <!-- END PROFILE CONTENT -->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->    
+<style>
+    th,td{
+        text-align: left;
+    }
+    .portlet.light .portlet-body {
+        padding-top: 8px;
+        height: 585px;
+    }
+    body{
+        font-size: 14px;
+    }
+    .font-blue-madison {
+        color: #345F98 !important;
+    }
+    .profile-usertitle-job {
+        text-transform: uppercase;
+        color: #7EAFD8;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 7px;
+    }
+</style>
+
+{% endblock %}

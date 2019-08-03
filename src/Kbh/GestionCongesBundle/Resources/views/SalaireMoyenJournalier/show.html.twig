@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>SalaireMoyenJournalier</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            
+            <tr>
+                <th>Salarié</th>
+                <td>{{ entity.salarie }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ entity.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Salaire moyen journalier</th>
+                <td>{{ entity.salaireMoyenJournalier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('salairemoyenjournalier') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('salairemoyenjournalier_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

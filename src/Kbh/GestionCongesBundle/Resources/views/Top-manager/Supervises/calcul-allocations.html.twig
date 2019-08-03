@@ -1,0 +1,414 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('collaborateur_droits')}}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Calcul de l'allocation</h3>
+                </header>
+            <section class="scrollable wrapper">              
+              <div class="row">
+                  <!-- / .accordion -->
+                  <!-- .nav-justified -->
+                  <section class="panel panel-default">
+                    <header class="panel-heading bg-light">
+                      <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#salarie" data-toggle="tab">D'un Salarié</a></li>
+                        <li><a href="#entreprise" data-toggle="tab">De l'Entreprise</a></li>
+                        <li><a href="#direction" data-toggle="tab">D'une Direction</a></li>
+                        <li><a href="#departement" data-toggle="tab">D'un Département</a></li>
+                        <li><a href="#service" data-toggle="tab">D'un Service</a></li>
+                      </ul>
+                    </header>
+                    <div class="panel-body">
+                      <div class="tab-content">
+                      <!-- ################################# cas d'un salarie ############################### -->
+                        <div class="tab-pane active" id="salarie">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <section class="panel panel-default">
+                                <header class="panel-heading font-bold">Remplissez le formulaire</header>
+                                <div class="panel-body">
+                                  <form class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                      <label class="col-lg-2 control-label">Matricule</label>
+                                      <div class="col-lg-8">
+                                        <input type="text" class="form-control" placeholder="Matricule du Salarié">
+                                        <span class="help-block m-b-none"></span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-lg-2 control-label">Salaire</label>
+                                      <div class="col-lg-8">
+                                        <input type="number" class="form-control" placeholder="Salaire Moyen Journalié">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-8">
+                                        <button type="submit" class="btn btn-sm btn-success">Soumettre</button>
+                                      </div>
+                                    </div>
+                                    <br/>
+                                  </form>
+                                  <div class="table-responsive">
+                                    <table class="table table-striped b-t b-light">
+                                      <thead>
+                                          <th>Nom Prenom</th>
+                                          <th>Poste</th>
+                                          <th>Unité</th>
+                                          <th>Montant allocation</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département Marketing & Communication</td>
+                                          <td style="background-color: #1aae88;color:white;">15 400 000 FCFA</td>                     
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </section>
+                            </div>
+                          </div>
+                        </div>
+                         <!-- ################################# cas de l'entreprise ############################### -->
+                        <div class="tab-pane" id="entreprise">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <section class="panel panel-default">
+                                <header class="panel-heading font-bold">Remplissez le formulaire</header>
+                                <div class="panel-body">
+                                  <form class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                      <label class="col-sm-2 control-label">Importez le fichier Excel</label>
+                                      <div class="col-sm-3">
+                                        <input type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-3">
+                                        <button type="submit" class="btn btn-sm btn-success">Soumettre</button>
+                                      </div>
+                                    </div>
+                                    <br/>
+                                  </form>
+                                  <div class="table-responsive">
+                                    <table class="table table-striped b-t b-light">
+                                      <thead>
+                                          <th>Nom Prenom</th>
+                                          <th>Poste</th>
+                                          <th>Unité</th>
+                                          <th>Montant allocation</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département Marketing & Communication</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>Jason Bon</td>
+                                          <td>Chef du service Commercial</td>
+                                          <td>Direction Marketing</td>
+                                          <td>21 600 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>Ezquiel Williams</td>
+                                          <td>Agent Commercial</td>
+                                          <td>Département Marketing & Communication</td>
+                                          <td>7 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>Steven Howkins</td>
+                                          <td>Responsable Département Ventes & Achats</td>
+                                          <td>Département Marketing & Communication</td>
+                                          <td>11 800 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>Julia Roberts</td>
+                                          <td>Responsable Direction Marketing</td>
+                                          <td>Direction Marketing</td>
+                                          <td>35 200 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td class="bg bg-success">Montant Total</td>
+                                          <td class="bg bg-success">91 400 000 FCFA</td>                     
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </section>
+                            </div>
+                          </div>
+                        </div>
+                         <!-- ################################# cas d'une Direction ############################### -->
+                        <div class="tab-pane" id="direction">
+                        <div class="row">
+                            <div class="col-sm-12">
+                              <section class="panel panel-default">
+                                <header class="panel-heading font-bold">Remplissez le formulaire</header>
+                                <div class="panel-body">
+                                  <form class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                      <label class="col-lg-2 control-label">Direction</label>
+                                      <div class="col-lg-8">
+                                        <input type="text" class="form-control" placeholder="Saisissez le nom de la Direction">
+                                        <span class="help-block m-b-none"></span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-2 control-label">Importez le fichier Excel</label>
+                                      <div class="col-sm-3">
+                                        <input type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-8">
+                                        <button type="submit" class="btn btn-sm btn-success">Soumettre</button>
+                                      </div>
+                                    </div>
+                                    <br/>
+                                  </form>
+                                  <div class="table-responsive">
+                                    <table class="table table-striped b-t b-light">
+                                      <thead>
+                                          <th>Nom Prenom</th>
+                                          <th>Poste</th>
+                                          <th>Unité</th>
+                                          <th>Montant allocation</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Direction des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Direction des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Direction des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Direction des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Direction des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td class="bg bg-success">Montant Total</td>
+                                          <td class="bg bg-success">77 000 000 FCFA</td>                     
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </section>
+                            </div>
+                        </div>
+                        </div>
+                        <!-- ################################# cas d'un Département ############################### -->
+                        <div class="tab-pane" id="departement">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                <section class="panel panel-default">
+                                  <header class="panel-heading font-bold">Remplissez le formulaire</header>
+                                  <div class="panel-body">
+                                  <form class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                      <label class="col-lg-2 control-label">Département</label>
+                                      <div class="col-lg-8">
+                                        <input type="text" class="form-control" placeholder="Saisissez le nom du Département">
+                                        <span class="help-block m-b-none"></span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-2 control-label">Importez le fichier Excel</label>
+                                      <div class="col-sm-3">
+                                        <input type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                      </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-8">
+                                          <button type="submit" class="btn btn-sm btn-success">Soumettre</button>
+                                        </div>
+                                      </div>
+                                      <br/>
+                                    </form>
+                                    <div class="table-responsive">
+                                      <table class="table table-striped b-t b-light">
+                                        <thead>
+                                            <th>Nom Prenom</th>
+                                            <th>Poste</th>
+                                            <th>Unité</th>
+                                            <th>Montant allocation</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Responsable Département Commercial</td>
+                                          <td>Département des Ressources Humaines</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td class="bg bg-success">Montant Total</td>
+                                          <td class="bg bg-success">77 000 000 FCFA</td>                     
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </section>
+                              </div>
+                          </div>
+                        </div>
+                        <!-- ################################# cas d'un Service ############################### -->
+                        <div class="tab-pane" id="service">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                <section class="panel panel-default">
+                                  <header class="panel-heading font-bold">Remplissez le formulaire</header>
+                                  <div class="panel-body">
+                                  <form class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                      <label class="col-lg-2 control-label">Service</label>
+                                      <div class="col-lg-8">
+                                        <input type="text" class="form-control" placeholder="Saisissez le nom du Service">
+                                        <span class="help-block m-b-none"></span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-2 control-label">Importez le fichier Excel</label>
+                                      <div class="col-sm-3">
+                                        <input type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                                      </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-8">
+                                          <button type="submit" class="btn btn-sm btn-success">Soumettre</button>
+                                        </div>
+                                      </div>
+                                      <br/>
+                                    </form>
+                                    <div class="table-responsive">
+                                      <table class="table table-striped b-t b-light">
+                                        <thead>
+                                            <th>Nom Prenom</th>
+                                            <th>Poste</th>
+                                            <th>Unité</th>
+                                            <th>Montant allocation</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                          <td>John Smith</td>
+                                          <td>Dévellopeur </td>
+                                          <td>Service Informatique</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Dévellopeur </td>
+                                          <td>Service Informatique</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Dévellopeur </td>
+                                          <td>Service Informatique</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Dévellopeur </td>
+                                          <td>Service Informatique</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td>John Smith</td>
+                                          <td>Dévellopeur </td>
+                                          <td>Service Informatique</td>
+                                          <td>15 400 000 FCFA</td>                     
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td class="bg bg-success">Montant Total</td>
+                                          <td class="bg bg-success">77 000 000 FCFA</td>                     
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </section>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+              </div>
+          </section>
+       </section>           
+        </section>
+
+  <script src="{{ asset('bundles/kbhgestionconges/js/file-input/bootstrap-filestyle.min.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>BaseDroits</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Estfemmedemoinsde21ans</th>
+                <td>{{ entity.estFemmedeMoinsDe21ans }}</td>
+            </tr>
+            <tr>
+                <th>Nbenfantsmineursacharge</th>
+                <td>{{ entity.nbEnfantsMineursAcharge }}</td>
+            </tr>
+            <tr>
+                <th>Aplusde5ansanciennete</th>
+                <td>{{ entity.aPlusDe5ansAnciennete }}</td>
+            </tr>
+            <tr>
+                <th>Aplusde10ansanciennete</th>
+                <td>{{ entity.aPlusDe10ansAnciennete }}</td>
+            </tr>
+            <tr>
+                <th>Aplusde15ansanciennete</th>
+                <td>{{ entity.aPlusDe15ansAnciennete }}</td>
+            </tr>
+            <tr>
+                <th>Aplusde20ansanciennete</th>
+                <td>{{ entity.aPlusDe20ansAnciennete }}</td>
+            </tr>
+            <tr>
+                <th>Aplusde25ansanciennete</th>
+                <td>{{ entity.aPlusDe25ansAnciennete }}</td>
+            </tr>
+            <tr>
+                <th>Amedaillehonneurtravail</th>
+                <td>{{ entity.aMedailleHonneurTravail }}</td>
+            </tr>
+            <tr>
+                <th>Estlogedansentreprise</th>
+                <td>{{ entity.estLogeDansEntreprise }}</td>
+            </tr>
+            <tr>
+                <th>Estexpatriesejour1</th>
+                <td>{{ entity.estExpatrieSejour1 }}</td>
+            </tr>
+            <tr>
+                <th>Estexpatriesejoursuivant</th>
+                <td>{{ entity.estExpatrieSejourSuivant }}</td>
+            </tr>
+            <tr>
+                <th>Travailleaumoins50hsemaine</th>
+                <td>{{ entity.travailleAuMoins50hsemaine }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupannuel</th>
+                <td>{{ entity.joursSupAnnuel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('basedroits') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('basedroits_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

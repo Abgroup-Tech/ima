@@ -1,0 +1,73 @@
+{% extends '::base-admin.html.twig' %}
+{% block main %}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('dashboard_admin') }}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Liste des Salaries</h3>
+                  <a href="{{ path('ad_salarie_new') }}" style="float:right;margin-top: -45px;" class="btn btn-primary">Ajouter un Salarié</a>
+                  <a href="{#{{ path('ad_salarie_new') }}#}" style="float:right;margin-top: -45px;margin-right: 154px;" class="btn btn-primary">Export Excell</a>
+                  <a href="{#{{ path('ad_salarie_new') }}#}" style="float:right;margin-top: -45px;margin-right: 279px;" class="btn btn-primary">Imprimer</a>
+                </header>
+
+                <div class="table-responsive">
+                  <table class="table table-striped b-t b-light">
+                    <thead>
+                        <th>Id</th>
+                        <th>Matricule</th>
+                        <th>Cnps</th>
+                        <th>Nom & prenom</th>
+                        <th>Poste</th>
+                        <th>Email</th>
+                        <th>Superviseur</th>
+                        <th>Statut</th>
+                        <th width="100">Actions</th>
+                        <th width="100">Modifier</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in entities %}
+                      <tr>
+                        <td><a href="{{ path('ad_salarie_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                        <td>{{ entity.matricule }}</td>
+                        <td>{{ entity.numeroCnps }}</td>
+                        <td>{{ entity.nomprenom }}</td>
+                        <td>{{ entity.poste }}</td>
+                        <td>{{ entity.email }}</td>
+                        <td>{{ entity.superviseur }}</td>
+                        <td>{{ entity.statutEmploi }}</td>
+                        <td>
+                            <a href="{{ path('ad_salarie_show', { 'id': entity.id }) }}" class="btn btn-success">Détail Profil</a>
+                        </td>
+                         <td>
+                            <a href="{{ path('ad_salarie_edit', { 'id': entity.id }) }}" class="btn btn-primary">Modifier Profil</a>
+                        </td>
+                      </tr>
+                   {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                 
+                    </div>
+                    <div class="col-sm-4 text-center">
+                      {#<a href="{{ path('sa_demande_conge_new') }}" class="btn btn-success">Nouvelle demande de congé</a>#}
+                    </div>
+                  </div>
+                </footer>
+              </section>
+        </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+      </section>
+    </section>
+
+    {% endblock %}

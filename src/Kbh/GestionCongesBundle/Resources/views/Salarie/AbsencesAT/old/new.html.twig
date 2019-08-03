@@ -1,0 +1,193 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Aide ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                            
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('ad_absencesat') }}">Arrêt de travail</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Nouvelle absence
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered form-fit">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-calendar font-blue-hoki"></i>
+                                <span class="caption-subject font-blue-hoki bold uppercase">Formulaire d'enregistrement </span>
+                                <span class="caption-helper">d'un arrêt de travail</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            {% if erreur %}
+                                <div class="note note-danger">
+                                    <h4 class="block">{{ erreur }}</h4>
+                                    <p>Une érreur c'est produite lors de la modification du salarié. Veulliez revérifier tous les champs</p>
+                                </div>
+                            {% endif %}
+                            <!-- BEGIN FORM-->
+                            {{ form_start(form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}  
+                            {#<form class="form-horizontal form-bordered form-label-stripped" action="{{ path('admin_salarie_create')}}" method="POST">#}
+                            <div class="form-body">
+                                {#<div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.salarie,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>#}
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Sélectionnez le salarié
+                                        <span class="required">
+                                            * 
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <div id="div-collab" class="input-group">
+                                        <select id="btn-collab" data-required="true" class="form-control select2me" name="options2" required="true">
+                                            <option  value="">Selectionnez....</option>
+                                            {% for salaries in salaries%}
+                                                <option id="collabId" value="{{ salaries.id }}">{{ salaries.nomprenom }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button id="confirmer" class="btn btn-success" type="button" data-toggle="modal"><i class="fa fa-check-circle"/></i> Confirmer</button> 
+                                        </span> 
+                                        {# <span id="fa-times"style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-times fa-2x text-danger"/></i></span>#}
+                                        <span style="display:none">
+                                            {{ form_widget(form.salarie, {'attr': {'class': 'form-control',}}) }}
+                                        </span>
+                                    </div>
+                                    </div>
+                                    
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Sélectionnez motif</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.motif,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Précisez la date de départ</label>
+                                    <div class="col-md-8">
+                                     {{ form_widget(form.dateDebut,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Précisez la date de fin</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateFin,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                {#<div class="form-group">
+                                    <label class="control-label col-md-3">Pièces justificatives</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.pieceJustificative.file, {'attr': {'class': 'form-control'}}) }}
+                                        <span class="help-block">
+                                            Merci de scanner et joindre la décision d'arrêt de travail du salarié</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nommez le fichier importé</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.pieceJustificative.name, {'attr': {'class': 'form-control'}}) }}
+                                        <span style="display:none">
+                                            {{ form_widget(form.pieceJustificative.ajouterPar, {'attr': {'class': 'form-control',}}) }}
+                                        </span>
+                                    </div>
+                                </div>#}      
+                            </div>
+                            <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                <div class="row">
+                                    <div class="col-md-offset-10 col-md-3 pull-right">
+{#                                        <a href="{{ path('ad_organigrammeunite')}}" class="btn red">Annuler</a>#}
+                                        <input type="submit" class="btn green" value="Confirmer enregistrement"/>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_rest(form) }}  
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+    <script>
+            $("document").ready(function () {
+                
+               {# $("#kbh_gestioncongesbundle_absencesat_pieceJustificative_ajouterPar").val({{ admin.id }});#}
+                
+                $("#confirmer").click(function () {
+                    $("#kbh_gestioncongesbundle_absencesat_salarie").val($("select[id='btn-collab'] option[id='collabId']:selected ").val());
+                    $("#div-collab").append('<span style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-check-circle fa-2x text-success"/></i></span>');
+{#                    console.log("id du salarie = "+$("#kbh_gestioncongesbundle_absencesat_salarie").val());
+                    console.log("ajouter par = "+$("#kbh_gestioncongesbundle_absencesat_pieceJustificative_ajouterPar").val());#}
+                });
+
+            });
+        </script>
+{% endblock %}

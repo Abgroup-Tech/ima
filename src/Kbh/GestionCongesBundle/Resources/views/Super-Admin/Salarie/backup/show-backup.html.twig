@@ -1,0 +1,170 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main -%}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('ad_salarie')}}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Fiche Salarie</h3>
+                </header>
+            <section class="scrollable wrapper">              
+              <div class="row">
+                  <div class="col-lg-12">
+                  <div class="col-lg-4">
+                  <section class="panel panel-default ">
+                    <div class="panel-body bg-primary"  style="background-color: rgba(23, 123, 187, 0.66) !important;">
+                      <div class="clearfix text-center m-t">
+                        <div class="inline">
+                          <div class="easypiechart" data-percent="75" data-line-width="5" data-bar-color="#4cc0c1" data-track-Color="#f5f5f5" data-scale-Color="false" data-size="134" data-line-cap='butt' data-animate="1000">
+                            <div class="thumb-lg">
+                              <img src="/symfony/web/bundles/gestionconges/images/avatar.png" class="img-circle">
+                            </div>
+                          </div>
+                          <div class="h4 m-t m-b-xs">{{ entity.civilite }} {{entity.prenom}} {{entity.nom}}</div>
+                         <a href="#" class="text-info">Poste : {{entity.poste}}<i class="icon-twitter"></i></a>
+                         <br/><a href="#" class="text-info">Email : {{ entity.email }}<i class="icon-twitter"></i></a><br/>
+                         <br/><a href="{{ path('ad_salarie_edit', { 'id': entity.id }) }}" class="btn btn-default">Modifier Profil</a>
+                      {#   
+                         <br/><a href="#" class="text-info">Statut marital : {{ entity.statutMarital }}<i class="icon-twitter"></i></a>
+                         <br/><a href="#" class="text-info">Departement : {{ entity.unite }}<i class="icon-twitter"></i></a>#}
+                        </div>                      
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+             <div class="col-lg-8">                  
+                      <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 123, 187, 0.66) !important;color: white">
+                            <h3>Informations - Personnelles</h3>
+                          </header>
+                        <ul class="list-group no-radius">
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.id }}</span>
+                            <span class="label bg-primary">1</span>
+                             Id :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.matricule }}</span>
+                            <span class="label bg-primary">2</span>
+                            matricule :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.numeroCnps }}</span>
+                            <span class="label bg-primary">3</span>
+                           numeroCnps :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.dateNaissance|date('Y-m-d') }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">4</span>
+                           Date de Naissance :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.dateEmbauche|date('Y-m-d') }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">5</span>
+                           Date d'Embauche :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.typeContratTravail }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">6</span>
+                            Type Contrat Travail :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.telephone }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">7</span>
+                            Telephone :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.statutMarital }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">8</span>
+                            StatutMarital :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.unite }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">9</span>
+                            Unite :
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ entity.statutEmploi }}</span>
+                            <span class="pull-right"></span>
+                            <span class="label bg-primary">10</span>
+                            statut Emploi :
+                          </li>
+                        </ul>    
+                      </section>
+                      <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 123, 187, 0.66) !important;color: white">
+                            <h3>Droits </h3>
+                          </header>
+                       <ul class="list-group no-radius">
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.droitsAcquisAnneeEnCours}} jours </span>
+                            <span class="label bg-primary">1</span>
+                             Congés acquis en {{"now"|date("Y")}}
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.reliquatDroitsAnterieur}} jours </span>
+                            <span class="label bg-primary">2</span>
+                             Congés non pris années précédentes
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.CumulDroitsAcquis}} jours</span>
+                            <span class="label bg-primary">3</span>
+                            Total Congés acquis
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.droitsPris}} jours </span>
+                            <span class="label bg-primary">4</span>
+                            Congés pris en {{"now"|date("Y")}}
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ droits.permissionsPrises }} jours </span>
+                            <span class="label bg-primary">5</span>
+                            Permissions prises
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ droits.soldePermissions }} jours </span>
+                            <span class="label bg-primary">6</span>
+                            Permissions disponibles
+                          </li>
+                        </ul> 
+                      </section>      
+                    </div>
+                </div>           
+          </section>
+       </section>           
+        </section>
+
+
+{% endblock %}
+
+        {#<ul class="record_actions">
+    <li>
+        <a href="{{ path('ad_salarie') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ad_salarie_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ad_droits_edit', { 'id': droits.id }) }}">
+            Droits
+        </a>
+    </li>
+    
+</ul>#}

@@ -1,0 +1,63 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>Absence list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Datedebut</th>
+                <th>Datefin</th>
+                <th>Nbjoursouvrables</th>
+                <th>Commentairesdemandeur</th>
+                <th>Commentairessuperviseur</th>
+                <th>Estencours</th>
+                <th>Estvalide</th>
+                <th>Datevalidation</th>
+                <th>Estcloture</th>
+                <th>Datecloture</th>
+                <th>Datedemande</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('absence_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.type }}</td>
+                <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateFin %}{{ entity.dateFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.nbJoursOuvrables }}</td>
+                <td>{{ entity.commentairesDemandeur }}</td>
+                <td>{{ entity.commentairesSuperviseur }}</td>
+                <td>{{ entity.estEncours }}</td>
+                <td>{{ entity.estValide }}</td>
+                <td>{% if entity.dateValidation %}{{ entity.dateValidation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.estCloture }}</td>
+                <td>{% if entity.dateCloture %}{{ entity.dateCloture|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateDemande %}{{ entity.dateDemande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('absence_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('absence_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('absence_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

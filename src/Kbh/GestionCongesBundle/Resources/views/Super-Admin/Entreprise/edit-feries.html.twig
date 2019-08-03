@@ -1,0 +1,163 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    {#    <h1>Salarie creation</h1>
+        {{ form(form) }}#}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                       {{ form_start(delete_form) }} 
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">ATTENTION !!</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-12 note note-danger">
+                                <h4 class="block">CONFIRMATION DE LA SUPPRESSION! </h4>
+                                <p>
+                                    Voulez-vous vraiment SUPPRIMER ces informations ?
+                                </p>
+                            </div>
+                          </div> 
+                        </div>
+                        <div class="modal-footer">
+                             <input type="submit" class="btn red" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Annuler</button>
+                        </div>
+                        {{ form_end(delete_form) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('sup_ad_systeme_show') }}">Systeme</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Feries 
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered form-fit">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-info font-blue-hoki"></i>
+                                <span class="caption-subject font-blue-hoki bold uppercase">Modifier</span>
+                                <span class="caption-helper">Feries</span>
+                            </div>
+                            {#<div class="actions">
+                             <a class="btn btn-circle btn-icon-only btn-default" href="#portlet-config" data-toggle="modal" title="Besoin d'aide ?">
+                             <i class="icon-info"></i>
+                             </a>
+                            </div>#}
+                        </div>
+                        <div class="portlet-body form">
+                            {#{% if erreur %}
+                                <div class="note note-danger">
+                                    <h4 class="block">{{ erreur }}</h4>
+                                    <p>Une érreur c'est produite lors de la modification du salarié. Veulliez revérifier tous les champs</p>
+                                </div>
+                            {% endif %}#}
+                            <!-- BEGIN FORM-->
+                            {{ form_start(form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}  
+                            {#<form class="form-horizontal form-bordered form-label-stripped" action="{{ path('admin_salarie_create')}}" method="POST">#}
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Titre ferié</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.titreFeries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un férié"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de début</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateDebutFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de début"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de fin</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateFinFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de fin"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre de jours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.nbJoursFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre de jours"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                            <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                <div class="row">
+                                    <div class="col-md-offset-4 col-md-4 pull-right">
+                                        <a href="{{ path('sup_ad_systeme_show')}}" class="btn default">Annuler</a>
+                                        <input type="submit" class="btn green" value="Mettre à jour"/>
+                                        <a href="#portlet-config" class="btn red" data-toggle="modal" >Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form_rest(form) }}  
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+    <script>
+        {#$("document").ready( function() {
+            //RECUPERATION DU SALARIE AU CLICK
+            $("#carriereapp_carriereappbundle_demande_demandeur").val("{{ demande.demandeur.id }}");
+            $("#carriereapp_carriereappbundle_demande_motif").val("{{ demande.motif }}");
+            console.log("nom : "+$("#carriereapp_carriereappbundle_demande_demandeur").val()+" okey!!!");
+            console.log("nom : "+$("#carriereapp_carriereappbundle_demande_motif").val()+" okey!!!");
+        });#}
+    </script>
+{% endblock %}
+

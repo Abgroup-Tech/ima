@@ -1,0 +1,30 @@
+absencesat:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:index" }
+
+absencesat_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:show" }
+
+absencesat_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:new" }
+
+absencesat_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:create" }
+    methods:  POST
+
+absencesat_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:edit" }
+
+absencesat_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:update" }
+    methods:  [POST, PUT]
+
+absencesat_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:delete" }
+    methods:  [POST, DELETE]

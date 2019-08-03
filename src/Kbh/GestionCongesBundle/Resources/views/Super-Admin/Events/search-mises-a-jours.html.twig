@@ -1,0 +1,269 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE HEAD -->
+      
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                {#<li>
+                        <a href="#">Demandes</a>
+                        <i class="fa fa-circle"></i>
+                </li>#}
+                <li class="active">
+                    Historique des mises à jours
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                <div class="portlet-body">
+                    <div class="invoice">
+
+                        {#                        <hr/>#}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_1" data-toggle="tab">
+                                           Mise à jours mensuelle des droits  </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_2" data-toggle="tab">
+                                            Mise à jours annuelle des droits </a>
+                                    </li>
+                                    {#<li>
+                                        <a href="#tab_1_3" tabindex="-1" data-toggle="tab">
+                                            Historique de suppression du cache </a>
+                                    </li>#}
+                                   
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_1_1">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption" style="margin-top: 7px;">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">Mise à jours mensuelle ({{month}}-{{"now"|date('Y')}})</span>
+                                                </div>
+                                                 <div class="tools">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default">Filter</button>
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_search_mise_ajours', { 'month': 'now'|date_modify('-3 month')|date('m') }) }}">
+                                                                 <i class="fa fa-calendar"></i>    Il y a 3 mois </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_search_mise_ajours', { 'month': 'now'|date_modify('-2 month')|date('m') }) }}">
+                                                                  <i class="fa fa-calendar"></i>  Il y a 2 mois </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_search_mise_ajours', { 'month': 'now'|date_modify('-1 month')|date('m') }) }}">
+                                                                  <i class="fa fa-calendar"></i>   Il y a 1 mois </a>
+                                                            </li>
+                                                            <li class="divider">
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_historique_mise_ajours') }}">
+                                                                 <i class="fa fa-calendar"></i>    Ce mois </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                       <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        N°
+                                                    </th>
+                                                    <th>
+                                                        Salarie
+                                                    </th>
+                                                    <th>
+                                                        Date mise à jours
+                                                    </th>
+                                                    <th>
+                                                        Ancien solde
+                                                    </th>
+                                                    <th>
+                                                       Nouveau solde
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for LogMensuel in LogMensuel%}
+                                                    {% if LogMensuel.dateUpdate|date('m') == month %}
+                                                         {% if LogMensuel.salarie.poste != "Super Administrateur IMA" %}
+                                                             {% if LogMensuel.salarie.poste != "Administrateur IMA" %}  
+                                                    <tr>
+                                                        <td>
+                                                            {{LogMensuel.id}}
+                                                        </td>
+                                                        <td>
+                                                            {{LogMensuel.salarie}}
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            {{LogMensuel.dateUpdate|date('d-m-Y')}} 
+                                                        </td>
+                                                        <td>
+                                                            {{LogMensuel.ancienSolde}} + (2.2)
+                                                        </td>
+                                                        <td style="color:#F3565D !important">
+                                                            {{LogMensuel.nouveauSolde}}
+                                                        </td>
+                                                    </tr>
+                                                       {% endif %} 
+                                                     {% endif %} 
+                                                   {% endif %} 
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                    <div class="tab-pane fade" id="tab_1_2">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">Mise à jours annuelle ({{"now"|date('Y')}})</span>
+                                                </div>
+                                                <div class="tools">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default">Filter</button>
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_search_mise_ajours_annuel', { 'year': 'now'|date_modify('-3 year')|date('Y') }) }}">
+                                                                 <i class="fa fa-calendar"></i>    Il y a 3 ans </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_search_mise_ajours_annuel', { 'year': 'now'|date_modify('-2 year')|date('Y') }) }}">
+                                                                  <i class="fa fa-calendar"></i>  Il y a 2 ans </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_search_mise_ajours_annuel', { 'year': 'now'|date_modify('-1 year')|date('Y') }) }}">
+                                                                  <i class="fa fa-calendar"></i>   Il y a 1 an </a>
+                                                            </li>
+                                                            <li class="divider">
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('sup_ad_historique_mise_ajours') }}">
+                                                                 <i class="fa fa-calendar"></i>    Cette année </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        N°
+                                                    </th>
+                                                    <th>
+                                                        Salarie
+                                                    </th>
+                                                    <th>
+                                                        Date mise à jours
+                                                    </th>
+                                                    <th>
+                                                        Jours supplémentaire ajoutés
+                                                    </th>
+                                                    <th>
+                                                       Ancien solde
+                                                    </th>
+                                                    <th>
+                                                       Nouveau solde
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for LogAnnuel in LogAnnuel%}
+                                                    {% if LogAnnuel.annee == "now"|date('Y')  %}
+                                                         {% if LogAnnuel.salarie.poste != "Super Administrateur IMA" %}
+                                                             {% if LogAnnuel.salarie.poste != "Administrateur IMA" %}
+                                                    <tr>
+                                                        <td>
+                                                            {{LogAnnuel.id}}
+                                                        </td>
+                                                        <td>
+                                                            {{LogAnnuel.salarie}}
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            {{LogAnnuel.dateUpdate|date('d-m-Y')}} 
+                                                        </td>
+                                                        <td>
+                                                            {{LogAnnuel.jourSupAnnuel}}
+                                                        </td>
+                                                        <td>
+                                                            {{LogAnnuel.ancienSolde}}
+                                                        </td>
+                                                        <td style="color:#F3565D !important">
+                                                            {{LogAnnuel.salarie.droits.totalDroitsAprendre}}
+                                                        </td>
+                                                    </tr>
+                                                       {% endif %} 
+                                                     {% endif %} 
+                                                   {% endif %} 
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                                   
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+            color:#345F98 !important;
+        }
+    </style>
+
+{% endblock %}

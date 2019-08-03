@@ -1,0 +1,6 @@
+parametre-sal:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:parametre" }
+
+
+

@@ -1,0 +1,112 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+  <section>
+      <section class="hbox stretch">
+
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{path('dashboard_salarie')}}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Formulez votre justification</h3>
+                </header>
+          <section class="vbox">
+                  <div class="wrapper">
+                        <section class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="conges">                  
+                             <div class="wrapper">
+                               <div class="col-sm-12">
+
+                                  <form data-validate="parsley">
+                                    <div class="alert alert-danger">
+                                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                      <i class="fa fa-info-sign"></i><strong>Attention ! </strong> Toutes abscences devra être justifiée dans les 15 jours qui suivent l'absence ... Dans le cas contraire elle sera considérée comme non-justifiée et sera décomptée de votre solde de congée !
+                                    </div>
+                                    <br/>  
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                              <div class="col-lg-12">
+                                <div class="padder-v text-center clearfix">                            
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold">{{ droits.droitsAcquisAnneeEnCours }} Jours</div>
+                                    <small class="text-muted">Droit Acquits Année en cours</small>
+                                  </div>
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold">{{ droits.CumulDroitsAcquis }} Jours</div>
+                                    <small class="text-muted">Cumul des Droits Acquits</small>
+                                  </div>
+
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold text-danger">{{ droits.totalDroitsAprendre }} Jours</div>
+                                    <small class="text-danger">Solde Congés</small>
+                                  </div>
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold "> 0 Jours</div>
+                                    <small class="text-muted">Absence Non-Justifiées</small>
+                                  </div>
+
+                                  <div class="col-lg-2-4 ">
+                                    <div class="h3 font-bold">{{ droits.droitsPris }} Jours</div>
+                                    <small class="text-muted">Congés Pris</small>
+                                  </div>
+
+                                </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                      <br/>
+                                          </div>
+                                        <div class="panel-body">               
+                  <div class="form-group pull-in clearfix">
+                    <div class="col-sm-4" style="width: 46.333333%;">
+                     <div class="btn-group " style="margin-left: 0px !important;float: left;margin-right: 30px;margin-top: -7px;">
+                         <label>Choisissez un motif</label>
+                          <select id="btn-motif" data-required="true" class="form-control m-t" style="margin-top: 4px;">
+                                <option  value="">Choisissez un motif</option>
+                                {% for types in types%}
+                                <option id="motifAbs" value="{{ types.motif }}">{{ types.motif }}</option>
+                                 {% endfor %}
+{#                                <option value="bar">Bar</option>#}
+                            </select>
+                                          
+                     </div>
+                    <div id="view" class="col-sm-4 sr">
+                        <label>Durée</label>
+                    <input id="dureeAbs" name="dureeAbs" style="width: 120%;float: right;" type="number" class="input-sm input-s form-control" max="" min="1"/>
+                    </div>
+                    
+                    </div>
+                    <div class="col-sm-4">
+                      <label>A partir du</label>
+                     <input id="dateDebut" class="input-sm input-s form-control" size="12" type="date" value="{{"now"|date('d-m-y')}}" style="width: 64%;" >
+                    </div>
+            
+                  </div>
+                      <div class="form-group">
+                        <label>Commentaire</label>
+                        <textarea class="form-control" rows="6" data-minwords="6" data-required="true" placeholder="Saisissez un commentaire"></textarea>
+                      </div>
+                  </div>
+                      <footer class="panel-footer text-right bg-light lter">
+                        <button type="submit" class="btn btn-success btn-s-xs">Soumettre</button>
+                      </footer>
+
+                        </form>
+                      </div> 
+                       </div>
+                        </div>
+                                    </section>
+                                </section>
+                            </section>
+                          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+                        </section>
+                      </section>
+                    </section>
+  </section>
+  <style type="text/css">
+  th,tr {
+    text-align: center;
+  }
+  </style>
+    {% endblock %}

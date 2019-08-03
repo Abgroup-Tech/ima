@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Organigrammeunite" table="organigrammeunite">
+    <indexes>
+      <index name="IDX_A094C969483F7189" columns="rattachement"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="UNIQ_A094C969D436D4A8" columns="salarie_"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nom" type="string" column="nom" length="255" nullable="false"/>
+    <field name="sigle" type="string" column="sigle" length="255" nullable="false"/>
+    <field name="niveau" type="integer" column="niveau" nullable="false"/>
+    <many-to-one field="salarie" target-entity="Salarie">
+      <join-columns>
+        <join-column name="salarie_" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="rattachement" target-entity="Organigrammeunite">
+      <join-columns>
+        <join-column name="rattachement" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

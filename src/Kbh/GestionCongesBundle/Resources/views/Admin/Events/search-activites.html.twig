@@ -1,0 +1,168 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE HEAD -->
+      
+            <!-- BEGIN PAGE CONTENT -->
+            <div class="page-content">
+                <div class="container">
+                    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                    <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Modal title</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Widget settings form goes here
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn blue">Save changes</button>
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                    <!-- BEGIN PAGE BREADCRUMB -->
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                            Historique des activités
+                        </li>
+                    </ul>
+                    <!-- END PAGE BREADCRUMB -->
+                    <!-- BEGIN PAGE CONTENT INNER -->
+                    
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                    <i class="icon-book-open font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Historique des activités ({{month}}-{{"now"|date('Y')}})</span>
+                            </div>
+                            <div class="tools">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default">Filter par date</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="{{ path('ad_search_activities', { 'month': 'now'|date_modify('-3 month')|date('m') }) }}">
+                                             <i class="fa fa-calendar"></i>    Il y a 3 mois </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('ad_search_activities', { 'month': 'now'|date_modify('-2 month')|date('m') }) }}">
+                                              <i class="fa fa-calendar"></i>  Il y a 2 mois </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('ad_search_activities', { 'month': 'now'|date_modify('-1 month')|date('m') }) }}">
+                                              <i class="fa fa-calendar"></i>   Il y a 1 mois </a>
+                                        </li>
+                                        <li class="divider">
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('ad_historique_activities') }}">
+                                             <i class="fa fa-calendar"></i>  Ce mois </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="timeline">
+                                {% for notification in notifications %}
+                                <!-- TIMELINE ITEM -->
+                                <div class="timeline-item">
+                                    <div class="timeline-badge">
+                                        <!-- ZONE DE L'ICON -->
+                                        <div class="timeline-icon">
+                                            {% if notification.cible == "salariés"%}<i class="{{notification.icon}} font-green-haze"></i>{% endif %}
+                                            {% if notification.cible == "notifications"%}<i class="{{notification.icon}} font-red-intense"></i>{% endif %}
+                                            {% if notification.cible == "arrêt de travail"%}<i class="{{notification.icon}} font-yellow-gold"></i>{% endif %}
+                                            {% if notification.cible == "arrêt maladie"%}<i class="{{notification.icon}} font-red-intense"></i>{% endif %}
+                                            {% if notification.cible == "unités"%}<i class="{{notification.icon}} font-red-intense"></i>{% endif %}
+                                            {% if notification.cible == "justifications des absences"%}<i class="{{notification.icon}} font-purple-studio"></i>{% endif %}
+                                            {% if notification.cible == "mises à jours"%}<i class="{{notification.icon}} font-blue-madison"></i>{% endif %}
+                                            {% if notification.cible == "documents"%}<i class="{{notification.icon}} font-grey-gallery"></i>{% endif %}
+                                            {% if notification.cible == "système"%}<i class="{{notification.icon}} font-blue-madison"></i>{% endif %}
+                                            {% if notification.cible == "entreprise"%}<i class="{{notification.icon}} font-green-haze"></i>{% endif %}
+                                            {% if notification.cible == "FAQ"%}<i class="{{notification.icon}} font-yellow-gold"></i>{% endif %}
+                                            {% if notification.cible == "password"%}<i class="{{notification.icon}} font-red-intense"></i>{% endif %}
+                                        </div>
+                                       <!-- ZONE DE L'ICON --> 
+                                    </div>
+                                    <div class="timeline-body">
+                                        <div class="timeline-body-arrow">
+                                        </div>
+                                        <div class="timeline-body-head">
+                                            <div class="timeline-body-head-caption">
+                                            {% if notification.cible == "salariés"%}<span class="timeline-body-alerttitle font-green-haze">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "notifications"%}<span class="timeline-body-alerttitle font-red-intense">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "arrêt de travail"%}<span class="timeline-body-alerttitle font-yellow-gold">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "arrêt maladie"%}<span class="timeline-body-alerttitle font-red-intense">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "unités"%}<span class="timeline-body-alerttitle font-red-intense">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "justifications des absences"%}<span class="timeline-body-alerttitle font-purple-studio">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "mises à jours"%}<span class="timeline-body-alerttitle font-blue-madison">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "mises à jours"%}<span class="timeline-body-alerttitle font-blue-madison">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "système"%}<span class="timeline-body-alerttitle font-blue-madison">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "FAQ"%}<span class="timeline-body-alerttitle font-yellow-gold">{{notification.action}}</span>{% endif %}
+                                            {% if notification.cible == "password"%}<span class="timeline-body-alerttitle font-red-intense">{{notification.action}}</span>{% endif %}
+                                           {% if notification.cible == "entreprise"%}<span class="timeline-body-alerttitle font-green-haze">{{notification.action}}</span>{% endif %}
+                                                <span class="timeline-body-time font-grey-cascade"><i class="icon-calendar"></i> Le {{notification.dateCreation|date('d-m-Y')}} à {{notification.dateCreation|date('H:i')}} </span><br/>
+                                             {#   par <b>{{notification.salarie}}</b></span><br/>#}
+                                               
+                                            </div>
+                                           {# <div class="timeline-body-head-actions">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-circle grey-salsa btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                        Actions <i class="fa fa-angle-down"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu pull-right" role="menu">
+                                                        <li>
+                                                            <a href="javascript:;">Action </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">Another action </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">Something else here </a>
+                                                        </li>
+                                                        <li class="divider">
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">Separated link </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>#}
+                                        </div>
+                                        <div class="timeline-body-content">
+                                            {#<span class="font-grey-cascade">#}
+                                               <p style="color: #5b9bd1 !important;">{{notification.message}} </p>{#<a href="javascript:;">Lorem ipsuim</a>#}
+                                            {#</span>#}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END TIMELINE ITEM -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- END PAGE CONTENT INNER -->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+            color:#345F98 !important;
+        }
+    </style>
+
+{% endblock %}

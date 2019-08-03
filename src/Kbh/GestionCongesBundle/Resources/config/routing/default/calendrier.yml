@@ -1,0 +1,6 @@
+calendrier:    
+    path: /calendrier   
+    defaults: { _controller: "KbhGestionCongesBundle:Default:calendrier" }
+
+
+

@@ -1,0 +1,63 @@
+ {% if collabs_liste|length == 0 %}
+         //Liste des demandes en cours (cas généralisé)   
+        {% if demandes%}
+           	{% set a = 0 %}
+            {% for demande in demandes %}
+                {% for listSalaries in salaries%}
+                    {% for salarie in listSalaries%}
+                        {% if demande.salarie == salarie %}
+                                        {
+                                            title: '  {{ demande.salarie.civilite }} {{ demande.salarie.nomprenom }}  ',
+                                            start: '{{ demande.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ demande.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#FFB848',
+                                            url: "{{ path('superviseur_demande_show_2', { 'id': demande.id}) }}"
+                                        }{% if a < nb_demandes-1 %},{% endif %}{% set a = a + 1 %}
+                        {%endif%}
+                    {% endfor %}
+                  {% endfor %}
+                 {% endfor %}     
+        {%endif%}
+
+                            //Liste des Congés autorisées (cas généralisé)   
+        {% if conges%}
+             {% if demandes|length != 0%}, {%endif%}{% set i = 0 %}
+            {% for conge in conges %}
+                {% for listSalaries in salaries%}
+                    {% for salarie in listSalaries%}
+                        {% if conge.salarie == salarie %}
+                                        {
+                                            title: ' {{ conge.salarie.civilite }} {{ conge.salarie.nomprenom }} ',
+                                            start: '{{ conge.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ conge.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#35aa47 ',
+                                            url: "{{ path('superviseur_demande_show_2', { 'id': conge.demande.id}) }}"
+                                        }{% if i < nb_conges-1 %},{% endif %}{% set i = i + 1 %}
+                        {%endif%}
+                    {% endfor %}
+                  {% endfor %}
+                 {% endfor %}  
+        {%endif%}
+
+                            //Liste des absences autorisées (cas généralisé)   
+        {% if absences%}
+          {% if conges%} ,{%endif%}
+            {% if conges|length == 0 and demandes|length != 0 %} ,{%endif%}
+            {% set e = 0 %}
+            {% for absence in absences %}
+                {% for listSalaries in salaries%}
+                    {% for salarie in listSalaries%}
+                        {% if absence.salarie == salarie %}
+                                        {
+                                            title: '  {{ absence.salarie.civilite }} {{ absence.salarie.nomprenom }}  ',
+                                            start: '{{ absence.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ absence.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#8E44AD',
+                                            url: "{{ path('superviseur_demande_show_2', { 'id': absence.demande.id}) }}"
+                                        }{% if e < nb_permissions-1 %},{% endif %}{% set e = e + 1 %}
+                    {%endif%}
+                {% endfor %}
+              {% endfor %}
+             {% endfor %}            
+        {%endif%}	 
+     {%endif%}

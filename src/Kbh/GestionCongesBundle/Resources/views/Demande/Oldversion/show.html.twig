@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>Demande</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{{ entity.dateDebut|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{{ entity.dateFin|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datedemande</th>
+                <td>{{ entity.dateDemande|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Typedemande</th>
+                <td>{{ entity.typeDemande }}</td>
+            </tr>
+            <tr>
+                <th>Nbjoursouvrables</th>
+                <td>{{ entity.nbjoursOuvrables }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ entity.motif }}</td>
+            </tr>
+            <tr>
+                <th>Estencours</th>
+                <td>{{ entity.estEnCours }}</td>
+            </tr>
+            <tr>
+                <th>Estrefuse</th>
+                <td>{{ entity.estRefuse }}</td>
+            </tr>
+            <tr>
+                <th>Refusepar</th>
+                <td>{{ entity.refusePar }}</td>
+            </tr>
+            <tr>
+                <th>Raisonrefus</th>
+                <td>{{ entity.raisonRefus }}</td>
+            </tr>
+            <tr>
+                <th>Daterefus</th>
+                <td>{{ entity.dateRefus|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>estValideNiveau1</th>
+                <td>{{ entity.estValideNiveau1 }}</td>
+            </tr>
+            <tr>
+                <th>estValideNiveau2</th>
+                <td>{{ entity.estValideNiveau2 }}</td>
+            </tr>
+            <tr>
+                <th>valideurNiveau1</th>
+                <td>{{ entity.valideurNiveau1 }}</td>
+            </tr>
+            <tr>
+                <th>valideurNiveau2</th>
+                <td>{{ entity.valideurNiveau2 }}</td>
+            </tr>
+            <tr>
+                <th>dateValidation1</th>
+                <td>{{ entity.dateValidation1|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>dateValidation2</th>
+                <td>{{ entity.dateValidation2|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Estcloture</th>
+                <td>{{ entity.estCloture }}</td>
+            </tr>
+            <tr>
+                <th>Datecloture</th>
+                <td>{{ entity.dateCloture|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('demande') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('demande_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

@@ -1,0 +1,30 @@
+periodetraitementdemandes:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:index" }
+
+periodetraitementdemandes_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:show" }
+
+periodetraitementdemandes_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:new" }
+
+periodetraitementdemandes_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:create" }
+    methods:  POST
+
+periodetraitementdemandes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:edit" }
+
+periodetraitementdemandes_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:update" }
+    methods:  [POST, PUT]
+
+periodetraitementdemandes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeTraitementDemandes:delete" }
+    methods:  [POST, DELETE]

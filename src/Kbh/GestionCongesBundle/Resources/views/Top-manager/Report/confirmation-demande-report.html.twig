@@ -1,0 +1,190 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+ <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                            <h1>Report<small> de congé</small></h1>
+                        </div>
+                        
+                </div>
+        </div>     
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                                <a href="{{ path('top_manager_reports') }}">Report congé</a>
+                                <i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                               Nouveau report
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                               <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">CONFIRMATION DU REPORT</span>
+                                                </div>
+                                                <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="note note-success">
+                                                    <h4 class="block">CONFIRMATION!</h4>
+                                                    <p>
+                                                      SOUHAITEZ-VOUS CONFIRMER CE REPORT ?
+                                                    </p>
+                                            </div>
+                                           
+                                            <!-- BEGIN FORM-->
+                                            {#{{ form_start(form, {'attr': {'data-validate' : 'parsley', 'class': 'form-horizontal'}}) }}#}
+                            <form class="form-horizontal form-bordered form-label-stripped" action="{{ path('top_manager_report_conge_create', { 'id': conge.id })}}" method="POST">                                            
+                                                <div class="form-body" id="form-demande">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">{{ form_label(form.nbJoursOuvrables, "Durée") }}</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="nbJours" name="nbJours" min="1" type="number" class="form-control" value="{{entity.nbJoursOuvrables}}" readonly="true" />
+                                                                    {{ form_widget(form.nbJoursOuvrables, {'attr': {'name': 'dateDebut', 'class': 'input-sm input-s form-control', 'size': '12', 'type': 'text', 'style': 'width:120%',}}) }}
+                                                                    <span class="help-block">
+                                                                        Vous ne pouvez plus modifier la durée du congé
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Nouvelle date de début</label>
+                                                                <div class="col-md-9">
+                                                                    {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control', 'type': 'date','readonly':'true'}}) }}
+                                                                    <span class="help-block">
+                                                                        Nouvelle date de départ en congé
+                                                                    </span> 
+                                                                </div>
+                                                                    <span class="help-block">
+                                                                        {{ form_errors(form.dateDebut) }}
+                                                                    </span>
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-2">Nouvelle date de fin</label>
+                                                                    <div class="col-md-9">
+                                                                                 <input id="dateFin" type="date" class="form-control" value="{{entity.dateFin|date('Y-m-d')}}" readonly="true">
+                                                                           <span class="help-block">
+                                                                            Nouvelle date de fin</span> 
+                                                                    </div>
+                                                                            <span class="help-block">
+                                                                            {{ form_errors(form.dateDebut) }}</span>
+                                                                </div>
+                                                        </div>  
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                    <label class="control-label col-md-2">Date de retour</label>
+                                                                    <div class="col-md-9">
+                                                                                      <input id="dateRetour" type="date" class="form-control" value="{{dateRetour|date('Y-m-d')}}" readonly="true">
+                                                                                      <span class="help-block">
+                                                                                    Date de reprise du travail</span>
+                                                                    </div>
+                                                                            <span class="help-block">
+                                                                         {{ form_errors(form.dateDebut) }}</span>
+                                                                    </div>
+                                                        </div> 
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Motif du report</label>
+                                                                <div class="col-md-9">
+                                                                       {{ form_widget(form.motifReport, {'attr': {'size': '12','class' : 'form-control', 'data-minwords':'6','readonly':'true'}}) }}
+                                                                </div>
+                                                                        <span class="help-block">
+                                                                        {{ form_errors(form.motifReport) }}</span>
+                                                            </div>
+                                                        </div>         
+                                                    </div>                              
+                                                </div>
+                                                <div class="row">
+                                                    <footer class="panel-footer text-right bg-light lter">
+                                                       <a class="btn btn-danger btn-s-xs" href="{{path('top_manager_reports')}}"> Annuler </a>
+                                                       <input id="valider" type="submit" class="btn btn-success btn-s-xs" value="Confirmer la demande"/>
+                                                    </footer>
+                                                    <span style="display:none;"> 
+                                                        {{ form_rest(form) }}    
+                                                    </span>                                              
+                                                    {{ form_end(form) }}
+                                                </div>    
+
+                                        <!-- END FORM-->
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+    th,td{
+        text-align: center;
+    }
+</style>
+<script>
+  $("document").ready( function() {
+
+   // Au chargement de la page les éléments sont insérés
+   
+    $("#kbh_gestioncongesbundle_report_dateFin").val($("#dateFin").val());           
+    $("#kbh_gestioncongesbundle_report_dateRetour").val($("#dateRetour").val());           
+
+    console.log("date : "+$("#kbh_gestioncongesbundle_report_dateFin").val()+" dateFin!!!");
+    console.log("date : "+$("#kbh_gestioncongesbundle_report_dateRetour").val()+" dateRetour!!!");
+	
+    console.log("date : "+$("#kbh_gestioncongesbundle_report_salarie").val()+" salarie!!!");
+    console.log("date : "+$("#kbh_gestioncongesbundle_report_conge").val()+" Conge!!!");
+    console.log("date : "+$("#kbh_gestioncongesbundle_report_manager").val()+" manager!!!");
+	console.log("date : "+$("#kbh_gestioncongesbundle_report_typeReport").val()+" type!!!");
+    console.log("date : "+$("#kbh_gestioncongesbundle_report_nbJoursOuvrables").val()+" nbJoursOuvrables!!!");
+ 
+});                  
+</script>
+{% endblock %}

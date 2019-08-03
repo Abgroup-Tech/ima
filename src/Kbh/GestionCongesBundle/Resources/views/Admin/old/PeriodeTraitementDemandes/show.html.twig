@@ -1,0 +1,161 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Aide ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                            
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('ad_periodetraitementdemandes_new') }}">Période de traitement des demandes de congés </a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Gestion période
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered form-fit">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-calendar font-blue-hoki"></i>
+                                <span class="caption-subject font-blue-hoki bold uppercase">Gestion période</span>
+                                <span class="caption-helper">Congés</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                                <div class="note note-info">
+                                    <h4 class="block">Période de traitement des demandes de congé</h4>
+                                    <p>Déclenchez la période où cloturez la dès que la date limite est atteinte.</p>
+                                </div>
+                            <!-- BEGIN FORM-->
+                            <form class="form-horizontal form-bordered form-label-stripped">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de debut</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" readonly="true" value="{{entity.dateDebut|date('d-m-Y')}} à partir de 00h00"/>
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de Fin</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" readonly="true" value="{{entity.dateFin|date('d-m-Y')}} à partir de 00h00"/>
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre de jours</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" readonly="true" value="{{nb_jour}}"/>
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Statut</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" readonly="true" value="{{entity.statut}}"/>
+                                        <span class="help-block">
+                                        {% if entity.statut == "En cours" %}
+                                            <span class="note note-success" style="padding-top: 5px; padding-bottom: 5px;">    
+                                        Vous avez démarré la période de traitement de congé
+                                            </span>
+                                        {% endif %}
+                                        {% if entity.statut == "Clôturé" %}
+                                            <span class="note note-danger" style="padding-top: 5px; padding-bottom: 5px;">    
+                                        Vous avez clôturé la période de traitement de congé
+                                            </span>
+                                        {% endif %}
+                                        </span>
+                                    </div>
+                                </div>        
+                            </div>
+                            <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-4 pull-right">
+                                         {% if entity.statut == "En attente" %}
+                                        <a href="{{ path('ad_periodetraitementdemandes_edit', { 'id': entity.id }) }}" class="btn blue">Modifer période</a>
+                                         <a href="{{ path('ad_demarrage_periode_traitement')}}" class="btn green">Démarrer période</a>
+                                        {% endif %}
+                                        {% if entity.statut == "En cours" %}
+                                        <a href="{{ path('ad_periodetraitementdemandes_edit', { 'id': entity.id }) }}" class="btn blue">Modifer période</a>
+                                        <a href="{{ path('ad_cloture_periode_traitement')}}" class="btn red">Clôturer période</a>
+                                        {% endif %}
+                                        {% if entity.statut == "Clôturé" %}
+                                         <a href="{{ path('ad_periodetraitementdemandes_edit', { 'id': entity.id }) }}" class="btn blue" style="margin-left: 127px;">Modifer période</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+    <script>
+        {#$("document").ready( function() {
+            //RECUPERATION DU SALARIE AU CLICK
+            $("#carriereapp_carriereappbundle_demande_demandeur").val("{{ demande.demandeur.id }}");
+            $("#carriereapp_carriereappbundle_demande_motif").val("{{ demande.motif }}");
+            console.log("nom : "+$("#carriereapp_carriereappbundle_demande_demandeur").val()+" okey!!!");
+            console.log("nom : "+$("#carriereapp_carriereappbundle_demande_motif").val()+" okey!!!");
+        });#}
+    </script>
+{% endblock %}

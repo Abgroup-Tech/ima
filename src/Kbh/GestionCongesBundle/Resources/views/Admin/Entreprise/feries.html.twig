@@ -1,0 +1,207 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            {#  ################################## #}
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="new-ferie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{ form_start(feriesForm,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Nouveau fériés</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Titre ferié</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.titreFeries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un férié"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de début</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.dateDebutFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de début"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de fin</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.dateFinFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de fin"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre de jours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.nbJoursFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre de jours"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                        {{ form_end(feriesForm) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            {#  ################################ #}
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Gestion des féries
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="portlet light">
+                <div class="portlet-body">
+                    <div class="portlet-title">
+                        <div class="actions">
+                             {#<a class="btn btn-circle btn-icon-only btn-default" href="#portlet-config" data-toggle="modal" title="Besoin d'aide ?">
+                             <i class="icon-info"></i>
+                             </a>#}
+                             <a href="#new-ferie" class="btn green pull-right" data-toggle="modal" style="margin-top: 15px;">
+                                + Nouveau férié 
+                            </a>
+                        </div>
+                    </div>
+                    <div class="invoice">
+                         <h3>Liste des féries: </h3>                         
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                                Titre féries
+                                            </th>
+                                            <th class="hidden-480">
+                                                Date début  
+                                            </th>
+                                            <th class="hidden-480">
+                                                Date fin
+                                            </th>
+                                            <th class="hidden-480">
+                                                Nombre jours
+                                            </th>
+                                            <th class="hidden-480">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ferie in feries%}
+                                            <tr>
+                                                <td>
+                                                    {{ferie.id}}
+                                                </td>
+                                                <td>
+                                                    {{ferie.titreFeries }}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{ferie.dateDebutFerie|date('d-m-Y')}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{ferie.dateFinFerie|date('d-m-Y')}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{ferie.nbJoursFerie}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    <a href="{{ path('ad_feries_edit', { 'id': ferie.id }) }}" class="btn btn-sm btn red" >
+                                                        modifier
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {#<hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Liste des permissions exceptionnelles:</h3>
+                                <div class="btn-group">
+                                    <a href="#new-permission" class="btn green" data-toggle="modal">
+                                        + Nouvelle permission 
+                                    </a>
+                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                                Motif
+                                            </th>
+                                            <th class="hidden-480">
+                                                Durée
+                                            </th>
+                                            <th class="hidden-480">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for param_permission in param_permission%}
+                                            <tr>
+                                                <td>
+                                                    {{param_permission.id}}
+                                                </td>
+                                                <td>
+                                                    {{param_permission.motif}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{param_permission.duree}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    <a href="{{ path('ad_permissions_edit', { 'id': param_permission.id }) }}" class="btn btn-sm btn red" >
+                                                        modifier
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>#}
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
+{% endblock %}

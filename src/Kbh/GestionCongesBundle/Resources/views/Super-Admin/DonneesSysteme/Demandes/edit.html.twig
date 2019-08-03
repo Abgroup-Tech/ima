@@ -1,0 +1,426 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    {#    <h1>Salarie creation</h1>
+        {{ form(form) }}#}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Aide ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                            
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('sup_ad_demandes') }}">Liste des demandes</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Modification d'une demande
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered form-fit">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-user font-blue-hoki"></i>
+                                <span class="caption-subject font-blue-hoki bold uppercase">Modification </span>
+                                <span class="caption-helper">d'une demande</span>
+                            </div>
+                            {#<div class="actions">
+                             <a class="btn btn-circle btn-icon-only btn-default" href="#portlet-config" data-toggle="modal" title="Besoin d'aide ?">
+                             <i class="icon-info"></i>
+                             </a>
+                            </div>#}
+                        </div>
+                        <div class="portlet-body form">
+                            {#{% if erreur %}
+                                <div class="note note-danger">
+                                    <h4 class="block">{{ erreur }}</h4>
+                                    <p>Une érreur c'est produite lors de la modification du salarié. Veulliez revérifier tous les champs</p>
+                                </div>
+                            {% endif %}#}
+                            <!-- BEGIN FORM-->
+                            {{ form_start(form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}  
+{#                            <form class="form-horizontal form-bordered form-label-stripped" action="{{ path('sup_ad_baseDroitsSalarie_update', {'id': salarie.id, 'bd': entity.id })}}" method="POST">#}
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Salarié</label>
+                                    <div class="col-md-8">
+{#                                        <input type="text" class="form-control" value="{{entity.joursSupAnnuel}} jour(s)" readonly="true"/>#}
+                                         {{ form_widget(form.salarie,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                               <div class="form-group">
+                                    <label class="control-label col-md-3">Type demande</label>
+                                    <div class="col-md-8">
+{#                                        <input type="text" class="form-control" value="{{entity.joursSupAnnuel}} jour(s)" readonly="true"/>#}
+                                         {{ form_widget(form.typeDemande,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>          
+                              <div class="form-group">
+                                    <label class="control-label col-md-3">Date demande</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateDemande,{'attr': {'class':'form-control','min':'0'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+{#                               {% if salarie.civilite != "Mr"%}#}
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date début</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateDebut,{'attr': {'class':'form-control','min':'0'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+{#                                {% endif %}#}
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date fin</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateFin,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date retour</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateRetour,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>     
+                               <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre de jours ouvrable</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.nbJoursOuvrables,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Motif</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.motif,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                  <div class="form-group">
+                                    <label class="control-label col-md-3">Autre motif</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.autreMotif,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Localité</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.localite,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>  
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Distance</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.distance,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>        
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Est en cours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estEnCours,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Est refusé</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estRefuse,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>     
+                                  <div class="form-group">
+                                    <label class="control-label col-md-3">Raison refus</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.raisonRefus,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Date refus</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateRefus,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>        
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Est valide niveaux 1</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estValideNiveau1,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Est valide niveaux 2</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estValideNiveau2,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>        
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Est valide niveaux 3</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estValideNiveau3,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Date validation 1</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateValidation1,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>        
+                               <div class="form-group">
+                                    <label class="control-label col-md-3">Date validation 2</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateValidation2,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>  
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date validation 3</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateValidation3,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>         
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Nbre niveaux validation</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.nbNiveauxValidation,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Est cloturé</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estCloture,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>         
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Date cloture</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateCloture,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Est validé</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.estValide,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                  <div class="form-group">
+                                    <label class="control-label col-md-3">Date validation</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.dateValidation,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Solde droits</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.soldeDroits,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>  
+                                  <div class="form-group">
+                                    <label class="control-label col-md-3">Refusé par</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.refusePar,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Valideur final</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.valideurFinal,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>         
+                               <div class="form-group">
+                                    <label class="control-label col-md-3">Valideur en cours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.valideurEnCours,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Suppléant en cours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.suppleantEnCours,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Valideur niveaux 1</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.valideurNiveau1,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div> 
+                               <div class="form-group">
+                                    <label class="control-label col-md-3">Valideur niveaux 2</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.valideurNiveau2,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>        
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Valideur niveaux 3</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.valideurNiveau3,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Crée par superviseur</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.creeParSuperviseur,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>  
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Auteur demande</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.auteurDemande,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Piece jointe</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.pieceJointe,{'attr': {'class':'form-control'}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                        
+                            </div>
+                            <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-4 pull-right">
+                                        <a href="{{ path('sup_ad_demandes') }}" class="btn red">Annuler</a>
+                                        <a href="{{ path('sup_ad_demandes_delete',{'id': entity.id}) }}" class="btn blue">Supprimer</a>
+                                        <input type="submit" class="btn green" value="Mettre à jour"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <span style="display:none">            
+                            {{ form_rest(form) }}  
+                            </span>  
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+    <script>
+        {#$("document").ready( function() {
+            //RECUPERATION DU SALARIE AU CLICK
+            $("#carriereapp_carriereappbundle_demande_demandeur").val("{{ demande.demandeur.id }}");
+            $("#carriereapp_carriereappbundle_demande_motif").val("{{ demande.motif }}");
+            console.log("nom : "+$("#carriereapp_carriereappbundle_demande_demandeur").val()+" okey!!!");
+            console.log("nom : "+$("#carriereapp_carriereappbundle_demande_motif").val()+" okey!!!");
+        });#}
+    </script>
+{% endblock %}
+

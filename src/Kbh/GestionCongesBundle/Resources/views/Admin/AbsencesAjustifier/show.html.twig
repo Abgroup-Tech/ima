@@ -1,0 +1,176 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %} 
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('ad_absencesajustifier') }}">Absences à justifer</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Détails
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-note font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Détails de l'absence</span>
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <header class="panel-heading" style="border-left: 6px solid rgb(238, 130, 238); margin-bottom: 20px;background: ghostwhite;margin-left: 11px;">
+                                <h3><b>Absence de {{ entity.demande.salarie.civilite }} {{ entity.demande.salarie }}</b></h3>
+                                <h4><b>Formulée le : {{ entity.dateCreation|date('d-m-Y')  }}</b></h4>
+                                <h4><b>Motif : {{ entity.demande.motif }}</b></h4>
+                                <ul>
+                                    <li><b>date de départ</b> :  {{ entity.demande.dateDebut|date('d-m-Y')  }}</li>
+                                    <li><b>date de Fin</b> : {{ entity.demande.dateFin|date('d-m-Y')  }}</li>
+                                </ul>
+                            </header>
+                            <!-- BEGIN FORM-->
+                            <div class="form-body" id="form-demande">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {#<div class="form-group">
+
+                                            <label class="control-label col-md-2">Delais max pour justification </label>
+                                            <div class="col-md-9">
+                                                <input id="nbJours" name="nbJours" min="1" type="text" class="form-control" value="{{ entity.dateMax|date('d-m-Y') }}" readonly="true" />
+                                                <span class="help-block"></span>
+                                            </div>
+
+                                        </div>#}
+                                    </div>
+                                    <!--/span-->
+
+                                    <div class="col-md-12" style="padding-bottom: 5px;">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Statut absence</label>
+                                            <div class="col-md-9">
+                                                <input  min="1" type="text" class="form-control" value="{{ entity.statut }}" readonly="true" />
+                                                <span class="help-block"></span> 
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="margin-bottom: 0px;">
+                                        <label class="control-label col-md-2">Nom du fichier
+                                        </label>
+                                        <div class="col-md-7">
+                                            <input id="collab" class="form-control" value="{{entity.justificatif.name}}" readonly="true">
+                                            <span class="help-block">
+                                            </span>
+                                        </div>
+                                            <a class="btn btn-success btn-sm" style="margin-top: 3px;" href="{{ asset(entity.justificatif.downloadPath) }}" download="{{entity.justificatif.path}}" title="Telecharger">
+                                                <i class="fa fa-cloud"></i>
+                                                <strong>Télécharger</strong>
+                                            </a>
+                                    </div>  
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Date import fichier</label>
+                                            <div class="col-md-9">
+                                                <input  min="1" type="datetime" class="form-control" value="{{ entity.justificatif.dateCreation|date('d-m-Y') }}" readonly="true" />
+                                                <span class="help-block"></span> 
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>            
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Statut délais</label>
+                                            <div class="col-md-9">
+                                                <input  min="1" type="text" class="form-control" value="{% if entity.justifieAtemps == 1%} Respecté {%endif%}{% if entity.justifieAtemps == 0%} En retard {%endif%}" readonly="true" />
+                                                <span class="help-block"></span> 
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>            
+                                    
+                                    {#<div class="col-md-12">
+                                    <hr/>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-8"  style="border-left: 6px solid rgb(238, 130, 238); margin-bottom: 20px;background: ghostwhite;margin-left: 11px;">
+                                        <h4>
+                                            Souhaitez-vous créer un arrêt pour maladie ?
+                                        </h4>
+                                        <div class="col-md-3 pull-right" style="padding-right: 0px;margin-top: -36px;margin-right: -135px;">
+                                                <a href="{{ path('ad_absencesajustifier')}}" class="btn red">Non</a>
+                                                <input type="submit" class="btn green" value="Oui"/>
+                                        </div>
+                                    </div>
+                                    
+                                    </div>#}
+                                </div>                              
+                            </div>
+                            <div class="form-actions" style="padding-top:20px;">
+                                <div class="row">
+                                    <!-- <footer class="panel-footer text-right bg-light lter">
+                                    <!-- <input type="submit" class="btn btn-success btn-s-xs" value="Soumettre"/> 
+                                  </footer> -->
+                                </div>
+                            </div>
+
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}

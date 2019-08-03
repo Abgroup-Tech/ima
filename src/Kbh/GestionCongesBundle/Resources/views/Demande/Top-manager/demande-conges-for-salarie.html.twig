@@ -1,0 +1,250 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+    <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Formulaire <small> de demande</small></h1>
+                </div>
+                <!-- END PAGE TITLE -->
+            </div>
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+            <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Widget settings form goes here
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                        <a>Demandes</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li class="active">
+                        Nouveau Congé
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-note font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Formulaire de demande de congé</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_1">
+                                        <p></p>
+                                        <!-- BEGIN DES RECAP DE DROITS -->
+                                        <br/>
+                                        <div class="row" style="margin-bottom: -18px !important;  border-bottom:1px solid #eaeef1; padding-bottom: 35px;">
+
+                                        </div>                         
+                                        <!-- END DES RECAP DE DROITS -->
+                                        <!-- BEGIN CHAMP FORMULAIRE -->
+                                        <div class="row">
+                                            <div class="portlet light">
+                                                <div class="portlet-body form">
+                                                    <!-- BEGIN FORM-->
+                                                    {{ form_start(form, {'attr': {'data-validate' : 'parsley', 'class': 'form-horizontal'}}) }}
+                                                    <div class="form-body" id="form-demande">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12" style="margin-bottom:10px !important;" >
+                                                                <label class="control-label col-md-3"></label>
+                                                                <div class="col-md-6">
+                                                                    {#{% if depot.statut == "En cours"%}
+                                                                        <div class="alert alert-success pull-in" style="margin-bottom:0px !important; text-align: center;">
+                                                                            <b>Debut de la période de demandes de congés.<br/>
+                                                                                Cette période prendra fin le : {{ depot.dateFin|date('d-m-Y') }}, Soit dans 
+                                                                                {% if nbJours < 0 %}0  jour(s){% endif %}
+                                                                                {% if nbJours >= 0 %}{{nbJours}}  jour(s).{% endif %}</b>
+                                                                            <div class="progress progress-striped active"  style="margin-top: 10px;">
+                                                                                <div class="progress-bar progress-bar-success tooltips" role="progressbar" data-placement="bottom" data-original-title="Jours écoulés : {{nbJoursTotal-nbJours}} / {{nbJoursTotal}}" aria-valuenow="40 "aria-valuemin="0" aria-valuemax="100" style="width: {{pourcentage}}%">
+                                                                                </div>
+                                                                            </div>       
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if depot.statut == "Clôturé" and traitement.statut == "En attente"%}
+                                                                        <div  class="alert alert-danger pull-in" style="margin-bottom:0px !important; text-align: center;{% if "now"|date('d-m-y') < depot.dateFin|date_modify('+2 day')|date('d-m-y') %} display:none; {%endif%}">
+                                                                            <b>Fin de la période de demandes de congés. Les demandes<br/>
+                                                                                seront traitées à partir du : {{ traitement.dateDebut|date('d-m-Y') }}</b>
+                                                                            <div class="progress progress-striped active" style="margin-top: 10px;">
+                                                                                <div class="progress-bar progress-bar-danger tooltips" role="progressbar" data-placement="bottom" data-original-title="Jours écoulés : {{nbJoursTotal-nbJours}} / {{nbJoursTotal}}" aria-valuenow="40 "aria-valuemin="0" aria-valuemax="100" style="width: {{pourcentage}}%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endif %}#}
+                                                                </div>
+                                                            </div> 
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group" style="margin-bottom: 0px;">
+                                                                    <label class="control-label col-md-3">Collaborateur</label>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <div id="div-collab" class="input-group">
+                                                                                    <select id="btn-motif" data-required="true" class="form-control select2me" name="options2" required="true">
+                                                                                        <option  value="">Selectionnez....</option>
+                                                                                        {% for salaries in salaries%}
+                                                                                            <option id="motifAbs" value="{{ salaries.id }}">{{ salaries.nomprenom }}</option>
+                                                                                        {% endfor %}
+                                                                                    </select>
+                                                                                    <span class="input-group-btn">
+                                                                                        <button id="confirmer" class="btn btn-success" type="button" data-toggle="modal"><i class="fa fa-check-circle"/></i> Confirmer</button> 
+                                                                                    </span> 
+                                                                                    {# <span id="fa-times"style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-times fa-2x text-danger"/></i></span>#}
+                                                                                    <span style="display:none">
+                                                                                        {{ form_widget(form.salarie, {'attr': {'class': 'form-control',}}) }}
+                                                                                    </span>
+                                                                                </div>
+                                                                                <span class="help-block">
+                                                                                    Choisisssez le collaborateur concerné par la demande
+                                                                                </span>        
+                                                                            </div>              
+                                                                        </div>        
+                                                                    </div>              
+                                                                </div>        
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+
+                                                                    <label class="control-label col-md-3">Auteur de la demande</label>
+                                                                    <div class="col-md-6">
+                                                                        <input class="form-control" value="{{salarie}}" readonly="true">
+                                                                        <span style="display:none">
+                                                                            {{ form_widget(form.auteurDemande, {'attr': {'class': 'form-control',}}) }}
+                                                                        </span>       
+                                                                        <span class="help-block">
+                                                                            Vous êtes l'auteur de la demande</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-md-12" >
+                                                                <div class="form-group">
+
+                                                                    <label class="control-label col-md-3">Motif</label>
+                                                                    <div class="col-md-6">
+                                                                        {{ form_widget(form.autreMotif, {'attr': {'class': 'form-control'}}) }}
+                                                                        <span class="help-block">
+                                                                            Motif pour lequel vous formulez la demande</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                 
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+
+                                                                    <label class="control-label col-md-3">Durée</label>
+                                                                    <div class="col-md-6">
+                                                                        {# <input id="nbJours" name="nbJours" min="1" type="number" step="1" class="form-control">#}
+                                                                        {{ form_widget(form.nbJoursOuvrables, {'attr': {'min': '1','class': 'form-control','type': 'number'}}) }}
+                                                                        <span class="help-block">
+                                                                            Précisez le nombre de jours ouvrables qu'il desire avoir</span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Date Départ</label>
+                                                                    <div class="col-md-6">
+                                                                        <div class="col-md-12 input-group">
+                                                                            <div class="input-icon">
+                                                                                <i class="fa fa-calendar fa-fw"></i>
+                                                                                {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control', 'type': 'date'}}) }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="help-block">
+                                                                            Précisez le jour de son départ en congé</span>        
+                                                                    </div>
+                                                                    <span class="help-block">
+                                                                        {{ form_errors(form.dateDebut) }}</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div> 
+                                                    </div>
+                                                    <div class="row">
+                                                        <footer class="panel-footer text-right bg-light lter">
+                                                            <input id="okey" type="submit" class="btn btn-success btn-s-xs" value="Soumettre"/>
+                                                        </footer>
+                                                        {{ form_rest(form) }}                                                                  
+                                                        {{ form_end(form) }}
+                                                    </div>                                    
+                                                    <!-- END FORM-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PAGE CONTAINER-->
+                    </div>
+                    <!-- BEGIN PAGE CONTENT -->
+                </div>
+                <!-- END PAGE CONTENT -->
+            </div>
+            <!-- BEGIN PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTENT -->
+        <script>
+            $("document").ready(function () {
+
+            {#    $("#kbh_gestioncongesbundle_demande_pieceJointe_ajouterPar").val({{ salarie.id }});#}
+
+                    //RECUPERATION DU MOTIF AU CLICK
+                    $("#confirmer").click(function () {
+                        $("#kbh_gestioncongesbundle_demande_salarie").val($("select[id='btn-motif'] option[id='motifAbs']:selected ").val());
+                        $("#div-collab").append('<span style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-check-circle fa-2x text-success" style="font-size: 30px;"/></i></span>');
+                    });
+
+                    //RECUPERATION DU SALARIE AU CLICK
+                    $("#okey").click(function () {
+                        $("#kbh_gestioncongesbundle_demande_salarie").val($("select[id='btn-motif'] option[id='motifAbs']:selected ").val());
+                        $("#div-collab").append('<span style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-check-circle fa-2x text-success"/></i></span>');
+                    });
+                });
+            {#    if($("#kbh_gestioncongesbundle_demande_salarie").val()===''){
+                    $("#div-collab").append('<span id="fa-times"style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-times fa-2x text-danger"/></i></span>');
+                }
+               else{    
+                $(".fa fa-times").remove();
+                $("#kbh_gestioncongesbundle_demande_salarie").val($("select[id='btn-motif'] option[id='motifAbs']:selected ").val());
+                $("#div-collab").append('<span style="margin-left: 9px; position: absolute; margin-top: 10px;"><i class="fa fa-check-circle fa-2x text-success"/></i></span>');
+                }#}
+        </script>
+    {% endblock %}

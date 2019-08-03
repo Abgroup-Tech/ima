@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>Report edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('report') }}">
+            Retour
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

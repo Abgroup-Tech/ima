@@ -1,0 +1,330 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form class="form-horizontal form-bordered form-label-stripped" action="{{ path('ad_document_create')}}" method="POST" {{ form_enctype(form) }}>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title uppercase">import de fichiers</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 note note-info">
+                                        <h4 class="block">Information! </h4>
+                                        <p>Les documents reconnus sont de type <b>XLSX (EXCEl)</b>.<br/>
+                                            Veuillez vous assurer de l'extension du fichier avant l'import.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12">   
+                                        <div class="form-body">
+                                            <div class="form-group last">
+                                                <label class="control-label col-md-3">Fichier d'import</label>
+                                                <div class="col-md-8">
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                        {{ form_widget(form.file) }}
+                                                    </div>
+                                                    <span class="help-block">
+                                                        {{ form_errors(form.file) }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Nom</label>
+                                                <div class="col-md-6">
+                                                    {{ form_widget(form.name,{'attr': {'class':'form-control', 'placeholder':"nom-document"}}) }}
+                                                    <span class="help-block">
+                                                        {{ form_errors(form.name) }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Cible de l'import</label>
+                                                <div class="col-md-6">
+                                                    {{ form_widget(form.cible,{'attr': {'class':'form-control'}}) }}
+                                                    <span class="help-block">
+                                                        {{ form_errors(form.cible) }}
+                                                    </span>
+                                                </div>
+                                            </div>  
+                                        </div>    
+                                    </div>
+                                </div>      
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn green" value="Confirmer"/>
+                                <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                            </div>
+                            {{ form_rest(form) }}  
+                        </form>                        
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Organigramme unités<i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Liste
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Organigramme unités</span>
+                            </div>
+                            <div class="tools">
+                                {#	<a href="javascript:;" class="collapse">
+                                        </a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                        </a>
+                                        <a href="javascript:;" class="reload">
+                                        </a>
+                                        <a href="javascript:;" class="remove">
+                                        </a>#}
+                                <div class="btn-group pull-right">
+                                    <div class="btn-group">
+                                        <a href="{{ path('sup_ad_organigrammeunite_new')}}" class="btn green">
+                                            Nouvelle unité <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    <button class="btn dropdown-toggle red" data-toggle="dropdown">Outils <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#portlet-config" data-toggle="modal" ><i class="fa fa-angle-right"></i>
+                                                Importer fichier </a>
+                                        </li>
+                                        <li><a href="javascript:;"><i class="fa fa-angle-right"></i>
+                                                Convertir en PDF </a>
+                                        </li>
+                                        <li><a href="javascript:;"><i class="fa fa-angle-right"></i>
+                                                Exporter en Excel </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <table class="table table-striped table-bordered table-hover" id="sample_2">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sigle
+                                        </th>
+                                        <th>
+                                            Nom
+                                        </th>
+                                        <th>
+                                            Type unité
+                                        </th>
+                                        <th>
+                                            Manager
+                                        </th>
+                                        <th>
+                                            Niveau validation
+                                        </th>
+                                        <th>
+                                            Nombre de salariés
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for entity in entities %}
+                                        <tr>
+                                            <td>
+                                                {{ entity.sigle }}
+                                            </td>
+                                            <td>
+                                                <a href="#{{ entity.sigle }}" data-toggle="modal">
+                                                    {{ entity.nom }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {%if(entity.estService)%}Service{% endif%}
+                                                {%if(entity.estCellule)%}Cellule{% endif%}
+                                                {%if(entity.estDepartement)%}Département{% endif%}
+                                                {%if(entity.estDirection)%}Direction{% endif%}
+                                                {%if(entity.estDga)%}Direction générale adjointe{% endif%}
+                                                {%if(entity.estDg)%}Direction générale{% endif%}
+                                                {%if(entity.estDrh)%}Direction des ressources humaines{% endif%}
+                                            </td>
+                                            <td>
+                                                {{ entity.manager }}
+                                            </td>
+                                            <td>
+                                                {{ entity.nbNiveauxValidation }}
+                                            </td>
+                                            <td>
+                                                {% set num = 0 %}
+                                                {% if(entity.salaries)%}
+                                                    {% for salarie in entity.salaries %}
+                                                        {%  set num = num + 1 %} 
+                                                    {% endfor %}
+                                                    {{num}}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    {% for entity in entities %}
+        <div class="modal fade" id="{{ entity.sigle }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">{{ entity.nom }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span class="caption-subject font-green-sharp bold uppercase"> Autres informations </span>
+                        <table class="table table-striped" id="">
+                            {%if(entity.situationGeographique)%}
+                                <tr>
+                                    <td>
+                                        Situation géographique
+                                    </td>
+                                    <td>
+                                        {{ entity.situationGeographique}}
+                                    </td>
+                                </tr>
+                            {% endif%}
+                            {%if(entity.lieuTravail)%}
+                                <tr>
+                                    <td>
+                                        Lieu de travail
+                                    </td>
+                                    <td>
+                                        {{ entity.lieuTravail}}
+                                    </td>
+                                </tr>
+                            {% endif%}
+                            {%if(entity.uniteSuivante1)%}
+                                <tr>
+                                    <td>
+                                        Unité suivante 1
+                                    </td>
+                                    <td>
+                                        {{ entity.uniteSuivante1}}
+                                    </td>
+                                </tr>
+                            {% endif%}
+                            {%if(entity.uniteSuivante2)%}
+                                <tr>
+                                    <td>
+                                        Unité suivante 2
+                                    </td>
+                                    <td>
+                                        {{ entity.uniteSuivante2 }}
+                                    </td>
+                                </tr> 
+                            {% endif%}
+                            {%if(entity.uniteSuivante3)%}
+                                <tr>
+                                    <td>
+                                        Unité suivante 3
+                                    </td>
+                                    <td>
+                                        {{ entity.uniteSuivante3 }}
+                                    </td>
+                                </tr> 
+                            {% endif%}
+                            {%if(entity.valideurPourManager1)%}
+                                <tr>
+                                    <td>
+                                        Valideur unité suivante 1
+                                    </td>
+                                    <td>
+                                        {{ entity.valideurPourManager1.manager }}
+                                    </td>
+                                </tr> 
+                            {% endif%}
+                            {%if(entity.valideurPourManager2)%}
+                                <tr>
+                                    <td>
+                                        Valideur unité suivante 2
+                                    </td>
+                                    <td>
+                                        {{ entity.valideurPourManager2.manager }}
+                                    </td>
+                                </tr>
+                            {% endif%}
+                            {%if(entity.valideurPourManager3)%}
+                                <tr>
+                                    <td>
+                                        Valideur unité suivante 3
+                                    </td>
+                                    <td>
+                                        {{ entity.valideurPourManager3.manager }}
+                                    </td>
+                                </tr> 
+                            {% endif%}
+                        </table>
+                        <hr/>
+                        <span class="caption-subject font-green-sharp bold uppercase"> Liste des salariés </span>
+                        <table class="table table-striped" id="">
+                            {%if(entity.salaries)%}
+                                {% for salarie in entity.salaries %}
+                                    <tr>
+                                        <td>
+                                            {{ salarie }}
+                                        </td>
+                                        <td>
+                                            {{ salarie.poste }}  
+                                        </td>
+                                    </tr> 
+                                {% endfor%} 
+                            {% endif%}
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        <a href="{{ path('sup_ad_organigrammeunite_edit',{'id':entity.id}) }}" type="button" class="btn red" >Editer</a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    {% endfor%}                         
+    <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->    
+<style type="text/css">
+    body{
+        font-size: 14px;
+    }
+    .font-blue-madison {
+        color: #345F98 !important;
+    }
+    th,td{
+        text-align: center;
+    }
+</style> 
+{% endblock %}

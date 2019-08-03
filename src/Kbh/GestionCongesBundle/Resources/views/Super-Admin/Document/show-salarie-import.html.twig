@@ -1,0 +1,350 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title uppercase">import de salariés</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 note note-success">
+                                    <h4 class="block">CONFIRMATION DE LA MIGRATION! </h4>
+                                    <p>Voulez-vous vraiment confirmer la migration des <b>{{number}} nouveaux salariés ?</b><br/>
+                                        Assurez vous d'avoir effectué toutes les modifications avant de valider la migration.
+                                    </p>
+                                </div>
+                            </div>      
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('sup_ad_import_sa_migration', { 'id': doc.id })}}" type="submit" class="btn green">Confirmer migration</a>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>  
+                        </form>                        
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+            <div class="modal fade" id="portlet-config-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title uppercase">import de salariés</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 note note-danger">
+                                    <h4 class="block">ANNULATION DE LA MIGRATION! </h4>
+                                    <p>Voulez-vous vraiment annuler la migration des <b>{{number}} nouveaux salariés ?</b><br/>
+                                    </p>
+                                </div>
+                            </div>      
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('sup_ad_documents_show')}}" type="submit" class="btn red">Annuler migration</a>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>  
+                        </form>                        
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>                
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('sup_ad_documents_show') }}">Documents</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Import des salariés<i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Liste
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Liste des salariés importés</span>
+                            </div>
+                            <div class="tools">
+                                <div class="btn-group pull-right">
+                                    {% if doc.statut != "Traité"%}   
+                                        <div class="btn-group">
+                                            <a href="#portlet-config" class="btn green" data-toggle="modal">
+                                                Terminer la migration 
+                                            </a>
+                                        </div>{#
+                                         <div class="btn-group">
+                                            <a href="#portlet-config-2" class="btn red" data-toggle="modal">
+                                                Annuler la migration 
+                                            </a>
+                                        </div>#}
+                                    {% endif %}   
+                                    <button class="btn dropdown-toggle default" data-toggle="dropdown">Outils <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="ui_notific8.html"><i class="fa fa-angle-right"></i>
+                                                Imprimer </a>
+                                        </li>
+                                        <li><a href="javascript:;"><i class="fa fa-angle-right"></i>
+                                                Convertir en PDF </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            {% if doc.statut == "Traité"%}
+                                <div class="col-md-12 note note-success">
+                                    <h4 class="block">IMFORMATION! </h4>
+                                    <p>Le contenu de ce fichier à déjà été <b>traité</b> et importé dans la base de donnée. <br/>
+                                        Si vous souhaité ajouter à nouveau des salarié, veuillez importer un nouveau fichier.
+                                    </p>
+                                </div>
+                            {% endif %}            
+                            <table class="table table-striped table-bordered table-hover" id="sample_2">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Civilite
+                                        </th>
+                                        <th>
+                                            Nom & prenoms
+                                        </th>
+                                        <th>
+                                            Matricule
+                                        </th>
+                                        <th>
+                                            poste
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for entity in entities %}
+                                        <tr>
+                                            <td>
+                                                {{ entity.civilite }}
+                                            </td>
+                                            <td>
+                                                <a href="#{{ entity.matricule }}" data-toggle="modal">
+                                                    {{ entity.nom }}  {{ entity.prenom }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ entity.matricule }}
+                                            </td>
+                                            <td>
+                                                {{ entity.poste }}
+                                            </td>
+                                            <td>
+                                                {{ entity.email }}
+                                            </td>
+                                        </tr>
+                                    {% endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    {% for entity in entities %}
+        <div class="modal fade" id="{{ entity.matricule }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">{{ entity.nom }} {{ entity.prenom }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped" id="">
+                            <tr>
+                                <td>
+                                    N° Cnps
+                                </td>
+                                <td>
+                                    {{ entity.numeroCnps}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Date de naissance
+                                </td>
+                                <td>
+                                    {{ entity.dateNaissance }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Statut Matrimoniale
+                                </td>
+                                <td>
+                                    {{ entity.statutMarital }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    telephone
+                                </td>
+                                <td>
+                                    {{ entity.telephone }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Date embauche
+                                </td>
+                                <td>
+                                    {{ entity.dateEmbauche }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Type Contrat
+                                </td>
+                                <td>
+                                    {{ entity.typeContrat }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Unité
+                                </td>
+                                <td>
+                                    {{ entity.unite }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Responsable direct
+                                </td>
+                                <td>
+                                    {{ entity.responsableDirect }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Poste responsable direct
+                                </td>
+                                <td>
+                                    {{ entity.posteResponsableDirect }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Droits Acquis année en cours
+                                </td>
+                                <td>
+                                    {{ entity.droitsAcquis }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Droits antérieurs
+                                </td>
+                                <td>
+                                    {{ entity.droitsAnterieur }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Cumul droits acquis
+                                </td>
+                                <td>
+                                    {{ entity.cumulDroits }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Droits pris
+                                </td>
+                                <td>
+                                    {{ entity.droitsPris }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Solde permission
+                                </td>
+                                <td>
+                                    {{ entity.soldePermission }}
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>
+                                    Permissions prises
+                                </td>
+                                <td>
+                                    {{ entity.permissionsPrises }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Solde de congés
+                                </td>
+                                <td>
+                                    {{ entity.soldeConges }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Role utilisateur
+                                </td>
+                                <td>
+                                    {{ entity.roleUtilisateur }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        <a href="{{ path('sup_ad_import_edit_salarie',{'id':doc.id, 'id_salarie':entity.id }) }}" type="button" class="btn red" >Editer</a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    {% endfor%}                         
+    <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->    
+<style type="text/css">
+    body{
+        font-size: 14px;
+    }
+    .font-blue-madison {
+        color: #345F98 !important;
+    }
+    th,td{
+        text-align: center;
+    }
+</style> 
+{% endblock %}

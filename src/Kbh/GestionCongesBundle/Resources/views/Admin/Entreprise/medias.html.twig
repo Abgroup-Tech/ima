@@ -1,0 +1,132 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Gestion des images de profil
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable tabbable-custom tabbable-noborder">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_1" data-toggle="tab">
+                                  IMAGES DE PROFIL DES COLLABORATEURS </a>
+                            </li>
+                            {#<li>
+                                <a href="#tab_2" data-toggle="tab">
+                                    3 Columns </a>
+                            </li>
+                            <li>
+                                <a href="#tab_3" data-toggle="tab">
+                                    2 Columns </a>
+                            </li>#}
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <!-- BEGIN FILTER -->
+                                <div class="margin-top-10">
+                                    <ul class="mix-filter">
+                                        <li class="filter" data-filter="all">
+                                            Toutes les unités
+                                        </li>
+                                        {% for unite in unite%}
+                                        <li class="filter" data-filter="{{ unite.sigle }}">
+                                            {{ unite.nom }}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <hr/>
+                                    <div class="row mix-grid">
+                                            <div class="table-scrollable table-scrollable-borderless">
+                                    <table class="table table-hover table-light">
+                                        {% for salaries in salaries %}
+                                                {% if salaries.nomprenom != salarie.nomprenom and salaries.poste != "Super Administrateur IMA"%}
+                                                    <tr class ="col-md-12 col-sm-4 mix {% if salaries.unite %}{{salaries.unite.sigle}} {% endif %}" >
+                                                        <td>
+                                                           {% if salaries.image %}
+                                                               <a class="fancybox-button" href="{{ asset('uploads/' ~ salaries.image.path) }}" title="{{salaries.image.name}}" data-rel="fancybox-button">
+                                                                   <img class="user-pic" src="{{ asset('uploads/' ~ salaries.image.path) }}" class="img-responsive" alt="">
+                                                                </a>
+                                                           {% endif %}
+                                                            {% if not salaries.image %} <img src="{{ asset('uploads/avatar.png') }}" class="img-responsive" alt="">{% endif %}     
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ path('ad_salarie_show', {'id': salaries.id })}}" class="primary-link">{{ salaries.nomprenom }}</a>
+                                                        </td>
+                                                        <td>
+                                                            {{ salaries.poste }}
+                                                        </td>
+                                                        <td style="float:right; margin-top: -52px;">
+                                                            <a href="{{ path('ad_salarie_edit', { 'id': salaries.id }) }}" class="btn btn-success"><i class="fa fa-spinner"></i> Modifier image de profil</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                        {% endfor %} 
+                                 
+                                    </table>
+                                </div>
+                                    </div>
+                                </div>
+                                <!-- END FILTER -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+{% endblock %}

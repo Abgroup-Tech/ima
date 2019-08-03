@@ -1,0 +1,182 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+ <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                            <h1>Report</h1>
+                        </div>
+                        
+                </div>
+        </div>     
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                               Report de congé
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                               <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">report de congé</span>
+                                                </div>
+                                                <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                                <ul class="nav nav-pills">
+                                                        <li class="active">
+                                                                <a href="#tab_1" data-toggle="tab">
+                                                                Congés reportables</a>
+                                                        </li>
+                                                        <li>
+                                                                <a href="#tab_2" data-toggle="tab">
+                                                                Historique des reports </a>
+                                                        </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                        <div class="tab-pane fade active in" id="tab_1">
+                                                            <br/><hr/>
+                                                                <div class="scroller">
+                                                                    <table class="table table-hover table-light" >
+                                                                        <thead>
+                                                                        <tr>
+                                                                       <th>Collaborateur</th>
+                                                                        <th>Date début</th>
+                                                                        <th>Date fin</th>
+                                                                        <th>Durée(jour ouvrable)</th>
+                                                                        {#<th>Statut</th>#}
+                                                                        <th>Actions</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                       {% for conge in conges %}
+                                                                        {# @BHK-02062015 :Si  le manager connecté est le manager n+1 du salarié #}
+                                                                            {% if managerConnecte.id == conge.salarie.superviseur.id %}
+                                                                                {% if "now"|date('Ymd')  < conge.dateDebut|date('Ymd') %}
+                                                                                    <tr> 
+                                                                                        <td>{{ conge.salarie.nomprenom }}</td>
+                                                                                        <td>{% if conge.dateDebut %}{{ conge.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                                                                                        <td>{% if conge.dateFin %}{{ conge.dateFin|date('d-m-Y') }}{% endif %}</td>
+                                                                                        <td>{{ conge.nbjoursOuvrables }}</td>
+                                                                                        <td>
+                                                                                            <a href="{{ path('report_conge_new', { 'id': conge.id }) }}"  class="btn btn-sm btn-success btn-sm">reporter</a>
+                                                                                        </td>
+                                                                                {% endif %}
+                                                                            {% endif%}
+                                                                        </tr>
+                                                                       {% endfor %}
+                                                                        </table>
+                                                              </div>
+                                                 
+                                                        </div>
+                                                       <div class="tab-pane fade" id="tab_2">
+                                                    <br/><hr/>
+                                                        <table class="table table-hover table-light" >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> N°</th>
+                                                                    <th> Date report  </th>
+                                                                    <th> Ancienne date de début  </th>
+                                                                    <th> Ancienne date de fin  </th>
+                                                                    <th> Nouvelle date de début  </th>
+                                                                    <th> Nouvelle date de fin  </th>
+                                                                    <th> Durée </th>
+                                                                    <th> Motif du report  </th>
+                                                                    <th> Action  </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for entity in entities %}
+                                                                    {% if managerConnecte.id == entity.salarie.superviseur.id or managerConnecte.poste == "Directeur des Ressources Humaines" or managerConnecte.poste == "Chef du service Administration et gestion de la paie" or managerConnecte.poste == "Directeur Général"%}
+                                                                    <tr>
+                                                                        <td> <a href="{{ path('report_show', { 'id': entity.id }) }}">{{ entity.id }}</a>  </td>
+                                                                        <td> {% if entity.dateReport %}{{ entity.dateReport|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.ancienneDateDebut %}{{ entity.ancienneDateDebut|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.ancienneDateFin %}{{ entity.ancienneDateFin|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {{ entity.nbjoursOuvrables }}  </td>
+                                                                        <td> {{ entity.motifReport }}  </td>
+                                                                        <td>
+                                                                            <a href="{{ path('report_show', { 'id': entity.id }) }}"  class="btn btn-sm btn-success btn-sm">Détails</a>
+                                                                         </td>
+                                                                    </tr>
+                                                                    {% endif%} 
+                                                                {% endfor %}
+                                                                {#{% for entity in entities %}
+                                                                    {% if %}
+                                                                    <tr>
+                                                                        <td> <a href="{{ path('report_show', { 'id': entity.id }) }}">{{ entity.id }}</a>  </td>
+                                                                        <td> {% if entity.dateReport %}{{ entity.dateReport|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.ancienneDateDebut %}{{ entity.ancienneDateDebut|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.ancienneDateFin %}{{ entity.ancienneDateFin|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}  </td>
+                                                                        <td> {{ entity.nbjoursOuvrables }}  </td>
+                                                                        <td> {{ entity.motifReport }}  </td>
+                                                                        <td>
+                                                                            <a href="{{ path('report_show', { 'id': entity.id }) }}"  class="btn btn-sm btn-success btn-sm">Détails</a>
+                                                                         </td>
+                                                                    </tr>
+                                                                    {% endif%} 
+                                                                {% endfor %}#}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+th,td{
+        text-align: center;
+        color:#345F98 !important;
+    }
+</style>
+
+    {% endblock %}

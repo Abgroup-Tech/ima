@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>Demande edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('demande') }}">
+            Back to the list
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

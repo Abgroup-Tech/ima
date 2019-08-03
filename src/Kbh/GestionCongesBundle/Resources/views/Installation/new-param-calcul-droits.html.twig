@@ -1,0 +1,296 @@
+{% extends '::base-anonymous.html.twig' %}
+{% block title %}IMA | Configuration système{% endblock %}
+{% block main %}
+    {#    <h1>Salarie creation</h1>
+        {{ form(form) }}#}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px; background-color: #eff3f8;">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Aide ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12" style="margin-top:95px;">
+                    <div class="portlet light" id="form_wizard_1">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-green-sharp bold uppercase">
+                                    <i class="icon-settings"></i> guide d'installation - <span class="step-title">Etape 2 sur 3 </span>
+                                </span>
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config">
+                                </a>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                                <div class="form-wizard">
+                                    <div class="form-body">
+                                        {#<a href="{{ path('welcome') }}" style="text-decoration:inherit; font-size: 22px;margin-left: 21%;">
+                                            <img style="margin-top: -6px !important;position: relative;" src="{{ asset('bundles/kbhgestionconges/images/logo.png')}}"/>
+                                            <span class="caption-subject font-blue-madison bold uppercase">IMA VOTRE SOLUTION DE GESTION  DES ABSENCES</span> 
+                                        </a>
+                                        <hr/>#}
+                                        <ul class="nav nav-pills nav-justified steps">
+                                            <li>
+                                                <a href="#" class="step">
+                                                    <span class="number">
+                                                        <i class="icon-settings"></i></span>
+                                                    <span class="desc">
+                                                        Paramètre entreprise</span>
+                                                </a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#tab3" data-toggle="tab" class="step">
+                                                    <span class="number">
+                                                        <i class="icon-wrench"></i></span>
+                                                    <span class="desc">
+                                                        Configuration système</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="step">
+                                                    <span class="number">
+                                                        <i class="icon-user"></i></span>
+                                                    <span class="desc">
+                                                        Création de compte </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="66,66" aria-valuemin="0" aria-valuemax="100" style="width: 66.66%">
+                                            </div>
+                                        </div>
+                                        <div class="tab-content">
+                                            {{ form_start(form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}  
+                                            {#                         BLOCK DES ERREURS                           #}
+                                                <div class="alert alert-danger display-none">
+                                                    <button class="close" data-dismiss="alert"></button>
+                                                    You have some form errors. Please check below.
+                                                </div>
+                                                <div class="alert alert-success display-none">
+                                                    <button class="close" data-dismiss="alert"></button>
+                                                    Your form validation is successful!
+                                                </div>
+                                                {#                         BLOCK DES ERREURS                           #}
+
+                                                <div class="tab-pane active" id="tab2">
+                                                    <div class="col-md-3" style="padding-left: 0px;">           
+                                                        <div class="note note-info" style="margin-top: 11px;width: 106%;">
+                                                            <h5 class="block"><i class="icon-wrench"></i> CONFIGURATION SYSTEME</h5>
+                                                            <p>
+                                                                Vous devez saisir les différentes valeurs correspondantes aux paramètres de base de calcul des droits.
+                                                                Ces données nous permettes de configurer les mises à jours mensuelles et annuelles. 
+                                                                Les données de base sont celles de la convention collective.
+                                                                Cliquez sur continuer après avoir remplis tout les champs.
+                                                            <br/>
+                                                            <br/>
+                                                                <b>NB: cette étape est primordiale pour la suite
+                                                            </p>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-md-9" style="padding-left: 0px;">
+                                                    <div class="form-body" style="border-left: 1px solid #EEE;margin-top: 9px;"> 
+{#                                                        <br/> #}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Base de calcul des droits </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.baseDroitsAcquis,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div> 
+{#                                            <hr/>        #}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">5 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupAnciennete5ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">10 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupAnciennete10ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">15 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupAnciennete15ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">20 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupAnciennete20ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">25 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupAnciennete25ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Jours sup / enfant à charge  </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupFemmeParEnfantMineur,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Medaille d'honneur du travail  </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupMedailleHonneur,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">Logé(e) dans l'entreprise </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupAstreinte,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Droits expatrié(e) sejour 1 </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.droitsExpatSejour1,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Droits expatrié(e) de base </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.droitsExpatBase,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+{#                                            <hr/>#}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Travail au moins 200h/mois </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(form.joursSupPr200hmois,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                    <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                                        <div class="row">
+                                                            <div class="col-md-offset-5 col-md-2 pull-right">
+                                                                {# <a href="{{ path('ad_salarie_show', {'id': salarie.id }) }}" class="btn red">Annuler</a>#}
+                                                                <input id="blockui_sample_1_3" type="submit" class="btn green" value="Continuer"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div> 
+                                                      
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                        
+                                    </div>
+                                    {{ form_rest(form) }}  
+                            </form>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+
+    body{
+        font-size: 14px;
+    }
+    .note p {
+        font-size: 14px;
+    }
+    .font-blue-madison {
+        color: rgba(34, 96, 150, 0.88) !important;
+    }
+    .b-r{
+        border-right: 1px solid rgb(187, 188, 200);
+    }
+    .p-c{
+        text-align: center;
+    }
+    .scroll-to-top{
+        display: none !important;
+    }
+    .page-content {
+        background: none; 
+        padding: 0px 0 0px; 
+        margin-top: -80px;
+    }
+</style>
+<script>
+    {#$("document").ready( function() {
+        //RECUPERATION DU SALARIE AU CLICK
+        $("#carriereapp_carriereappbundle_demande_demandeur").val("{{ demande.demandeur.id }}");
+        $("#carriereapp_carriereappbundle_demande_motif").val("{{ demande.motif }}");
+        console.log("nom : "+$("#carriereapp_carriereappbundle_demande_demandeur").val()+" okey!!!");
+        console.log("nom : "+$("#carriereapp_carriereappbundle_demande_motif").val()+" okey!!!");
+    });#}
+</script>
+
+{% endblock %}

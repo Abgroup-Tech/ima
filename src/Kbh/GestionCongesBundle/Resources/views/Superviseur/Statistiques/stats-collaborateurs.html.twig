@@ -1,0 +1,196 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+ <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Détails <small> des statisques</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                <div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <h3>EXPORTER</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-12">
+                                                                                <ul class="theme-colors">
+                                                                                        <li class="theme-color theme-color-default" data-theme="default">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Excel</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Json</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-steel" data-theme="blue-steel">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Word</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">PDF</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Xml</span>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>    
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                               Statistiques Collaborateurs
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                                   <!-- BEGIN PORTLET-->
+                                        <div class="portlet light ">
+                                                <div class="portlet-title">
+                                                        <div class="caption caption-md">
+                                                                
+                                                                <span class="caption-subject theme-font bold uppercase"><i class="fa fa-list fa-1x"></i> Statistiques Collaborateurs</span>
+                                                                <span class="caption-helper hide">weekly stats...</span>
+                                                        </div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                        <div class="table-scrollable table-scrollable-borderless">
+                                                                <table class="table table-hover table-light">
+                                                                <thead>
+                                                                    <th>Information du collaborateur</th>
+                                                                    <th>Nombre (demandes, congés et absence, en cours ou validés)</th>
+                                                                    <th>Taux (congés, absence, validés ou refusés)</th> 
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% for stat in stats %}
+                                                                  <tr>
+                                                                    <td style="text-align:left;">
+                                                                        <b>Matricule:</b> {{ stat.salarie.matricule }}<br/>
+                                                                        <b>Nom:</b> {{ stat.salarie.nomprenom }}<br/>
+                                                                        <b>Poste:</b> {{ stat.salarie.poste }}<br/>
+                                                                        <b>Unite:</b> {{ stat.unite }}<br/>
+                                                                        <b>Email:</b> {{ stat.salarie.email }}<br/>
+                                                                        <b>Telephone:</b> {{ stat.salarie.telephone }}<br/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <li class="list-group-item">
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-primary tooltips" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="{{ stat.nombreDemandes }} demande(s) formulée(s)" style="width: {% if stat.nombreDemandes > 0%}{{ stat.nombreDemandes + 10 }}%{% endif %}{% if stat.nombreDemandes == 0%}{{ stat.nombreDemandes}}%{% endif %}"></div>
+                                                                         </div>
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-success lter tooltips" data-toggle="tooltip" data-original-title="{{ stat.nbDemandesCongesValides }} demande(s) de type congé autorisée" style="width: {% if stat.nbDemandesCongesValides > 0%}{{ stat.nbDemandesCongesValides  + 10 }}%{% endif %}{% if stat.nbDemandesCongesValides == 0%}{{ stat.nbDemandesCongesValides}}%{% endif %}"></div>
+                                                                        </div>
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-success tooltips" data-toggle="tooltip" data-original-title="{{ stat.nbDemandesPermissionsValides }} demande(s) de type permission autorisée" style="width: {% if stat.nbDemandesPermissionsValides > 0%}{{ stat.nbDemandesPermissionsValides  + 10 }}%{% endif %}{% if stat.nbDemandesPermissionsValides == 0%}{{ stat.nbDemandesPermissionsValides}}%{% endif %}"></div>
+                                                                        </div>
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-warning tooltips" data-toggle="tooltip" data-original-title="{{ stat.nbDemandesEnCours }} demandes en cours" style="width: {% if stat.nbDemandesEnCours > 0%}{{ stat.nbDemandesEnCours  + 10 }}%{% endif %}{% if stat.nbDemandesEnCours == 0%}{{ stat.nbDemandesEnCours}}%{% endif %}"></div>
+                                                                        </div>
+                                                                      </li>
+                                                                   </td>
+                                                                   <td>
+                                                                        <li class="list-group-item">
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-success tooltips" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="{{ stat.taux_conge }}% de congés validés" style="width: {{ stat.taux_conge }}%"></div>
+                                                                         </div>
+                                                                        <div class="progress progress-sm progress-striped  active">
+                                                                          <div class="progress-bar progress-bar-success lter tooltips" data-toggle="tooltip" data-original-title="{{ stat.taux_absence }}% de Permissions Autorisées" style="width: {{ stat.taux_absence }}%"></div>
+                                                                        </div>
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-warning tooltips" data-toggle="tooltip" data-original-title="{{ stat.taux_demande_encours }}% de demandes en cours" style="width: {{ stat.taux_demande_encours}}%"></div>
+                                                                        </div>
+                                                                        <div class="progress progress-sm progress-striped active">
+                                                                          <div class="progress-bar progress-bar-danger tooltips" data-toggle="tooltip" data-original-title="{{ stat.taux_demande_refusee }}% de demandes rejetées" style="width: {{ stat.taux_demande_refusee }}%"></div>
+                                                                        </div>
+                                                                      </li>
+                                                                   </td>
+                                                                  </tr>
+                                                               {% endfor %}
+                                                                </tbody>
+
+                                                                </table>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                <!-- END PORTLET-->
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+    th,td{
+        text-align: center;
+    }
+</style>
+<link href="{{ asset('bundles/kbhgestionconges/css/animate.css') }}" type="text/css" rel="stylesheet" /> 
+<link href="{{ asset('bundles/kbhgestionconges/assets/global/css/components-rounded.css') }}" type="text/css" rel="stylesheet" /> 
+
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/ui-general.js') }}"></script>
+<script src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/scripts/ui-general.js') }}"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+    
+<script src="{{ asset('bundles/kbhgestionconges/js/app.js') }}" type="text/javascript"></script>
+<script>
+jQuery(document).ready(function() {       
+   // initiate layout and plugins
+   Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+Demo.init(); // init demo features
+   UIGeneral.init();
+});
+</script>
+
+    {% endblock %}

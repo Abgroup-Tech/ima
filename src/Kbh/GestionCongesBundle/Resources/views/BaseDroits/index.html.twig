@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>BaseDroits list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estfemmedemoinsde21ans</th>
+                <th>Nbenfantsmineursacharge</th>
+                <th>Aplusde5ansanciennete</th>
+                <th>Aplusde10ansanciennete</th>
+                <th>Aplusde15ansanciennete</th>
+                <th>Aplusde20ansanciennete</th>
+                <th>Aplusde25ansanciennete</th>
+                <th>Amedaillehonneurtravail</th>
+                <th>Estlogedansentreprise</th>
+                <th>Estexpatriesejour1</th>
+                <th>Estexpatriesejoursuivant</th>
+                <th>Travailleaumoins50hsemaine</th>
+                <th>Jourssupannuel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('basedroits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.estFemmedeMoinsDe21ans }}</td>
+                <td>{{ entity.nbEnfantsMineursAcharge }}</td>
+                <td>{{ entity.aPlusDe5ansAnciennete }}</td>
+                <td>{{ entity.aPlusDe10ansAnciennete }}</td>
+                <td>{{ entity.aPlusDe15ansAnciennete }}</td>
+                <td>{{ entity.aPlusDe20ansAnciennete }}</td>
+                <td>{{ entity.aPlusDe25ansAnciennete }}</td>
+                <td>{{ entity.aMedailleHonneurTravail }}</td>
+                <td>{{ entity.estLogeDansEntreprise }}</td>
+                <td>{{ entity.estExpatrieSejour1 }}</td>
+                <td>{{ entity.estExpatrieSejourSuivant }}</td>
+                <td>{{ entity.travailleAuMoins50hsemaine }}</td>
+                <td>{{ entity.joursSupAnnuel }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('basedroits_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('basedroits_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('basedroits_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

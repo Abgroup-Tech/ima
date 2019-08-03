@@ -1,0 +1,54 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ImportFeries
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\ImportFeriesRepository")
+ */
+class ImportFeries
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titreFeries", type="string", length=255)
+     */
+    private $titreFeries;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateDebutFerie", type="string")
+     */
+    private $dateDebutFerie;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateFinFerie", type="string")
+     */
+    private $dateFinFerie;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nbJoursFerie", type="string", length=255)
+     */
+    private $nbJoursFerie;
+
+
+
+}

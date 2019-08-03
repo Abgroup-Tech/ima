@@ -1,0 +1,194 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+        <!-- BEGIN PAGE HEAD -->
+    <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1> Espace<small> Salarié </small></h1>
+            </div>
+
+        </div>
+    </div>  
+    <!-- END PAGE HEAD -->       
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="#">Aide ?</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    FAQ 
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-info font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">FAQ</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="tab-content">
+                                            <div id="tab_1" class="tab-pane active">
+                                                <div id="accordion1" class="panel-group">
+                                                  {% for entity in entities%}  
+                                                    <div class="panel panel-{{entity.codeCouleur}}">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#{{ entity.id }}">
+                                                                    {{ entity.id }}. {{ entity.question }} ? 
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="{{ entity.id }}" class="panel-collapse collapse in">
+                                                            <div class="panel-body">
+                                                                {{ entity.reponse|raw }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   {% endfor %} 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                   
+                </div>
+                
+                <div class="row">
+                <div class="col-md-3">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-info font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Questions ({{entities|length}})</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="tab-content">
+                                            <div id="tab_1" class="tab-pane active">
+                                                <div id="accordion1" class="panel-group">
+                                                  {% for entity in entities%}  
+                                                    <div class="panel panel-{{entity.codeCouleur}}">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a href="#{{ entity.id }}">
+                                                                    {{ entity.id }}. {{ entity.question }} ? 
+                                                                </a> 
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                   {% endfor %} 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                   
+                </div>
+                 <div class="col-md-3">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-info font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">tutoriels video</span>
+                            </div>
+                            {#<div class="tools">
+                                <div class="btn-group">
+                                    <a href="#portlet-config" class="btn green" data-toggle="modal">
+                                       + Ajouter question 
+                                    </a>
+                                </div>
+                            </div>#}
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="tab-content">
+                                            <div id="tab_1" class="tab-pane active">
+                                                <div id="accordion1" class="panel-group">
+                                                    <div class="panel panel-yellow">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a href="#">
+                                                                  1. comment demander un congé?
+                                                                </a> 
+                                                            </h4>
+                                                        </div>
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#">
+                                                                  2. comment demander une permission?
+                                                                </a> 
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                   
+                </div>
+            </div>                                  
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+            color:#345F98 !important;
+        }
+        .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+            color: #fff;
+            background-color: #6838A5;
+        }
+        body{
+            font-size: 14px;
+        }
+    </style>
+
+{% endblock %}

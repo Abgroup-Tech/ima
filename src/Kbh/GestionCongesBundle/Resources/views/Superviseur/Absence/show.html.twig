@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('collaborateurs') }}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Liste des Absences de {{ collaborateur.civilite }} {{ collaborateur.nomprenom }} 
+                  </h3>
+                </header>
+              <div class="table-responsive">
+                        <table class="table table-striped b-t b-light">
+                          <thead>
+                              <th>N°</th>
+                              <th>Date Début</th>
+                              <th>Date Fin</th>
+                              <th>Nombre<br/>jours ouvrables</th>
+                              <th>Motif Absence</th>
+                              <th width="100">Détail Absence</th>
+                              <th width="100">Reporter Absence</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {% for entity in entity %}
+                            <tr>
+                              <td>{{ entity.id }}</td>
+                              <td>{{ entity.dateDebut|date('Y-m-d H:i:s') }}</td>
+                              <td>{{ entity.dateFin|date('Y-m-d H:i:s') }}</td>
+                              <td>{{ entity.nbJoursOuvrables }}</td>
+                              <td>{{ entity.motif }}</td>
+                              <td>
+                                  <a href="{{ path('collaborateur_absence_show', { 'id': entity.id }) }}" class="btn btn-primary">Détails</a>
+                              </td>
+                              <td>
+                                  <a href="{#{{ path('absence_edit', { 'id': entity.id }) }}#}#" class="btn btn-primary">Report</a>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                    </div>
+                  </div>
+                </footer>
+              </section>
+        </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+      </section>
+    </section>
+<style>
+th,td{
+    text-align: center;
+}
+</style>
+{% endblock %}

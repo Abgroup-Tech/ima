@@ -1,0 +1,247 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * HistoriqueDroits
+ *
+ * @ORM\Table(name="historiqueDroits_premium")
+ * @ORM\Entity
+ */
+class HistoriqueDroits
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id")
+     * 
+     */
+    private $salarie;
+    
+/**
+     * @var \Demande
+     *
+     * @ORM\OneToOne(targetEntity="Demande")
+     * @ORM\JoinColumn(name="demande", referencedColumnName="id")
+     * 
+     */
+    private $demande;    
+    
+    /**
+     * @var \Droits
+     *
+     * @ORM\ManyToOne(targetEntity="Droits")
+     * @ORM\JoinColumn(name="droits", referencedColumnName="id")
+     * 
+     */
+    private $droits;
+    
+/**
+     * @var integer
+     *
+     * @ORM\Column(name="conge", type="integer", nullable=true)
+     */
+    private $conge;    
+ 
+/**
+     * @var integer
+     *
+     * @ORM\Column(name="absence", type="integer", nullable=true)
+     */
+    private $absence;        
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateModification", type="date", nullable=true)
+     */
+    private $dateModification;
+
+   
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="soldeCongeAncien", type="float", nullable=true)
+     */
+    private $soldeCongeAncien; 
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="soldeCongeNouveau", type="float", nullable=true)
+     */
+    private $soldeCongeNouveau;  
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="soldePermissionAncien", type="float", nullable=true)
+     */
+    private $soldePermissionAncien;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="soldePermissionNouveau", type="float", nullable=true)
+     */
+    private $soldePermissionNouveau;  
+
+
+    
+    public function __construct(){
+        $this->setSoldeCongeAncien(0);
+        $this->setSoldeCongeNouveau(0);
+        $this->setSoldePermissionAncien(0);
+        $this->setSoldePermissionNouveau(0);
+        
+    }
+    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+    * Get salarie
+    *
+    * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+    */
+    public function getSalarie() {
+        return $this->salarie;
+    }
+
+    /**
+    * Get demande
+    *
+    * @return \Kbh\GestionCongesBundle\Entity\Demande 
+    */
+    public function getDemande() {
+        return $this->demande;
+    }
+
+    /**
+    * Get droits
+    *
+    * @return \Kbh\GestionCongesBundle\Entity\Droits 
+    */
+    public function getDroits() {
+        return $this->droits;
+    }
+
+    public function getConge() {
+        return $this->conge;
+    }
+
+    public function getAbsence() {
+        return $this->absence;
+    }
+
+    public function getDateModification() {
+        return $this->dateModification;
+    }
+
+    public function getSoldeCongeAncien() {
+        return $this->soldeCongeAncien;
+    }
+
+    public function getSoldeCongeNouveau() {
+        return $this->soldeCongeNouveau;
+    }
+
+    public function getSoldePermissionAncien() {
+        return $this->soldePermissionAncien;
+    }
+
+    public function getSoldePermissionNouveau() {
+        return $this->soldePermissionNouveau;
+    }
+
+    /**
+    * Set salarie
+    *
+    * @param \Kbh\GestionCongesBundle\Entity\Salarie $salarie
+    * @return HistoriqueDroits
+    */
+    public function setSalarie(\Kbh\GestionCongesBundle\Entity\Salarie $salarie = null) {
+        $this->salarie = $salarie;
+    }
+
+    /**
+    * Set demande
+    *
+    * @param \Kbh\GestionCongesBundle\Entity\Demande $demande
+    * @return HistoriqueDroits
+    */
+    public function setDemande(\Kbh\GestionCongesBundle\Entity\Demande $demande = null) {
+        $this->demande = $demande;
+    }
+
+    /**
+    * Set droits
+    *
+    * @param \Kbh\GestionCongesBundle\Entity\Droits $droits
+    * @return HistoriqueDroits
+    */
+    public function setDroits(\Kbh\GestionCongesBundle\Entity\Droits $droits = null) {
+        $this->droits = $droits;
+    }
+
+    /**
+    * Set conge
+    *
+    * @return HistoriqueDroits
+    */
+    public function setConge($conge) {
+        $this->conge = $conge;
+    }
+
+    /**
+    * Set absence
+    *
+    * @return HistoriqueDroits
+    */
+    public function setAbsence($absence) {
+        $this->absence = $absence;
+    }
+
+    public function setDateModification($dateModification) {
+        $this->dateModification = $dateModification;
+    }
+
+    public function setSoldeCongeAncien($soldeCongeAncien) {
+        $this->soldeCongeAncien = $soldeCongeAncien;
+    }
+
+    public function setSoldeCongeNouveau($soldeCongeNouveau) {
+        $this->soldeCongeNouveau = $soldeCongeNouveau;
+    }
+
+    public function setSoldePermissionAncien($soldePermissionAncien) {
+        $this->soldePermissionAncien = $soldePermissionAncien;
+    }
+
+    public function setSoldePermissionNouveau($soldePermissionNouveau) {
+        $this->soldePermissionNouveau = $soldePermissionNouveau;
+    }
+
+
+    
+}

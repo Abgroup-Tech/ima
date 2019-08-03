@@ -1,0 +1,92 @@
+{% extends 'KbhUserBundle::layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<form class="login-form" action="{{ path("fos_user_security_check") }}" method="post">
+                <div class="form-group">
+                        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                        <label class="control-label visible-ie8 visible-ie9">Username</label>
+                        <div class="input-icon">
+                                <i class="fa fa-user"></i>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                <input class="form-control placeholder-no-fix" type="text" autocomplete="on" id="username" name="_username" placeholder="Username" value="{{ last_username }}"/>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <label class="control-label visible-ie8 visible-ie9">Password</label>
+                        <div class="input-icon">
+                                <i class="fa fa-lock"></i>
+                                <input class="form-control placeholder-no-fix" type="password"  id="password"  name="_password" autocomplete="on" placeholder="Password" />
+                        </div>
+                </div>
+                {#<div class="form-actions" style="padding-bottom: 50px;">
+                        <input class="btn green-haze pull-right" type="submit" id="_submit" name="_submit" value="Connexion" />
+                        <i class="m-icon-swapright m-icon-white"></i>
+                </div>
+                <div class="forget-password">
+                    <center><h4 style="color:#578EBE;">Mot de passe oublié ?</h4>
+                        <p style="color:#578EBE;">
+                                Cliquez <a href="{{path('fos_user_resetting_request')}}" style="color:#BD1717;">ici</a> pour le réinitialiser.
+                        </p>
+                      </center>  
+                </div>#}
+                <div class="form-actions">
+                        <input class="btn btn-success uppercase" type="submit" id="_submit" name="_submit" value="CONNEXION" style="margin-top: 14px;"/>
+                    <label class="rememberme check">
+                        <input type="hidden" name="remember" value="1" /></label>
+{#                    <a id="blockui_sample_1_3" href="{{path('fos_user_resetting_request')}}" id="forget-password" class="forget-password">mot de passe oublié?</a>#}
+                <div class="col-md-5 login-options pull-right">   
+{#                <h4>Suivez-nous</h4>#}
+                <ul class="social-icons" style=" padding-top: 0px; margin-top: -14px; margin-left: 10px;">
+                    <h4>Suivez nous</h4>
+                        <li>
+                            <a class="social-icon-color facebook" data-original-title="facebook" href="http://facebook.fr"></a>
+                        </li>
+                        <li>
+                            <a class="social-icon-color googleplus" data-original-title="Goole Plus" href="https://plus.google.com/explore"></a>
+                        </li>
+                        <li>
+                            <a class="social-icon-color linkedin" data-original-title="Linkedin" href="https://fr.linkedin.com/"></a>
+                        </li>
+                    </ul>
+                </div>
+               </div> 
+                 <div class="login-options">
+{#                    <h4>Suivez-nous</h4>#}
+                    
+                </div>
+                
+        </form>
+        <!-- END LOGIN FORM -->
+{#        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <form class="forget-form" action="" method="post">
+                <h3>Mot de passe oublié ?</h3>
+                <p>
+                         Entrez votre email en dessous pour le signaler à l'administrateur.
+                </p>
+                <div class="form-group">
+                        <div class="input-icon">
+                                <i class="fa fa-envelope"></i>
+                                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
+                        </div>
+                </div>
+                <div class="form-actions">
+                        <button type="button" id="back-btn" class="btn">
+                        <i class="m-icon-swapleft"></i> Retour </button>
+                        <button type="submit" class="btn green-haze pull-right">
+                        Soumettre <i class="m-icon-swapright m-icon-white"></i>
+                        </button>
+                </div>
+        </form>
+        <!-- END FORGOT PASSWORD FORM -->#}
+        </div>
+<!-- END LOGIN -->
+<div class="copyright" >
+    2015 &copy; IMA. Tous droits réservés - Pôles Compétences SARL.
+</div>
+  </style>
+{% endblock fos_user_content %}

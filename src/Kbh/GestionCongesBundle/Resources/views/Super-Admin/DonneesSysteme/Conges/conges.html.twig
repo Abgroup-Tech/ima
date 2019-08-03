@@ -1,0 +1,125 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('sup_ad_systeme_show') }}">Système</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Liste des congés 
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-settings font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Congés</span>
+                            </div>
+                            {#<span>
+                            <a class=' pull-right btn btn-circle btn-success' href="{{ path('ad_absencesat_new') }}">nouvelle enregistrement +</a>
+                            </span>#}
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="tab_1">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Salarie</th>
+                                                    <th>Demande</th>
+                                                    <th>Date debut</th>
+                                                    <th>Date fin</th>
+                                                    <th>Date retour</th>
+                                                    <th>Nb jours ouvrables</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for entity in entities %}
+                                                    <tr>
+                                                        <td><a href="{{ path('sup_ad_conge_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                                        <td><a class="tooltips" data-original-title="{{ entity.salarie }}">{{ entity.salarie.id }}</a></td>
+                                                        <td>{{ entity.demande.id }}</td>
+                                                        <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('Y-m-d ') }}{% endif %}</td>
+                                                        <td>{% if entity.dateFin %}{{ entity.dateFin|date('Y-m-d ') }}{% endif %}</td>
+                                                        <td>{% if entity.dateRetour %}{{ entity.dateRetour|date('Y-m-d ') }}{% endif %}</td>
+{#                                                        <td><a class="tooltips" data-original-title="{{ entity.pieceJustificative }}">{{ entity.pieceJustificative.id }}</a></td>#}
+                                                        <td>{{ entity.nbJoursOuvrables }}</td>
+                                                        <td>
+                                                            <a class="btn btn-success btn-sm" href="{{ path('sup_ad_conge_edit', { 'id': entity.id }) }}"><i class="icon-pencil "></i></a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+
+{% endblock %}

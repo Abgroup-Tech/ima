@@ -1,0 +1,94 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>Les demandes de {{collab.civilite }} {{collab.nomprenom }} en attente de validation</h1>
+    
+    <h2>Congés</h2>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date demande</th>
+                <th>Date début</th>
+                <th>Date fin</th>
+                <th>Durée</th>
+                <th>Motif</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+          {% if entity.estEnCours == true %}  
+            {% if entity.typeDemande == 'Congé' %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{% if entity.dateDemande %}{{ entity.dateDemande|date('d-m-Y H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                    <td>{% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}</td>
+                    <td>{{ entity.nbjoursOuvrables }}</td>
+                    <td>{{ entity.motif }}</td>
+                    <td>
+                        {% if entity.estValideNiveau1 %}Validation n°1 le {{ entity.dateValidation1|date('d-m-Y H:i:s') }} par {{ entity.valideurNiveau1 }}<br/>{% endif %}
+                        {% if entity.estValideNiveau2 %}Validation n°2 le {{ entity.dateValidation2|date('d-m-Y H:i:s') }} par {{ entity.valideurNiveau2 }}<br/>{% endif %}
+                        {% if entity.estValide %}<i class="fa fa-check text-success"></i> {{ entity.dateValidation|date('d-m-Y H:i:s') }} - validation définitive par {{ entity.valideurFinal}}<br/>{% endif %}
+                    </td>
+                    <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sa_demande_show', { 'id': entity.id }) }}">détails</a>
+                        </li>
+                    </ul>
+                    </td>
+                </tr>
+            {% endif %}
+          {% endif %}  
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <h2>Permissions</h2>                
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date demande</th>
+                <th>Date début</th>
+                <th>Date fin</th>
+                <th>Durée</th>
+                <th>Motif</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            {% if entity.estEnCours == true %}  
+                {% if entity.typeDemande == 'Permission' %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{% if entity.dateDemande %}{{ entity.dateDemande|date('d-m-Y H:i:s') }}{% endif %}</td>
+                        <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                        <td>{% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}</td>
+                        <td>{{ entity.nbjoursOuvrables }}</td>
+                        <td>{{ entity.motif }}</td>
+                        <td>
+                            {% if entity.estValideNiveau1 %}Validation n°1 le {{ entity.dateValidation1|date('d-m-Y H:i:s') }} par {{ entity.valideurNiveau1 }}<br/>{% endif %}
+                            {% if entity.estValideNiveau2 %}Validation n°2 le {{ entity.dateValidation2|date('d-m-Y H:i:s') }} par {{ entity.valideurNiveau2 }}<br/>{% endif %}
+                            {% if entity.estValide %}<i class="fa fa-check text-success"></i> {{ entity.dateValidation|date('d-m-Y H:i:s') }} - validation définitive par {{ entity.valideurFinal}}<br/>{% endif %}
+                        </td>
+                        <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('sa_demande_show', { 'id': entity.id }) }}">détails</a>
+                            </li>
+                        </ul>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endif %}                    
+        {% endfor %}
+        </tbody>
+    </table>
+
+  {% endblock %}

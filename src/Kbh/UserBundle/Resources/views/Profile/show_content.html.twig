@@ -1,0 +1,21 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="input-group">
+      <span class="input-group-btn">
+        <a href="{{path('welcome')}}" class="btn btn-success btn-rounded" type="button"><i class="fa fa-arrow-left"></i></a>
+      </span>
+      <input type="password" class="form-control text-sm btn-rounded" disabled placeholder="retourner à votre Interface">
+</div>
+
+<div class="thumb-md" style="margin-left: 48px; width: 200px;">
+<br/>
+{#	<img src="{{ asset ('bundles/kbhgestionconges/images/avatar.png') }}" alt="..." style="margin-left: 37px;">#}
+<center>
+	<p class="text-white h4 m-t m-b">{{ user.username }}</p>
+    <p class="text-white h5 m-t">{{ 'Email'|trans }}: {{ user.email }}</p>
+</center>
+</div>
+
+<br/>
+<div class="copyright" style="color:#578EBE;">
+        2015 &copy; IMA. Tous droits réservés - Pôles Compétences.
+</div>

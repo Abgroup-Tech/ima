@@ -1,0 +1,354 @@
+{% extends '::base-anonymous.html.twig' %}
+{% block title %}IMA | Paramètre entreprise{% endblock %}
+{% block main %}
+    {#    <h1>Salarie creation</h1>
+        {{ form(form) }}#}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px; background-color: #eff3f8;">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Aide ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12" style="margin-top:95px;">
+                    <div class="portlet light" id="form_wizard_1">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-green-sharp bold uppercase">
+                                    <i class="icon-settings"></i> guide d'installation - <span class="step-title">Etape 1 sur 3 </span>
+                                </span>
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config">
+                                </a>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                                <div class="form-wizard">
+                                    <div class="form-body">
+{#                                        <a href="{{ path('welcome') }}" style="text-decoration:inherit; font-size: 22px;margin-left: 21%;">
+                                            <img style="margin-top: -6px !important;position: relative;" src="{{ asset('bundles/kbhgestionconges/images/logo.png')}}"/>
+                                            <span class="caption-subject font-blue-madison bold uppercase">IMA VOTRE SOLUTION DE GESTION  DES ABSENCES</span> 
+                                        </a>
+                                        <hr/>#}
+                                        <ul class="nav nav-pills nav-justified steps">
+                                            <li class="active">
+                                                <a href="#tab2" data-toggle="tab" class="step">
+                                                    <span class="number">
+                                                        <i class="icon-settings"></i>
+{#                                                        1#}
+                                                    </span>
+                                                    <span class="desc">
+                                                        Paramètre entreprise</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="step">
+                                                    <span class="number">
+                                                        <i class="icon-wrench"></i>
+{#                                                        2#}
+                                                    </span>
+                                                    <span class="desc">
+                                                        Configuration système</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="step">
+                                                    <span class="number">
+                                                        <i class="icon-user"></i>
+{#                                                        3#}
+                                                    </span>
+                                                    <span class="desc">
+                                                        Création de compte </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100" style="width: 33.33%">
+                                            </div>
+                                        </div>
+                                        <div class="tab-content">
+                                           {{ form_start(form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}  
+                                                {#                         BLOCK DES ERREURS                           #}
+                                                <div class="alert alert-danger display-none">
+                                                    <button class="close" data-dismiss="alert"></button>
+                                                    You have some form errors. Please check below.
+                                                </div>
+                                                <div class="alert alert-success display-none">
+                                                    <button class="close" data-dismiss="alert"></button>
+                                                    Your form validation is successful!
+                                                </div>
+                                                {#                         BLOCK DES ERREURS                           #}
+
+                                                <div class="tab-pane active" id="tab2">
+                                                    <div class="col-md-3" style="padding-left: 0px;">           
+                                                        <div class="note note-info" style="margin-top: 10px;width: 106%;">
+                                                            <h5 class="block"><i class="icon-settings"></i> PARAMETRES ENTREPRISE</h5>
+                                                            <p>
+                                                                Vous devez saisir les différentes informations de l'entreprise,
+                                                                préciser les délais de mise à jours mensuelles et annuelles, sans oublier de préciser les dates d'effet pour les mises à jours et 
+                                                                importer les fichier excels comportant les jours fériés et les permissions exceptionnelles.
+                                                                Cliquez sur continuer après avoir remplis tout les champs.
+                                                            <br/>
+                                                            <br/>
+                                                                <b>NB: veuillez utiliser des documents Excel de type XLSX.
+                                                            </p>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-md-9" style="padding-left: 0px;">
+                                                    <div class="form-body" style="border-left: 1px solid #EEE;margin-top: 10px;">  
+{#                                                        <br/>   #}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Nom entreprise</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.nom,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nom"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+{#                                                        <hr/>#}
+                                                        <div class="form-group last">
+                                                            <label class="control-label col-md-3">Logo de l'entreprise</label>
+                                                            <div class="col-md-8">
+                                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                                        {% if entity.logo %} <img src="{{ asset('uploads/' ~ entity.logo.path) }}" class="img-responsive" alt="">{% endif %}
+                                                                        {% if not entity.logo %} <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" class="img-responsive" alt="">{% endif %}
+                                                                    </div>
+                                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                                                    </div>
+                                                                    <div>
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new">
+                                                                                Choisir une image </span>
+                                                                            <span class="fileinput-exists">
+                                                                                Changer </span>
+                                                                                {{ form_widget(form.logo.file) }}
+                                                                        </span>
+                                                                        <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                                            Supprimer </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix margin-top-10">
+                                                                    <span class="label label-danger" style="margin-right:8px;">
+                                                                        NOTE! 
+                                                                    </span> Pour un meilleur rendu veuillez insérer une belle image.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+{#                                                        <hr/>#}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">titre logo</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.logo.name,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+{#                                                        <hr/>#}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Nombre employés</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.nbSalaries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+{#                                                        <hr/>         #}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Delais mise à jours des droits</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.delaisMiseAjours,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nombre de jours"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div> 
+{#                                                        <hr/>         #}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Delais mise à jours des droits supplémentaires</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.delaisMiseAjoursAnnuel,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nombre de jours"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div> 
+{#                                                        <hr/>#}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Prochaine mise à jours mensuel </label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.dateUpdateMensuel,{'attr': {'class':'form-control', 'placeholder':"yyyy-mm-dd"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+{#                                                        <hr/>#}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Prochaine mise à jours annuel </label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.dateUpdateAnnuel,{'attr': {'class':'form-control', 'placeholder':"yyyy-mm-dd"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>        
+                                                        {#                                            <span style="display:none">#}
+{#                                                        <hr/>#}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Date implémentation</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.dateImplementation,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+{#                                                        <hr/>#}
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Date livraison</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.dateLivraison,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Nom du doc fériés</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.docFeries.name,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nom du fichier"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Doc fériés</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.docFeries.file,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nom du fichier"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Cible</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.docFeries.cible,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Nom du doc permissions</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.docPermissions.name,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nom du fichier"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Doc permissions</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.docPermissions.file,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nom du fichier"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Cible</label>
+                                                            <div class="col-md-8">
+                                                                {{ form_widget(form.docPermissions.cible,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                                                <span class="help-block">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                                        <div class="row">
+                                                            <div class="col-md-offset-5 col-md-2 pull-right">
+                                                                {# <a href="{{ path('ad_salarie_show', {'id': salarie.id }) }}" class="btn red">Annuler</a>#}
+                                                                <input id="blockui_sample_1_3" type="submit" class="btn green" value="Continuer"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div> 
+                                                      
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                        
+                                    </div>
+                                    {{ form_rest(form) }}  
+                            </form>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+
+    body{
+        font-size: 14px;
+    }
+    .note p {
+        font-size: 14px;
+    }
+    .font-blue-madison {
+        color: rgba(34, 96, 150, 0.88) !important;
+    }
+    .b-r{
+        border-right: 1px solid rgb(187, 188, 200);
+    }
+    .p-c{
+        text-align: center;
+    }
+    .scroll-to-top{
+        display: none !important;
+    }
+    .page-content {
+        background: none; 
+        padding: 0px 0 0px; 
+        margin-top: -80px;
+    }
+</style>
+<script>
+    {#$("document").ready( function() {
+        //RECUPERATION DU SALARIE AU CLICK
+        $("#carriereapp_carriereappbundle_demande_demandeur").val("{{ demande.demandeur.id }}");
+        $("#carriereapp_carriereappbundle_demande_motif").val("{{ demande.motif }}");
+        console.log("nom : "+$("#carriereapp_carriereappbundle_demande_demandeur").val()+" okey!!!");
+        console.log("nom : "+$("#carriereapp_carriereappbundle_demande_motif").val()+" okey!!!");
+    });#}
+</script>
+
+{% endblock %}

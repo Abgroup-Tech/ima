@@ -1,0 +1,198 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 700px !important">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('ad_absencesat') }}">Arrêt de travail</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Détails
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!--BEGIN TABS-->
+                    <div class="tabbable tabbable-custom tabbable-noborder">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_1_1" data-toggle="tab">
+                                    Détails de la décision </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1_1">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <ul class="list-unstyled profile-nav">
+                                            <li>
+                                                <img src="{{ asset('uploads/' ~ salarie.image.path) }}" class="img-responsive" alt=""/>
+                                            </li>
+                                            <div class="col-md-12 profile-info">
+                                                <p>
+                                                    <b><h4>{{ salarie.civilite }} {{salarie.prenom}} {{salarie.nom}}</h4></b>
+                                                </p>
+                                                <p>
+                                                    <b>Poste</b> : {{ salarie.poste }} 
+                                                </p>
+                                                <p> 
+                                                    <b>Responsable hiérarchique</b> : {{ salarie.superviseur }}
+                                                </p>
+
+                                            </div>
+                                            <!--end col-md-8-->
+
+                                            <br/>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <ul class="list-inline" style="padding-left: 7px;">
+                                                <li>
+                                                    <i class="fa fa-map-marker"></i> Abidjan
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-calendar"></i> {{ salarie.dateNaissance|date("d-m-Y") }}
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-phone"></i> {{ salarie.telephone }}
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-envelope"></i> {{ salarie.email }}
+                                                </li>
+                                            </ul>
+                                            <div class="col-md-12" style="padding-left: 2px;">
+                                                <div class="tabbable tabbable-custom tabbable-custom-profile">
+                                                    {#<div class="table-scrollable table-scrollable-borderless">#}      
+                                                    <div style="padding:15px">
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane active" id="tab_1_11">
+                                                                <div class="portlet-body">
+                                                                    <form class="form-horizontal form-bordered form-label-stripped" >
+                                                                        <div class="form-body">    
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-2">Motif de l'arrêt
+                                                                                </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input id="motif" class="form-control" value="{{entity.motif}}" readonly="true">
+                                                                                    <span class="help-block">
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-2">Date de debut 
+                                                                                </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input id="collab" class="form-control" value="{{entity.dateDebut|date('d-m-Y')}}" readonly="true">
+                                                                                    <span class="help-block">
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-2">Date de fin
+                                                                                </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input id="collab" class="form-control" value="{{entity.dateFin|date('d-m-Y')}}" readonly="true">
+                                                                                    <span class="help-block">
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-2">Date de création
+                                                                                </label>
+                                                                                <div class="col-md-9">
+                                                                                    <input id="collab" class="form-control" value="{{entity.dateCreation|date('d-m-Y')}}" readonly="true">
+                                                                                    <span class="help-block">
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                             <div class="form-group">
+                                                                                <label class="control-label col-md-2">Pièce jointe
+                                                                                </label>
+                                                                                <div class="col-md-7">
+                                                                                    <input id="collab" class="form-control" value="{{entity.pieceJustificative.name}}" readonly="true">
+                                                                                    <span class="help-block">
+                                                                                    </span>
+                                                                                </div>
+                                                                                    <a class="btn btn-success btn-sm" style="margin-top: 3px;" href="{{ asset(entity.pieceJustificative.downloadPath) }}" download="{{entity.pieceJustificative.path}}" title="Telecharger">
+                                                                                        <i class="fa fa-cloud"></i>
+                                                                                        <strong>Télécharger</strong>
+                                                                                    </a>
+                                                                            </div>       
+                                                                                 
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END TABS-->
+                    </div>        
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+        th,td{
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}

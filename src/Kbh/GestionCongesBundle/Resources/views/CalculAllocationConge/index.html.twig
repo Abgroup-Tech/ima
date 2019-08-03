@@ -1,0 +1,88 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+     <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+            <header class="panel-heading">
+                <h1>Etat des droits à congés et allocations de congé de tout le personnel</h1>
+                <h3>Date d'effet :{{dateEffet| date('d-m-Y')}}</h3>
+                <a href="{#{{ path('ad_salarie_new') }}#}" style="float:right;margin-top: -45px;margin-right: 154px;" class="btn btn-primary">Export Excel</a>
+                <a href="{#{{ path('ad_salarie_new') }}#}" style="float:right;margin-top: -45px;margin-right: 279px;" class="btn btn-primary">Imprimer</a>
+            </header>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Salarié</th>
+                            <th>Salaire moyen journalier</th>
+                            <th>Droits légaux</th>
+                            <th>Droits réels</th>
+                            <th>Allocation de congé</th>
+                            <th width="100"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.matricule }}</td>
+                            <td>{{ entity.salarie }}</td>
+                            <td>{{ entity.salaireMoyenJournalier|number_format(0, ',', ' ') }}</td>
+                            <td>{{ entity.droitsLegaux }}</td>
+                            <td>{{ entity.droitsReels }}</td>
+                            <td>{{ entity.allocationConge|number_format(0, ',', ' ') }}</td>
+                            <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('calculallocationconge_show', { 'id': entity.id }) }}" class="btn btn-success">consulter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('calculallocationconge_edit', { 'id': entity.id }) }}" class="btn btn-primary">éditer</a>
+                                </li>
+                            </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <td><b>TOTAUX</b></td>
+                    <thead>
+                        <tr>
+                            <th>Effectif</th>
+                            <th>Salaire Moyen Journalier Global </th>
+                            <th>Droits légaux</th>
+                            <th>Droits réels</th>
+                            <th>Allocations de congé</th>
+                        </tr>
+                    </thead>
+                    <td><b>{{ effectif }}</b></td>
+                    <td><b>{{ compteurSMJ|number_format(0, ',', ' ') }} FCFA</b></td>
+                    <td><b>{{ compteurDL }} jours</b></td>
+                    <td><b>{{ compteurDR }} jours</b></td>
+                    <td><b>{{ compteurAC|number_format(0, ',', ' ') }} FCFA</b></td>
+                    </tbody>
+                </table>
+            </ul>
+            </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                 
+                    </div>
+                    <div class="col-sm-4 text-center">
+                      {#<a href="{{ path('sa_demande_conge_new') }}" class="btn btn-success">Nouvelle demande de congé</a>#}
+                    </div>
+                  </div>
+                </footer>
+              </section>
+        </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+      </section>
+    </section>
+
+    {% endblock %}

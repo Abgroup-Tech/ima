@@ -1,0 +1,138 @@
+dashboard_salarie:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Default:dashboardSalarie" }
+
+#######################   SALARIE   #############################
+sa_salarie_show:
+    path:     /profile
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:salarieShow" }
+
+#######################  DEMANDES   #############################
+sa_demandes:
+    path:     /historique-demandes
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:mesDemandes" }
+    
+sa_absencesat_travail:
+    path:     /historique-arrêt-travail
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:historiqueSalarie" }  
+    
+sa_absencesat_show:
+    path:     /historique-arrêt-travail/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:showSalarie" }      
+
+calcul_demande_conge:
+    path:     /demande/conge/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:calculDemandeConge" }
+
+calcul_demande_absence:
+    path:     /demande/absence/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:calculDemandeAbsence" }
+
+sa_demande_show:
+    path:     /demande/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:showDemande" }
+    
+sa_demande_show_2:
+    path:     /historique-demande/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:showDemandeHistorique" }
+
+sa_demande_conge_new:
+    path:     /demande-conge
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:newDemandeConge" }
+
+sa_demande_absence_new:
+    path:     /demande-permission
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:newDemandeAbsence" }
+
+sa_demande_conge_create:
+    path:     /create-conge
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:createDemandeConge" }
+    requirements: { _method: post }
+
+sa_demande_absence_create:
+    path:     /create-permission
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:createDemandeAbsence" }
+    requirements: { _method: post }
+
+sa_demande_justif_create:
+    path:     /justif-create
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:JustifAbsence" }
+    requirements: { _method: post }
+
+#######################   ABSENCES   #############################
+
+sa_absence_justif:
+    path:     /absence/justif
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:absJustif" }
+
+sa_absence_create:
+    path:     /absence/create
+    defaults: { _controller: "KbhGestionCongesBundle:Absence:absCreate" }
+    requirements: { _method: post }
+
+#######################   DROITS   #############################
+sa_droits_salarie:
+    path:     /droits
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:showDroitsSalarie" }
+
+sa_historique_droits:
+    path:     /historique-droits
+    defaults: { _controller: "KbhGestionCongesBundle:HistoriqueDroits:showLogDroit" }    
+
+#######################   CONGES   #############################
+sa_conges:
+    path:     /conges
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:saCongesList" }
+
+sa_conge_new:
+    path:     /conge/new
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:saNew" }
+
+sa_conge_show:
+    path:     /conge/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:saShow" }
+
+sa_conge_create:
+    path:     /conge/create
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:saCreate" }
+    requirements: { _method: post }
+
+#######################   EVENEMENTS   #############################
+
+sa_events:
+    path:     /evenements
+    defaults: { _controller: "KbhGestionCongesBundle:Default:saEvenements" }
+
+path_ajax_date:    
+    path: date/{nbj}/{dateDebut}
+    defaults: { _controller: "KbhGestionCongesBundle:Default:ajaxConges" }
+    requirements:
+        _method: GET
+
+path_ajax_absence:    
+    path: /absence/duree/{motif}
+    defaults: { _controller: "KbhGestionCongesBundle:Default:ajaxDemandeAbs" }
+    requirements:
+        _method: GET
+
+#######################   STATISTIQUES   #############################
+
+sa_statistiques:
+    path:     /statistiques
+    defaults: { _controller: "KbhGestionCongesBundle:Statistiques:showStatistiques" }
+
+#######################   CALENDRIER  #############################
+
+sa_calendrier:    
+    path: /sa_calendrier   
+    defaults: { _controller: "KbhGestionCongesBundle:Default:sa_calendrier" }
+
+#######################   REPORTS  #############################
+
+sa_report_show:
+    path:     /report/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Report:show" }	
+    
+sa_faq:
+    path:     /FAQ
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:faqSalarie" }    

@@ -1,0 +1,336 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Etats
+ *
+ * @ORM\Table(name="etats_premium")
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\EtatsRepository")
+ */
+class Etats
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \OrganigrammeUnite
+     *
+     * @ORM\OneToOne(targetEntity="Kbh\GestionCongesBundle\Entity\OrganigrammeUnite", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="unite", nullable=true)
+     */
+    private $unite;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="congesAcquis", type="float")
+     */
+    private $congesAcquis;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="congesAnterieur", type="float")
+     */
+    private $congesAnterieur;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="totalDroitsAcquis", type="float")
+     */
+    private $totalDroitsAcquis;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="totalCongesConsomme", type="float")
+     */
+    private $totalCongesConsomme;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="stockConge", type="float")
+     */
+    private $stockConge;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="permissions", type="float")
+     */
+    private $permissions;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="absencesEx", type="float")
+     */
+    private $absencesEx;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="congesPris", type="float")
+     */
+    private $congesPris;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="totalAbsences", type="float")
+     */
+    private $totalAbsences;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set congesAcquis
+     *
+     * @param float $congesAcquis
+     * @return Etats
+     */
+    public function setCongesAcquis($congesAcquis)
+    {
+        $this->congesAcquis = $congesAcquis;
+
+        return $this;
+    }
+
+    /**
+     * Get congesAcquis
+     *
+     * @return float 
+     */
+    public function getCongesAcquis()
+    {
+        return $this->congesAcquis;
+    }
+
+    /**
+     * Set congesAnterieur
+     *
+     * @param float $congesAnterieur
+     * @return Etats
+     */
+    public function setCongesAnterieur($congesAnterieur)
+    {
+        $this->congesAnterieur = $congesAnterieur;
+
+        return $this;
+    }
+
+    /**
+     * Get congesAnterieur
+     *
+     * @return float 
+     */
+    public function getCongesAnterieur()
+    {
+        return $this->congesAnterieur;
+    }
+
+    /**
+     * Set totalDroitsAcquis
+     *
+     * @param float $totalDroitsAcquis
+     * @return Etats
+     */
+    public function setTotalDroitsAcquis($totalDroitsAcquis)
+    {
+        $this->totalDroitsAcquis = $totalDroitsAcquis;
+
+        return $this;
+    }
+
+    /**
+     * Get totalDroitsAcquis
+     *
+     * @return float 
+     */
+    public function getTotalDroitsAcquis()
+    {
+        return $this->totalDroitsAcquis;
+    }
+
+    /**
+     * Set totalCongesConsomme
+     *
+     * @param float $totalCongesConsomme
+     * @return Etats
+     */
+    public function setTotalCongesConsomme($totalCongesConsomme)
+    {
+        $this->totalCongesConsomme = $totalCongesConsomme;
+
+        return $this;
+    }
+
+    /**
+     * Get totalCongesConsomme
+     *
+     * @return float 
+     */
+    public function getTotalCongesConsomme()
+    {
+        return $this->totalCongesConsomme;
+    }
+
+    /**
+     * Set permissions
+     *
+     * @param float $permissions
+     * @return Etats
+     */
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    /**
+     * Get permissions
+     *
+     * @return float 
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * Set absencesEx
+     *
+     * @param float $absencesEx
+     * @return Etats
+     */
+    public function setAbsencesEx($absencesEx)
+    {
+        $this->absencesEx = $absencesEx;
+
+        return $this;
+    }
+
+    /**
+     * Get absencesEx
+     *
+     * @return float 
+     */
+    public function getAbsencesEx()
+    {
+        return $this->absencesEx;
+    }
+
+    /**
+     * Set congesPris
+     *
+     * @param float $congesPris
+     * @return Etats
+     */
+    public function setCongesPris($congesPris)
+    {
+        $this->congesPris = $congesPris;
+
+        return $this;
+    }
+
+    /**
+     * Get congesPris
+     *
+     * @return float 
+     */
+    public function getCongesPris()
+    {
+        return $this->congesPris;
+    }
+
+    /**
+     * Set totalAbsences
+     *
+     * @param float $totalAbsences
+     * @return Etats
+     */
+    public function setTotalAbsences($totalAbsences)
+    {
+        $this->totalAbsences = $totalAbsences;
+
+        return $this;
+    }
+
+    /**
+     * Get totalAbsences
+     *
+     * @return float 
+     */
+    public function getTotalAbsences()
+    {
+        return $this->totalAbsences;
+    }
+
+    /**
+     * Set unite
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\OrganigrammeUnite $unite
+     * @return Etats
+     */
+    public function setUnite(\Kbh\GestionCongesBundle\Entity\OrganigrammeUnite $unite = null)
+    {
+        $this->unite = $unite;
+
+        return $this;
+    }
+
+    /**
+     * Get unite
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\OrganigrammeUnite 
+     */
+    public function getUnite()
+    {
+        return $this->unite;
+    }
+
+    /**
+     * Set stockConge
+     *
+     * @param float $stockConge
+     * @return Etats
+     */
+    public function setStockConge($stockConge)
+    {
+        $this->stockConge = $stockConge;
+
+        return $this;
+    }
+
+    /**
+     * Get stockConge
+     *
+     * @return float 
+     */
+    public function getStockConge()
+    {
+        return $this->stockConge;
+    }
+
+}

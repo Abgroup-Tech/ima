@@ -1,0 +1,128 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <div class="page-container">
+        <!-- END PAGE HEAD -->       
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content" style="min-height: 800px">
+            <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Widget settings form goes here
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                    </li>
+                    {#<li>
+                            <a href="#">Demandes</a>
+                            <i class="fa fa-circle"></i>
+                    </li>#}
+                    <li class="active">
+                        Migration des données
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-note font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Rapport de la migration</span>
+                                </div>
+                                <div class="tools">
+                                    {#<a href="javascript:;" class="collapse">
+                                    </a>
+                                    <a href="#portlet-config" data-toggle="modal" class="config">
+                                    </a>#}
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="table-scrollable table-scrollable-borderless">
+                                    <div class="tab-content">
+                                        <div class="portlet light">
+                                            <div class="portlet-body">
+                                                <div class="panel-group accordion" id="accordion3">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1">
+                                                                    ({{compteur_erreur}}) ERREUR LORS DE LA MIGRATION</a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse_3_1" class="panel-collapse collapse">
+                                                            <div class="panel-body">
+                                                                {% set Num = 1 %}
+                                                                {% for erreur in erreurs %}
+                                                                <p>
+                                                                <ul>
+                                                                    <li class="text-danger"><b>Erreur n° {{Num}}</b> : {{erreur}}</li>
+                                                                </ul>    
+                                                                </p>
+                                                                {% set Num = Num + 1 %}
+                                                                {%endfor%}  
+                                                                {% if not erreurs %}
+                                                                 <ul>
+                                                                    <li><b>Aucune erreur lors de la migration</li>
+                                                                </ul> 
+                                                                {% endif %} 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 note note-success">
+                                                    <h4 class="block"> FELICITATION! ({{success}}) DONNEE(S) IMPORTE(S)</h4>
+                                                    <p>La migration <b> est effectuée</b><br/></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                                   
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+            </div>
+            <!-- BEGIN PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTENT -->
+        <style>
+            th,td{
+                text-align: center;
+                color:#345F98 !important;
+            }
+            .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+                color: #fff;
+                background-color: #6838A5;
+            }
+            body{
+                font-size: 14px;
+            }
+            .font-blue-madison {
+                color: #345F98 !important;
+            }
+        </style>
+
+    {% endblock %}

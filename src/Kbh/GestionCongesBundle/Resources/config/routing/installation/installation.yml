@@ -1,0 +1,46 @@
+bienvenue:
+    path:     /bienvenue
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:bienvenue" }    
+    
+installation_entreprise_new:
+    path:     /parametre-entreperise
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:newEntreprise" }
+
+installation_entreprise_create:
+    path:     /parametre-entreperise/create
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:createEntreprise" }
+    requirements: { _method: post }    
+    
+installation_paramcalculdroits_new:
+    path:     /configuration-système
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:newParamCalculDroits" }    
+    
+installation_paramcalculdroits_create:
+    path:     /configuration-système/create
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:createParamCalculDroits" }
+    requirements: { _method: post }  
+   
+installation_new_user:
+    path:     /création-compte
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:newUserCompte" }    
+    
+installation_user_create:
+    path:     /création-compte/create
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:createNewUser" }
+    requirements: { _method: post }      
+    
+installation_felicitaion:
+    path:     /félicitation
+    defaults: { _controller: "KbhGestionCongesBundle:Installation:felicitation" }  
+    
+installation_import_feries:
+    path:     /import-feries
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importFeries" }    
+    
+installation_traitement_import_feries:
+    path:     /traitement-import-feries
+    defaults: { _controller: "KbhGestionCongesBundle:Document:migrationFeries" }        
+    
+installation_import_permissions:
+    path:     /import-permissions
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importPermissions" }        

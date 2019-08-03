@@ -1,0 +1,67 @@
+#kbh_gestion_conges_absencesajustifier:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/absencesajustifier.yml"
+#    prefix:   /absencesajustifier
+
+#kbh_gestion_conges_absencesat:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/absencesat.yml"
+#    prefix:   /absencesat
+
+#kbh_gestion_conges_periodetraitementdemandes:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/periodetraitementdemandes.yml"
+#    prefix:   /periodetraitementdemandes
+#
+#kbh_gestion_conges_periodedepotdemandes:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/periodedepotdemandes.yml"
+#    prefix:   /periodedepotdemandes
+
+kbh_gestion_conges_faq:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/faq.yml"
+    prefix:   /faq
+
+welcome:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Default:welcome" }
+    
+calendrier:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Default:showCalendar" }
+
+lireNotif:
+    path:     /marquer-comme-lu
+    defaults: { _controller: "KbhGestionCongesBundle:Default:notificationsLues" }
+    
+installations:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/installation/installation.yml"
+    prefix:   /installation/
+    
+super_admin:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/super-admin/super-admin.yml"
+    prefix:   /dashboard-super-admin/
+
+admin:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/admin/admin.yml"
+    prefix:   /dashboard-admin/
+    
+superviseur:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/superviseur/superviseur.yml"
+    prefix:   /dashboard-superviseur/
+    
+top_manager:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/top-manager/top-manager.yml"
+    prefix:   /dashboard-top-manager/  
+    
+salarie:
+    resource: "@KbhGestionCongesBundle/Resources/config/routing/salarie/salarie.yml"
+    prefix:   /dashboard-salarie/
+
+#kbh_gestion_conges_calculallocationconge:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/calculallocationconge.yml"
+#    prefix:   /dashboard-superviseur/calculallocationconge
+#
+#kbh_gestion_conges_salairemoyenjournalier:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/salairemoyenjournalier.yml"
+#    prefix:   /salairemoyenjournalier
+#
+#kbh_gestion_conges_basedroits:
+#    resource: "@KbhGestionCongesBundle/Resources/config/routing/basedroits.yml"
+#    prefix:   /basedroits

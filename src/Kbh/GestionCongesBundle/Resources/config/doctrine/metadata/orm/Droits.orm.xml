@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Droits" table="droits">
+    <unique-constraints>
+      <unique-constraint name="UNIQ_5D1F8828E3A1A" columns="salarie"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="droitsacquisanneeencours" type="decimal" column="droitsAcquisAnneeEnCours" precision="10" scale="0" nullable="false"/>
+    <field name="reliquatdroitsanterieur" type="decimal" column="reliquatDroitsAnterieur" precision="10" scale="0" nullable="false"/>
+    <field name="cumuldroitsacquis" type="decimal" column="cumulDroitsAcquis" precision="10" scale="0" nullable="false"/>
+    <field name="droitspris" type="decimal" column="droitsPris" precision="10" scale="0" nullable="false"/>
+    <field name="totaldroitsaprendre" type="decimal" column="totalDroitsAprendre" precision="10" scale="0" nullable="false"/>
+    <many-to-one field="salarie" target-entity="Salarie">
+      <join-columns>
+        <join-column name="salarie" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

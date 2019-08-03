@@ -1,0 +1,209 @@
+<div class="col-md-6">
+    <!-- BEGIN PORTLET -->
+    <div class="portlet light" style="padding-bottom:46px;">
+        <div class="portlet-title tabbable-line">
+            <div class="caption caption-md">
+                <i class="icon-list" style="color: #345F98;" ></i>
+                <span class="caption-subject font-blue-madison bold uppercase"> Mes informations </span>
+            </div>
+            <div class="tools">
+            </div>
+        </div>
+        <div class="portlet-body">
+            <!--BEGIN TABS-->
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="scroller" style="height: 320px;color: #345F98;"  data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                        <div class="col-md-12">    
+                            <table class="table font-blue-madison">
+                                <thead>
+                                    <tr>
+                                        <td class="bold">
+                                            NÂ° matricule
+                                        </td>
+                                        <td>
+                                            {{ salarie.matricule }}
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="bold">
+                                            NÂ° CNPS
+                                        </td>
+                                        <td>
+                                            {{ salarie.numeroCnps }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            statut matrimoniale
+                                        </td>
+                                        <td>
+                                            {{ salarie.statutMarital }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            Responsable direct
+                                        </td>
+                                        <td>
+                                            {% if salarie.superviseur %}{{ salarie.superviseur.civilite }} {{ salarie.superviseur }} {% endif%}
+                                            {% if not salarie.superviseur %} Aucun {% endif%}
+                                        </td>
+                                    </tr>
+                                    {% if salarie.unite %} 
+                                        <tr>
+                                            <td class="bold">
+                                                Rattachement
+                                            </td>
+                                            <td>
+                                                <a class="tooltips" data-original-title="{{ salarie.unite.nom }}">{{ salarie.unite.sigle }}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">
+                                                Situation gÃ©ographique unitÃ©
+                                            </td>
+                                            <td>
+                                                {% if salarie.unite.situationGeographique %}{{ salarie.unite.situationGeographique }}{% endif %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">
+                                                Lieu de travail
+                                            </td>
+                                            <td>
+                                                {% if salarie.unite.lieuTravail %}{{ salarie.unite.lieuTravail }}{% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td class="bold">
+                                            Email
+                                        </td>
+                                        <td>
+                                            {{ salarie.email }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            Derniers congÃ©s
+                                        </td>
+                                        <td>
+                                            {% if conge %}
+                                                {% set n = 1%}
+                                                {% for conge in conge%}
+                                                    {% if n == cp_conge%}
+                                                        <b>{{conge.dateDebut|date('d-m-Y')}} / {{conge.dateFin|date('d-m-Y')}}</b>
+                                                    {% endif %}
+                                                    {% set n = n+1%}  
+                                                {% endfor %}
+                                            {% endif %}
+
+                                            {% if cp_conge == 0%}
+                                                <b> Aucune information </b>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--END TABS-->
+        </div>
+    </div>
+    <!-- END PORTLET -->
+</div>
+<div class="col-md-6">
+    <!-- BEGIN PORTLET -->
+    <div class="portlet light" style="padding-bottom:46px;">
+        <div class="portlet-title tabbable-line">
+            <div class="caption caption-md">
+                <i class="fa fa-bookmark" style="color: #345F98;" ></i>
+                <span class="caption-subject font-blue-madison bold uppercase">Mes compteurs </span>
+            </div>
+            <div class="tools">
+            </div>
+        </div>
+        <div class="portlet-body">
+            <!--BEGIN TABS-->
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="scroller" style="height: 320px;color: #345F98; font-weight: 500;" data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                        <div class="col-md-12">    
+                            <table class="table font-blue-madison">
+                                <thead>
+                                    <tr>
+                                        <td class="bold">
+                                            CongÃ©s acquis en {{ "now"|date_modify('-1 year')|date('Y') }}
+                                        </td>
+                                        <td>
+                                            {{droits.reliquatDroitsAnterieur}} jours
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="bold">
+                                            CongÃ©s acquis en {{ "now"|date('Y') }}
+                                        </td>
+                                        <td>
+                                            {{droits.droitsAcquisAnneeEnCours}} jours
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            Cumul congÃ©s
+                                        </td>
+                                        <td>
+                                            {{droits.CumulDroitsAcquis}} jours
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            CongÃ©s pris {{ "now"|date('Y') }}
+                                        </td>
+                                        <td>
+                                            {{droits.droitsPris}} jours
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            Permissions prises
+                                        </td>
+                                        <td>
+                                            {{ droits.permissionsPrises }} jours
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            Solde permissions
+                                        </td>
+                                        <td style="color: #F3565D !important">
+                                            <b>{{ droits.soldePermissions }} jours</b> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">
+                                            Solde congÃ©s
+                                        </td>
+                                        <td style="color: #F3565D !important">
+                                            <b>{{droits.totalDroitsAprendre}} jours</b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- END PORTLET -->
+    </div>
+</div>

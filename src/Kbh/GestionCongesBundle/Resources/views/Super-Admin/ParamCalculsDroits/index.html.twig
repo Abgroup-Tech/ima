@@ -1,0 +1,63 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>ParamCalculsDroits list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Basedroitsacquis</th>
+                <th>Jourssupanciennete5ans</th>
+                <th>Jourssupanciennete10ans</th>
+                <th>Jourssupanciennete15ans</th>
+                <th>Jourssupanciennete20ans</th>
+                <th>Jourssupanciennete25ans</th>
+                <th>Jourssupfemmeparenfantmineur</th>
+                <th>Jourssupmedaillehonneur</th>
+                <th>Jourssupastreinte</th>
+                <th>Droitsexpatsejour1</th>
+                <th>Droitsexpatbase</th>
+                <th>Jourssuppr200hmois</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('paramcalculsdroits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.baseDroitsAcquis }}</td>
+                <td>{{ entity.joursSupAnciennete5ans }}</td>
+                <td>{{ entity.joursSupAnciennete10ans }}</td>
+                <td>{{ entity.joursSupAnciennete15ans }}</td>
+                <td>{{ entity.joursSupAnciennete20ans }}</td>
+                <td>{{ entity.joursSupAnciennete25ans }}</td>
+                <td>{{ entity.joursSupFemmeParEnfantMineur }}</td>
+                <td>{{ entity.joursSupMedailleHonneur }}</td>
+                <td>{{ entity.joursSupAstreinte }}</td>
+                <td>{{ entity.droitsExpatSejour1 }}</td>
+                <td>{{ entity.droitsExpatBase }}</td>
+                <td>{{ entity.joursSupPr200hmois }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('paramcalculsdroits_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('paramcalculsdroits_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('paramcalculsdroits_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,0 +1,253 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Historique <small> de demandes</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                </div>
+        </div>    
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        {#<li>
+                                <a href="#">Demandes</a>
+                                <i class="fa fa-circle"></i>
+                        </li>#}
+                        <li class="active">
+                                Historique Demandes
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">Historique des Demandes</span>
+                                                </div>
+                                                {#<div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>#}
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="table-scrollable table-scrollable-borderless">
+                                                <ul class="nav nav-pills">
+                                                        <li class="active">
+                                                                <a href="#tab_1" data-toggle="tab">
+                                                                Historique congés</a>
+                                                        </li>
+                                                        <li>
+                                                                <a href="#tab_2" data-toggle="tab">
+                                                                Historique permissions </a>
+                                                        </li>
+														<li>
+                                                                <a href="#tab_3" data-toggle="tab">
+                                                                Congés reportés</a>
+                                                        </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                        <div class="tab-pane fade active in" id="tab_1">
+                                                            <br/><hr/>
+                                                            <div class="scroller" style="height: 500px;">
+															  <div class="table-scrollable table-scrollable-borderless">  
+                                                                   <table class="table table-hover table-light" >
+                                                                        <thead>
+                                                                        <tr>
+                                                                       <th>Id</th>
+                                                                        <th>Date demande</th>
+                                                                        <th>Date début</th>
+                                                                        <th>Date fin</th>
+                                                                        <th>Durée (jours ouvrables)</th>
+                                                                        <th>Statut</th>
+                                                                        <th>Actions</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        {% set Num = 0 %}
+                                                                       {% for entity in entities %}
+                                                                       {% if entity.typeDemande == 'Conge' %}
+                                                                        <tr>
+                                                                        {% set Num = Num + 1 %}    
+                                                                       <td class="fit">{{ Num }}</td>
+                                                                       <td>{% if entity.dateDemande %}{{ entity.dateDemande|date('d-m-Y H:i:s') }}{% endif %}</td>
+                                                                        <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                                                                        <td>{% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}</td>
+                                                                        <td>{{ entity.nbjoursOuvrables }}</td>
+                                                                        <td>
+                                                                            {% if entity.estEnCours %}<i class="btn btn-circle btn-warning btn-sm">En cours</i><br/>{% endif %}
+                                                                            {% if entity.estValide %}<i class="btn btn-circle btn-success btn-sm">Validé</i><br/>{% endif %}
+                                                                            {% if entity.estRefuse %}<i class="btn btn-circle btn-danger btn-sm">Rejetée</i><br/>{% endif %}
+                                                                        </td>
+                                                                       <td>
+                                                                                  <a href="{{ path('superviseur_demande_show_2', { 'id': entity.id }) }}"  class="btn btn-circle btn-primary btn-sm">Voir Détail</a>
+                                                                       </td>
+                                                                        </tr>
+                                                                        {% endif %}
+                                                                       {% endfor %}
+                                                                        </table>
+                                                             </div>
+                                                           </div>
+                                                        </div>
+                                                       <div class="tab-pane fade" id="tab_2">
+                                                                <br/><hr/>
+                                                              <div class="scroller" style="height: 500px;"> 
+																<div class="table-scrollable table-scrollable-borderless">
+                                                                     <table class="table table-hover table-light" >
+                                                                        <thead>
+                                                                        <tr>
+                                                                       <th>Id</th>
+                                                                        <th>Date demande</th>
+                                                                        <th>Date début</th>
+                                                                        <th>Date fin</th>
+                                                                        <th>Durée</th>
+                                                                        <th>Statut</th>
+                                                                        <th>Actions</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        {% set Num = 0 %}
+                                                                       {% for entity in entities %}
+                                                                       {% if entity.typeDemande != 'Conge' %}
+                                                                        <tr>
+                                                                        {% set Num = Num + 1 %}    
+                                                                       <td class="fit">{{ Num }}</td>
+                                                                       <td>{% if entity.dateDemande %}{{ entity.dateDemande|date('d-m-Y H:i:s') }}{% endif %}</td>
+                                                                        <td>
+                                                                            {% if entity.dateDebut %}
+                                                                                {% if entity.dateFin|date('H:i:s') != '00:00:00'%}
+                                                                                    {{ entity.dateDebut|date('d-m-Y H:i:s') }}
+                                                                                {% else %}
+                                                                                    {{ entity.dateDebut|date('d-m-Y') }}
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.dateFin %}
+                                                                                {% if entity.dateFin|date('H:i:s') != '00:00:00'%}
+                                                                                    {{ entity.dateFin|date('d-m-Y H:i:s') }}
+                                                                                {% else %}
+                                                                                    {{ entity.dateFin|date('d-m-Y') }}
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.dateFin|date('H:i:s') != '00:00:00'%}
+                                                                                {{ entity.nbjoursOuvrables }} h
+                                                                            {% else %}
+                                                                                {{ entity.nbjoursOuvrables }} j
+                                                                            {% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.estEnCours == 1 %}<i class="btn btn-circle btn-warning btn-sm">En cours</i><br/>{% endif %}
+                                                                            {% if entity.estValide == 1 %}<i class="btn btn-circle btn-success btn-sm">Validé</i><br/>{% endif %}
+                                                                            {% if entity.estRefuse == 1 %}<i class="btn btn-circle btn-danger btn-sm">Rejetée</i><br/>{% endif %}
+                                                                        </td>
+                                                                       <td>
+                                                                          <a href="{{ path('superviseur_demande_show_2', { 'id': entity.id }) }}"  class="btn btn-circle btn-primary btn-sm">Voir Détail</a>
+                                                                       </td>
+                                                                        </tr>
+                                                                        {% endif %}
+                                                                       {% endfor %}
+                                                                        </table>
+                                                                   </div>
+                                                        </div>
+                                                     </div>
+                                                    <div class="tab-pane fade" id="tab_3">
+                                                                <br/><hr/>
+																<div class="scroller" style="height: 500px;">
+                                                                <div class="table-scrollable table-scrollable-borderless">
+                                                                   <table class="table table-hover table-light" >
+                                                                        <thead>
+                                                                        <tr>
+                                                                       <th> N°</th>
+																		<th> Date report  </th>
+																		<th> Ancienne date de début  </th>
+																		<th> Ancienne date de fin  </th>
+																		<th> Nouvelle date de début  </th>
+																		<th> Nouvelle date de fin  </th>
+																		<th> Durée </th>
+																		<th> Motif du report  </th>
+                                                                        <th>Actions</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        {% set Num = 0 %}
+                                                                       {% for reports in reports %}
+                                                                        <tr>
+                                                                        {% set Num = Num + 1 %}   
+                                                                       <td> <a href="{{ path('sa_report_show', { 'id': reports.id }) }}">{{ Num }}</a>  </td>
+                                                                                <td> {% if reports.dateReport %}{{ reports.dateReport|date('d-m-Y H:i:s') }}{% endif %}  </td>
+                                                                                <td> {% if reports.ancienneDateDebut %}{{ reports.ancienneDateDebut|date('d-m-Y') }}{% endif %}  </td>
+                                                                                <td> {% if reports.ancienneDateFin %}{{ reports.ancienneDateFin|date('d-m-Y') }}{% endif %}  </td>
+                                                                                <td> {% if reports.dateDebut %}{{ reports.dateDebut|date('d-m-Y') }}{% endif %}  </td>
+                                                                                <td> {% if reports.dateFin %}{{ reports.dateFin|date('d-m-Y') }}{% endif %}  </td>
+                                                                                <td> {{ reports.nbjoursOuvrables }}  </td>
+                                                                                <td> {{ reports.motifReport }}  </td>
+                                                                       <td>
+                                                                                  <a href="{{ path('sa_report_show', { 'id': reports.id }) }}"  class="btn btn-circle btn-primary btn-sm">Voir Détail</a>
+                                                                       </td>
+                                                                        </tr>
+                                                                       {% endfor %}
+                                                                        </table>
+                                                             </div>
+                                                           </div> 
+                                                        </div>
+                                                
+												 </div>
+                                        </div>
+                                     </div>                                   
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+    th,td{
+        text-align: center;
+        color:#345F98 !important;
+    }
+ .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  color: #fff;
+  background-color: #6838A5;
+}
+</style>
+
+    {% endblock %}

@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Droits</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+           <tr>
+                <th>Congés acquis en {{"now"|date("Y")}}</th>
+                <td>{{ droits.droitsAcquisAnneeEnCours }}</td>
+            </tr>
+            <tr>
+                <th>Congés non pris années précédentes</th>
+                <td>{{ droits.reliquatDroitsAnterieur }}</td>
+            </tr>
+            <tr>
+                <th>Total Congés acquis</th>
+                <td>{{ droits.cumulDroitsAcquis }}</td>
+            </tr>
+            <tr>
+                <th>Congés pris en {{"now"|date("Y")}}</th>
+                <td>{{ droits.droitsPris }}</td>
+            </tr>
+            <tr>
+                <th>Congés disponibles</th>
+                <td>{{ droits.totalDroitsAprendre }}</td>
+            </tr>
+            <tr>
+                <th>Permissions prises</th>
+                <td>{{ droits.permissionsPrises }}</td>
+            </tr>
+            <tr>
+                <th>Permissions disponibles</th>
+                <td>{{ droits.soldePermissions }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('droits') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('droits_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

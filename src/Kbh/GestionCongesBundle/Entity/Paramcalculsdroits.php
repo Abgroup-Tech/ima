@@ -1,0 +1,410 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Paramcalculsdroits
+ *
+ * @ORM\Table(name="paramcalculsdroits_premium")
+ * @ORM\Entity
+ */
+class Paramcalculsdroits
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="baseDroitsAcquis", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $baseDroitsAcquis;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupAnciennete5ans", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupanciennete5ans;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupAnciennete10ans", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupanciennete10ans;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupAnciennete15ans", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupanciennete15ans;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupAnciennete20ans", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupanciennete20ans;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupAnciennete25ans", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupanciennete25ans;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupFemmeParEnfantMineur", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupfemmeparenfantmineur;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupMedailleHonneur", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupmedaillehonneur;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupAstreinte", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssupastreinte;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="droitsExpatSejour1", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $droitsexpatsejour1;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="droitsExpatBase", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $droitsexpatbase;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="joursSupPr200hmois", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $jourssuppr200hmois;
+
+    public function __construct() {
+        $this->baseDroitsAcquis = 2.2;
+        $this->jourssupanciennete10ans=2;
+        $this->jourssupanciennete15ans=3;
+        $this->jourssupanciennete20ans=4;
+        $this->jourssupanciennete25ans=5;
+        $this->jourssupanciennete5ans=1;
+        $this->jourssupastreinte=12;
+        $this->jourssupfemmeparenfantmineur=2;
+        $this->jourssupmedaillehonneur=1;
+        $this->jourssuppr200hmois=1;
+        $this->droitsexpatbase=5;
+        $this->droitsexpatsejour1=6;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+   
+
+    /**
+     * Set baseDroitsAcquis
+     *
+     * @param string $baseDroitsAcquis
+     * @return Paramcalculsdroits
+     */
+    public function setBaseDroitsAcquis($baseDroitsAcquis)
+    {
+        $this->baseDroitsAcquis = $baseDroitsAcquis;
+
+        return $this;
+    }
+
+    /**
+     * Get baseDroitsAcquis
+     *
+     * @return string 
+     */
+    public function getBaseDroitsAcquis()
+    {
+        return $this->baseDroitsAcquis;
+    }
+
+    /**
+     * Set jourssupanciennete5ans
+     *
+     * @param string $jourssupanciennete5ans
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupanciennete5ans($jourssupanciennete5ans)
+    {
+        $this->jourssupanciennete5ans = $jourssupanciennete5ans;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupanciennete5ans
+     *
+     * @return string 
+     */
+    public function getJourssupanciennete5ans()
+    {
+        return $this->jourssupanciennete5ans;
+    }
+
+    /**
+     * Set jourssupanciennete10ans
+     *
+     * @param string $jourssupanciennete10ans
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupanciennete10ans($jourssupanciennete10ans)
+    {
+        $this->jourssupanciennete10ans = $jourssupanciennete10ans;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupanciennete10ans
+     *
+     * @return string 
+     */
+    public function getJourssupanciennete10ans()
+    {
+        return $this->jourssupanciennete10ans;
+    }
+
+    /**
+     * Set jourssupanciennete15ans
+     *
+     * @param string $jourssupanciennete15ans
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupanciennete15ans($jourssupanciennete15ans)
+    {
+        $this->jourssupanciennete15ans = $jourssupanciennete15ans;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupanciennete15ans
+     *
+     * @return string 
+     */
+    public function getJourssupanciennete15ans()
+    {
+        return $this->jourssupanciennete15ans;
+    }
+
+    /**
+     * Set jourssupanciennete20ans
+     *
+     * @param string $jourssupanciennete20ans
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupanciennete20ans($jourssupanciennete20ans)
+    {
+        $this->jourssupanciennete20ans = $jourssupanciennete20ans;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupanciennete20ans
+     *
+     * @return string 
+     */
+    public function getJourssupanciennete20ans()
+    {
+        return $this->jourssupanciennete20ans;
+    }
+
+    /**
+     * Set jourssupanciennete25ans
+     *
+     * @param string $jourssupanciennete25ans
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupanciennete25ans($jourssupanciennete25ans)
+    {
+        $this->jourssupanciennete25ans = $jourssupanciennete25ans;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupanciennete25ans
+     *
+     * @return string 
+     */
+    public function getJourssupanciennete25ans()
+    {
+        return $this->jourssupanciennete25ans;
+    }
+
+    /**
+     * Set jourssupfemmeparenfantmineur
+     *
+     * @param string $jourssupfemmeparenfantmineur
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupfemmeparenfantmineur($jourssupfemmeparenfantmineur)
+    {
+        $this->jourssupfemmeparenfantmineur = $jourssupfemmeparenfantmineur;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupfemmeparenfantmineur
+     *
+     * @return string 
+     */
+    public function getJourssupfemmeparenfantmineur()
+    {
+        return $this->jourssupfemmeparenfantmineur;
+    }
+
+    /**
+     * Set jourssupmedaillehonneur
+     *
+     * @param string $jourssupmedaillehonneur
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupmedaillehonneur($jourssupmedaillehonneur)
+    {
+        $this->jourssupmedaillehonneur = $jourssupmedaillehonneur;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupmedaillehonneur
+     *
+     * @return string 
+     */
+    public function getJourssupmedaillehonneur()
+    {
+        return $this->jourssupmedaillehonneur;
+    }
+
+    /**
+     * Set jourssupastreinte
+     *
+     * @param string $jourssupastreinte
+     * @return Paramcalculsdroits
+     */
+    public function setJourssupastreinte($jourssupastreinte)
+    {
+        $this->jourssupastreinte = $jourssupastreinte;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssupastreinte
+     *
+     * @return string 
+     */
+    public function getJourssupastreinte()
+    {
+        return $this->jourssupastreinte;
+    }
+
+    /**
+     * Set droitsexpatsejour1
+     *
+     * @param string $droitsexpatsejour1
+     * @return Paramcalculsdroits
+     */
+    public function setDroitsexpatsejour1($droitsexpatsejour1)
+    {
+        $this->droitsexpatsejour1 = $droitsexpatsejour1;
+
+        return $this;
+    }
+
+    /**
+     * Get droitsexpatsejour1
+     *
+     * @return string 
+     */
+    public function getDroitsexpatsejour1()
+    {
+        return $this->droitsexpatsejour1;
+    }
+
+    /**
+     * Set droitsexpatbase
+     *
+     * @param string $droitsexpatbase
+     * @return Paramcalculsdroits
+     */
+    public function setDroitsexpatbase($droitsexpatbase)
+    {
+        $this->droitsexpatbase = $droitsexpatbase;
+
+        return $this;
+    }
+
+    /**
+     * Get droitsexpatbase
+     *
+     * @return string 
+     */
+    public function getDroitsexpatbase()
+    {
+        return $this->droitsexpatbase;
+    }
+
+    /**
+     * Set jourssuppr200hmois
+     *
+     * @param string $jourssuppr200hmois
+     * @return Paramcalculsdroits
+     */
+    public function setJourssuppr200hmois($jourssuppr200hmois)
+    {
+        $this->jourssuppr200hmois = $jourssuppr200hmois;
+
+        return $this;
+    }
+
+    /**
+     * Get jourssuppr200hmois
+     *
+     * @return string 
+     */
+    public function getJourssuppr200hmois()
+    {
+        return $this->jourssuppr200hmois;
+    }
+}

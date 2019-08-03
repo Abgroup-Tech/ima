@@ -1,0 +1,97 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Parampermissions
+ *
+ * @ORM\Table(name="parampermissions_premium")
+ * @ORM\Entity
+ */
+class Parampermissions
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="motif", type="string", length=255, nullable=false)
+     */
+    private $motif;
+
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="duree", type="decimal", precision=10, scale=0, nullable=false)
+     */
+    private $duree;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set motif
+     *
+     * @param string $motif
+     * @return ParamPermissions
+     */
+    public function setMotif($motif)
+    {
+        $this->motif = $motif;
+
+        return $this;
+    }
+
+    /**
+     * Get motif
+     *
+     * @return string 
+     */
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param decimal $duree
+     * @return ParamPermissions
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return decimal 
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+    
+//    public function __toString() {
+//        return $this->motif;
+//    }
+}

@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Absence creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('absence') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

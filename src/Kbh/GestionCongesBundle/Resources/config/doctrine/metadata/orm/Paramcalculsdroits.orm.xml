@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Paramcalculsdroits" table="paramcalculsdroits">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="basedroitsacquis" type="decimal" column="baseDroitsAcquis" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupanciennete5ans" type="decimal" column="joursSupAnciennete5ans" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupanciennete10ans" type="decimal" column="joursSupAnciennete10ans" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupanciennete15ans" type="decimal" column="joursSupAnciennete15ans" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupanciennete20ans" type="decimal" column="joursSupAnciennete20ans" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupanciennete25ans" type="decimal" column="joursSupAnciennete25ans" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupfemmeparenfantmineur" type="decimal" column="joursSupFemmeParEnfantMineur" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupmedaillehonneur" type="decimal" column="joursSupMedailleHonneur" precision="10" scale="0" nullable="false"/>
+    <field name="jourssupastreinte" type="decimal" column="joursSupAstreinte" precision="10" scale="0" nullable="false"/>
+    <field name="droitsexpatsejour1" type="decimal" column="droitsExpatSejour1" precision="10" scale="0" nullable="false"/>
+    <field name="droitsexpatbase" type="decimal" column="droitsExpatBase" precision="10" scale="0" nullable="false"/>
+    <field name="jourssuppr200hmois" type="decimal" column="joursSupPr200hmois" precision="10" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

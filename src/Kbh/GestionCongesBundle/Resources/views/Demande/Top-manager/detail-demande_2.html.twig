@@ -1,0 +1,509 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main -%}
+    <!-- BEGIN PAGE CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Détails <small>de la demande </small></h1>
+                </div>
+                <!-- END PAGE TITLE -->
+                <!-- BEGIN PAGE TOOLBAR -->
+                <div class="page-toolbar">
+                    <!-- BEGIN THEME PANEL -->
+                    <div class="btn-group btn-theme-panel">
+                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-settings"></i>
+                        </a>
+                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>EXPORTER</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="theme-colors">
+                                                <li class="theme-color theme-color-default" data-theme="default" onclick="javascript:window.print();">
+                                                    <span class="fa fa-print"></span>
+                                                    <span class="theme-color-name">Imprimer</span>
+                                                </li>
+                                                <!-- <li class="theme-color theme-color-default" data-theme="default" onClick ="$('#details').tableExport({type:'excel',escape:'false'});">
+<span class="theme-color-view"></span>
+<span class="theme-color-name">Excel</span>
+</li>
+<li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki" onClick ="$('#details').tableExport({type:'json',escape:'false'});">
+<span class="theme-color-view"></span>
+<span class="theme-color-name">Json</span>
+</li>
+<li class="theme-color theme-color-blue-steel" data-theme="blue-steel" onClick ="$('#details').tableExport({type:'doc',escape:'false',ignoreColumn: [2,3], htmlContent:'true', tableName: 'détail-demande '});">
+<span class="theme-color-view"></span>
+<span class="theme-color-name">Word</span>
+</li>
+<li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange" onClick ="$('#details').tableExport({type: 'pdf', escape: 'false', ignoreColumn: [2,3], htmlContent:'true', tableName: 'détail-demande ',pdfFontSize: 8,pdfLeftMargin: 10});">
+<span class="theme-color-view"></span>
+<span class="theme-color-name">PDF</span>
+</li>
+<li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta" onClick ="$('#details').tableExport({type:'xml',escape:'false'});">
+<span class="theme-color-view"></span>
+<span class="theme-color-name">Xml</span>
+</li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END THEME PANEL -->
+                </div>
+                <!-- END PAGE TOOLBAR -->
+            </div>
+        </div>
+        <!-- END PAGE HEAD -->
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+            <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Confirmation du refus</h4>
+                            </div>
+                            <div class="modal-body">
+                                <section class="scrollable wrapper" >
+                                    {{ form_start(form2, {'attr': {'data-validate' : 'parsley'}}) }}
+                                    <div class="form-group">
+                                        <div class="alert alert-info">
+                                            {#<button type="button" class="close" data-dismiss="alert">&times;</button>#}
+                                            <i class="fa fa-info-sign"></i><strong>Attention ! </strong> Voulez-vous vraiment <strong>REFUSER</strong> la demande formulée par <strong>{{entity.salarie.civilite}}
+                                                {{entity.salarie.nomprenom}}</strong> !? Si oui laissez un commentaire avant la validation du REFUS
+                                        </div>
+                                        {#<label></label>#}
+                                        {{ form_label(form2.raisonRefus, "Raisons du refus") }}
+                                        {{ form_widget(form2.raisonRefus, {'attr': {'class': 'form-control', 'rows': '6', 'data-minwords': '6' , 'placeholder': 'Saisissez un commentaire'}}) }}
+                                        {#<textarea class="form-control" rows="6" data-minwords="6" required data-required="true" placeholder="Saisissez un commentaire"></textarea>#}                                        
+                                    </div>   
+                                </section> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-s-xs">Confirmer</button> 
+                                <button type="button" class="btn default" data-dismiss="modal">retour</button>
+                                {{ form_end(form2) }}
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                    </li>
+                    {#<li>
+                            <a href="{{ path('sup_events') }}">Historique des évènements</a>
+                            <i class="fa fa-circle"></i>
+                    </li>#}
+                    <li class="active">
+                        Détails demande
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="portlet light" >
+                    <div class="portlet-body" >
+                        <div class="invoice" >
+                            <div class="row invoice-logo" id="details">
+                                <div class="col-xs-6 invoice-logo-space">
+                                    <img src="{{ asset('uploads/' ~ entreprise.logo.path) }}" class="img-responsive" alt=""/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p  style="float:right;">
+                              <!-- test:{{ 'now' | localizeddate('full', 'none') }}-----  -->     Demande N° : <b/>{{ entity.id }}</b><br/> Le <b>{{ entity.dateDemande|date('d-m-Y') }} à {{ entity.dateDemande|date('H:i:s') }}</b>
+                                        <br/><br/>
+                                        {% if entity.estValide %}
+                                            {% if reports%}
+                                                {% for conge in conge %}
+                                                    {% if entity == conge.demande %}   
+                                                        {% for reports in reports %}
+                                                            {% if conge == reports.conge %}    
+                                                                <a href="{{ path('top_manager_report_show', { 'id': reports.id }) }}" class="btn btn-md btn-danger">Congé reporté</a>
+                                                            {% endif %}
+                                                        {% endfor %}  
+                                                    {% endif %}
+                                                {% endfor %} 
+                                            {% endif %}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-4" style="border-left: 6px solid rgb(238, 130, 238); margin-left: 14px;">
+                                    <h3>Informations demandeur:</h3>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <strong>{{entity.salarie.civilite}} {{entity.salarie.nomprenom}}</strong>
+                                        </li>
+                                        <li>
+                                            Unité : <strong>{{ entity.salarie.unite }}</strong>
+                                        </li>
+                                        <li>
+                                            N° matricule : <strong>{{entity.salarie.matricule}}</strong>
+                                        </li>
+                                        <li>
+                                            Date d'embauche : <strong>{{ entity.salarie.dateEmbauche|date('d-m-Y')  }}</strong><br><br>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                                {% if entity.CreeParSuperviseur == 1%}      
+                                    <div class=" pull-right col-md-4" style="border-left: 6px solid violet;">
+                                        <h3>Informations sur la demande:</h3>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                Auteur de la demande :<strong>{{entity.auteurDemande.civilite}} {{entity.auteurDemande.nomprenom}}</strong>
+                                            </li>
+                                            <li>
+                                                Unité : <strong>{{ entity.auteurDemande.unite }}</strong>
+                                            </li>
+                                            <li>
+                                                Motif de la demande : <strong>{{entity.autreMotif}}</strong>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-paperclip"></i> Pièce jointe à la demande : <a href="{{ asset(entity.pieceJointe.downloadPath) }}" download="{{entity.pieceJointe.path}}" title="Telecharger"><strong>{{ entity.pieceJointe.name  }}</strong></a><br><br>
+                                            </li>
+
+                                        </ul>
+                                    </div>       
+                                {% endif %}        
+                            </div>
+                            <hr/>
+                            <div class="row">
+
+                                <div class="col-xs-12">
+                                    <p class="m-t m-b">Objet :
+                                        <strong>
+                                            {% if entity.typeDemande == 'Conge' %}Demande de congé payé.{% endif %}
+                                            {% if entity.typeDemande == 'Permission' %}
+                                                Demande de permission exceptionnelle
+                                            {% endif %}
+                                            {% if entity.typeDemande == 'Absence exceptionnelle' %}
+                                                Demande d'absence exceptionnelle.
+                                            {% endif %}
+                                            {% if entity.typeDemande == 'Férie(s)'  %}
+                                                Demande d'absence exceptionnelle (Férié réligieux).
+                                            {% endif %}
+                                            {% if entity.typeDemande == 'Arrêt maladie' %}
+                                                Demande d'absence pour maladie.
+                                            {% endif %}
+                                        </strong><br>
+                                    </p>
+
+                                    <p style="text-align: justify;">{{ entity.valideurFinal.civilite}} le {{ entity.valideurFinal.poste}}<br/>
+                                        {% if entity.typeDemande == 'Conge' %}
+                                            Conformément au planning des départs en congé du personnel
+                                            {% if entity.salarie.unite.estService or entity.salarie.unite.estDepartement %}
+                                                du {{ entity.salarie.unite }},
+                                            {% else %}
+                                                de la {{ entity.salarie.unite }} ,
+                                            {% endif %}
+                                            <br>
+                                            je viens, par la présente, solliciter
+                                            <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong>
+                                            de congés, du
+                                            <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong>
+                                            (date effective de début), au
+                                            <strong> {{ entity.dateFin|date('d-m-Y') }}</strong>
+                                            (date de fin de congé) ; je reprendrai le service le
+                                            <strong>{{ entity.dateRetour|date('d-m-Y') }}</strong>
+                                            matin.
+                                            <br><br>
+                                            Je voudrais, à toutes fins utiles, porter à votre connaissance que mes droits à congé des années précédentes s'établissent à 
+                                            {{entity.salarie.droits.reliquatDroitsAnterieur}}
+                                            jour(s), majorés de
+                                            {{entity.salarie.droits.droitsAcquisAnneeEnCours}}
+                                            jour(s) acquis au titre de l'année
+                                            {{ entity.dateDemande|date('Y')}}
+                                            . Je dispose à ce jour, de
+                                            <strong>{{ entity.soldeDroits}} jour(s)</strong>
+                                            de droits à congé.
+                                            <br>
+                                        {% endif %}
+                                        {% if entity.typeDemande == 'Permission' %}
+                                            J'ai l'honneur de solliciter, par la présente,
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong>
+                                            {% else %}
+                                                <strong>{{ entity.nbjoursOuvrables }} heure(s)</strong>
+                                            {% endif %}
+                                            de permission exceptionnelle pour des raisons familiales (motif spécifié :
+                                            {{ entity.motif }}),
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                du <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong>
+                                            {% else %}
+                                                du <strong>{{ entity.dateDebut|date('d-m-Y') }} à {{ entity.dateDebut|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            (date effective de début), au
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateFin|date('d-m-Y') }}</strong>
+                                            {% else %}
+                                                <strong>{{ entity.dateFin|date('d-m-Y') }} à {{ entity.dateFin|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            (date de fin de permission) ; je reprendrai le service le
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateRetour|date('d-m-Y') }} </strong>  matin
+                                            {% else %}
+                                                <strong>{{ entity.dateRetour|date('d-m-Y') }} à partir de {{ entity.dateRetour|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            .
+                                            <br/>
+                                        {% endif %}
+                                        {% if entity.typeDemande == 'Absence exceptionnelle' %}
+                                            J'ai l'honneur de solliciter, par la présente,
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong>
+                                            {% else %}
+                                                <strong>{{ entity.nbjoursOuvrables }} heure(s)</strong>
+                                            {% endif %}
+                                            d'absence pour convenance personnelle, du
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong>
+                                            {% else %}
+                                                <strong>{{ entity.dateDebut|date('d-m-Y') }} à {{ entity.dateDebut|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            (date effective de début), au
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateFin|date('d-m-Y') }} </strong>
+                                            {% else %}
+                                                <strong>{{ entity.dateFin|date('d-m-Y') }} à {{ entity.dateFin|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            ;<br> je reprendrai le service le
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateRetour|date('d-m-Y') }} </strong>  matin
+                                            {% else %}
+                                                <strong>{{ entity.dateRetour|date('d-m-Y') }} à partir de {{ entity.dateRetour|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            .
+                                            <br>
+                                        {% endif %}
+                                        {% if entity.typeDemande == 'Férie(s)'  %}
+                                            J'ai l'honneur de solliciter, par la présente, <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong> d'absence en raison du férié, du <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong> (date effective de début), au <strong>{{ entity.dateFin|date('d-m-Y') }}</strong> ; je reprendrai le service le <strong>{{ entity.dateRetour|date('d-m-Y') }}</strong> matin.<br>
+                                        {% endif %}
+                                        {% if entity.typeDemande == 'Arrêt maladie' %}
+                                            J'ai l'honneur de solliciter, par la présente,
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong>
+                                            {% else %}
+                                                <strong>{{ entity.nbjoursOuvrables }} heure(s)</strong>
+                                            {% endif %}
+                                            d'absence pour des raisons de santé (motif spécifié :
+                                            {{ entity.motif }}), du
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong>
+                                            {% else %}
+                                                <strong>{{ entity.dateDebut|date('d-m-Y') }} à {{ entity.dateDebut|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            (date effective de début), au
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateFin|date('d-m-Y') }}</strong>
+                                            {% else %}
+                                                <strong>{{ entity.dateFin|date('d-m-Y') }} à {{ entity.dateFin|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            ; je reprendrai le service le
+                                            {% if entity.dateFin|date('H:i:s') == "00:00:00"  %}
+                                                <strong>{{ entity.dateRetour|date('d-m-Y') }} </strong>  matin
+                                            {% else %}
+                                                <strong>{{ entity.dateRetour|date('d-m-Y') }} à partir de {{ entity.dateRetour|date('H:i:s') }}</strong>
+                                            {% endif %}
+                                            .
+                                            <br>
+                                        {% endif %}
+                                        Dans l'attente de la suite qu'il vous plaira de réserver à  ma demande, je vous prie d'agréer,
+                                        {{entity.valideurFinal.civilite}} le {{entity.valideurFinal.poste}},
+                                        mes salutations respectueuses.
+                                        <br>
+                                        <br>
+                                    </p>
+                                    <strong style="float:right;">{{entity.salarie.nomprenom}}</strong><br/>
+                                    <strong style="float:right;">{{ entity.salarie.poste }}</strong><br/>
+                                    <hr/><br/>
+                                </div>
+                            </div>
+                                    <div class="row">
+                                        {% if entity.estValideNiveau1 %}
+                                            {% if entity.valideurNiveau1 != entity.valideurFinal %}
+                                                <div class="col-md-4">
+                                                    <div class="well">
+                                                        <address>
+                                                            <strong class="badge badge-roundless badge-warning" style="font-size: 19px !important;padding-bottom: 21px;">AVIS DE LA HIERARCHIE (N+1)</strong><br/>
+                                                            <strong class="text-success">Demande : Validée</strong><br/>
+                                                            Le  {{ entity.dateValidation1|date('d-m-Y') }} à {{ entity.dateValidation1|date('H:i:s') }}<br/>
+                                                            Par: {{ entity.valideurNiveau1  }}<br/>
+                                                            Poste: <strong>{{ entity.valideurNiveau1.unite.sigle }}</strong><br/><br/>
+                                                        </address>	
+                                                    </div>
+                                                </div> 
+                                            {% endif %}                
+                                            {% if entity.valideurNiveau1 == entity.valideurFinal %}
+                                                <div class="col-md-4">
+                                                    <div class="well">
+                                                        <address>
+                                                            <strong class="badge badge-roundless badge-success" style="font-size: 19px !important;padding-bottom: 21px;">DECISION DE L'AUTORITE</strong><br/>
+                                                            <strong class="text-success">Autorise 
+                                                                {% if entity.typeDemande == 'Conge' %}le congé sollicité{%endif%} 
+                                                                {% if entity.typeDemande != 'Conge' %}l'absence sollicitée{%endif%} 
+                                                            </strong><br/>
+                                                            <strong class="text-success">Demande cloturée</strong><br/>
+                                                            Le  {{ entity.dateValidation1|date('d-m-Y') }} à {{ entity.dateValidation1|date('H:i:s') }}<br/>
+                                                            Par: {{ entity.valideurNiveau1  }}<br/>
+                                                            Poste: <strong>{{ entity.valideurNiveau1.unite.sigle  }}</strong><br/><br/>
+                                                        </address>	
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %} 
+
+                                        {% if entity.ValideurNiveau2 %}
+                                            {% if entity.estValideNiveau2 %}
+                                                {%if entity.valideurNiveau2 == entity.valideurFinal %}
+                                                    <div class="col-md-4">
+                                                        <div class="well">
+                                                            <address>
+                                                                <strong class="badge badge-roundless badge-success" style="font-size: 19px !important;padding-bottom: 21px;">DECISION DE L'AUTORITE</strong><br/>
+                                                                <strong class="text-success">Autorise 
+                                                                    {% if entity.typeDemande == 'Conge' %}le congé sollicité{%endif%} 
+                                                                    {% if entity.typeDemande != 'Conge' %}l'absence sollicitée{%endif%} 
+                                                                </strong><br/>
+                                                                <strong class="text-success">Demande cloturée</strong><br/>
+                                                                Le  {{ entity.dateValidation|date('d-m-Y') }} à {{ entity.dateValidation|date('H:i:s') }}<br/>
+                                                                Par: {{ entity.valideurNiveau2  }} , <br/>
+                                                                Poste: <strong>{{ entity.valideurNiveau2.unite.sigle  }}</strong><br/><br/>
+                                                            </address>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}            
+                                                {% if entity.valideurNiveau2 != entity.valideurFinal %}
+                                                    <div class="col-md-4">
+                                                        <div class="well">
+                                                            <address>
+                                                                <strong class="badge badge-roundless badge-warning" style="font-size: 19px !important;padding-bottom: 21px;">AVIS DE LA HIERARCHIE (N+2)</strong><br/>
+                                                                <strong class="text-success">Demande : Validée</strong><br/>
+                                                                Le  {{ entity.dateValidation2|date('d-m-Y') }} à {{ entity.dateValidation2|date('H:i:s') }}<br/>
+                                                                Par: {{ entity.valideurNiveau2  }} , <br/>
+                                                                Poste: <strong>{{ entity.valideurNiveau2.unite.sigle  }}</strong><br/><br/>
+                                                            </address>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if entity.estValide %}     
+                                            {% if entity.valideurNiveau2 != entity.valideurFinal and entity.valideurNiveau1 != entity.valideurFinal %}       
+                                                <div class="col-md-4">
+                                                    <div class="well">
+                                                        <address>
+                                                            <strong class="badge badge-roundless badge-success" style="font-size: 19px !important;padding-bottom: 21px;">DECISION DE L'AUTORITE</strong><br/>
+                                                            <strong class="text-success">Autorise 
+                                                                {% if entity.typeDemande == 'Conge' %}le congé sollicité{%endif%} 
+                                                                {% if entity.typeDemande != 'Conge' %}l'absence sollicitée{%endif%} 
+                                                            </strong><br/>
+                                                            <strong class="text-success">Demande cloturée</strong><br/>
+                                                            Le  {{ entity.dateValidation|date('d-m-Y') }} à {{ entity.dateValidation|date('H:i:s') }}<br/>
+                                                            Par: {{ entity.valideurFinal  }} , <br/>
+                                                            Poste: <strong>{{ entity.valideurFinal.unite.sigle  }}</strong><br/><br/>
+                                                        </address>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}           
+
+
+                                        {% if entity.estRefuse %} 
+                                            <div class="col-md-4 invoice-block">
+                                                <div class="well">
+                                                    <ul class="list-unstyled amounts">
+                                                        <li>
+                                                            <strong class="badge badge-roundless badge-success" style="font-size: 19px !important;padding-bottom: 21px;">DECISION DE L'AUTORITE</strong>
+                                                        </li>
+                                                        <li>
+                                                            <strong class="text-danger">Refuse 
+                                                                {% if entity.typeDemande == 'Conge' %}le congé sollicité{%endif%} 
+                                                                {% if entity.typeDemande != 'Conge' %}l'absence sollicitée{%endif%} 
+                                                            </strong>
+                                                        </li>
+                                                        <li>
+                                                            <strong class="text-danger">Demande cloturée </strong>
+                                                        </li>
+                                                        <li>
+                                                            <strong>Le</strong> {{ entity.dateRefus|date('d-m-Y') }} à {{ entity.dateRefus|date('H:i:s') }}
+                                                        </li>
+                                                        <li>
+                                                            <strong>Par:</strong> {{ entity.refusePar }}
+                                                        </li>
+                                                        <li>
+                                                            <strong>Poste:</strong> {{ entity.refusePar.unite.sigle }}
+                                                        </li>
+                                                        <li>
+                                                            <strong>Motif refus:</strong> {{ entity.raisonRefus }}  
+                                                        </li>
+                                                    </ul>
+                                                    <br/>
+                                                    {# <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                                                     Print <i class="fa fa-print"></i>
+                                                     </a>#}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    {% if salarie == entity.valideurEnCours and entity.estEnCours == 1 %}
+                                        {{ form_start(form1, {'attr': {'data-validate' : 'parsley'}}) }}
+                                        <footer class="panel-footer text-right bg-light lter">
+                                            <button type="submit" class="btn btn-success btn-s-xs">Accepter</button>
+                                            <a href="#portlet-config"  data-toggle="modal" class="btn btn-danger btn-s-xs">Refuser</a>
+                                        </footer>
+                                        {{ form_end(form1) }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PAGE CONTENT INNER -->
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT -->
+            </div>
+            <!-- END PAGE CONTAINER -->
+            <style>
+                .theme-panel {
+                    z-index: 999;
+                    min-width: 180px;
+                    padding: 20px 10px;
+                    font-family: "Open Sans", sans-serif;
+                }
+                .scroll-to-top > i {
+                    color: #657383;
+                    font-size: 32px;
+                    opacity: 0.7;
+                    filter: alpha(opacity=70);
+                    display:none;
+                }
+                .row {
+                    margin-right: -15px;
+                    margin-left: -15px;
+                    display: -webkit-box;
+                }
+            </style>
+            <script src="{{ asset('bundles/kbhgestionconges/js/tableExport.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/kbhgestionconges/js/jquery.base64.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/kbhgestionconges/js/sprintf.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/kbhgestionconges/js/jspdf.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/kbhgestionconges/js/base64.js') }}" type="text/javascript"></script>
+            {% endblock %}

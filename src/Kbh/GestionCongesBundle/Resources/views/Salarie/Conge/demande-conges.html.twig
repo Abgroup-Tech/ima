@@ -1,0 +1,130 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+  <section>
+      <section class="hbox stretch">
+
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{path('dashboard_salarie')}}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Formulez votre demande de Congé</h3>
+                </header>
+          <section class="vbox">
+                  <div class="wrapper">
+                        <section class="panel panel-default">
+                    {#<header class="panel-heading bg-light">
+                      <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#conges" data-toggle="tab">Conges et Absences</a></li>
+                        <li><a href="#permit" data-toggle="tab">Permitions Exceptionnelles</a></li>
+                      </ul>
+                    </header>#}
+                    <div class="panel-body">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="conges">                  
+                             <div class="wrapper">
+                               <div class="col-sm-12">
+
+                                 {# <form data-validate="parsley">#}
+                                 {{ form_start(form, {'attr': {'data-validate' : 'parsley'}}) }}
+                                    {#<div class="alert alert-info">
+                                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                      <i class="fa fa-info-sign"></i><strong>Attention ! </strong> Toutes abscences devra être justifiée dans les 15 jours qui précède l'absence ... Dans le cas contraire elle sera considérée comme non-justifiée et sera décomptée de votre solde de congée !
+                                    </div>#}
+                                    <br/>  
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                              <div class="col-lg-12">
+                                <div class="padder-v text-center clearfix">                            
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold">{{ droits.droitsAcquisAnneeEnCours }} Jours</div>
+                                    <small class="text-muted">Droit Acquits Année en cours</small>
+                                  </div>
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold">{{ droits.CumulDroitsAcquis }} Jours</div>
+                                    <small class="text-muted">Cumul des Droits Acquits</small>
+                                  </div>
+
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold text-danger">{{ droits.totalDroitsAprendre }} Jours</div>
+                                    <small class="text-danger">Solde Congés</small>
+                                  </div>
+                                  <div class="col-lg-2-4 b-r">
+                                    <div class="h3 font-bold "> {{ droits.soldePermissions }} Jours</div>
+                                    <small class="text-muted">Permissions Disponibles</small>
+                                  </div>
+
+                                  <div class="col-lg-2-4 ">
+                                    <div class="h3 font-bold">{{ droits.droitsPris }} Jours</div>
+                                    <small class="text-muted">Congés Pris</small>
+                                  </div>
+
+                                </div>
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                      <br/>
+                                          </div>
+                                      {#  <div class="btn-group m-r">
+                                          <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+                                            <span class="dropdown-label">Demander des congés</span> 
+                                            <span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu dropdown-select">
+                                              <li class="active"><a href="#"><input type="radio" name="d-s-r" checked="">Demander des congés</a></li>
+                                              <li><a href="#"><input type="radio" name="d-s-r">Justifier une absence</a></li>
+                                              <!-- <li><a href="#"><input type="radio" name="d-s-r">Option3</a></li> -->
+                                              <!-- <li class="disabled"><a href="#"><input type="radio" name="d-s-r" disabled="">I'm disabled</a></li> -->
+                                          </ul>
+                                        </div>#}
+
+                                        <div class="panel-body">
+<!--                                           <p class="text-muted">Déterminez la date de début et de fin de congé / abscence.</p>  -->                       
+                  <div class="form-group pull-in clearfix">
+                    <div class="col-sm-4">
+                     {{ form_label(form.dateDebut, "Saisissez un nombre de jours") }}                 
+                      <input id="nbJours" name="nbJours" min="0" class="input-sm input-s form-control" size="16" type="number" style="padding-left:8px; width: 64% " >
+{#                    {{ form_errors(form.nbJours) }}#}
+                    </div>
+                   <div class="col-sm-4">
+                      {{ form_label(form.dateDebut, "A partir de") }}
+                      {{ form_widget(form.dateDebut, {'attr': {'class': 'input-sm input-s form-control', 'size': '12', 'type': 'date', 'style': 'width: 64%'}}) }}<br/>
+                      {{ form_errors(form.dateDebut) }}
+                      {#<input id="dateDebut" class="input-sm input-s form-control" size="12" type="date" value="{{"now"|date('d-m-y')}}" style="width: 64%;" >#}
+                    </div>
+                     <div id="view" class="col-sm-4">
+                       {{ form_label(form.dateFin, "Date de Fin") }}
+                       {{ form_widget(form.dateFin, {'attr': {'class': 'input-sm input-s form-control', 'size': '16', 'type': 'text', 'style': 'padding-left:8px;width: 64%'}}) }}<br/>
+                      {{ form_errors(form.dateFin) }}
+                    </div>
+                    {#<div id="view" class="col-sm-4">
+                      {{ form_label(form.dateFin, "Date de Retour") }}
+                     <input id="dateRetour" disable="true" name="dateRetour" class="input-sm input-s form-control" size="16" type="text"  style="padding-left:8px; width: 64% " >
+                    </div>#}
+                  </div>
+                  {#  {{ form_label(form.dateDebut, "Nombre de Jours Ouvrables") }} #}
+                    {{ form_widget(form.nbJoursOuvrables, {'attr': {'type' : 'hidden', 'name': 'nbJoursOuvrables', 'id': 'nbJoursOuvrables', 'class': 'input-sm input-s form-control', 'size': '12', 'type': 'text', 'style': 'width: 20%'}}) }}
+                    {{ form_rest(form) }}
+                  </div>
+                      <footer class="panel-footer text-right bg-light lter">
+                        <button type="submit" class="btn btn-success btn-s-xs">Soumettre</button>
+                      </footer>
+
+                       {{ form_end(form) }}
+                      </div> 
+                       </div>
+                        </div>
+
+                                    </section>
+                                </section>
+                            </section>
+                          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+                        </section>
+                      </section>
+                    </section>
+  </section>
+  <style type="text/css">
+  th,tr {
+    text-align: center;
+  }
+  </style>
+    {% endblock %}

@@ -1,0 +1,15 @@
+
+
+demande_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:edit" }
+
+demande_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:update" }
+    requirements: { _method: post|put }
+
+demande_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:delete" }
+    requirements: { _method: post|delete }

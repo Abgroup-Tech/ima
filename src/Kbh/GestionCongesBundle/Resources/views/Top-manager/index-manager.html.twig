@@ -1,0 +1,705 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE HEAD -->
+    <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1> Espace<small> Responsable </small></h1>
+            </div>
+            {#{% if depot.statut == "En cours"%}
+            <div  id="pulsate-regular" class="alert alert-success pull-right" style="margin-bottom:0px !important; text-align: center;">
+                <b>Debut de la période de demandes de congés.<br/>
+                Cette période prendra fin le : {{ depot.dateFin|date('d-m-Y') }}</b>
+            </div>
+            {% endif %}
+            {% if depot.statut == "Clôturé" and traitement.statut == "En attente"%}
+            <div  class="alert alert-danger pull-right" style="margin-bottom:0px !important; text-align: center; {% if "now"|date('d-m-y') < depot.dateFin|date_modify('+2 day')|date('d-m-y') %} display:none; {%endif%}">
+                <b>Fin de la période de demandes de congés. Vos demandes<br/>
+                 seront traitées à partir du : {{ traitement.dateDebut|date('d-m-Y') }}</b>
+            </div>
+            {% endif %}
+            {% if depot.statut == "Clôturé" and traitement.statut == "En cours"%}
+            <div id="pulsate-regular" class="alert alert-success pull-right" style="margin-bottom:0px !important; text-align: center;">
+                <b>Debut de la période de traitement des demandes de congés.<br/>
+                Cette période prendra fin le : {{ traitement.dateFin|date('d-m-Y') }}</b>
+            </div>
+            {% endif %}
+            {% if depot.statut == "Clôturé" and traitement.statut == "Clôturé"%}
+                <div class="alert alert-danger pull-right" style="margin-bottom:0px !important; text-align: center; {% if "now"|date('d-m-y') < traitement.dateFin|date_modify('+2 day')|date('d-m-y') %} display:none; {%endif%}">
+                    <b>Fin de la période de traitement des demandes de congés.<br/>
+                Cette période à pris fin le  : {{ traitement.dateFin|date('d-m-Y') }}</b>
+            </div>
+            {% endif %}#}
+        </div>
+    </div>         
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+             {% include "::modules-salaries/a-propos.html.twig" %}
+            <!-- BEGIN PAGE BREADCRUMB -->
+            {#<ul class="page-breadcrumb breadcrumb">
+                    <li>
+                            <a href="#">Espace Responsable</a><i class="fa fa-circle"></i>
+                    </li>#}
+            {#<li>
+                    <a href="extra_profile.html">Pages</a>
+                    <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                     Espace Responsable
+            </li>
+    </ul>#}
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row margin-top-10">
+                <div class="col-md-12">
+                    <!-- BEGIN PROFILE SIDEBAR -->
+                    <div class="profile-sidebar" style="width: 250px;">
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light profile-sidebar-portlet">
+                            <!-- SIDEBAR USERPIC -->
+                            <div class="profile-userpic">
+                                <img src="{{ asset('uploads/' ~ salarie.image.path) }}" class="img-responsive" alt="">
+                            </div>
+                            <!-- END SIDEBAR USERPIC -->
+                            <!-- SIDEBAR USER TITLE -->
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name">
+                                    {{ salarie.nomprenom }}
+                                </div>
+                                <div class="profile-usertitle-job">
+                                    {{ salarie.poste }}
+                                </div>
+                            </div>
+                            <!-- END SIDEBAR USER TITLE -->
+                            <!-- SIDEBAR BUTTONS -->
+                            <div class="profile-userbuttons">
+                                <a href="{{ path('top_manager_demande_absence_new') }}" class="btn btn-circle green-haze btn-sm">Permission</a>
+                                <a href="{{ path('top_manager_demande_conge_new') }}" class="btn btn-circle btn-danger btn-sm">Congé</a>
+                            </div>
+                            <!-- END SIDEBAR BUTTONS -->
+                            <!-- SIDEBAR MENU -->
+                            <div class="profile-usermenu">
+                                <ul class="nav">
+                                    <li class="active">
+                                        <a href="{{ path('welcome') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-home"></i>
+                                            Accueil </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('top_manager_historique_droits') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-notebook"></i>
+                                            Historique droits </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('top_manager_collaborateurs') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-users"></i>
+                                            Liste collaborateurs </a>
+                                    </li>
+                                    <li>
+                                            <a href="{{ path('top_absencesat_travail')}}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-ban"></i>
+                                            Arrêt de travail </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('top_manager_collaborateurs_demandes') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-share-alt"></i>
+                                            Demandes à valider {% if new_2 > 0%}<span style="position: relative;margin-top: -3px;" class="badge badge-danger"> {{new_2}} </span>{% endif%}</a>
+                                    </li>
+                                    {#<li>
+                                        <a href="{{ path('top_manager_demandes_deposees') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-check"></i>
+                                            Demandes déposées </a>
+                                    </li>#}
+                                    <li>
+                                        <a href="{{ path('top_manager_demandes_traitees') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 16px;">
+                                            <i class="fa fa-folder-o" style="font-size: 18px;"></i>
+                                            Demandes traitées</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('top_manager_graph_statistiques') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 17px;">
+                                            <i class="fa fa-bar-chart-o" style="font-size: 17px;"></i>
+                                            Statistiques </a>
+                                    </li>
+                                   {# <li>
+                                        <a href="{{ path('top_manager_statistiques') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-equalizer"></i>
+                                            Etats </a>
+                                    </li>#}
+                                    <li>
+                                        <a href="{{ path('top_manager_events')}}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-layers"></i>
+                                            Historique évènements {% if new > 0 %}<span class="badge badge-danger"> {{new}} </span>{% endif %}{% if new == 0 %}<span class="badge badge-danger"></span>{% endif %}</a>
+                                    </li>
+                                        <li>
+                                            <a href="{{ path('top_manager_historique_absences') }}" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                                <i class="icon-book-open"></i>
+                                             Historique absences </a>
+                                        </li>
+                                    {#<li>
+                                        <a href="#" style="  text-transform: uppercase; font-size: 12px; font-weight: 600;padding: 6px 15px;">
+                                            <i class="icon-settings"></i>
+                                            Paramètres </a>
+                                    </li>#}
+                                </ul>
+                            </div>
+                            <!-- END MENU -->
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light">
+                            <!-- STAT -->
+                            <div class="row list-separated profile-stat">
+                                <div class="col-md-12">
+                                    <h4 class="profile-desc-title" style="color:#345F98;">Aide ?</h4>
+                                    <span class="profile-desc-text" style="color:#345F98;">Veuillez contacter la hotline par mail pour tout problème ...</span>
+                                </div>
+                            </div>
+                            <!-- END STAT -->
+                            <div>
+                                <div class="margin-top-20 profile-desc-link">
+                                    <i class=" icon-globe"></i> 
+                                    <a href="#portlet-config" style="color:#345F98;" data-toggle="modal" >A propos</a>
+                                </div>
+                                <div class="margin-top-20 profile-desc-link">
+                                    <i class="icon-info"></i>
+                                    <a href="{{ path('sup_faq') }}" style="color:#345F98;">FAQ</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                    </div>
+                    <!-- END BEGIN PROFILE SIDEBAR -->
+                    <!-- BEGIN PROFILE CONTENT -->
+                    <div class="profile-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- BEGIN PORTLET -->
+                                <div class="portlet light" style="padding-bottom:46px;">
+                                    <div class="portlet-title tabbable-line">
+                                        <div class="caption caption-md">
+                                            <i class="icon-list font-black-sharp" style="color: #345F98;"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase">Mes informatons </span>
+                                        </div>
+                                        <div class="tools">
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <!--BEGIN TABS-->
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab_1_1">
+                                                <div class="scroller" style="height: 320px; color: #345F98; font-weight: 500;" data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                                    <div class="col-md-12">    
+                                                <table class="table font-blue-madison">
+                                                    <thead>
+                                                        <tr>
+                                                            <td class="bold">
+                                                               N° matricule
+                                                            </td>
+                                                            <td>
+                                                                {{ salarie.matricule }}
+                                                            </td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="bold">
+                                                                N° CNPS
+                                                            </td>
+                                                            <td>
+                                                                {{ salarie.numeroCnps }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold">
+                                                                statut matrimoniale
+                                                            </td>
+                                                            <td>
+                                                                {{ salarie.statutMarital }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold">
+                                                                Responsable direct
+                                                            </td>
+                                                            <td>
+                                                                {% if salarie.superviseur %}{{ salarie.superviseur.civilite }} {{ salarie.superviseur }} {% endif%}
+                                                                {% if not salarie.superviseur %} Aucun {% endif%}
+                                                            </td>
+                                                        </tr>
+                                                        {% if salarie.unite %} 
+                                                        <tr>
+                                                            <td class="bold">
+                                                                Rattachement
+                                                            </td>
+                                                            <td>
+                                                               <a class="tooltips" data-original-title="{{ salarie.unite.nom }}">{{ salarie.unite.sigle }}</a>
+                                                            </td>
+                                                        </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Situation géographique unité
+                                                                </td>
+                                                                <td>
+                                                                    {% if salarie.unite.situationGeographique %}{{ salarie.unite.situationGeographique }}{% endif %}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Lieu de travail
+                                                                </td>
+                                                                <td>
+                                                                    {% if salarie.unite.lieuTravail %}{{ salarie.unite.lieuTravail }}{% endif %}
+                                                                </td>
+                                                            </tr>
+                                                        {% endif %}
+                                                        <tr>
+                                                            <td class="bold">
+                                                                Email
+                                                            </td>
+                                                            <td>
+                                                                {{ salarie.email }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold">
+                                                                Derniers congés
+                                                            </td>
+                                                            <td>
+                                                               {% if conge %}
+                                                                {% set n = 1%}
+                                                                {% for conge in conge%}
+                                                                    {% if n == cp_conge%}
+                                                                        <b>{{conge.dateDebut|date('d-m-Y')}} / {{conge.dateFin|date('d-m-Y')}}</b>
+                                                                    {% endif %}
+                                                                    {% set n = n+1%}  
+                                                                {% endfor %}
+                                                            {% endif %}
+
+                                                            {% if cp_conge == 0%}
+                                                               <b> Aucune information </b>
+                                                            {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>            
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!--END TABS-->
+                                    </div>
+                                </div>
+                                <!-- END PORTLET -->
+                            </div>
+                            {#                         #}
+                            <div class="col-md-6">
+                                <!-- BEGIN PORTLET -->
+                                <div class="portlet light" style="padding-bottom:46px;">
+                                    <div class="portlet-title tabbable-line">
+                                        <div class="caption caption-md">
+                                            <i class="fa fa-bookmark font-primary"style="color: #345F98;" ></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase">Mes compteurs</span>
+                                        </div>
+                                        <div class="tools">
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <!--BEGIN TABS-->
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab_1_1">
+                                                <div class="scroller" style="height: 320px;color: #345F98; font-weight: 500;" data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                                     <div class="col-md-12">    
+                                                    <table class="table font-blue-madison">
+                                                        <thead>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                   Congés acquis en {{ "now"|date_modify('-1 year')|date('Y') }}
+                                                                </td>
+                                                                <td>
+                                                                    {{droits.reliquatDroitsAnterieur}} jours
+                                                                </td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Congés acquis en {{ "now"|date('Y') }}
+                                                                </td>
+                                                                <td>
+                                                                    {{droits.droitsAcquisAnneeEnCours}} jours
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Cumul congés
+                                                                </td>
+                                                                <td>
+                                                                    {{droits.CumulDroitsAcquis}} jours
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Congés pris {{ "now"|date('Y') }}
+                                                                </td>
+                                                                <td>
+                                                                    {{droits.droitsPris}} jours
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="bold">
+                                                                    Permissions prises
+                                                                </td>
+                                                                <td>
+                                                                   {{ droits.permissionsPrises }} jours
+                                                                </td>
+                                                            </tr>
+                                                                <tr>
+                                                                    <td class="bold">
+                                                                        Solde permissions
+                                                                    </td>
+                                                                    <td style="color: #F3565D !important">
+                                                                       <b>{{ droits.soldePermissions }} jours</b> 
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="bold">
+                                                                        Solde congés
+                                                                    </td>
+                                                                    <td style="color: #F3565D !important">
+                                                                        <b>{{droits.totalDroitsAprendre}} jours</b>
+                                                                    </td>
+                                                                </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    </div>   
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!--END TABS-->
+                                    </div>
+                                </div>
+                                <!-- END PORTLET -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- BEGIN PORTLET -->
+                                <div class="portlet light" style="height: 413px;">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-speech" style="color:#345F98;"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase"> Mes évènements</span>
+                                            <small> récents </small>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                                            <div class="general-item-list">
+                                                {% set Num = 0 %}
+                                                {% for notification in notifications %}
+                                                    {% if notification.observateur == salarie %}
+                                                        <div class="item">
+                                                            <div class="item-head">
+                                                                <div class="item-details">
+
+                                                                    <a class="item-name primary-link">Direction des Ressources Humaines</a><br/>
+                                                                    <span class="item-label">Le {{notification.dateEnvoi|date('d-m-Y') }} à {{notification.dateEnvoi|date('H:i:s') }}</span>
+                                                                </div>
+                                                                {% if notification.VuParObservateur == 0 %}<span class="badge badge-danger" style="float: right;"> nouveau </span>{% endif %}
+                                                                {% if notification.VuParObservateur == 1 %}<span class="badge badge-success" style="float: right;"> lu </span>{% endif %} 
+                                                            </div>
+                                                            {% set Num = Num + 1 %}                
+                                                            <div class="item-body">
+                                                                <a href="{{ path('top_manager_demande_show',{'id':notification.id}) }}" class="h4" style="font-size: 14px; text-decoration:inherit; text-align:justify;">
+                                                                    {{notification.messageFinal}}
+                                                                </a>       
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if notification.superieurN1 == salarie and notification.observateur != salarie%}
+                                                        <div class="item">
+                                                            <div class="item-head">
+                                                                <div class="item-details">
+
+                                                                    <a class="item-name primary-link">Direction des Ressources Humaines</a><br/>
+                                                                    <span class="item-label">Le {{notification.dateEnvoi|date('d-m-Y') }} à {{notification.dateEnvoi|date('H:i:s') }}</span>
+                                                                </div>
+                                                                {% if notification.VuParSupN1 == 0 %}<span class="badge badge-danger" style="float: right;"> nouveau </span>{% endif %}
+                                                                {% if notification.VuParSupN1 == 1 %}<span class="badge badge-success" style="float: right;"> lu </span>{% endif %} 
+                                                            </div>
+                                                            {% set Num = Num + 1 %}                
+                                                            <div class="item-body">
+                                                                <a href="{{ path('top_manager_demande_show',{'id':notification.id}) }}" class="h4" style="font-size: 14px; text-decoration:inherit; text-align:justify;">
+                                                                    {{notification.messageFinal}}
+                                                                </a>       
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if notification.salarie == salarie %}
+                                                        <div class="item">
+                                                            <div class="item-head">
+                                                                <div class="item-details">
+                                                                    <a class="item-name primary-link">
+                                                                       {% if notification.messageDemandeur == notification.messageFinal %}Direction des Ressources Humaines{% endif %} 
+                                                                         {% if notification.messageDemandeur != notification.messageFinal %}Moi{% endif %} 
+                                                                    </a><br/>
+                                                                    <span class="item-label">Le {{notification.dateEnvoi|date('d-m-Y') }} à {{notification.dateEnvoi|date('H:i:s') }}</span>
+                                                                </div>
+                                                                {% if notification.VuParDemandeur == 0 %}<span class="badge badge-danger" style="float: right;"> nouveau </span>{% endif %}
+                                                                {% if notification.VuParDemandeur == 1 %}<span class="badge badge-success" style="float: right;"> lu </span>{% endif %} 
+                                                            </div>
+                                                            {% set Num = Num + 1 %}                
+                                                            <div class="item-body">
+                                                                <a href="{{ path('top_manager_demande_show',{'id':notification.id}) }}" class="h4" style="font-size: 14px; text-decoration:inherit; text-align:justify;">
+                                                                    {{notification.messageDemandeur}}
+                                                                </a>       
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if notification.valideurPrecedent == salarie %}
+                                                        <div class="item">
+                                                            <div class="item-head">
+                                                                <div class="item-details">
+
+                                                                    <a class="item-name primary-link">Moi</a><br/>
+                                                                    <span class="item-label">Le {{notification.dateEnvoi|date('d-m-Y') }} à {{notification.dateEnvoi|date('H:i:s') }}</span>
+                                                                </div>
+                                                                {% if notification.VuParValideurPrecedent == 0 %}<span class="badge badge-danger" style="float: right;"> nouveau </span>{% endif %}
+                                                                {% if notification.VuParValideurPrecedent == 1 %}<span class="badge badge-success" style="float: right;"> lu </span>{% endif %} 
+                                                            </div>
+                                                            {% set Num = Num + 1 %}                
+                                                            <div class="item-body">
+                                                                <a href="{{ path('top_manager_demande_show',{'id':notification.id}) }}" class="h4" style="font-size: 14px; text-decoration:inherit; text-align:justify;">
+                                                                    {{notification.messageValideurPrecedent}}
+                                                                </a>       
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if notification.valideurEnCours == salarie %}
+                                                        <div class="item">
+                                                            <div class="item-head">
+                                                                <div class="item-details">
+
+                                                                    <a class="item-name primary-link">{{notification.salarie}}</a><br/>
+                                                                    <span class="item-label">Le {{notification.dateEnvoi|date('d-m-Y') }} à {{notification.dateEnvoi|date('H:i:s') }}</span>
+                                                                </div>
+                                                                {% if notification.VuParValideurEnCours == 0 %}<span class="badge badge-danger" style="float: right;"> nouveau </span>{% endif %}
+                                                                {% if notification.VuParValideurEnCours == 1 %}<span class="badge badge-success" style="float: right;"> lu </span>{% endif %} 
+                                                            </div>
+                                                            {% set Num = Num + 1 %}                
+                                                            <div class="item-body">
+                                                                <a href="{{ path('top_manager_demande_show',{'id':notification.id}) }}" class="h4" style="font-size: 14px; text-decoration:inherit; text-align:justify;">
+                                                                    {{notification.messageValideurEnCours}}
+                                                                </a>       
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END PORTLET -->
+                            </div>
+                            <div class="col-md-6 ">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet light">
+                                    <div class="portlet-title tabbable-line">
+                                        <div class="caption">
+                                            <i class="icon-pin" style="color:#345F98;"></i>
+                                            <span class="caption-subject bold font-blue-madison uppercase">
+                                                Mes demandes </span>
+                                            <span class="caption-helper"> <a></a> </span>
+                                        </div>
+                                        <ul class="nav nav-tabs">
+                                            <li>
+                                                <a href="#permissions" data-toggle="tab">
+                                                    Permissions</a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#conges" data-toggle="tab">
+                                                    Congés</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="permissions">
+                                                <div class="table-scrollable table-scrollable-borderless" style="height: 300px;">
+                                                    <div class="scroller" style="height: 296px;">
+                                                        <table class="table table-hover table-light" style="margin-top: -12px !important;margin-bottom: 12px !important;">
+                                                            <thead>
+                                                                <tr class="">
+                                                                    <th>
+                                                                        N°
+                                                                    </th>
+                                                                    <th>
+                                                                        Date Début
+                                                                    </th>
+                                                                    <th>
+                                                                        Date Fin
+                                                                    </th>
+                                                                    <th>
+                                                                        Jours
+                                                                    </th>
+                                                                    <th>
+                                                                        Statut
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            {% set Num = 0 %}
+                                                            {% for entity in entities %}
+                                                                {% if entity.typeDemande != 'Conge' %}
+                                                                    <tr>
+                                                                        {% set Num = Num + 1 %}    
+                                                                        <td class="fit">
+                                                                            {{ Num }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ entity.nbjoursOuvrables }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ path('top_manager_demande_show_2', { 'id': entity.id }) }}" >
+                                                                                {% if entity.estEnCours %}<i class="btn btn-circle btn-warning btn-sm">en cours</i><br/>{% endif %}
+                                                                                {% if entity.estValide %}<i class="btn btn-circle btn-success btn-sm">validée</i><br/>{% endif %}
+                                                                                {% if entity.estRefuse %}<i class="btn btn-circle btn-danger btn-sm">rejetée</i><br/>{% endif %}
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </table>
+
+                                                    </div>
+                                                </div>         
+                                            </div>
+                                            <div class="tab-pane active" id="conges">
+                                                <div class="table-scrollable table-scrollable-borderless" style="height: 300px;">
+                                                    <div class="scroller" style="height: 296px;">
+                                                        <table class="table table-hover table-light" style="margin-top: -12px !important;margin-bottom: 12px !important;">
+                                                            <thead>
+                                                                <tr class="">
+                                                                    <th>
+                                                                        N°
+                                                                    </th>
+                                                                    <th>
+                                                                        Date Début
+                                                                    </th>
+                                                                    <th>
+                                                                        Date Fin
+                                                                    </th>
+                                                                    <th>
+                                                                        Jours
+                                                                    </th>
+                                                                    <th>
+                                                                        Statut
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            {% set Num = 0 %}
+                                                            {% for entity in entities %}
+                                                                {% if entity.typeDemande == 'Conge' %}
+                                                                    <tr>
+                                                                        {% set Num = Num + 1 %}    
+                                                                        <td>
+                                                                            {{ Num }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.dateDebut %}{{ entity.dateDebut|date('d-m-Y') }}{% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if entity.dateFin %}{{ entity.dateFin|date('d-m-Y') }}{% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ entity.nbjoursOuvrables }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ path('top_manager_demande_show_2', { 'id': entity.id }) }}" >
+                                                                                {% if entity.estEnCours %}<i class="btn btn-circle btn-warning btn-sm">en cours</i><br/>{% endif %}
+                                                                                {% if entity.estValide %}<i class="btn btn-circle btn-success btn-sm">validée</i><br/>{% endif %}
+                                                                                {% if entity.estRefuse %}<i class="btn btn-circle btn-danger btn-sm">rejetée</i><br/>{% endif %}
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>              
+                    </div>
+                </div>
+                <!-- END PROFILE CONTENT -->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT INNER -->
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->    
+<!-- TRAITEMENTS DES UPDATES -->
+{% include "::notifications/notification-update-annuel.html.twig" %}
+{% include "::notifications/notification-update-mensuel.html.twig" %}
+<style>
+    .primary-link {
+        color: #345F98;
+        font-weight: 800;
+    }
+    .font-blue-madison {
+        color: #345F98 !important;
+    }
+    th,td{
+{#        text-align: center;#}
+        font-size: 14px;
+        color:#345F98 !important;
+    }
+    .profile-usertitle-job {
+        text-transform: uppercase;
+        color: #345F98;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 7px;
+    }
+    .profile-usertitle-name {
+        color: #345F98;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 7px;
+    }
+    a.h4{
+        color:#345F98;
+    }
+    .general-item-list > .item > .item-head > .item-details > .item-label {
+        color: #D02F42;
+    }
+    .portlet.light > .portlet-title > .nav-tabs > li.active > a, .portlet.light > .portlet-title > .nav-tabs > li:hover > a {
+        margin: 0;
+        background: none;
+        color: #345F98;
+    }
+    .portlet.light > .portlet-title > .nav-tabs > li > a {
+        margin: 0;
+        padding: 12px 13px 13px 13px;
+        font-size: 13px;
+        color: #345F98;
+    } 
+</style>
+
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}  
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Absences à justifer
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-note font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Absences en attente de justification ({{ nb1 }})</span>
+                            </div>
+                            {#<span>
+                            <a class=' pull-right btn btn-circle btn-success' href="{{ path('ad_absencesat_new') }}">nouvelle enregistrement +</a>
+                            </span>#}
+                        </div>
+                        <div class="portlet-body">
+                            <ul class="nav nav-pills">
+                                <li class="active">
+                                    <a href="#tab_1" data-toggle="tab">
+                                        Absences en attente</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_2" data-toggle="tab">
+                                        Absences justifiées </a>
+                                </li>
+                                <li>
+                                    <a href="#tab_3" data-toggle="tab">
+                                        Absences injustifiable </a>
+                                </li>
+                            </ul>
+                            <br/>
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="tab_1">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr>
+                                                     <th>Id</th>
+                                                    <th>motif</th>
+                                                    <th>Salarie</th>
+                                                    <th>Date de creation</th>
+                                                    <th>Date max</th>
+                                                    <th>Statut</th>
+{#                                                    <th>Justifie à temps</th>#}
+                                                   {# <th>Détails</th>#}
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for en_attente in en_attentes %}
+                                                    <tr>
+                                                        <td><a href="{{ path('ad_absencesajustifier_show', { 'id': en_attente.id }) }}">{{ en_attente.id }}</a></td>
+                                                        <td>{{ en_attente.demande.motif }}</td>
+                                                        <td>{{ en_attente.demande.salarie }}</td>
+                                                        <td>{% if en_attente.dateCreation %}{{ en_attente.dateCreation|date('d-m-Y') }}{% endif %}</td>
+                                                        <td>{{ en_attente.dateCreation|date_modify('+2 day')|date('d-m-Y') }}</td>
+                                                        <td>{{ en_attente.statut }}</td>
+                                                      {#  <td>
+                                                            {% if justifiees.justifieAtemps == 0 %} non {% endif %}
+                                                            {% if justifiees.justifieAtemps == 1 %} oui {% endif %}
+                                                        </td>#}
+                                                       {#<td>
+                                                            <a class="btn btn-circle btn-success" href="{{ path('ad_absencesajustifier_show', { 'id': en_attente.id }) }}">Détails</a>
+                                                       </td>#}
+                                                        <td>
+                                                          <a class="btn btn-circle btn-danger btn-sm" href="{{ path('ad_absencesajustifier_edit', { 'id': en_attente.id }) }}">Justifier</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade active" id="tab_2">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>motif</th>
+                                                    <th>Salarie</th>
+                                                    <th>Date de creation</th>
+                                                    <th>Date max</th>
+                                                    <th>Statut</th>
+{#                                                    <th>Justifie à temps</th>#}
+                                                    {#<th>Détails</th>#}
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for justifiees in justifiees %}
+                                                    <tr>
+                                                        <td><a href="{{ path('ad_absencesajustifier_show', { 'id': justifiees.id }) }}">{{ justifiees.id }}</a></td>
+                                                        <td>{{ justifiees.demande.motif }}</td>
+                                                        <td>{{ justifiees.demande.salarie }}</td>
+                                                        <td>{% if justifiees.dateCreation %}{{ justifiees.dateCreation|date('d-m-Y') }}{% endif %}</td>
+                                                        <td>{{ justifiees.dateCreation|date_modify('+2 day')|date('d-m-Y') }}</td>
+                                                        <td>{{ justifiees.statut }}</td>
+                                                       {# <td>
+                                                            {% if justifiees.justifieAtemps == 0 %} non {% endif %}
+                                                            {% if justifiees.justifieAtemps == 1 %} oui {% endif %}
+                                                        </td>#}
+                                                        <td>
+                                                           <a class="btn btn-circle btn-success btn-sm" href="{{ path('ad_absencesajustifier_show', { 'id': justifiees.id }) }}">Détails</a>
+                                                         </td>
+                                                        {#<td>
+                                                           <a class="btn btn-circle btn-primary" href="{{ path('ad_absencesajustifier_edit', { 'id': justifiees.id }) }}">Justifier</a>
+                                                        </td>#}
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>       
+                                            
+                                <div class="tab-pane fade active" id="tab_3">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>motif</th>
+                                                    <th>Salarie</th>
+                                                    <th>Date de creation</th>
+                                                    <th>Date max</th>
+                                                    <th>Statut</th>
+{#                                                    <th>Justifie à temps</th>#}
+                                                    {#<th>Détails</th>#}
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for injustifiees in injustifiees %}
+                                                    <tr>
+                                                        <td><a href="{{ path('ad_absencesajustifier_show', { 'id': injustifiees.id }) }}">{{ injustifiees.id }}</a></td>
+                                                        <td>{{ injustifiees.demande.motif }}</td>
+                                                        <td>{{ injustifiees.demande.salarie }}</td>
+                                                        <td>{% if injustifiees.dateCreation %}{{ injustifiees.dateCreation|date('d-m-Y') }}{% endif %}</td>
+                                                        <td>{{ injustifiees.dateCreation|date_modify('+2 day')|date('d-m-Y') }}</td>
+                                                        <td>{{ injustifiees.statut }}</td>
+                                                       {# <td>
+                                                            {% if justifiees.justifieAtemps == 0 %} non {% endif %}
+                                                            {% if justifiees.justifieAtemps == 1 %} oui {% endif %}
+                                                        </td>#}
+                                                        <td>
+                                                           <a class="btn btn-circle btn-success btn-sm" href="{{ path('ad_absencesajustifier_show', { 'id': injustifiees.id }) }}">Détails</a>
+                                                         </td>
+                                                        {#<td>
+                                                           <a class="btn btn-circle btn-primary" href="{{ path('ad_absencesajustifier_edit', { 'id': justifiees.id }) }}">Justifier</a>
+                                                        </td>#}
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+
+{% endblock %}

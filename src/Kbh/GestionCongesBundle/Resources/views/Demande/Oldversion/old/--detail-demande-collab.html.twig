@@ -1,0 +1,312 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main -%}
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Détails <small>de la demande</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                <div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <h3>EXPORTER</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-12">
+                                                                                <ul class="theme-colors">
+                                                                                        <li class="theme-color theme-color-default" data-theme="default">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Excel</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Json</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-steel" data-theme="blue-steel">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Word</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">PDF</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Xml</span>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>
+        <!-- END PAGE HEAD -->
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+                <div class="container">
+                        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                        <div class="modal-content">
+                                                <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <h4 class="modal-title">Confirmation du refus</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <section class="panel panel-default">
+                                                                   <section class="scrollable wrapper" >
+                                                                           {{ form_start(form2, {'attr': {'data-validate' : 'parsley'}}) }}
+                                                                          <div class="form-group">
+                                                                                  <div class="alert alert-info">
+                                                                                          {#<button type="button" class="close" data-dismiss="alert">&times;</button>#}
+                                                                                          <i class="fa fa-info-sign"></i><strong>Attention ! </strong> Voulez-vous vraiment <strong>REFUSER</strong> la demande formulée par <strong>{{salarie.civilite}}
+                                                                                          {{salarie.nomprenom}}</strong> !? Si oui laissez un commentaire avant la validation du REFUS
+                                                                                    </div>
+                                                                                  {#<label></label>#}
+                                                                                  {{ form_label(form2.raisonRefus, "Raisons du Refus") }}
+                                                                                  {{ form_widget(form2.raisonRefus, {'attr': {'class': 'form-control', 'rows': '6', 'data-minwords': '6' , 'placeholder': 'Saisissez un commentaire'}}) }}
+                                                                                  {#<textarea class="form-control" rows="6" data-minwords="6" required data-required="true" placeholder="Saisissez un commentaire"></textarea>#}                                        
+                                                                          </div>   
+                                                                  </section> 
+                                                     </section> 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success btn-s-xs" style="margin-right: 10px;">Confirmer</button> 
+                                                    <button type="button" class="btn default" data-dismiss="modal">retour</button>
+                                                                                                            {{ form_end(form2) }}
+                                                </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                        <!-- BEGIN PAGE BREADCRUMB -->
+                        <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                                <a href="{{ path('collaborateurs') }}">Liste des Collaborateurs</a>
+                                <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                                <a href="{{ path('collaborateur_demandes', { 'id': salarie.id }) }}">Demandes Collaborateur</a>
+                                <i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                                Détail demande
+                        </li>
+                      </ul>
+                        <!-- END PAGE BREADCRUMB -->
+                        <!-- BEGIN PAGE CONTENT INNER -->
+                        <div class="portlet light">
+                                <div class="portlet-body">
+                                        <div class="invoice">
+                                                <div class="row invoice-logo">
+                                                        <div class="col-xs-6 invoice-logo-space">
+                                                                <img src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/media/invoice/CNPS-logo.png') }}" class="img-responsive" alt=""/>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                                <p  style="float:right;">
+                                                                    Demande N° : <b/>{{ entity.id }}</b> / Le <b>{{ entity.dateDemande|date('d-m-Y H:i:s') }}</b>
+                                                                </p>
+                                                        </div>
+                                                </div>
+                                                <hr/>
+                                                <div class="row">
+                                                        <div class="col-xs-6">
+                                                                <h3>Informations demandeur:</h3>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <strong>{{entity.salarie.civilite}} {{entity.salarie.nomprenom}}</strong>
+                                        </li>
+                                        <li>
+                                            Unité : <strong>{{ entity.salarie.unite }}</strong>
+                                        </li>
+                                        <li>
+                                            N° matricule : <strong>{{entity.salarie.matricule}}</strong>
+                                        </li>
+                                        <li>
+                                            Date d'embauche : <strong>{{ entity.salarie.dateEmbauche|date('d-m-Y')  }}</strong><br><br>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <hr/>
+                                <div class="col-xs-12">
+                                    <p class="m-t m-b">Objet :
+                                         <strong>
+                                                {% if entity.typeDemande == 'Conge' %}Demande de congé payé.{% endif %}
+                                                {% if entity.typeDemande == 'Permission' %}
+                                                                Demande de permission exceptionnelle
+                                                {% endif %}
+                                                {% if entity.typeDemande == 'Absence exceptionnelle' %}
+                                                                Demande d'absence exceptionnelle.
+                                                {% endif %}
+                                        </strong><br>
+                                    </p>
+
+                                    <p style="text-align: justify;">Madame, Monsieur,<br/>
+                                            {% if entity.typeDemande == 'Conge' %}
+                                                    Conformément au planning des départs en congé du personnel{% if entity.salarie.unite.estService or entity.salarie.unite.estDepartement %} du {{ entity.salarie.unite }},{% else %} de la {{ entity.salarie.unite }} ,{% endif %}<br>
+                                                    je viens, par la présente, solliciter <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong>  de congés,du <strong><strong>{{ entity.dateDebut|date("d-m-Y") }}</strong></strong> (date effective de début), au <strong> {{ entity.dateFin|date("d-m-Y") }}</strong>  (date de fin de congé).Je reprendrai le service le <strong>{{ entity.dateRetour|date("d-m-Y") }}</strong> matin.<br>Je reprendrai le service le <strong>{{ entity.dateRetour|date("d-m-Y") }}</strong>  matin.<br><br>
+                                                    Je voudrais, à toutes fins utiles, porter à votre connaissance que mes droits à congé des années précédentes s'établissent à  {{entity.salarie.droits.reliquatDroitsAnterieur}} jour(s), majorés de {{entity.salarie.droits.droitsAcquisAnneeEnCours}} jour(s) acquis au titre de l'année {{ entity.dateDemande|date('Y')}}. Je dispose à ce jour, de <strong>{{ entity.salarie.droits.totalDroitsAprendre}} jour(s)</strong> de droits à congés.<br>
+                                                    Je reprendrai le service le <strong>{{ entity.dateRetour|date("d-m-Y") }}</strong> matin.<br><br>
+
+                                            {% endif %}
+                                            {% if entity.typeDemande == 'Permission' %}
+                                                    J'ai l'honneur de solliciter, par la présente,<strong>{{ entity.nbjoursOuvrables }} jour(s)</strong> de permission exceptionnelle pour des raisons familiales (motif spécifié : {{ entity.motif }}),<br>
+                                                    du <strong>{{ entity.dateDebut|date("d-m-Y") }}</strong> (date effective de début), au <strong>{{ entity.dateFin|date("d-m-Y") }}</strong> (date de fin de permission). Je reprendrai le service le <strong>{{ entity.dateRetour|date("d-m-Y") }}</strong> matin.
+                                            {% endif %}	
+                                            {% if entity.typeDemande == 'Absence exceptionnelle' %}
+                                                    J'ai l'honneur de solliciter, par la présente, <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong> d'absence pour convenance personnelle, du <strong>{{ entity.dateDebut|date("d-m-Y") }}</strong> (date effective de début), au <strong>{{ entity.dateFin|date("d-m-Y") }}</strong>.Je reprendrai le service le <strong>{{ entity.dateRetour|date("d-m-Y") }}</strong> matin.<br><br>
+
+                                            {% endif %}<br><br>
+                                            Dans l'attente de la suite qu'il vous plaira de réserver à  ma demande,<br>
+                                            Je vous prie d'agréer, Madame, Monsieur, mes salutations respectueuses.<br><br>
+                                    </p>	
+
+                                    <strong style="float:right;">{{salarie.nomprenom}}</strong><br/>
+                                    <hr/><br/>
+                    {% if salarie.nomprenom == entity.valideurEnCours.nomprenom and entity.estEnCours == 1 %}
+                        {{ form_start(form1, {'attr': {'data-validate' : 'parsley'}}) }}
+                                <footer class="panel-footer text-right bg-light lter">
+                                        <button type="submit" class="btn btn-success btn-s-xs">Accepter</button>
+                                        <a href="#portlet-config"  data-toggle="modal" class="btn btn-danger btn-s-xs">Refuser</a>
+                                  </footer>
+                        {{ form_end(form1) }}
+                {% endif %}
+                </div>
+        </div>
+        <div class="row">
+             {% if entity.estValideNiveau1 %}
+        {% if entity.valideurNiveau1 != entity.valideurFinal %}
+            <div class="col-md-4">
+                <div class="well">
+                        <address>
+                            <strong class="text-success">PREMIERE VALIDATION</strong><br/>
+                            le  {{ entity.dateValidation1|date('d-m-Y H:i:s') }}<br/>
+                            par: {{ entity.valideurNiveau1  }}<br/>
+                            poste: <strong>{{ entity.valideurNiveau1.poste  }}</strong><br/>
+                        </address>	
+                </div>
+            </div>      
+        {% else %}
+            <div class="col-md-4">
+                <div class="well">
+                    <address>
+                        <strong class="text-success">PREMIERE ET DERNIERE VALIDATION</strong><br/>
+                        le  {{ entity.dateValidation1|date('d-m-Y H:i:s') }}<br/>
+                        par: {{ entity.valideurNiveau1  }}<br/>
+                        poste: <strong>{{ entity.valideurNiveau1.poste  }}</strong><br/>
+                    </address>	
+                </div>
+            </div>
+        {% endif %}
+        {% if entity.valideurNiveau2 %}
+            {% if entity.estValideNiveau2 %}
+                {%if entity.valideurNiveau2 == entity.valideurFinal %}
+                    <div class="col-md-4">
+                        <div class="well">
+                            <address>
+                                <strong class="text-success">DERNIERE VALIDATION</strong><br/>
+                                <strong class="text-success">Demande cloturée</strong><br/>
+                                le  {{ entity.dateValidation|date('d-m-Y H:i:s') }}<br/>
+                                par: {{ entity.valideurNiveau2  }} , <br/>
+                                poste:{{ entity.valideurNiveau2.poste  }}<br/>
+                            </address>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-4">
+                        <div class="well">
+                            <address>
+                                <strong class="text-success">DEUXIEME VALIDATION</strong><br/>
+                                le  {{ entity.dateValidation2|date('d-m-Y H:i:s') }}<br/>
+                                par: {{ entity.valideurNiveau2  }} , <br/>
+                                poste:<strong>{{ entity.valideurNiveau2.poste  }}</strong><br/>
+                            </address>
+                        </div>
+                    </div>
+                    {% if entity.estValide %}        
+                        <div class="col-md-4">
+                            <div class="well">
+                                <address>
+                                    <strong class="text-success">DERNIERE VALIDATION</strong><br/>
+                                    le  {{ entity.dateValidation|date('d-m-Y H:i:s') }}<br/>
+                                    par: {{ entity.valideurFinal  }} , <br/>
+                                    poste:<strong>{{ entity.valideurFinal.poste  }}</strong><br/>
+                                </address>
+                            </div>
+                        </div>
+                    {% endif %}            
+
+                {% endif %}
+             {% endif %}   
+        {% endif %}    
+    {% endif %}
+{% if entity.estRefuse %} 
+        <div class="col-xs-4 invoice-block">
+                <ul class="list-unstyled amounts">
+                        <li>
+                                <strong class="text-danger">Demande REFUSEE </strong>
+                        </li>
+                        <li>
+                                <strong>Le</strong> {{ entity.dateRefus|date('d-m-Y H:i:s') }}
+                        </li>
+                        <li>
+                                <strong>Par:</strong> {{ entity.refusePar }}
+                        </li>
+                        <li>
+                                <strong>Email:</strong> {{ entity.refusePar.email }}
+                        </li>
+                        <li>
+                                <strong>Motif Refus:</strong> {{ entity.raisonRefus }}  
+                        </li>
+                </ul>
+                <br/>
+               {# <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                Print <i class="fa fa-print"></i>
+                </a>#}
+        </div>
+       {% endif %}
+            </div>
+    </div>
+                                </div>
+                        </div>
+                        <!-- END PAGE CONTENT INNER -->
+                </div>
+        </div>
+        <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
+<style>
+    .theme-panel {
+  z-index: 999;
+  min-width: 180px;
+  padding: 20px 10px;
+  font-family: "Open Sans", sans-serif;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,30 @@
+basedroits:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:index" }
+
+basedroits_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:show" }
+
+basedroits_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:new" }
+
+basedroits_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:create" }
+    methods:  POST
+
+basedroits_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:edit" }
+
+basedroits_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:update" }
+    methods:  [POST, PUT]
+
+basedroits_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:BaseDroits:delete" }
+    methods:  [POST, DELETE]

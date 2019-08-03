@@ -1,0 +1,592 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+ <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Détails <small> des statisques</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                {#<div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <h3>EXPORTER</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-12">
+                                                                                <ul class="theme-colors">
+                                                                                        <li class="theme-color theme-color-default" data-theme="default">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Excel</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Json</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-steel" data-theme="blue-steel">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Word</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">PDF</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Xml</span>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>#}
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>    
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                {% include "::modules-salaries/arret-travail.html.twig" %}
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                               Statistiques graphiques
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                    <div class="col-md-3">
+                                <section class="panel panel-default">
+                                    <header class="panel-heading" style="background-color: #4db3a4;color: white;"> ETATS DETAILLES</header>
+                                    <div class="panel-body text-left">
+                                        <div class="note note-info">
+                                            <h4 class="block">Information!</h4>
+                                            <p>
+                                                Pour consulter les statistiques détaillées cliquez sur <a href="{{ path('top_manager_statistiques') }}"> ETATS DETAILLES </a>
+                                            </p>
+                                        </div>
+                                    </div>                     
+                                </section>
+                        
+                                <section class="panel panel-default">
+                                    <header class="panel-heading" style="background-color: rgba(229, 23, 39, 0.74);color: white;"> TAUX ARRÊT DE TRAVAIL</header>
+                                    <div class="panel-body text-left">
+                                        <div class="inline">
+                                            <ul style="margin-left:-17px;color: #333 !important;">
+                                                <li><a  href="#maladie-professionnelle" style="color: #333 !important;" data-toggle="modal">taux de maladie professionnelles</a></li>
+                                                <li><a  href="#accident-travail" style="color: #333 !important;" data-toggle="modal">taux d'accident de travail</a></li>
+                                                <li><a  href="#maladie-ordinaires" style="color: #333 !important;" data-toggle="modal">taux d'absences maladie</a></li>
+                                                <li><a  href="#conges-maternites" style="color: #333 !important;" data-toggle="modal">taux de congés maternités</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>                     
+                                </section>
+                        
+                                <section class="panel panel-default">
+                                    <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;"> STOCK CONGES</header>
+                                    <div class="panel-body text-left">
+                                        <div class="inline">
+                                            <ul style="margin-left: -17px;">
+                                                <li>Solde le plus élevé :<br/> <b>{{unite_conge_max.unite}} ({{unite_conge_max.stockConge}} jours)</b></li>
+                                                <li>Solde le plus bas :<br/> <b>{{unite_conge_min.unite}} ({{unite_conge_min.stockConge}} jours)</b></li>
+                                                <li>Solde moyen / Unité : <b>{{solde_moy_conge}} jours</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>                     
+                                </section>
+                                  
+                                <section class="panel panel-default" >
+                                    <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">PERMISSIONS EXCEPTIONNELLES</header>
+                                    <div class="panel-body text-left">
+                                        <div class="inline">
+                                            <ul style="margin-left: -17px;">
+                                                <li>Unité la plus consommatrice :<br/> <b>{{unite_permissions_max.unite}} ({{unite_permissions_max.permissions}} jours)</b></li>
+                                                <li>Unité la moins consommatrice :<br/> <b>{{unite_permissions_min.unite}} ({{unite_permissions_min.permissions}} jours)</b></li>
+                                                <li>Consommation moyenne / Unité :<b> {{consom_moy_permission}} jours</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>                     
+                                </section>   
+                                            
+                                <section class="panel panel-default">
+                                    <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">ABSENCES EXCEPTIONNELLES</header>
+                                    <div class="panel-body text-left">
+                                        <div class="inline">
+                                            <ul style="margin-left: -17px;">
+                                                <li>Unité la plus consommatrice :<br/> <b>{{unite_absences_max.unite}} ({{unite_absences_max.absencesEx}} jours)</b></li>
+                                                <li>Unité la moins consommatrice :<br/> <b>{{unite_absences_min.unite}} ({{unite_absences_min.absencesEx}} jours)</b></li>
+                                                <li>Consommation moyenne / Unité :<b> {{consom_moy_absence}} jours</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>                     
+                                </section>
+                        </div>
+                        <div class="col-md-9">
+                                <div class="row">
+                                   <!-- BEGIN PORTLET-->
+                                        <!-- BEGIN STACK CHART CONTROLS PORTLET-->
+                             <div class="portlet light">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="icon-plane font-green-haze"></i>
+                                                <span class="caption-subject bold uppercase font-green-haze"> Congés & absences</span>
+                                                <span class="caption-helper">(permissions, absences ex)</span>
+                                            </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+                                                <a id="blockui_sample_1_3" href="{{ path('top_manager_statistiques') }}">
+                                                    <i class="icon-reload"></i>
+                                                </a>
+                                                <a href="javascript:;" class="fullscreen">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div id="chart_1" class="chart" style="height: 500px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                            <!-- END STACK CHART CONTROLS PORTLET-->
+                            <div class="portlet light">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="icon-ban font-green-haze"></i>
+                                                <span class="caption-subject bold uppercase font-green-haze">Arrêt de travail</span>
+                                                <span class="caption-helper">(accident de travail, maladie professionnelles, maladie ordinaires, congés maternités)</span>
+                                            </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+                                                <a id="blockui_sample_1_3" href="{{ path('top_manager_statistiques') }}">
+                                                    <i class="icon-reload"></i>
+                                                </a>
+                                                <a href="javascript:;" class="fullscreen">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div id="chart_3" class="chart" style="height: 500px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- END PORTLET-->
+                                <!-- BEGIN PORTLET-->
+                                  
+                               <div class="portlet light">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="icon-pie-chart font-green-haze"></i>
+                                                <span class="caption-subject bold uppercase font-green-haze"> Stock de congés en % </span>
+                                            </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+                                                <a href="javascript:;" class="fullscreen">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div id="chart_6" class="chart" style="height: 525px;">
+                                            </div>
+{#                                            {% for statsMO in statsMaladieOrdinaires|keys %}
+                                                {{statsMO}}
+                                           {% endfor %}  #}
+                                        </div>
+                                    </div>
+                               
+                                <!-- END PORTLET-->
+                            </div>        
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+    th,td{
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+    var ChartsAmcharts = function() {
+
+    var initChartSample1 = function() {//Absences & congés
+        var chart = AmCharts.makeChart("chart_1", {
+            "type": "serial",
+            "theme": "light",
+            "pathToImages": Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/",
+            "autoMargins": false,
+            "marginLeft": 30,
+            "marginRight": 8,
+            "marginTop": 10,
+            "marginBottom": 26,
+
+            "fontFamily": 'Open Sans',            
+            "color":    '#888',
+            
+            "dataProvider": [
+                {% if statsUnites%}
+                    {% set q = 0 %}
+                    {% for statsUnites in statsUnites %}
+                            {
+                                "unite": "{{statsUnites.unite.sigle}}",
+                                "Congés consommés": {{statsUnites.congesPris}},
+                                "Absences ex": {{statsUnites.absencesEx}},
+                                "Permissions": {{statsUnites.permissions}}
+                            }{% if q < nb_unites -1 %},{% endif %}{% set q = q + 1 %}
+                     {% endfor %}  
+                {%endif%} 
+           ],
+            "valueAxes": [{
+                "axisAlpha": 0,
+                "position": "left"
+            }],
+            "startDuration": 1,
+            "graphs": [{
+                "alphaField": "alpha",
+                "balloonText": "<span style='font-size:13px;'>[[title]] de l'unité ([[category]]): <b>[[value]]</b> [[additional]]</span>",
+                "dashLengthField": "dashLengthColumn",
+                "fillAlphas": 1,
+                "title": "Absences ex",
+                "type": "column",
+                "valueField": "Absences ex"
+            }, 
+            {
+                "balloonText": "<span style='font-size:13px;'>[[title]] de l'unité ([[category]]): <b>[[value]]</b> [[additional]]</span>",
+                "bullet": "round",
+                "dashLengthField": "dashLengthLine",
+                "lineThickness": 3,
+                "bulletSize": 7,
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "useLineColorForBulletBorder": true,
+                "bulletBorderThickness": 3,
+                "fillAlphas": 1,
+                "lineAlpha": 1,
+                "title": "Congés consommés",
+                "type": "column",
+                "valueField": "Congés consommés"
+            }, 
+            {
+                "balloonText": "<span style='font-size:13px;'>[[title]] de l'unité ([[category]]): <b>[[value]]</b> [[additional]]</span>",
+                "bullet": "round",
+                "dashLengthField": "dashLengthLine",
+                "lineThickness": 3,
+                "bulletSize": 7,
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "useLineColorForBulletBorder": true,
+                "bulletBorderThickness": 3,
+                "fillAlphas": 1,
+                "lineAlpha": 1,
+                "title": "Permissions",
+                "type": "column",
+                "valueField": "Permissions"
+            }],
+            "categoryField": "unite",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "tickLength": 0
+            }
+        });
+
+        $('#chart_1').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+
+    var initChartSample3 = function() {//arrêt de travail
+        var chart = AmCharts.makeChart("chart_3", {
+            "type": "serial",
+            "theme": "light",
+            "pathToImages": Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/",
+            "autoMargins": false,
+            "marginLeft": 30,
+            "marginRight": 8,
+            "marginTop": 10,
+            "marginBottom": 26,
+
+            "fontFamily": 'Open Sans',            
+            "color":    '#888',
+            
+            "dataProvider": [{
+                "absenceAt": "accident de travail",
+                "type": {{AccidentDeTravail}}
+            }, {
+                "absenceAt": "maladie professionnelles",
+                "type": {{MaladieProfessionnelle}}
+            }, {
+                "absenceAt": "maladie ordinaires",
+                "type": {{Maladie}}
+            }, {
+                "absenceAt": "congés maternités",
+                "type": {{CongeMaternite}}
+            }],
+            "valueAxes": [{
+                "axisAlpha": 0,
+                "position": "left"
+            }],
+            "startDuration": 1,
+            "graphs": [{
+                "alphaField": "alpha",
+                "balloonText": "<span style='font-size:13px;'>[[category]]: <b>[[value]]</b> [[additional]]</span>",
+                "dashLengthField": "dashLengthColumn",
+                "fillAlphas": 1,
+                "title": "type",
+                "type": "column",
+                "valueField": "type"
+            }, {
+                "balloonText": "<span style='font-size:13px;'>[[title]] de [[category]]: <b>[[value]]</b> [[additional]]</span>",
+                "bullet": "round",
+                "dashLengthField": "dashLengthLine",
+                "lineThickness": 3,
+                "bulletSize": 7,
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "useLineColorForBulletBorder": true,
+                "bulletBorderThickness": 3,
+                "fillAlphas": 0,
+                "lineAlpha": 1,
+                "title": "Stock de congés",
+                "valueField": "Stock de congés"
+            }],
+            "categoryField": "absenceAt",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "tickLength": 0
+            }
+        });
+
+        $('#chart_3').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+
+    var initChartSample6 = function() {//stock congés
+        var chart = AmCharts.makeChart("chart_6", {
+            "type": "pie",
+            "theme": "light",
+
+            "fontFamily": 'Open Sans',
+            
+            "color":    '#888',
+
+            "dataProvider": [
+                {% if statsUnites%}
+{#                    {% if SomSC|length != 0%}            #}
+                    {% set a = 0 %}
+                    {% for statsUnites in statsUnites %}
+                            {
+                                "unite": "{{statsUnites.unite|raw}}",
+                                "taux": {{((statsUnites.stockConge*100)/SomSC)|number_format(2)}}
+                            }{% if a < nb_unites -1 %},{% endif %}{% set q = q + 1 %}
+                     {% endfor %}  
+{#                 {%endif%}        #}
+               {%endif%} 
+         ],
+            "valueField": "taux",
+            "titleField": "unite",
+            "exportConfig": {
+                menuItems: [{
+                    icon: Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/export.png",
+                    format: 'png'
+                }]
+            }
+        });
+
+        $('#chart_6').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+    
+    var initChartSample7 = function() { //maladie pro
+        var chart = AmCharts.makeChart("chart_7", {
+            "type": "pie",
+            "theme": "light",
+
+            "fontFamily": 'Open Sans',
+            
+            "color":    '#888',
+
+            "dataProvider": [
+                {% set b = 0 %}
+                        {% for idStatUnite in statsMaladiePro|keys %}
+                            {% for unite in list_unites %}
+                            {% if unite.id == idStatUnite %}
+                            {
+                                "unite": "{{unite}}",
+                                "taux": {{((statsMaladiePro[idStatUnite]*100)/MaladieProfessionnelle)|number_format(2)}}
+                            }{% if b < statsMaladiePro|length -1 %},{% endif %}{% set b = b + 1 %}
+                        {% endif %}
+                       {% endfor %}      
+            {% endfor %}  
+         ],
+            "valueField": "taux",
+            "titleField": "unite",
+            "exportConfig": {
+                menuItems: [{
+                    icon: Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/export.png",
+                    format: 'png'
+                }]
+            }
+        });
+
+        $('#chart_7').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+    
+    var initChartSample8 = function() { //accident travail
+        var chart = AmCharts.makeChart("chart_8", {
+            "type": "pie",
+            "theme": "light",
+
+            "fontFamily": 'Open Sans',
+            
+            "color":    '#888',
+
+            "dataProvider": [
+                {% set q = 0 %}
+                        {% for idStatUnite in statsAcT|keys %}
+                            {% for unite in list_unites %}
+                            {% if unite.id == idStatUnite %}
+                            {
+                                "unite": "{{unite|raw}}",
+                                "taux": {{((statsAcT[idStatUnite]*100)/AccidentDeTravail)|number_format(2)}}
+                            }{% if q < statsAcT|length -1 %},{% endif %}{% set q = q + 1 %}
+                        {% endif %}
+                       {% endfor %}      
+                    {% endfor %}  
+         ],
+            "valueField": "taux",
+            "titleField": "unite",
+            "exportConfig": {
+                menuItems: [{
+                    icon: Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/export.png",
+                    format: 'png'
+                }]
+            }
+        });
+
+        $('#chart_8').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+    
+    var initChartSample9 = function() { //maladie ordinaires
+        var chart = AmCharts.makeChart("chart_9", {
+            "type": "pie",
+            "theme": "light",
+
+            "fontFamily": 'Open Sans',
+            
+            "color":    '#888', 
+
+            "dataProvider": [
+                    {% set q = 0 %}
+                        {% for idStatUnite in statsMaladieOrdinaires|keys %}
+                            {% for unite in list_unites %}
+                            {% if unite.id == idStatUnite %}
+                            {
+                                "unite": "{{unite|raw}}",
+                                "taux": {{((statsMaladieOrdinaires[idStatUnite]*100)/Maladie)|number_format(2)}}
+                            }{% if q < statsMaladieOrdinaires|length -1 %},{% endif %}{% set q = q + 1 %}
+                        {% endif %}
+                       {% endfor %}      
+                    {% endfor %}  
+         ],
+            "valueField": "taux",
+            "titleField": "unite",
+            "exportConfig": {
+                menuItems: [{
+                    icon: Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/export.png",
+                    format: 'png'
+                }]
+            }
+        });
+
+        $('#chart_9').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+    
+    var initChartSample10 = function() { //congés maternités
+        var chart = AmCharts.makeChart("chart_10", {
+            "type": "pie",
+            "theme": "light",
+
+            "fontFamily": 'Open Sans',
+            
+            "color":    '#888',
+
+            "dataProvider": [
+                {% set s = 0 %}
+                        {% for idStatUnite in statsCM|keys %}
+                            {% for unite in list_unites %}
+                            {% if unite.id == idStatUnite %}
+                            {
+                                "unite": "{{unite|raw}}",
+                                "taux": {{((statsCM[idStatUnite]*100)/CongeMaternite)|number_format(2)}}
+                            }{% if s < statsCM|length -1 %},{% endif %}{% set s = s + 1 %}
+                        {% endif %}
+                       {% endfor %}      
+                    {% endfor %}  
+         ],
+            "valueField": "taux",
+            "titleField": "unite",
+            "exportConfig": {
+                menuItems: [{
+                    icon: Metronic.getGlobalPluginsPath() + "amcharts/amcharts/images/export.png",
+                    format: 'png'
+                }]
+            }
+        });
+
+        $('#chart_10').closest('.portlet').find('.fullscreen').click(function() {
+            chart.invalidateSize();
+        });
+    }
+    
+    return {
+        //main function to initiate the module
+
+        init: function() {
+
+            initChartSample1();
+            initChartSample3();
+            initChartSample6();
+            
+            initChartSample7();
+            initChartSample8();
+            initChartSample9();
+            initChartSample10();
+        }
+
+    };
+
+}();
+</script>
+    {% endblock %}

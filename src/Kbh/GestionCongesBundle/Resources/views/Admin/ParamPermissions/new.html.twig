@@ -1,0 +1,15 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>ParamPermissions creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('parampermissions') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

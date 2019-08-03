@@ -1,0 +1,141 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('dashboard_salarie') }}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Journal des Congés</h3>
+                </header>
+
+                <div class="table-responsive">
+                  <table class="table table-striped b-t b-light">
+                    <thead>
+                      
+                        <th class="th-sortable" data-toggle="class">Actions
+                          <span class="th-sort">
+                            <i class="fa fa-sort-down text"></i>
+                            <i class="fa fa-sort-up text-active"></i>
+                            <i class="fa fa-sort"></i>
+                          </span>
+                        </th>
+                        <th>Motif</th>
+                        <th>Date</th>
+                        <th width="30">statut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td>Demande de congés </td>
+                        <td>Voyage</td>
+                        <td>Le 25, Juillet 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                       
+                        <td>Demande de congés </td>
+                        <td>Repos</td>
+                        <td>Le 12, Août 2014</td>
+                        <td>
+                          <a href="#" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        
+                        <td>Permission exceptionnelle </td>
+                        <td>Mariage d'un parent</td>
+                        <td>Le 22, Août 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                       
+                        <td>Permission exceptionnelle </td>
+                        <td>Baptême d'unn enfant</td>
+                        <td>Le 05, Septembre 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        
+                        <td>Absence exceptionnelle </td>
+                        <td>Maladie</td>
+                        <td>Le 28, Septembre 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                      
+                        <td>Demande de congés</td>
+                        <td>Repos</td>
+                        <td>Le 10, Novembre 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-times text-danger text text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        
+                        <td>Permition exceptionnelle</td>
+                        <td>Déménagement</td>
+                        <td>Le 25, Novembre 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        
+                        <td>Demande de congés</td>
+                        <td>repos</td>
+                        <td>Le 22, Decembre 2014</td>
+                        <td>
+                          <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                 
+                    </div>
+                    <div class="col-sm-4 text-center">
+                      <small class="text-muted inline m-t-sm m-b-sm">Affiche 8-20 elements</small>
+                    </div>
+                    <div class="col-sm-4 text-right text-center-xs">                
+                      <ul class="pagination pagination-sm m-t-none m-b-none">
+                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </footer>
+              </section>
+        </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+      </section>
+    </section>
+    <style type="text/css">
+  th,tr {
+    text-align: center;
+  }
+  </style>
+{% endblock %}

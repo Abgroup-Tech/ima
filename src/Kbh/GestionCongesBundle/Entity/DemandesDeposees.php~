@@ -1,0 +1,65 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DemandesDeposees
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\DemandesDeposeesRepository")
+ */
+class DemandesDeposees
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+     /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id")
+     * 
+     */
+    private $salarie;
+
+    /**
+     * @var \Demande
+     *
+     * @ORM\OneToOne(targetEntity="Demande")
+     * @ORM\JoinColumn(name="demande", referencedColumnName="id")
+     * 
+     */
+    private $demande;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateEnvoi", type="datetime")
+     */
+    private $dateEnvoi;
+
+    /**
+     * @var \OrganigrammeUnite
+     *
+     * @ORM\ManyToOne(targetEntity="OrganigrammeUnite")
+     * @ORM\JoinColumn(name="unite", referencedColumnName="id" ,nullable=true)
+     */
+    private $unite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statut", type="string", length=255)
+     */
+    private $statut;
+
+
+}

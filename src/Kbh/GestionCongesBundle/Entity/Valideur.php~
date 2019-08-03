@@ -1,0 +1,84 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Valideur
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\ValideurRepository")
+ */
+class Valideur
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id" , nullable=true)
+     */
+    private $salarie;
+
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\Organigrammeunite
+     * @ORM\ManyToOne(targetEntity="Organigrammeunite")
+     * @ORM\JoinColumn(name="unite", referencedColumnName="id" , nullable=true)
+     */
+    private $unite;
+
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="suppleant", referencedColumnName="id" , nullable=true)
+     */
+    private $suppleant;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+          
+
+    public function getSuppleant() {
+        return $this->suppleant;
+    }
+    
+    public function getUnite() {
+        return $this->unite;
+    }
+
+    public function setUnite(\Kbh\GestionCongesBundle\Entity\Organigrammeunite $unite) {
+        $this->unite = $unite;
+    }
+
+    
+    public function setSuppleant(\Kbh\GestionCongesBundle\Entity\Salarie $suppleant) {
+        $this->suppleant = $suppleant;
+    }
+
+    public function getSalarie() {
+        return $this->salarie;
+    }
+
+    public function setSalarie(\Kbh\GestionCongesBundle\Entity\Salarie $salarie) {
+        $this->salarie = $salarie;
+    }
+
+
+    
+}

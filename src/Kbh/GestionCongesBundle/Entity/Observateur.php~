@@ -1,0 +1,96 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Observateur
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\ObservateurRepository")
+ */
+class Observateur
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+     /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id" , nullable=true)
+     */
+    private $salarie;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="poste", type="string", length=255)
+     */
+    private $poste;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=255)
+     */
+    private $code;
+    
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getSalarie() {
+        return $this->salarie;
+    }
+
+    public function setSalarie(\Kbh\GestionCongesBundle\Entity\Salarie $salarie) {
+        $this->salarie = $salarie;
+    }
+
+    /**
+     * Set poste
+     *
+     * @param string $poste
+     * @return Observateur
+     */
+    public function setPoste($poste)
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * Get poste
+     *
+     * @return string 
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+    
+    public function getCode() {
+        return $this->code;
+    }
+
+    public function setCode($code) {
+        $this->code = $code;
+    }
+
+
+}

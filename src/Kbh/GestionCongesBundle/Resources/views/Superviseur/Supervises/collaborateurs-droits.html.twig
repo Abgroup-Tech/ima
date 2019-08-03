@@ -1,0 +1,291 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                           <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+             <div class="modal fade" id="allocation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form class="form-horizontal form-bordered form-label-stripped" action="{{ path('sup_document_create')}}" method="POST" {{ form_enctype(form) }}>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title uppercase">import de fichiers</h4>
+                        </div>
+                        <div class="modal-body">
+                         <div class="row">
+                            <div class="col-md-12 note note-info">
+                                <h4 class="block">Information! </h4>
+                                <p>Les documents reconnus sont de type <b>XLSX (EXCEl)</b>.<br/>
+                                Veuillez vous assurer de l'extension du fichier avant l'import.
+                                </p>
+                            </div>
+                            <div class="col-md-12">   
+                                  <div class="form-body">
+                                        <div class="form-group last">
+                                            <label class="control-label col-md-3">Fichier d'import</label>
+                                            <div class="col-md-8">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                {{ form_widget(form.file) }}
+                                                </div>
+                                              <span class="help-block">
+                                                 {{ form_errors(form.file) }}
+                                              </span>
+                                            </div>
+                                       </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Nom du document</label>
+                                            <div class="col-md-6">
+                                            {{ form_widget(form.name,{'attr': {'class':'form-control', 'placeholder':"nom-document"}}) }}
+                                             <span class="help-block">
+                                       {{ form_errors(form.name) }}
+                                              </span>
+                                            </div>
+                                       </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Objet de l'import</label>
+                                            <div class="col-md-6">
+                                            {{ form_widget(form.cible,{'attr': {'class':'form-control'}}) }}
+                                             <span class="help-block">
+                                                 {{ form_errors(form.cible) }}
+                                              </span>
+                                            </div>
+                                       </div>  
+                                  </div>    
+                            </div>
+                          </div>      
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    {{ form_rest(form) }}  
+                     </form>                        
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Liste <small>des droits</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                <div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <h3>EXPORTER</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-12">
+                                                                                <ul class="theme-colors">
+                                                                                         <li class="theme-color theme-color-default" data-theme="default" onclick="javascript:window.print();">
+                                                                                                    <span class="fa fa-print"></span>
+                                                                                                    <span class="theme-color-name">Imprimer</span>
+                                                                                    </li>
+                                                                                    <li class="theme-color theme-color-default" data-theme="default" onClick ="$('#details').tableExport({type:'excel',escape:'false',tableName:'Collaborateurs-droits'});">
+                                                                                                    <span class="theme-color-view"></span>
+                                                                                                    <span class="theme-color-name">Excel</span>
+                                                                                    </li>
+                                                                                    <!-- <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki" onClick ="$('#details').tableExport({type:'json',escape:'false'});">
+                                                                                                    <span class="theme-color-view"></span>
+                                                                                                    <span class="theme-color-name">Json</span>
+                                                                                    </li> -->
+                                                                                    <!-- <li class="theme-color theme-color-blue-steel" data-theme="blue-steel" onClick ="$('#details').tableExport({type:'doc',escape:'false',tableName:'Collaborateurs-droits'});">
+                                                                                                    <span class="theme-color-view"></span>
+                                                                                                    <span class="theme-color-name">Word</span>
+                                                                                    </li> -->
+                                                                                    <!-- <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange" onClick ="$('#details').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
+                                                                                                    <span class="theme-color-view"></span>
+                                                                                                    <span class="theme-color-name">PDF</span>
+                                                                                    </li> -->
+                                                                                    <!-- <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta" onClick ="$('#details').tableExport({type:'xml',escape:'false'});">
+                                                                                                    <span class="theme-color-view"></span>
+                                                                                                    <span class="theme-color-name">Xml</span>
+                                                                                    </li>  -->
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>
+        <!-- END PAGE HEAD -->    
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title" style="color: #345F98 !important;"><strong>Récapitulatif</strong></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                              <p>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Nombre de collaborateurs :</strong> {{ nombre_personnel }}
+                                                      <hr/>
+                                                    </span>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Droits totaux à congés (année en cours) :</strong> {{ total_droit_annee_encours }} jours 
+                                                      <hr/>
+                                                    </span>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Droits totaux à congés (années antérieures) :</strong> {{ total_droit_annee_anterieurs }} jours
+                                                      <hr/>
+                                                    </span>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Cumul droits à congés :</strong> {{ cumul_droit }} jours
+                                                      <hr/>
+                                                    </span>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Total jours congés pris :</strong> {{ total_droits_pris }} jours
+                                                      <hr/>
+                                                    </span>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Total jours absences autorisées :</strong> {{ total_permissions_prises }} jours
+                                                      <hr/>
+                                                    </span>
+                                                    <span style="color: #345F98 !important;">
+                                                      <strong> Total jours permissions disponibles :</strong> {{ solde_permissions }} jours
+                                                      <hr/>
+                                                    </span>
+                                                    <span>
+                                                      <strong class="text-danger"> Solde total des congés : {{ solde_total_conges }} Jours </strong>
+                                                    </span>
+                                              </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                                Liste des droits à congés des collaborateurs
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                               <!-- BEGIN PORTLET-->
+                                        <div class="portlet light ">
+                                                <div class="portlet-title">
+                                                        <div class="caption caption-md">
+                                                                <span class="caption-subject theme-font bold uppercase"><i class="fa fa-list fa-1x"></i> Droits des collaborateurs</span>
+                                                                <span class="caption-helper hide">weekly stats...</span>
+                                                        </div>
+                                                        <div class="actions">
+                                                            <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                                                <label class="btn btn-transparent green-salsa btn-circle btn-sm active">
+                                                               <a class="btn btn-s-md btn-danger" href="{{path('superviseur_demande_permission_for_salarie')}}" data-toggle="modal" ><i class="icon-book-open "></i> Nouvelle absence pour collaborateur +</a>
+                                                                </label>
+                                                                <label class="btn btn-transparent green-salsa btn-circle btn-sm active">
+                                                                <a class="btn btn-s-md btn-danger" href="{{path('superviseur_demande_conge_for_salarie')}}" data-toggle="modal" ><i class="icon-envelope "></i> Nouveau congé pour collaborateur +</a>
+                                                                </label>
+                                                                <label class="btn btn-transparent green-salsa btn-circle btn-sm active">
+                                                                <a class="btn btn-s-md btn-success" href="#portlet-config" data-toggle="modal" ><i class="fa fa-spinner "></i> Récapitulatif des droits</a>
+                                                                </label>
+                                                           </div>
+                                                           {# {% if salarie.poste == 'Directeur des Ressources Humaines' or salarie.poste == 'Chef du service Administration et gestion de la paie' or salarie.poste == 'Directeur Général' %}
+                                                                   <label class="btn btn-transparent blue-salsa btn-circle btn-sm">
+                                                                   <a class="btn btn-s-md btn-success" href="#allocation" data-toggle="modal" ><i class="icon-calculator "></i> Calcul de l'allocation</a></label>
+                                                                    {% endif %}#}
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                        <div class="table-scrollable table-scrollable-borderless">
+                                                                <table class="table table-hover table-light" id="details">
+                                                                <thead>
+                                                                <tr class="uppercase">
+                                                                        <th>Nom Prenom</th>
+                                                                        <th>Poste</th>
+                                                                        <th>Congés <br/>(Années anterieures)</th>
+                                                                        <th>Congés <br/>(Année en cours)</th>
+                                                                        <th>Cumul <br/>Congés</th>
+                                                                        <th>Congés<br/>Pris</th>
+                                                                        <th>Permissions<br/>Prises</th>
+                                                                        <th>Solde<br/>Permissions</th>
+                                                                        <th>Solde<br/>Congés</th>
+                                                                </tr>
+                                                                </thead>
+                                                              {% if list_salaries|length == 0 %}      
+                                                                {% for entities in entities %}
+                                                                    {% for entity in entities %}
+                                                                    {% if entity.poste != "Super Administrateur IMA" %}
+                                                                        {% if entity.poste != "Administrateur IMA" %}
+                                                                            {% if entity.statutEmploi == "Actif"%}
+                                                                    <tr>
+                                                                      <td>{{ entity.nomprenom }}</td>
+                                                                      <td>{{ entity.poste }}</td>
+                                                                      <td>{{ entity.droits.reliquatDroitsAnterieur }}</td>
+                                                                      <td>{{ entity.droits.droitsAcquisAnneeEnCours }}</td>
+                                                                      <td>{{ entity.droits.cumulDroitsAcquis }}</td>
+                                                                      <td>{{ entity.droits.droitsPris }}</td>
+                                                                      <td>{{ entity.droits.permissionsPrises }}</td>
+                                                                      <td>{{ entity.droits.soldePermissions }}</td>
+                                                                      <td>{{ entity.droits.totalDroitsAprendre }}</td>                        
+                                                                    </tr>
+                                                                        {% endif %}
+                                                                     {% endif %}
+                                                                  {% endif %}  
+                                                                 {% endfor %}
+                                                                {% endfor %} 
+                                                              {% endif %}  
+                                                                </table>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <!-- END PORTLET-->
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+th,td{
+        text-align: center;
+        color:#345F98 !important;
+}
+.theme-panel {
+  z-index: 999;
+  min-width: 180px;
+  padding: 20px 10px;
+  font-family: "Open Sans", sans-serif;
+}
+</style>
+<script src="{{ asset('bundles/kbhgestionconges/js/tableExport.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/jquery.base64.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/sprintf.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/jspdf.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/base64.js') }}" type="text/javascript"></script>
+    {% endblock %}

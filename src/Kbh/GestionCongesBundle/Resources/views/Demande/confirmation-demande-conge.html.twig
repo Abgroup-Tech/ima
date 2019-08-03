@@ -1,0 +1,247 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Formulaire <small> de demande</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                </div>
+        </div>
+        <!-- END PAGE HEAD -->       
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                                <a href="#">Demandes</a>
+                                <i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                                Nouveau congé
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">CONFIRMATION DEMANDE DE CONGE</span>
+                                                </div>
+                                                <div class="tools">
+                                                     {#   <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>#}
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="note note-success">
+                                                        <h4 class="block">CONFIRMATION!</h4>
+                                                        <p>
+                                                          VOULEZ-VOUS VRAIMENT CONFIRMER CETTE DEMANDE ?<br/>
+                                                          {% if feries%}
+                                                            Jours fériés ({{ feries|length }}) : <br/>
+                                                            {%for ferie in feries%}
+                                                                - {{ferie}}<br/>
+                                                            {%endfor%}
+                                                        {%endif%}
+                                                        </p>
+                                                </div>
+                                                {#<ul class="nav nav-pills">
+                                                        <li class="active">
+                                                                <a href="#tab_1" data-toggle="tab">
+                                                                Creer une nouvelle demande </a>
+                                                        </li>
+                                                        <li>
+                                                                <a href="#tab_2" data-toggle="tab">
+                                                                Justifier une absence </a>
+                                                        </li>
+                                                </ul>#}
+                                                <div class="tab-content">
+                                                        <div class="tab-pane fade active in" id="tab_1">
+                                                                <p></p>
+                                                 <!-- BEGIN DES RECAP DE DROITS -->
+                                                         <br/>
+                                                         <div class="row" style="margin-bottom: -18px !important;  border-bottom:1px solid #eaeef1; padding-bottom: 35px;">
+                                                                <div class="col-lg-12">
+                                                                   <div class="row list-separated text-center clearfix">
+                                                                          <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                                                <div class="font-grey-mint font-sm">
+                                                                                         Cumul congés acquis
+                                                                                </div>
+                                                                                <div class="uppercase font-hg font-blue-sharp">
+                                                                                         {{ droits.CumulDroitsAcquis }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                                            <div class="font-grey-mint font-sm">
+                                                                                     Congés pris
+                                                                            </div>
+                                                                            <div class="uppercase font-hg font-blue-sharp">
+                                                                                     {{ droits.DroitsPris }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-sm-2 col-xs-6">
+                                                                            <div class="font-grey-mint font-sm">
+                                                                                     Solde congés
+                                                                            </div>
+                                                                            <div class="uppercase font-hg font-blue-sharp">
+                                                                                     {{ droits.totalDroitsAprendre }} <span class="font-lg font-grey-mint" style="font-size:11px;">Jours</span>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                           </div>
+                                                    </div>                         
+                                                <!-- END DES RECAP DE DROITS -->
+                                                    <br/>
+                                                <!-- BEGIN CHAMP FORMULAIRE -->
+                                                   <div class="row">
+                                                        <div class="portlet light">
+                                                               <div class="portlet-body form">
+                                                                            <!-- BEGIN FORM-->
+                                                                                {{ form_start(form, {'attr': {'data-validate' : 'parsley', 'class': 'form-horizontal'}}) }}
+                                                                                    <div class="form-body" id="form-demande">
+                                                                                           
+                                                                                            <div class="row">
+                                                                                                    <div class="col-md-12" style="padding-top: 18px;">
+                                                                                                            <div class="form-group">
+                                                                                                                    
+                                                                                                                    <label class="control-label col-md-3">Durée</label>
+                                                                                                                    <div class="col-md-6">
+                                                                                                                           {# <input id="nbJours" name="nbJours" min="1" type="number" step="1" class="form-control">#}
+                                                                                                                         {{ form_widget(form.nbJoursOuvrables, {'attr': {'class': 'form-control','type': 'number','readonly':'true'}}) }}
+                                                                                                                    <span class="help-block">
+                                                                                                                        Durée de votre congé ( en jours ouvrable )</span>
+                                                                                                                    </div>
+                                                                                                                    
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <!--/span-->
+                                                                                                    <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="control-label col-md-3">Date Départ</label>
+                                                                                                                <div class="col-md-6">
+                                                                                                                   <div class="col-md-12 input-group">
+                                                                                                                            <div class="input-icon">
+                                                                                                                                    <i class="fa fa-calendar fa-fw"></i>
+                                                                                                                                    <input id="dateDebut" class="form-control" type="date" value="{{ entity.dateDebut|date('Y-m-d') }}" readonly>
+                                                                                                                                     {#{{ form_widget(form.dateDebut, {'attr': {'class': 'form-control', 'type': 'datetime','readonly':'true'}}) }}#}
+                                                                                                                            </div>
+                                                                                                                    </div>
+                                                                                                                <span class="help-block">
+                                                                                                                        Jour de votre départ en congé</span>        
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="form-group">
+                                                                                                        <label class="control-label col-md-3">Date de Fin</label>
+                                                                                                        <div class="col-md-6">
+                                                                                                            <div class="col-md-12 input-group">
+                                                                                                                <div class="input-icon">
+                                                                                                                    <i class="fa fa-calendar fa-fw"></i>
+                                                                                                                    <input id="dateFin" type="date" class="form-control" value="{{entity.dateFin|date('Y-m-d')}}" readonly="true">
+                                                                                                                    <span class="help-block">
+                                                                                                                            Date de fin de votre congé</span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <span class="help-block">
+                                                                                                                        {{ form_errors(form.dateFin) }}</span>
+                                                                                                            {#<br/>#}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-12" style="padding-bottom:40px;">
+                                                                                                    <div class="form-group">
+                                                                                                        <label class="control-label col-md-3">Date de retour</label>
+                                                                                                        <div class="col-md-6">
+                                                                                                            <div class="col-md-12 input-group">
+                                                                                                                <div class="input-icon">
+                                                                                                                    <i class="fa fa-calendar fa-fw"></i>
+                                                                                                                    <input id="dateRetour" type="date" class="form-control" value="{{entity.dateRetour|date('Y-m-d')}}" readonly="true">
+                                                                                                                    <span class="help-block">
+                                                                                                                              Date de reprise du travail</span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <span class="help-block">
+                                                                                                                        {{ form_errors(form.dateRetour) }}</span>
+                                                                                                            {#<br/>#}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                                   
+                                                                                            </div> 
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <footer class="panel-footer text-right bg-light lter">
+                                                                                           <a class="btn btn-danger btn-s-xs" href="{{path('sa_demande_conge_new')}}"> Annuler </a>
+                                                                                           <input id="valider" type="submit" class="btn btn-success btn-s-xs" value="Confirmer la demande"/>
+                                                                                        </footer>
+                                                                                        <span style="display: none">{{ form_rest(form) }}  </span>
+                                                                                        {{ form_end(form) }}
+                                                                                    </div>                                    
+                                                                            <!-- END FORM-->
+                                                               </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- END PAGE CONTAINER-->
+                </div>
+                <!-- BEGIN PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+</div>                
+<script>
+$("document").ready( function() {
+
+   // Au chargement de la page les éléments sont insérés
+   
+    $("#kbh_gestioncongesbundle_demande_dateFin").val($("#dateFin").val());
+    $("#kbh_gestioncongesbundle_demande_dateRetour").val($("#dateRetour").val());                
+
+    console.log("date : "+$("#kbh_gestioncongesbundle_demande_dateDebut").val()+" dateDebut!!!");
+    console.log("date : "+$("#kbh_gestioncongesbundle_demande_dateFin").val()+" dateFin!!!");
+    console.log("date : "+$("#kbh_gestioncongesbundle_demande_dateRetour").val()+" dateRetour!!!");
+
+});
+</script>                                                                                        
+{% endblock %}

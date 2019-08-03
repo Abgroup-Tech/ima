@@ -1,0 +1,53 @@
+<?php
+
+namespace Kbh\UserBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+
+
+/**
+ * User
+ */
+class User extends BaseUser
+{
+   protected $id;
+   
+//   protected $fullname;
+//    /**
+//     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+//     *
+//     * @ORM\OneToOne(targetEntity="Kbh\GestionCongesBundle\Entity\Salarie" , inversedBy="user")
+//     * @ORM\JoinColumn(name="salarie", referencedColumnName="id")
+//     * 
+//     */
+//    protected $salarie;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+//    
+//    public function getFullname() {
+//        return $this->fullname;
+//    }
+//
+//    public function setFullname($fullname) {
+//        $this->fullname = $fullname;
+//    }
+//
+//    public function getSalarie() {
+//        return $this->salarie;
+//    }
+//
+//    public function setSalarie(\Kbh\GestionCongesBundle\Entity\Salarie $salarie) {
+//        $this->salarie = $salarie;
+//    }
+
+
+   
+}

@@ -1,0 +1,368 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="update-entreprise" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{ form_start(edit_form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modifier informations</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <div class="form-group last">
+                                    <label class="control-label col-md-3">Logo de l'entreprise</label>
+                                    <div class="col-md-8">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                {% if entity.logo %} <img src="{{ asset('uploads/' ~ entity.logo.path) }}" class="img-responsive" alt="">{% endif %}
+                                                {% if not entity.logo %} <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" class="img-responsive" alt="">{% endif %}
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                            </div>
+                                            <div>
+                                                <span class="btn default btn-file">
+                                                    <span class="fileinput-new">
+                                                        Choisir une image </span>
+                                                    <span class="fileinput-exists">
+                                                        Changer </span>
+                                                        {{ form_widget(edit_form.logo.file) }}
+                                                </span>
+                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                    Supprimer </a>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix margin-top-10">
+                                            <span class="label label-danger" style="margin-right:8px;">
+                                                NOTE! 
+                                            </span> Pour un meilleur rendu veuillez insérer une belle image.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">titre logo</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(edit_form.logo.name,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nom entreprise</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(edit_form.nom,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nom"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre employés</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(edit_form.nbSalaries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date implémentation</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(edit_form.dateImplementation,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date livraison</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(edit_form.dateLivraison,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                        {{ form_end(edit_form) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            {#  ################################## #}
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="new-ferie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{ form_start(feriesForm,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Nouveau fériés</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Titre ferié</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.titreFeries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un férié"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de début</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.dateDebutFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de début"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de fin</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.dateFinFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de fin"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre de jours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.nbJoursFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre de jours"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                        {{ form_end(feriesForm) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            {#  ################################ #}
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="new-permission" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{ form_start(permissionForm,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Nouvelle permission</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Motif permission</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(permissionForm.motif,{'attr': {'class':'form-control', 'placeholder':"Saisissez un motif"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>     
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Durée</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(permissionForm.duree,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre de jours"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                        {{ form_end(permissionForm) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Paramètre système
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="portlet light">
+                <div class="portlet-body">
+                    <div class="invoice">
+                        <div class="row invoice-logo">
+                            <div class="col-md-9 invoice-logo-space">
+                                {% if entity.logo %} <img src="{{ asset('uploads/' ~ entity.logo.path) }}" class="img-responsive" alt="">{% endif %}
+                                {% if not entity.logo %} <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>{% endif %}
+
+                            </div>
+                            <div class="col-md-3">
+                                <h3>Details client:</h3>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <strong>Nom entreprise:</strong> {{entity.nom}}
+                                    </li>
+                                    <li>
+                                        <strong>Nombre employés:</strong> {{entity.nbSalaries}}
+                                    </li>
+                                    <li>
+                                        <strong>Date implementation:</strong> {{entity.dateImplementation|date('d-m-Y')}}
+                                    </li>
+                                    <li>
+                                        <strong>Date livraison :</strong> {{entity.dateLivraison|date('d-m-Y')}}
+                                    </li>
+                                </ul>
+
+                                <div class="btn-group">
+                                    <div class="btn-group">
+                                        <a href="#update-entreprise" class="btn red" data-toggle="modal">
+                                            Modifier informations
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Liste des féries: </h3>
+                                <div class="btn-group">
+                                    <a href="#new-ferie" class="btn green" data-toggle="modal">
+                                        + Nouveau férié 
+                                    </a>
+                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                                Titre féries
+                                            </th>
+                                            <th class="hidden-480">
+                                                Date début  
+                                            </th>
+                                            <th class="hidden-480">
+                                                Date fin
+                                            </th>
+                                            <th class="hidden-480">
+                                                Nombre jours
+                                            </th>
+                                            <th class="hidden-480">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ferie in feries%}
+                                            <tr>
+                                                <td>
+                                                    {{ferie.id}}
+                                                </td>
+                                                <td>
+                                                    {{ferie.titreFeries}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{ferie.dateDebutFerie|date('d-m-Y')}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{ferie.dateFinFerie|date('d-m-Y')}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{ferie.nbJoursFerie}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    <a href="{{ path('ad_feries_edit', { 'id': ferie.id }) }}" class="btn btn-sm btn red" >
+                                                        modifier
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Liste des permissions exceptionnelles:</h3>
+                                <div class="btn-group">
+                                    <a href="#new-permission" class="btn green" data-toggle="modal">
+                                        + Nouvelle permission 
+                                    </a>
+                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                                Motif
+                                            </th>
+                                            <th class="hidden-480">
+                                                Durée
+                                            </th>
+                                            <th class="hidden-480">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for param_permission in param_permission%}
+                                            <tr>
+                                                <td>
+                                                    {{param_permission.id}}
+                                                </td>
+                                                <td>
+                                                    {{param_permission.motif}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    {{param_permission.duree}}
+                                                </td>
+                                                <td class="hidden-480">
+                                                    <a href="{{ path('ad_permissions_edit', { 'id': param_permission.id }) }}" class="btn btn-sm btn red" >
+                                                        modifier
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
+{% endblock %}

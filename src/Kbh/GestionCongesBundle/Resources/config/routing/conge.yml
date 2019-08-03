@@ -1,0 +1,30 @@
+conge:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:index" }
+
+conge_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:show" }
+
+conge_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:new" }
+
+conge_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:create" }
+    requirements: { _method: post }
+
+conge_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:edit" }
+
+conge_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:update" }
+    requirements: { _method: post|put }
+
+conge_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:delete" }
+    requirements: { _method: post|delete }

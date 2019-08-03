@@ -1,0 +1,653 @@
+dashboard_super_admin:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Default:dashboardSuperAdmin" }  
+ 
+#######################   SALARIE   #############################
+sup_ad_salarie:
+    path:     /salaries
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:index" }
+
+sup_ad_salarie_show:
+    path:     /salarie/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:show" }
+
+sup_ad_salarie_active_compte:
+    path:     /salarie/{id}/activer-compte
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:activeCompte" }        
+    
+sup_ad_salarie_desactive_compte:
+    path:     /salarie/{id}/desactive-compte
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:desactiveCompte" }      
+    
+sup_ad_salarie_new_role:
+    path:     /salarie/{id}/new-role
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:newRole" }    
+    
+sup_ad_salarie_delete_role:
+    path:     /salarie/{id}/delete-role
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:deleteRole" }        
+    
+sup_ad_salarie_add_role:
+    path:     /salarie/{id}/add-role
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:addRole" }
+    requirements: { _method: post|put }    
+    
+sup_ad_salarie_remove_role:
+    path:     /salarie/{id}/remove-role
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:removeRole" }              
+
+sup_ad_salarie_new:
+    path:     /salarie/new
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:new" }
+
+sup_ad_salarie_create:
+    path:     /salarie/create
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:create" }
+    requirements: { _method: post }
+
+sup_ad_config_create:
+    path:     /config-salarie/create
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:createConfig" }
+    requirements: { _method: post }
+
+sup_ad_salarie_edit:
+    path:     /salarie/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:edit" }
+    
+sup_ad_salarie_edit_user:
+    path:     /salarie/{id}/edit-user
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:editUser" }      
+
+sup_ad_salarie_update_user:
+    path:     /salarie/{id}/update-user
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:updateUser" }
+    requirements: { _method: post|put }
+
+sup_ad_salarie_edit_user_pass:
+    path:     /salarie/{id}/edit-user-pass
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:editUserPass" }    
+
+sup_ad_salarie_update_user_pass:
+    path:     /salarie/{id}/update-user-pass
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:updateUserPAss" }
+    requirements: { _method: post|put }
+
+sup_ad_salarie_update:
+    path:     /salarie/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:update" }
+    requirements: { _method: post|put }
+    
+sup_ad_baseDroitsSalarie_edit:
+    path:     /base-droits/salarie/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:editBaseCalculDroits" }
+
+sup_ad_baseDroitsSalarie_create:
+    path:     /base-droits/salarie/{id}/create
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:baseCalculDroitsCreate" }
+    requirements: { _method: post }    
+    
+sup_ad_baseDroitsSalarie_update:
+    path:     /base-droits/salarie/{id}/update/{bd}
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:updateBaseCalculDroits" }
+    requirements: { _method: post|put }        
+
+#######################   DROITS   #############################
+
+sup_ad_droits_show:
+    path:     /droits/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:show" }
+
+sup_ad_droits_list:
+    path:     /droits/liste
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:index" }  
+    
+sup_ad_droits_new:
+    path:     /droits/new
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:new" }
+
+sup_ad_droits_create:
+    path:     /droits/create
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:create" }
+    requirements: { _method: post }
+
+sup_ad_droits_edit:
+    path:     /droits/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:edit" }
+    
+sup_ad_droits_edit2:
+    path:     /droits-sys/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:edit2" }
+
+sup_ad_droits_update:
+    path:     /droits/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:update" }
+    requirements: { _method: post|put }
+    
+sup_ad_droits_update2:
+    path:     /droits-sys/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:update2" }
+    requirements: { _method: post|put }    
+
+sup_ad_droits_transfert:
+    path:     /droits/transfert
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:transfert" }    
+    
+#######################   IMPORT DE DOCUMENTS  #############################
+
+sup_ad_document_create:
+    path:     /document/create
+    defaults: { _controller: "KbhGestionCongesBundle:Default:createDocument" }
+
+sup_ad_document_sa_import:
+    path:     /document/import-salaries/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importSalarie" }
+    
+sup_ad_document_unit_import:
+    path:     /document/import-unites/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importUnite" }
+
+sup_ad_import_edit_salarie:
+    path:     /import-salarie/show/{id}/edit/{id_salarie}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importSalarieEdit" }
+    
+sup_ad_import_edit_unite:
+    path:     /import-unite/show/{id}/edit/{id_unit}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importUniteEdit" }    
+
+sup_ad_import_show_sa:
+    path:     /import-salarie/show/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importShowSalaries" }
+    
+sup_ad_import_show_unit:
+    path:     /import-unite/show/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importShowUnit" }
+
+sup_ad_documents_show:
+    path:     /documents/Liste
+    defaults: { _controller: "KbhGestionCongesBundle:Document:documentsListe" }
+
+sup_ad_import_sa_update:
+    path:     /import-salarie/update/{id}/{doc}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:updateSalarie" }
+    requirements: { _method: post|put }
+
+sup_ad_import_unit_update:
+    path:     /import-unite/update/{id}/{doc}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:updateUnite" }
+    requirements: { _method: post|put }  
+    
+sup_ad_document_delete:
+    path:     /document/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Document:deleteDocument" }
+    
+sup_ad_import_unit_migration:
+    path:     /import-unite/migration/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:migrationUnite" }
+    
+sup_ad_import_sa_migration:
+    path:     /import-salarie/migration/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:migrationSalarie" } 
+
+#######################   PARAMETRES ###########################
+
+sup_ad_systeme_show:
+    path:     /systeme
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:show" }
+
+sup_ad_feries_create:
+    path:     /feries/create
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:createFeries" }
+    requirements: { _method: post }
+    
+sup_ad_permissions_create:
+    path:     /permissions/create
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:createPermissions" }
+    requirements: { _method: post }    
+
+sup_ad_entreprise_edit:
+    path:     /entreprise/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:edit" }
+
+sup_ad_entreprise_update:
+    path:     /entreprise/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:updateEntreprise" }
+    requirements: { _method: post|put }
+    
+sup_ad_feries_edit:
+    path:     /feries/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:editFeries" }
+
+sup_ad_feries_update:
+    path:     /feries/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:updateFeries" }
+    requirements: { _method: post|put }
+    
+sup_ad_permissions_edit:
+    path:     /permissions/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:editPermissions" }
+
+sup_ad_permissions_update:
+    path:     /permissions/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:updatePermissions" }
+    requirements: { _method: post|put }   
+    
+sup_ad_feries_delete:
+    path:     /feries/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:deleteFeries" }
+    methods:  [POST, DELETE]
+    
+sup_ad_permissions_delete:
+    path:     /permissions/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Entreprise:deletePermissions" }
+    methods:  [POST, DELETE]       
+
+##########################   FAQ   ############################
+
+sup_ad_faq:
+    path:     /FAQ
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:index" }
+
+sup_ad_faq_new:
+    path:     /FAQ/new
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:new" }
+
+sup_ad_faq_create:
+    path:     /FAQ/create
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:create" }
+    methods:  POST
+
+sup_ad_faq_edit:
+    path:     /FAQ/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:edit" }
+
+sup_ad_faq_update:
+    path:     /FAQ/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:update" }
+    methods:  [POST, PUT]
+
+sup_ad_faq_delete:
+    path:     /FAQ/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:delete" }
+    methods:  [POST, DELETE]
+
+    ##########################   ORGANIGRAMME UNITE   ############################
+
+sup_ad_organigrammeunite:
+    path:     /unite
+    defaults: { _controller: "KbhGestionCongesBundle:OrganigrammeUnite:indexSupAdmin" }
+    
+sup_ad_organigrammeunite_show:
+    path:     /unite/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:OrganigrammeUnite:show" }
+    
+sup_ad_organigrammeunite_new:
+    path:     /unite/new
+    defaults: { _controller: "KbhGestionCongesBundle:OrganigrammeUnite:newSupAdmin" }
+
+sup_ad_organigrammeunite_create:
+    path:     /unite/create
+    defaults: { _controller: "KbhGestionCongesBundle:OrganigrammeUnite:create" }
+    requirements: { _method: post }
+
+sup_ad_organigrammeunite_edit:
+    path:     /unite/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:OrganigrammeUnite:editSupAdmin" }
+
+sup_ad_organigrammeunite_update:
+    path:     /unite/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:OrganigrammeUnite:update" }
+    requirements: { _method: post|put }
+
+    ##########################   PARAMETRES CALCULS DROITS   ############################
+
+sup_ad_paramcalculsdroits:
+    path:     /paramcalculsdroits
+    defaults: { _controller: "KbhGestionCongesBundle:ParamCalculsDroits:index" }
+
+sup_ad_paramcalculsdroits_show:
+    path:     /paramcalculsdroits/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:ParamCalculsDroits:show" }
+
+sup_ad_paramcalculsdroits_new:
+    path:     /paramcalculsdroits/new
+    defaults: { _controller: "KbhGestionCongesBundle:ParamCalculsDroits:new" }
+
+sup_ad_paramcalculsdroits_create:
+    path:     /paramcalculsdroits/create
+    defaults: { _controller: "KbhGestionCongesBundle:ParamCalculsDroits:create" }
+    requirements: { _method: post }
+
+sup_ad_paramcalculsdroits_edit:
+    path:     /paramcalculsdroits/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:ParamCalculsDroits:edit" }
+
+sup_ad_paramcalculsdroits_update:
+    path:     /paramcalculsdroits/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:ParamCalculsDroits:update" }
+    requirements: { _method: post|put }
+
+    ##########################   PARAMETRE PERMISSIONS   ############################
+
+sup_ad_parampermissions:
+    path:     /parampermissions
+    defaults: { _controller: "KbhGestionCongesBundle:ParamPermissions:index" }
+
+sup_ad_parampermissions_show:
+    path:     /parampermissions/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:ParamPermissions:show" }
+
+sup_ad_parampermissions_new:
+    path:     /parampermissions/new
+    defaults: { _controller: "KbhGestionCongesBundle:ParamPermissions:new" }
+
+sup_ad_parampermissions_create:
+    path:     /parampermissions/create
+    defaults: { _controller: "KbhGestionCongesBundle:ParamPermissions:create" }
+    requirements: { _method: post }
+
+sup_ad_parampermissions_edit:
+    path:     /parampermissions/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:ParamPermissions:edit" }
+
+sup_ad_parampermissions_update:
+    path:     /parampermissions/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:ParamPermissions:update" }
+    requirements: { _method: post|put }
+
+##########################   HISTORIQUES  ############################
+    
+sup_ad_historique_activities:
+    path:     /historique/activités
+    defaults: { _controller: "KbhGestionCongesBundle:Default:historiqueActivites" } 
+
+sup_ad_historique_mise_ajours:
+    path:     /historique/mises-a-jours
+    defaults: { _controller: "KbhGestionCongesBundle:Default:historiqueMisesAjours" } 
+    
+sup_ad_search_mise_ajours:
+    path:     /historique/mises-a-jours/mensuel/{month}
+    defaults: { _controller: "KbhGestionCongesBundle:Default:searchMonth" }     
+    
+sup_ad_search_mise_ajours_annuel:
+    path:     /historique/mises-a-jours/annuel/{year}
+    defaults: { _controller: "KbhGestionCongesBundle:Default:searchYear" }       
+    
+sup_ad_search_activities:
+    path:     /historique/activitiés/mensuel/{month}
+    defaults: { _controller: "KbhGestionCongesBundle:Default:searchMonthActivities" }           
+
+##################################################################################
+########################## LISTE DES DONNEES EN BASE   ############################
+##################################################################################
+
+############################### ABSENCES A JUSTIFIER #############################
+
+sup_ad_absJustif:
+    path:     /systeme/table/absence-à-justifier
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:absJustifListe" }
+    
+sup_ad_absencesajustifier_edit:
+    path:     /systeme/table/absence-à-justifier/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editAbsJustif" }
+    
+sup_ad_absencesajustifier_update:
+    path:     /systeme/table/absence-à-justifier/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateAbsJustif" }
+    methods:  [POST, PUT]    
+
+sup_ad_absencesajustifier_delete:
+    path:     /systeme/table/absence-à-justifier/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteAbsJustif" }    
+    
+######################### ABSENCES ARRÊT DE TRAVAIL  ###########################
+
+sup_ad_absAT:
+    path:     /systeme/table/absence-arrêt-travail
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:absATListe" }
+    
+sup_ad_absAT_edit:
+    path:     /systeme/table/absence-arrêt-travail/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editAbsAT" }
+    
+sup_ad_absAT_update:
+    path:     /systeme/table/absence-arrêt-travail/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateAbsAT" }
+    methods:  [POST, PUT]     
+
+sup_ad_absAT_delete:
+    path:     /systeme/table/absence-arrêt-travail/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteAbsAT" }    
+    
+######################### ABSENCES   ###########################
+
+sup_ad_abs:
+    path:     /systeme/table/absences
+    defaults: { _controller: "KbhGestionCongesBundle:Absence:absListe" }
+    
+sup_ad_abs_edit:
+    path:     /systeme/table/absences/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editAbs" }
+    
+sup_ad_abs_update:
+    path:     /systeme/table/absences/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateAbs" }
+    methods:  [POST, PUT]       
+    
+sup_ad_abs_delete:
+    path:     /systeme/table/absences/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteAbs" }
+    
+######################### CONGES  ###########################
+
+sup_ad_conges:
+    path:     /systeme/table/congés
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:congesListe" }
+  
+sup_ad_conge_edit:
+    path:     /systeme/table/congés/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editConge" }
+    
+sup_ad_conge_update:
+    path:     /systeme/table/congés/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateConge" }
+    methods:  [POST, PUT]  
+ 
+sup_ad_conge_delete:
+    path:     /systeme/table/congés/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteConge" }
+    
+######################### DEMANDES  ###########################
+
+sup_ad_demandes:
+    path:     /systeme/table/demandes
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:demandesListe" }        
+
+sup_ad_demandes_edit:
+    path:     /systeme/table/demandes/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editDemande" }
+    
+sup_ad_demandes_update:
+    path:     /systeme/table/demandes/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateDemande" }
+    methods:  [POST, PUT]  
+ 
+sup_ad_demandes_delete:
+    path:     /systeme/table/demandes/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteDemande" }    
+    
+######################### DOCUMENTS  ###########################
+
+sup_ad_documents_sys:
+    path:     /systeme/table/documents
+    defaults: { _controller: "KbhGestionCongesBundle:Document:documentsSysListe" }    
+
+sup_ad_documents_sys_edit:
+    path:     /systeme/table/documents/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editDocument" }
+    
+sup_ad_documents_sys_update:
+    path:     /systeme/table/documents/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateDocument" }
+    methods:  [POST, PUT]  
+ 
+sup_ad_documents_sys_delete:
+    path:     /systeme/table/documents/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteDocument" }    
+    
+######################### PIECES JOINTES  ###########################
+
+sup_ad_piecesJointes:
+    path:     /systeme/table/pièces-jointes
+    defaults: { _controller: "KbhGestionCongesBundle:Document:PiecesJointesSysListe" }     
+    
+sup_ad_piecesJointes_edit:
+    path:     /systeme/table/pièces-jointes/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editPiecesJointes" }
+    
+sup_ad_piecesJointes_update:
+    path:     /systeme/table/pièces-jointes/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updatePiecesJointes" }
+    methods:  [POST, PUT]      
+ 
+sup_ad_piecesJointes_delete:
+    path:     /systeme/table/pièces-jointes/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deletePiecesJointes" }
+    
+######################### LOG UPDATES MENSUEL  ###########################
+
+sup_ad_logUpdate_mensuel:
+    path:     /systeme/table/update-mensuel
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateMensuelListe" }        
+
+sup_ad_logUpdate_mensuel_edit:
+    path:     /systeme/table/update-mensuel/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editUpdateMensuel" }
+    
+sup_ad_logUpdate_mensuel_update:
+    path:     /systeme/table/update-mensuel/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateUMensuel" }
+    methods:  [POST, PUT]    
+ 
+sup_ad_logUpdate_mensuel_delete:
+    path:     /systeme/table/update-mensuel/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteUpdateMensuel" }
+    
+######################### LOG UPDATE ANNUEL  ###########################
+
+sup_ad_logUpdate_annuel:
+    path:     /systeme/table/update-annuel
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateAnnuelListe" }        
+
+sup_ad_logUpdate_annuel_edit:
+    path:     /systeme/table/update-annuel/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editUpdateAnnuel" }
+    
+sup_ad_logUpdate_annuel_update:
+    path:     /systeme/table/update-annuel/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateUAnnuel" }
+    methods:  [POST, PUT]    
+ 
+sup_ad_logUpdate_annuel_delete:
+    path:     /systeme/table/update-annuel/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteUpdateAnnuel" }
+    
+######################### NOTIFICATIONS  ###########################
+
+sup_ad_notifications:
+    path:     /systeme/table/notifications
+    defaults: { _controller: "KbhGestionCongesBundle:Base:notificationsListe" }        
+
+sup_ad_notifications_edit:
+    path:     /systeme/table/notifications/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editNotifications" }
+    
+sup_ad_notifications_update:
+    path:     /systeme/table/notifications/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateNotifications" }
+    methods:  [POST, PUT]     
+ 
+sup_ad_notifications_delete:
+    path:     /systeme/table/notifications/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteNotifications" }
+
+######################### ETATS  ###########################
+
+sup_ad_etats:
+    path:     /systeme/table/etats
+    defaults: { _controller: "KbhGestionCongesBundle:Base:etatsListe" }  
+
+sup_ad_etats_edit:
+    path:     /systeme/table/etats/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editEtats" }
+    
+sup_ad_etats_update:
+    path:     /systeme/table/etats/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateEtats" }
+    methods:  [POST, PUT]   
+ 
+sup_ad_etats_delete:
+    path:     /systeme/table/etats/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteEtats" }
+    
+######################### HISTORIQUE DROITS  ###########################
+
+sup_ad_historique_droits:
+    path:     /systeme/table/historique-droits
+    defaults: { _controller: "KbhGestionCongesBundle:Base:historiqueDroitsListe" } 
+
+sup_ad_historique_droits_edit:
+    path:     /systeme/table/historique-droits/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editHistoriqueDroits" }
+    
+sup_ad_historique_droits_update:
+    path:     /systeme/table/historique-droits/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateHistoriqueDroits" }
+    methods:  [POST, PUT]       
+ 
+sup_ad_historique_droits_delete:
+    path:     /systeme/table/historique-droits/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteHistoriqueDroits" }
+    
+######################### LOG ACTIVITES  ###########################
+
+sup_ad_log_activites:
+    path:     /systeme/table/log-activites
+    defaults: { _controller: "KbhGestionCongesBundle:Base:activitesListe" }          
+
+sup_ad_log_activites_edit:
+    path:     /systeme/table/log-activites/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editActivites" }
+    
+sup_ad_log_activites_update:
+    path:     /systeme/table/log-activites/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateActivites" }
+    methods:  [POST, PUT]  
+ 
+sup_ad_log_activites_delete:
+    path:     /systeme/table/log-activites/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteActivites" }
+    
+######################### REPORT  ###########################
+
+sup_ad_report:
+    path:     /systeme/table/report
+    defaults: { _controller: "KbhGestionCongesBundle:Base:reportListe" }        
+
+sup_ad_report_edit:
+    path:     /systeme/table/report/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Base:editReport" }
+    
+sup_ad_report_update:
+    path:     /systeme/table/report/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Base:updateReport" }
+    methods:  [POST, PUT]      
+    
+sup_ad_report_delete:
+    path:     /systeme/table/report/{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Base:deleteReport" }
+    
+######################### REINITIALISATION DES DONNEES  ###########################    
+
+sup_ad_reinitialisation_donnees:
+    path:     /systeme/table/reinitialisation/{table}
+    defaults: { _controller: "KbhGestionCongesBundle:Base:reinitialiserDonnees" }

@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Absence creation</h1>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+    <div>
+        {{ form_label(form.type,'Votre demande concerne:') }}
+        {{ form_errors(form.type) }}
+        {{ form_widget(form.type) }}
+        <p>Vous avez droit à  jours</p>
+    </div>
+    
+    <div>
+        {{ form_label(form.dateDebut,'Date de début:') }}
+        {{ form_errors(form.dateDebut) }}
+        {{ form_widget(form.dateDebut) }}
+    </div>
+    <div>
+        {{ form_label(form.dateFin,'Date de fin:') }}
+        {{ form_errors(form.dateFin) }}
+        {{ form_widget(form.dateFin) }}
+    </div>
+   {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+      {#  <a href="{{ path('absence') }}">
+            Back to the list
+        </a>#}
+    </li>
+</ul>
+{% endblock %}

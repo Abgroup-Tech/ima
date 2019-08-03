@@ -1,0 +1,30 @@
+faq:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:index" }
+
+faq_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:show" }
+
+faq_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:new" }
+
+faq_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:create" }
+    methods:  POST
+
+faq_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:edit" }
+
+faq_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:update" }
+    methods:  [POST, PUT]
+
+faq_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:delete" }
+    methods:  [POST, DELETE]

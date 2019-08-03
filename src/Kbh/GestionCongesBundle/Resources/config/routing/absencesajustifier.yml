@@ -1,0 +1,30 @@
+absencesajustifier:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:index" }
+
+absencesajustifier_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:show" }
+
+absencesajustifier_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:new" }
+
+absencesajustifier_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:create" }
+    methods:  POST
+
+absencesajustifier_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:edit" }
+
+absencesajustifier_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:update" }
+    methods:  [POST, PUT]
+
+absencesajustifier_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAjustifier:delete" }
+    methods:  [POST, DELETE]

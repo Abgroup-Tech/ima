@@ -1,0 +1,63 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+  <h1>OrganigrammeUnite</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Sigle</th>
+                <td>{{ entity.sigle }}</td>
+            </tr>
+            <tr>
+                <th>Estservice</th>
+                <td>{{ entity.estService }}</td>
+            </tr>
+            <tr>
+                <th>Estcellule</th>
+                <td>{{ entity.estCellule }}</td>
+            </tr>
+            <tr>
+                <th>Estdepartement</th>
+                <td>{{ entity.estDepartement }}</td>
+            </tr>
+            <tr>
+                <th>Estdirection</th>
+                <td>{{ entity.estDirection }}</td>
+            </tr>
+            <tr>
+                <th>Estdga</th>
+                <td>{{ entity.estDga }}</td>
+            </tr>
+            <tr>
+                <th>Estdg</th>
+                <td>{{ entity.estDg }}</td>
+            </tr>
+            <tr>
+                <th>Estdrh</th>
+                <td>{{ entity.estDrh }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('ad_organigrammeunite') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('ad_organigrammeunite_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+    </ul>  
+{% endblock %}

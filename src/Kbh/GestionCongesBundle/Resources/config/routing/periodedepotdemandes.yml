@@ -1,0 +1,30 @@
+periodedepotdemandes:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:index" }
+
+periodedepotdemandes_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:show" }
+
+periodedepotdemandes_new:
+    path:     /new
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:new" }
+
+periodedepotdemandes_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:create" }
+    methods:  POST
+
+periodedepotdemandes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:edit" }
+
+periodedepotdemandes_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:update" }
+    methods:  [POST, PUT]
+
+periodedepotdemandes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:PeriodeDepotDemandes:delete" }
+    methods:  [POST, DELETE]

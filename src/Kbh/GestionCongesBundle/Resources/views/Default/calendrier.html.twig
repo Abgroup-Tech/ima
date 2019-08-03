@@ -1,0 +1,133 @@
+{% extends '::base.html.twig' %}
+        {% block stylesheets %}
+        <link href="{{ asset('bundles/kbhgestionconges/css/app.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/kbhgestionconges/css/animate.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/bootstrap.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/font.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/icon.css') }}" type="text/css" rel="stylesheet" />        
+        <link href="{{ asset('bundles/kbhgestionconges/css/jquery-ui.min.css') }}" rel='stylesheet' />
+        <link href="{{ asset('bundles/kbhgestionconges/css/fullcalendar.css') }}" rel='stylesheet' />
+        <link href="{{ asset('bundles/kbhgestionconges/css/fullcalendar.print.css') }}" rel='stylesheet' media='print' />
+        {% endblock %}
+        
+            {% block javascripts %} 
+         <script src="{{ asset('bundles/kbhgestionconges/js/jquery.min.js') }}" type="text/javascript"></script>
+         <script src="{{ asset('bundles/kbhgestionconges/js/bootstrap.js') }}" type="text/javascript"></script>    
+         <script src="{{ asset('bundles/kbhgestionconges/js/moment.min.js') }}"></script>
+         <script src="{{ asset('bundles/kbhgestionconges/js/fullcalendar.min.js') }}"></script>
+         <script src="{{ asset('bundles/kbhgestionconges/js/lang-all.js') }}"></script>
+         <script>
+
+	$(document).ready(function() {
+		var currentLangCode = 'fr';
+
+		// build the language selector's options
+		$.each($.fullCalendar.langs, function(langCode) {
+			$('#lang-selector').append(
+				$('<option/>')
+					.attr('value', langCode)
+					.prop('selected', langCode == currentLangCode)
+					.text(langCode)
+			);
+		});
+
+		// rerender the calendar when the selected option changes
+		$('#lang-selector').on('change', function() {
+			if (this.value) {
+				currentLangCode = this.value;
+				$('#calendar').fullCalendar('destroy');
+				renderCalendar();
+			}
+		});
+
+		function renderCalendar() {
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: '',
+					right: 'title'
+				},
+				defaultDate: '{{ "now" |date('Y-m-d') }}',
+				lang: currentLangCode,
+				buttonIcons: true, // show the prev/next text
+				weekNumbers: false,
+				editable: false,
+				eventLimit: false, // allow "more" link when too many events
+				events: [ 
+                                                                                {% for feries in feries %}
+					{
+						title: '{{ feries.titreFeries }}',
+						start: '{% if feries.dateDebutFerie %}{{ feries.dateDebutFerie|date('Y-m-d') }}{% endif %}',
+                                                                                                            end: '{% if feries.dateFinFerie %}{{ feries.dateFinFerie|date('Y-m-d') }}{% endif %}',  
+                                                                                                            color: '#D0A910'
+					},
+				         {% endfor %}	
+				]
+			});
+		}
+
+		renderCalendar();
+	});
+
+</script>
+           {% endblock %}
+           {% block main %}
+
+  <section>
+      <section class="hbox stretch">
+<style>
+#calendar {
+        max-width: 100%;
+        margin: 0px auto;
+        padding: 0 10px;
+}
+.table {
+width: 100%;
+margin-bottom: 20px;
+}
+.header{
+min-height: 50px;
+padding: 0 15px;
+margin-bottom: 40px;
+}
+.table.table.header{
+    margin-bottom: 40px !important;
+}
+tr,td {
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+span.fc-title{
+    padding-left:16px;
+}
+</style>
+
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{path('dashboard_salarie')}}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+
+                </header>
+                        <section class="vbox">
+                            	
+                                        <section class="panel b-light">
+                                          <div id="calendar" style="padding-top: 15px; padding-bottom: 33px;"></div>
+                                        </section>                  
+
+                        </section>
+         </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+      </section>
+    </section>
+  </section>
+  <style type="text/css">
+{#  th,tr {
+    text-align: center;
+  }#}
+  </style>
+  
+    {% endblock %}
+

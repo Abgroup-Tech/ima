@@ -1,0 +1,129 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <section class="hbox stretch">
+              <section id="content">
+          <section class="vbox">
+            <section class="scrollable">
+              <section class="hbox stretch">
+                <aside class="aside-lg bg-light lter b-r">
+                  <section class="vbox">
+                    <section class="scrollable">
+                      <div class="wrapper">
+                        <section class="panel no-border bg-primary lt">
+                                        <div class="panel-body">
+                                          <div class="row m-t-xl">
+                                            <div class="col-xs-3 text-right padder-v">
+                                              <a href="{{ path('dashboard_salarie') }}"  title="retour" class="fa fa-arrow-circle-left fa-4x text" ></a>
+                                            </div>
+                                            <div class="col-xs-6 text-center">
+                                              <div class="inline">
+                                                <div class="easypiechart" style="margin-left:32px;" data-percent="100" data-line-width="6" data-bar-color="#fff" data-track-Color="#2796de" data-scale-Color="false" data-size="140" data-line-cap='butt' data-animate="1000">
+                                                  <div class="thumb-lg avatar">
+                                                    <img src="{{ asset ('bundles/kbhgestionconges/images/avatar.png') }}" class="dker">
+                                                  </div>
+                                                </div>
+                                                <div class="h4 m-t m-b-xs font-bold text-lt">{{ salarie.nom }} - {{ salarie.prenom }}</div>
+                                                <small class="text-muted m-b">Poste :{{ salarie.poste }}</small><br/>
+                                                 <small class="text-muted m-b">Departement : {{ salarie.unite }}</small>
+                                              </div>
+                                            </div>
+                                            <div class="col-xs-3 padder-v">
+                                              <a href="{{path('fos_user_profile_show')}}" title="Configurez vos accès" class="fa fa-cogs fa-4x text-white"></a>
+                                            </div>
+                                          </div>
+                                          <div class="wrapper m-t-xl m-b" style="margin-top: 5px;">
+                                            <div class="row m-b">
+                                              <div class="col-xs-6 text-right">
+                                                <small>Numero de cellulaire</small>
+                                                <div class="text-lt font-bold">{{ salarie.telephone }}</div>
+                                              </div>
+                                              <div class="col-xs-6">
+                                                <small>Email</small>
+                                                <div class="text-lt font-bold">{{ salarie.email }}</div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <footer class="panel-footer dk text-center no-border">
+                                          <div class="row pull-out">
+                                            
+                                          </div>
+                                        </footer>
+                                      </section>
+                      </div>
+                    </section>
+                  </section>
+                </aside>
+                <aside class="col-lg-4 b-l no-padder">
+                  <section class="vbox">
+                    <section class="scrollable">
+                      <div class="wrapper">
+                        <section class="panel panel-default">
+                    <header class="panel-heading bg-light">
+                      <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#Informations-Personnelles" data-toggle="tab">Informations Personnelles</a></li>
+                       
+                      </ul>
+                    </header>
+                    <div class="panel-body">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="Informations-Personnelles">
+                          <ul class="list-group">
+                              <li class="list-group-item">
+                                <p><a class="text-info">Civilité :</a>{{ salarie.civilite }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Nom :</a>{{ salarie.nom }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Prenoms :</a>{{ salarie.prenom }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">N° matricule :</a>{{ salarie.matricule }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Matricule CNPS :</a>{{ salarie.numeroCnps }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Poste :</a>{{ salarie.poste }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Superviseur :</a>{{ salarie.superviseur }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Status marital :</a>{{ salarie.statutMarital }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Date de naissance :</a>{{ salarie.dateNaissance|date('d-m-Y') }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Type de Contrat :</a>{{ salarie.typeContratTravail }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Date d'embauche :</a>{{ salarie.dateEmbauche|date('d-m-Y') }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p><a class="text-info">Identifiant :</a>{{ salarie.id }}</p>
+                            </li>
+                          </ul>
+                        </div>
+
+                            </section>
+                        
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                    </section>
+                  </section>              
+                </aside>
+              </section>
+            </section>
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+</section>
+    </section>     
+{% endblock %}

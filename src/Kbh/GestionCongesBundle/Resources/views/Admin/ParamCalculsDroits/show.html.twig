@@ -1,0 +1,76 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>ParamCalculsDroits</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Basedroitsacquis</th>
+                <td>{{ entity.baseDroitsAcquis }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupanciennete5ans</th>
+                <td>{{ entity.joursSupAnciennete5ans }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupanciennete10ans</th>
+                <td>{{ entity.joursSupAnciennete10ans }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupanciennete15ans</th>
+                <td>{{ entity.joursSupAnciennete15ans }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupanciennete20ans</th>
+                <td>{{ entity.joursSupAnciennete20ans }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupanciennete25ans</th>
+                <td>{{ entity.joursSupAnciennete25ans }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupfemmeparenfantmineur</th>
+                <td>{{ entity.joursSupFemmeParEnfantMineur }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupmedaillehonneur</th>
+                <td>{{ entity.joursSupMedailleHonneur }}</td>
+            </tr>
+            <tr>
+                <th>Jourssupastreinte</th>
+                <td>{{ entity.joursSupAstreinte }}</td>
+            </tr>
+            <tr>
+                <th>Droitsexpatsejour1</th>
+                <td>{{ entity.droitsExpatSejour1 }}</td>
+            </tr>
+            <tr>
+                <th>Droitsexpatbase</th>
+                <td>{{ entity.droitsExpatBase }}</td>
+            </tr>
+            <tr>
+                <th>Jourssuppr200hmois</th>
+                <td>{{ entity.joursSupPr200hmois }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('paramcalculsdroits') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('paramcalculsdroits_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

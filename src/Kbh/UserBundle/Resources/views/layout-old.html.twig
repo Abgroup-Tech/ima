@@ -1,0 +1,48 @@
+{% extends "::base-anonymous.html.twig" %}
+    {% block main %}
+     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+<div class="menu-toggler sidebar-toggler">
+</div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+    <a href="{{ path('welcome') }}" style="text-decoration:inherit; font-size:24px;">
+        <img style="margin-top: -6px !important;position: relative;" src="{{ asset('bundles/kbhgestionconges/images/logo.png')}}"/>
+        <span class="caption-subject font-blue-madison bold uppercase">IMA</span> 
+    </a>
+        <div style="padding-bottom:20px;">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+               {{ 'Vous êtes déjà Connecté'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'Cliquez ici pour vous Déconnecter'|trans({}, 'FOSUserBundle') }}
+                </a>
+                <h3 class="form-title">
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}" style="text-decoration:inherit;">{{ 'Connectez vous à votre compte '|trans({}, 'FOSUserBundle') }}</a>
+            {% endif %}
+           </h3>
+        </div>
+        
+                <div class="alert alert-danger display-hide">
+                        <button class="close" data-close="alert"></button>
+                        <span>
+                        Enter any username and password. </span>
+                </div>
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <!--<div class="flash-{{ type }}" style="padding-bottom: 10px;">
+                    {{ message }}
+                </div>-->
+                <div class="alert alert-success" style="font-size: 14px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="fa fa-chevron-circle-down"></i><strong> Félicitation!</strong> Modification Effectuée avec <a href="#" class="alert-link">Succès</a>.
+                  </div>
+            {% endfor %}
+        {% endfor %}
+
+    
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        
+    {% endblock %}

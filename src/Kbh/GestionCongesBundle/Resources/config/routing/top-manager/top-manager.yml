@@ -1,0 +1,295 @@
+dashboard_top_manager:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:Default:dashboardTopManager" }
+
+ #######################   SALARIE SUPERVISEUR   #############################
+top_manager_show:
+    path:     /profil
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:superviseurShow" }
+
+top_manager_droits:
+    path:     /droits
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:showDroitsSuperviseur" }
+    
+top_manager_historique_droits:
+    path:     /historique-droits
+    defaults: { _controller: "KbhGestionCongesBundle:HistoriqueDroits:showSupLogDroit" }    
+
+#######################   SALARIE & DROITS   #############################
+top_manager_collaborateurs:
+    path:     /collaborateurs
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:collabsList" }
+
+top_manager_collaborateur_show:
+    path:     /collaborateur/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Salarie:collabShow" }
+
+top_manager_collaborateur_droits:
+    path:     /droits-collaborateurs
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:showCollabsDroits" }
+
+#######################  DEMANDES   #############################
+
+top_manager_demandes:
+    path:     /demandes
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:supDemandes" }
+
+top_manager_calcul_demande_absence:
+    path:     /demande/absence/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:calculDemandeAbsence" }
+
+top_manager_calcul_demande_conge:
+    path:     /demande/conge/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:calculDemandeConge" }
+
+top_manager_demande_show:
+    path:     /{id}/detail-demande/
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:showSupDemande" }
+
+top_manager_demande_show_2:
+    path:     /historique-demande/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:showSupDemandeHistorique" }
+
+top_manager_demande_conge_new:
+    path:     /demande-conge
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:supDemandeConge" }
+    
+    #######################  ARRÊT DE TRAVAIL   #############################
+    
+top_absencesat_travail:
+    path:     /historique-arrêt-travail
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:historiqueSup" }  
+    
+top_absencesat_show:
+    path:     /historique-arrêt-travail/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:AbsencesAT:showSup" }       
+    
+######################### UPDATE DU 12/9/2015 PAR DESIRE ##############################
+
+top_manager_demande_conge_for_salarie:
+    path:     /collaborateur-demande-conge
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:supDemandeCongeForSalarie" }
+    
+top_manager_calcul_demande_conge_for_salarie:
+    path:     /demande-collaborateur/conge/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:calculDemandeCongeForSalarie" }
+    
+top_manager_demande_conge_create:
+    path:     /sup-create-conge
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:createDemandeCongeBySup" }
+    requirements: { _method: post }
+    
+top_manager_demande_permission_for_salarie:
+    path:     /collaborateur-demande-permission
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:supDemandePermissionForSalarie" }
+    
+top_manager_calcul_demande_permission_for_salarie:
+    path:     /demande-collaborateur/permission/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:calculDemandePermissionForSalarie" }
+    
+top_manager_permission_create:
+    path:     /sup-create-permission
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:createDemandePermissionBySup" }
+    requirements: { _method: post }    
+    
+###################################################################################
+
+top_manager_demande_absence_new:
+    path:     /demande-permission
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:supDemandeAbsence" }
+
+top_manager_absence_justif:
+    path:     /absence/justif
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:supAbsJustif" }
+
+top_manager_demande_conge_create:
+    path:     /create-conges
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:createDemandeCongeSup" }
+    requirements: { _method: post }
+
+top_manager_demande_absence_create:
+    path:     /create-absences
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:createDemandeAbsenceSup" }
+    requirements: { _method: post }
+
+top_manager_demande_justif_create:
+    path:     /justif-create
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:JustifAbsenceSup" }
+    requirements: { _method: post }
+
+top_manager_demandes_traitees:
+    path:     /demandes/traitees
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:demandesTraitees" }
+    
+top_manager_demandes_deposees:
+    path:     /demandes/deposees
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:demandesDeposees" }    
+
+#######################   ABSENCES #############################
+
+top_manager_collaborateurs_absences:
+    path:     /collaborateurs/absences
+    defaults: { _controller: "KbhGestionCongesBundle:Absence:absencesCollabs" }
+
+top_manager_collaborateur_absences:
+    path:     /collaborateur/{salarie_id}/absences
+    defaults: { _controller: "KbhGestionCongesBundle:Absence:absencesCollab" }
+
+top_manager_collaborateur_absence_show:
+    path:     /collaborateur/absence/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Absence:collabAbsShow" }
+
+top_manager_historique_absences:
+    path:     /historique/absences
+    defaults: { _controller: "KbhGestionCongesBundle:Absence:historiqueAbsences" }
+    
+#######################   CONGES   #############################
+top_manager_collaborateurs_conges:
+    path:     /collaborateurs/conges
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:collabsCongesList" }
+
+top_manager_collaborateur_conges:
+    path:     /collaborateur/{salarie_id}/conges
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:collabCongesList" }
+
+top_manager_collaborateur_conge_show:
+    path:     /collaborateur/{salarie_id}/conge/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Conge:collabCongeShow" }
+
+#######################   DEMANDES DES COLLABORATEURS  ######################
+
+top_manager_collaborateurs_demandes:
+    path:     /collaborateurs/demandes
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabsDemandes" }
+
+top_manager_collaborateur_demandes:
+    path:     /collaborateur/{id}/demandes
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandes" }
+
+top_manager_collaborateur_demande_show:
+    path:     /collaborateur/demande/{id}/detail-demande
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandeShow" }    
+
+top_manager_collaborateur_demande_show_decision:
+    path:     /collaborateurs/demandes/{id}/detail-demande
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandeShowDecision" }
+
+top_manager_collaborateur_demande_show_detail:
+    path:     /collaborateur/{id_salarie}/demandes/{id_demande}/detail
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDetailDemandeShow" }
+
+
+top_manager_collaborateur_demande_absence_edit:
+    path:     /collaborateur/demande/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandeAbsenceEdit" }
+
+top_manager_collaborateur_demande_absence_update:
+    path:     /collaborateur/demande/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandeAbsenceUpdate" }
+    requirements: { _method: post|put }
+
+top_manager_collaborateur_demande_absence_valide:
+    path:     /collaborateur/demande/{id}/validation
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:valideDemandeCollab" }
+    requirements: { _method: post|put }
+
+top_manager_collaborateur_demande_absence_refus:
+    path:     /collaborateur/demande/{id}/refus
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:refusDemandeCollab" }
+    requirements: { _method: post|put }
+
+top_manager_collaborateur_demande_conge_edit:
+    path:     /collaborateur/demande/{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandeCongeEdit" }
+
+top_manager_collaborateur_demande_conge_update:
+    path:     /collaborateur/demande/{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:Demande:collabDemandeCongeUpdate" }
+    requirements: { _method: post|put }
+
+####################### REPORTS DE CONGES ET PERMISSIONS ######################
+top_manager_reports:
+    path:     /reports
+    defaults: { _controller: "KbhGestionCongesBundle:Report:index" }
+
+top_manager_report_show:
+    path:     /report/{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:Report:showSup" }
+
+top_manager_report_conge_new:
+    path:     /report/conge/{id}/new
+    defaults: { _controller: "KbhGestionCongesBundle:Report:new" }
+
+top_manager_report_conge_create:
+    path:     /report/{id}/create
+    defaults: { _controller: "KbhGestionCongesBundle:Report:create" }
+    requirements: { _method: post }
+
+top_manager_calcul_demande_report:
+    path:     /report/{id}/calcul
+    defaults: { _controller: "KbhGestionCongesBundle:Report:calculDemandeReport" }	
+
+#######################   STATISTIQUES   #############################
+    
+top_manager_statistiques:
+    path:     /etats-entreprise
+    defaults: { _controller: "KbhGestionCongesBundle:Statistiques:showStatistiquesSup" }
+
+top_manager_graph_statistiques:
+    path:     /statistiques-entreprises
+    defaults: { _controller: "KbhGestionCongesBundle:Statistiques:showGraphStats" }
+    
+
+#######################   PLANNING DE L'ENTREPRISE  #############################
+
+top_manager_planning:    
+    path: /planning-entreprise  
+    defaults: { _controller: "KbhGestionCongesBundle:Default:planning" }
+
+
+#######################   CALCUL DE L'ALLOCATION DES CONGES  #############################
+
+top_manager_allocation_conge:    
+    path: /allocation_conge  
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:allocationConges" }
+
+#######################   EVENEMENTS   #############################
+
+top_manager_events:
+    path:     /evenements
+    defaults: { _controller: "KbhGestionCongesBundle:Default:supEvenements" }
+
+top_manager_faq:
+    path:     /FAQ
+    defaults: { _controller: "KbhGestionCongesBundle:Faq:faqSuperviseur" }
+    
+#######################   IMPORT DE DOCUMENTS  #############################
+
+top_manager_document_create:
+    path:     /document/create
+    defaults: { _controller: "KbhGestionCongesBundle:Droits:importDocumentAllocation" }
+
+top_manager_document_allocation_import:
+    path:     /document/import-fichier/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importAllocation" }
+
+top_manager_import_show_allocation:
+    path:     /import-fichier/show/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importShowAllocation" }
+
+top_manager_import_edit_donnees:
+    path:     /import-fichier/show/{id}/edit/{id_donnee}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:importAllocationEdit" }
+
+top_manager_import_allocation_update:
+    path:     /import-fichier/update/{id}/{id_doc}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:updateAllocation" }
+    requirements: { _method: post|put }
+    
+top_manager_import_calcul_allocation:
+    path:     /import-fichier/operation/{id}
+    defaults: { _controller: "KbhGestionCongesBundle:Document:calculAllocation" } 
+    
+top_manager_reinitialisation_donnees:
+    path:     /reinitialisation-donnees
+    defaults: { _controller: "KbhGestionCongesBundle:Document:reinitialisation" }     

@@ -1,0 +1,278 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE HEAD -->
+    <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1> Espace<small> Responsable </small></h1>
+            </div>
+
+        </div>
+    </div>         
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Planning des absences
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN PAGE CONTENT INNER -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet box bg-blue-steel calendar">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-gift text-white"></i>Calendrier des absences
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-12">
+                                            <!-- BEGIN DRAGGABLE EVENTS PORTLET-->
+                                            <h3 class="event-form-title">Draggable Events</h3>
+                                            <div id="external-events">
+                                                <div class="note note-info">
+                                                    <h4 class="block">Information!</h4>
+                                                    <p>
+                                                        En cliquant sur la demande vous pourrez avoir toutes les informations que vous désirez
+                                                        et valider ou refuser les demandes en cours et en attente de validation
+                                                    </p>
+                                                </div>
+                                                <hr/>
+                                                <div id="event_box">
+                                                    <p> <strong style="color:black;">LEGENDE :</strong>
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item bg-green"> Congés validés</li>
+                                                        <li class="list-group-item bg-yellow"> Demandes en cours</li>
+                                                        <li class="list-group-item bg-purple"> Absences autorisées</li>
+                                                        <li class="list-group-item" style="background:#484141; border: 1px solid #484141;"> Jours fériés de l'année</li>
+                                                        <li class="list-group-item" style="background:#CA3E3E; border: 1px solid #CA3E3E;"> Arrêt de travail</li>
+                                                    </ul>   
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!-- END DRAGGABLE EVENTS PORTLET-->
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <div id="calendar" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END CALENDAR PORTLET-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PAGE CONTENT INNER -->
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+        .fc-more-popover .fc-event-container {
+            padding: 10px;
+            padding-top: 30px;
+        }	
+        .fc-ltr .fc-popover .fc-header .fc-title, .fc-rtl .fc-popover .fc-header .fc-close {
+            float: left;
+            color: black;
+        }
+    </style>
+    <link href="{{ asset('bundles/kbhgestionconges/css/fullcalendar.css') }}" rel='stylesheet'  />
+    <link href="{{ asset('bundles/kbhgestionconges/css/fullcalendar.print.css') }}" rel='stylesheet' media='print' />
+    <link href="{{ asset('bundles/kbhgestionconges/js/calendar/bootstrap_calendar.css') }}" type="text/css"/> 
+    <link href="{{ asset('bundles/kbhgestionconges/css/jquery-ui.min.css') }}" />
+    <!-- Bootstrap -->
+
+    <script src="{{ asset('bundles/kbhgestionconges/js/moment.js') }}"></script>
+    <script src="{{ asset('bundles/kbhgestionconges/js/fullcalendar.min.js') }}"></script>  
+    <script src="{{ asset('bundles/kbhgestionconges/js/lang-all.js') }}"></script>  
+    <script>
+        //moment.createFromInputFallback = function(config) {
+        // unreliable string magic, or
+        //  config._d = new Date(config._i);
+        //};
+
+
+        $(document).ready(function () {
+            var currentLangCode = 'fr';
+            // build the language selector's options
+            $.each($.fullCalendar.langs, function (langCode) {
+                $('#lang-selector').append(
+                        $('<option/>')
+                        .attr('value', langCode)
+                        .prop('selected', langCode === currentLangCode)
+                        .text(langCode)
+                        );
+            });
+
+            // rerender the calendar when the selected option changes
+            $('#lang-selector').on('change', function () {
+                if (this.value) {
+                    currentLangCode = this.value;
+                    $('#calendar').fullCalendar('destroy');
+                    renderCalendar();
+                }
+            });
+
+            // rerender the calendar when the selected option changes
+            $('.fc-day-grid-event fc-event fc-start fc-end').click(function () {
+                alert("Item clicked - show some details");
+            });
+
+            function renderCalendar() {
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: '',
+                        right: 'title'
+                    },
+                    defaultDate: Date(),
+                    lang: currentLangCode,
+                    buttonIcons: false, // show the prev/next text
+                    weekNumbers: false,
+                    editable: false,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: [
+         
+                           //Liste des Fériés en base 
+         {% if feries%}
+             {% set q = 0 %}
+            {% for ferie in feries %}
+                    {
+                        title: ' {{ ferie.titreFeries|raw }}  ',
+                        start: '{{ ferie.dateDebutFerie|date('Y-m-d') }}',
+                        end: '{{ ferie.dateFinFerie|date_modify("+1 day")|date('Y-m-d') }}',
+                        color: '#484141'
+                    }{% if q < nb_feries-1 %},{% endif %}{% set q = q + 1 %}
+             {% endfor %}  
+        {%endif%}        
+          
+        {% if collabs_liste|length != 0 %}
+         //Liste des demandes en cours (cas généralisé)   
+       {% if feries|length != 0%}, {%endif%}  
+        {% if demandes%}
+           	{% set a = 0 %}
+            {% for demande in demandes %}
+                {% for salarie in collabs_liste%}
+                        {% if demande.salarie == salarie %}
+                                        {
+                                            title: '  {{ demande.salarie.civilite }} {{ demande.salarie.nomprenom }}  ',
+                                            start: '{{ demande.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ demande.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#FFB848',
+                                            url: "{{ path('top_manager_demande_show_2', { 'id': demande.id}) }}"
+                                        }{% if a < nb_demandes-1 %},{% endif %}{% set a = a + 1 %}
+                        {%endif%}
+                  {% endfor %}
+                 {% endfor %}     
+        {%endif%}
+
+                            //Liste des Congés autorisées (cas généralisé)   
+        {% if conges%}
+             {% if demandes|length != 0%}, {%endif%}{% set i = 0 %}
+            {% for conge in conges %}
+                {% for salarie in collabs_liste%}
+                        {% if conge.salarie == salarie %}
+                                        {
+                                            title: ' {{ conge.salarie.civilite }} {{ conge.salarie.nomprenom }} ',
+                                            start: '{{ conge.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ conge.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#35aa47 ',
+                                            url: "{{ path('top_manager_demande_show_2', { 'id': conge.demande.id}) }}"
+                                        }{% if i < nb_conges-1 %},{% endif %}{% set i = i + 1 %}
+                        {%endif%}
+                  {% endfor %}
+                 {% endfor %}  
+        {%endif%}
+            
+            
+                                //Liste arrêt de travail (cas généralisé)   
+        {% if absencesAT%}
+             {% if conges|length != 0 or demandes|length == 0 %}, {%endif%}{% set h = 0 %}
+            {% for absAT in absencesAT %}
+                {% for salarie in collabs_liste%}
+                        {% if absAT.salarie == salarie %}
+                                        {
+                                            title: ' {{ absAT.salarie.civilite }} {{ absAT.salarie.nomprenom }} ',
+                                            start: '{{ absAT.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ absAT.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#CA3E3E ',
+                                            url: "{{ path('top_absencesat_show', { 'id': absAT.id}) }}"
+                                        }{% if h < nb_absAT-1 %},{% endif %}{% set h = h + 1 %}
+                        {%endif%}
+                  {% endfor %}
+                 {% endfor %}  
+        {%endif%}
+
+                            //Liste des absences autorisées (cas généralisé)   
+        {% if absences%}
+            {% if conges|length != 0 or absencesAT|length != 0 or demandes|length != 0 %} ,{%endif%}
+            {% set e = 0 %}
+            {% for absence in absences %}
+                {% for salarie in collabs_liste%}
+                        {% if absence.salarie == salarie %}
+                                        {
+                                            title: '  {{ absence.salarie.civilite }} {{ absence.salarie.nomprenom }}  ',
+                                            start: '{{ absence.dateDebut|date('Y-m-d') }}',
+                                            end: '{{ absence.dateFin|date_modify("+1 day")|date('Y-m-d') }}',
+                                            color: '#8E44AD',
+                                            url: "{{ path('top_manager_demande_show_2', { 'id': absence.demande.id}) }}"
+                                        }{% if e < nb_permissions-1 %},{% endif %}{% set e = e + 1 %}
+                    {%endif%}
+              {% endfor %}
+             {% endfor %}            
+        {%endif%}	 
+     {%endif%}   
+         
+                            ]
+                        });
+                    }
+
+                    renderCalendar();
+                });
+
+
+    </script>
+
+    <!-- END PAGE LEVEL PLUGINS -->
+{% endblock %}

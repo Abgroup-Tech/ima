@@ -1,0 +1,57 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>OrganigrammeUnite liste</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Sigle</th>
+                <th>Type</th>
+                <th>Manager</th>
+                <th>Unité suivante</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('ad_organigrammeunite_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.sigle }}</td>
+                <td>
+                    {%if(entity.estService)%}Service{% endif%}
+                    {%if(entity.estCellule)%}Cellule{% endif%}
+                    {%if(entity.estDepartement)%}Département{% endif%}
+                    {%if(entity.estDirection)%}Direction{% endif%}
+                    {%if(entity.estDga)%}Direction générale adjointe{% endif%}
+                    {%if(entity.estDg)%}Direction générale{% endif%}
+                    {%if(entity.estDrh)%}Direction des ressources humaines{% endif%}
+                </td>
+                <td>{{ entity.manager }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('ad_organigrammeunite_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('ad_organigrammeunite_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('ad_organigrammeunite_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    
+{% endblock %}

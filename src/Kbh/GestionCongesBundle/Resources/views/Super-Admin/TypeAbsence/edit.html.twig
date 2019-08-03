@@ -1,0 +1,16 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>TypeAbsence edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('typeabsence') }}">
+            Back to the list
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

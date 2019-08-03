@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Conge de {{ salarie.nomprenom }}</h1>
+    <ul>
+        <li>Total Droits acquis:{{droits.cumulDroitsAcquis}} jours</li>
+        <li>Droits pris:{{droits.droitsPris}} jours</li>
+        <li>Total Droits à prendre:{{droits.totalDroitsAprendre}} jours</li>
+    </ul>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{{ entity.dateDebut|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{{ entity.dateFin|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Nbjoursouvrables</th>
+                <td>{{ entity.nbJoursOuvrables }}</td>
+            </tr>
+            <tr>
+                <th>Commentairesdemandeur</th>
+                <td>{{ entity.commentairesDemandeur }}</td>
+            </tr>
+            <tr>
+                <th>Commentairessuperviseur</th>
+                <td>{{ entity.commentairesSuperviseur }}</td>
+            </tr>
+            <tr>
+                <th>Estencours</th>
+                <td>{{ entity.estEncours }}</td>
+            </tr>
+            <tr>
+                <th>Estvalide</th>
+                <td>{{ entity.estValide }}</td>
+            </tr>
+            <tr>
+                <th>Datevalidation</th>
+                <td>{{ entity.dateValidation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Estcloture</th>
+                <td>{{ entity.estCloture }}</td>
+            </tr>
+            <tr>
+                <th>Datecloture</th>
+                <td>{{ entity.dateCloture|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datedemande</th>
+                <td>{{ entity.dateDemande|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('conge') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('conge_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

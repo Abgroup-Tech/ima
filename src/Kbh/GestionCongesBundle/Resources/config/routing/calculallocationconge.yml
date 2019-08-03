@@ -1,0 +1,30 @@
+calculallocationconge:
+    path:     /
+    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:new" }
+
+calculallocationconge_show:
+    path:     /{id}/show
+    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:show" }
+
+#calculallocationconge_new:
+#    path:     /new
+#    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:new" }
+
+calculallocationconge_create:
+    path:     /create
+    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:create" }
+    methods:  POST
+
+calculallocationconge_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:edit" }
+
+calculallocationconge_update:
+    path:     /{id}/update
+    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:update" }
+    methods:  [POST, PUT]
+
+calculallocationconge_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KbhGestionCongesBundle:CalculAllocationConge:delete" }
+    methods:  [POST, DELETE]

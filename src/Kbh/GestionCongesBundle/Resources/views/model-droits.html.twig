@@ -1,0 +1,64 @@
+<div class="col-md-12">    
+<table class="table font-blue-madison">
+    <thead>
+        <tr>
+            <td class="bold">
+               Congés acquis en {{ "now"|date_modify('-1 year')|date('Y') }}
+            </td>
+            <td>
+                {{droits.reliquatDroitsAnterieur}} jours
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="bold">
+                Congés acquis en {{ "now"|date('Y') }}
+            </td>
+            <td>
+                {{droits.droitsAcquisAnneeEnCours}} jours
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                Cumul congés
+            </td>
+            <td>
+                {{droits.CumulDroitsAcquis}} jours
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                Congés pris {{ "now"|date('Y') }}
+            </td>
+            <td>
+                {{droits.droitsPris}} jours
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                Permissions prises
+            </td>
+            <td>
+               {{ droits.permissionsPrises }} jours
+            </td>
+        </tr>
+            <tr>
+                <td class="bold">
+                    Solde permissions
+                </td>
+                <td style="color: #F3565D !important">
+                   <b>{{ droits.soldePermissions }} jours</b> 
+                </td>
+            </tr>
+            <tr>
+                <td class="bold">
+                    Solde congés
+                </td>
+                <td style="color: #F3565D !important">
+                    <b>{{droits.totalDroitsAprendre}} jours</b>
+                </td>
+            </tr>
+    </tbody>
+</table>
+</div>   

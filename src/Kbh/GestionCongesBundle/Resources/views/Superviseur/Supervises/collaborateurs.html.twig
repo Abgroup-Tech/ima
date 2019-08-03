@@ -1,0 +1,144 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+    <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Liste <small> des collaborateurs</small></h1>
+                </div>
+                <!-- END PAGE TITLE -->
+            </div>
+        </div> 
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content" style="min-height: 800px">
+            <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Widget settings form goes here
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                    </li>
+                    {#<li>
+                            <a href="#">Demandes</a>
+                            <i class="fa fa-circle"></i>
+                    </li>#}
+                    <li class="active">
+                        Liste des Collaborateurs
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PORTLET-->
+                        <div class="portlet light ">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+
+                                    <span class="caption-subject theme-font bold uppercase"><i class="fa fa-list fa-1x"></i> Mes Collaborateurs</span>
+                                    <span class="caption-helper hide">weekly stats...</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="table-scrollable table-scrollable-borderless">
+                                    <table class="table table-hover table-light">
+                                        <thead>
+                                            <tr class="uppercase">
+                                                <th colspan="2">
+                                                    Nom & Prénoms
+                                                </th>
+                                                <th>
+                                                    Unite
+                                                </th>
+                                                <th>
+                                                    Poste
+                                                </th>
+                                                <th>
+                                                    Email
+                                                </th>
+                                                <th>
+                                                    Profil
+                                                </th>
+                                                <th>
+                                                    Demandes
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        
+                                        {% if collabs_liste|length == 0 %}
+                                        {% for collab in collabs %}
+                                            {% for salarie in collab %}
+                                                {% if salarie.nomprenom != salarie_connect.nomprenom %}
+                                                    <tr>
+                                                        <td class="fit">
+                                                            <img class="user-pic" src="{{ asset('uploads/' ~ salarie.image.path) }}">
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ path('collaborateur_show', { 'id': salarie.id }) }}" class="primary-link">{{ salarie.nomprenom }}</a>
+                                                        </td>
+                                                        <td>
+                                                            {{ salarie.unite }}
+                                                        </td>
+                                                        <td>
+                                                            {{ salarie.poste }}
+                                                        </td>
+                                                        <td>
+                                                            {{ salarie.email }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ path('collaborateur_show', { 'id': salarie.id }) }}" class="btn btn-primary">Détails</a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ path('collaborateur_demandes', { 'id': salarie.id }) }}" class="btn btn-success">Voir liste</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}  
+                                        {% endfor %} 
+                                        {% endif %}
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- END PORTLET-->
+                    </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+            </div>
+            <!-- BEGIN PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTENT -->
+        <style>
+            th,td{
+                text-align: center;
+                color:#345F98 !important;
+            }
+        </style>
+
+    {% endblock %}

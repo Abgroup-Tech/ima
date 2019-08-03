@@ -1,0 +1,89 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('dashboard_salarie')}}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Detail Des Droits</h3>
+                </header>
+            <section class="scrollable wrapper">              
+              <div class="row">
+                  <div class="col-lg-12">
+                  <div class="col-lg-4">
+                  <section class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="clearfix text-center m-t">
+                        <div class="inline">
+                          <div class="easypiechart" style="margin-left: 25px;" data-percent="75" data-line-width="5" data-bar-color="#428BCA" data-track-Color="#f5f5f5" data-scale-Color="false" data-size="134" data-line-cap='butt' data-animate="1000">
+                            <div class="thumb-lg">
+                              <img src="{{ asset ('bundles/kbhgestionconges/images/avatar.png') }}" class="img-circle">
+                            </div>
+                          </div>
+                          <div class="h4 m-t m-b-xs">{{salarie.prenom}} {{salarie.nom}}</div>
+                         <a href="#" class="text-info">Poste : {{salarie.poste}}<i class="icon-twitter"></i></a>
+                            <small class="block text-muted">Departement : Direction Générale</small>
+                        </div>                      
+                      </div>
+                    </div>
+                   
+                  </section>
+                </div>
+             <div class="col-lg-8">                  
+                      <section class="panel panel-default">
+
+                        <ul class="list-group no-radius">
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.droitsAcquisAnneeEnCours}} jours </span>
+                            <span class="label bg-primary">1</span>
+                             Congés acquis en {{"now"|date("Y")}}
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.reliquatDroitsAnterieur}} jours </span>
+                            <span class="label bg-primary">2</span>
+                             Congés non pris années précédentes
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.CumulDroitsAcquis}} jours</span>
+                            <span class="label bg-primary">3</span>
+                            Total Congés acquis
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{droits.droitsPris}} jours </span>
+                            <span class="label bg-primary">4</span>
+                            Congés pris en {{"now"|date("Y")}}
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ droits.permissionsPrises }} jours </span>
+                            <span class="label bg-primary">5</span>
+                            Permissions prises
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right">{{ droits.soldePermissions }} jours </span>
+                            <span class="label bg-primary">6</span>
+                            Permissions disponibles
+                          </li>
+                        </ul>
+                   <footer class="panel-footer bg-primary text-center">
+                      <div class="clear">
+                            <span class="text-white"> Congés disponibles <i class="icon-twitter"></i></span>
+                            <span class="block text-white" style="font-size: 28px;">{{droits.totalDroitsAprendre}} jours</span>
+                            {#<a href="#" class="btn btn-xs btn-success m-t-xs">Follow</a>#}
+                          </div>
+                    </footer>      
+                      </section>
+                    </div>
+                      
+                </div>           
+          </section>
+       </section>           
+        </section>
+
+
+{% endblock %}

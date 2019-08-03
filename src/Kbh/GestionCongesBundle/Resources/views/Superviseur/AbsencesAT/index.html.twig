@@ -1,0 +1,173 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+     <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1> Espace<small> Responsable </small></h1>
+            </div>
+
+        </div>
+    </div>  
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Arrêt de travail
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-note font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Historique arrêt de travail</span>
+                            </div>
+                            {#<span>
+                            <a class=' pull-right btn btn-circle btn-success' href="{{ path('ad_absencesat_new') }}">nouvelle enregistrement +</a>
+                            </span>#}
+                        </div>
+                        <div class="portlet-body">
+                            <ul class="nav nav-pills">
+                                <li class="active">
+                                        <a href="#tab_1" data-toggle="tab">
+                                        Mon historique </a>
+                                </li>
+                                <li>
+                                        <a href="#tab_2" data-toggle="tab">
+                                        Historique collaborateur </a>
+                                </li>
+                                </ul>
+                            <br/>
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="tab_1">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Motif</th>
+                                                    <th>Date de debut</th>
+                                                    <th>Date de fin</th>
+                                                    <th>Date creation</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for entity in entities %}
+                                                    <tr>
+                                                        <td><a href="{{ path('sup_absencesat_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                                        <td>{{ entity.motif }}</td>
+                                                        <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                                                        <td>{% if entity.dateFin %}{{ entity.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                                        <td>{% if entity.dateCreation %}{{ entity.dateCreation|date('Y-m-d') }}{% endif %}</td>
+                                                        <td>
+                                                            <a class="btn btn-circle btn-success btn-sm" href="{{ path('sup_absencesat_show', { 'id': entity.id }) }}">Détails</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active" id="tab_2">
+                                    <div class="scroller">
+                                        <table class="table table-hover table-light" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Motif</th>
+                                                    <th>Salarié</th>
+                                                    <th>Date de debut</th>
+                                                    <th>Date de fin</th>
+                                                    <th>Date creation</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for all in all %}
+                                                    {% for collaborateur in collaborateurs %}
+                                                      {% if all.salarie == collaborateur %} 
+                                                        <tr>
+                                                            <td><a href="{{ path('sup_absencesat_show', { 'id': all.id }) }}">{{ all.id }}</a></td>
+                                                            <td>{{ all.motif }}</td>
+                                                            <td>{{ all.salarie }}</td>
+                                                            <td>{% if all.dateDebut %}{{ all.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                                                            <td>{% if all.dateFin %}{{ all.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                                            <td>{% if all.dateCreation %}{{ all.dateCreation|date('Y-m-d') }}{% endif %}</td>
+                                                            <td>
+                                                                <a class="btn btn-circle btn-success btn-sm" href="{{ path('sup_absencesat_show', { 'id': all.id }) }}">Détails</a>
+                                                            </td>
+                                                        </tr>
+                                                     {% endif %}
+                                                  {% endfor %}  
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+
+{% endblock %}

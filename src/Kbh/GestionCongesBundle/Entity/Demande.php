@@ -1,0 +1,1099 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Demande
+ *
+ * @ORM\Table(name="demande_premium")
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\DemandeRepository")
+ */
+class Demande
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \Datetime
+     *
+     * @ORM\Column(name="dateDebut", type="datetime", length=255)
+     */
+    private $dateDebut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateFin", type="string", length=255, nullable=true)
+     */
+    private $dateFin;
+	
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="dateRetour", type="string", length=255, nullable=true)
+     */
+    private $dateRetour;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDemande", type="datetime", nullable=true)
+     */
+    private $dateDemande;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="typeDemande", type="string", length=255, nullable=true)
+     */
+    private $typeDemande;
+
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="nbjoursOuvrables", type="decimal", nullable=true)
+     */
+    private $nbjoursOuvrables;
+
+  /**
+     * @var string
+     *
+     * @ORM\Column(name="motif", type="string", length=255, nullable = true)
+     */
+    private $motif;
+
+  /**
+     * @var string
+     *
+     * @ORM\Column(name="autreMotif", type="string", length=255, nullable = true)
+     */
+    private $autreMotif;
+    
+  /**
+     * @var string
+     *
+     * @ORM\Column(name="localite", type="string", length=255, nullable = true)
+     */
+    private $localite;
+        
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="distance", type="float",nullable=true)
+     */
+    private $distance;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estEnCours", type="boolean", nullable=true)
+     */
+    private $estEnCours;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estRefuse", type="boolean",nullable=true)
+     */
+    private $estRefuse;
+
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="refusePar", referencedColumnName="id" , nullable=true)
+     */
+    private $refusePar;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="raisonRefus", type="string", length=255,nullable=true)
+     */
+    private $raisonRefus;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateRefus", type="datetime",nullable=true)
+     */
+    private $dateRefus;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estValideNiveau1", type="boolean",nullable=true)
+     */
+    private $estValideNiveau1;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estValideNiveau2", type="boolean",nullable=true)
+     */
+    private $estValideNiveau2;
+    
+      /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estValideNiveau3", type="boolean",nullable=true)
+     */
+    private $estValideNiveau3;
+    
+    
+     /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="valideurFinal", referencedColumnName="id" , nullable=true)
+     */
+    private $valideurFinal;
+
+   
+      /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="valideurEnCours", referencedColumnName="id" , nullable=true)
+     */
+    private $valideurEnCours;
+    
+      /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="suppleantEnCours", referencedColumnName="id" , nullable=true)
+     */
+    private $suppleantEnCours;
+    
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="valideurNiveau1", referencedColumnName="id" , nullable=true)
+     */
+    private $valideurNiveau1;
+    
+     /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="valideurNiveau2", referencedColumnName="id" , nullable=true)
+     */
+    private $valideurNiveau2;
+    
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="valideurNiveau3", referencedColumnName="id" , nullable=true)
+     */
+    private $valideurNiveau3;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateValidation1", type="datetime",nullable=true)
+     */
+    private $dateValidation1;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateValidation2", type="datetime",nullable=true)
+     */
+    private $dateValidation2;
+    
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateValidation3", type="datetime",nullable=true)
+     */
+    private $dateValidation3;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbNiveauxValidation", type="integer", nullable=true)
+     */
+    private $nbNiveauxValidation ;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estCloture", type="boolean",nullable=true)
+     */
+    private $estCloture;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCloture", type="datetime",nullable=true)
+     */
+    private $dateCloture;
+
+     /**
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id")
+     * 
+     */
+    private $salarie;
+    
+    /** 
+     * ############ UPDATE  DU 12/9/2015 #######################
+     * 
+     * @var \Kbh\GestionCongesBundle\Entity\Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="auteurDemande", referencedColumnName="id", nullable=true)
+     * 
+     */
+    private $auteurDemande;
+    
+    /**
+     * @var \Kbh\GestionCongesBundle\Entity\PiecesJointes
+     * @ORM\ManyToOne(targetEntity="PiecesJointes") 
+     * @ORM\JoinColumn(name="pieceJointe", referencedColumnName="id" , nullable=true)
+     */
+    private $pieceJointe;
+    
+      /**
+     * @var boolean
+     *
+     * @ORM\Column(name="creeParSuperviseur", type="boolean",nullable=true)
+     */
+    private $creeParSuperviseur;
+    
+    /**
+     * ########################################################
+     * @var boolean
+     *
+     * @ORM\Column(name="estValide", type="boolean",nullable=true)
+     */
+    private $estValide;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateValidation", type="datetime",nullable=true)
+     */
+    private $dateValidation;
+	
+	 /**
+     * @var float
+     *
+     * @ORM\Column(name="soldeDroits", type="float", nullable=true)
+     */
+    private $soldeDroits ;
+    
+    
+    public function __construct() {
+        $this->setDateDemande(new \DateTime());
+        $this->estEnCours = true;
+        $this->estRefuse = false;
+        $this->estCloture = false;
+        $this->estValide = false;
+        
+    }
+
+    public function __toString() {
+        return "Demande N°".$this->getId();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \Datetime $dateDebut
+     * @return Demande
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \Datetime 
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param string  $dateFin
+     * @return Demande
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return string 
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set dateDemande
+     *
+     * @param \DateTime $dateDemande
+     * @return Demande
+     */
+    public function setDateDemande($dateDemande)
+    {
+        $this->dateDemande = $dateDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDemande
+     *
+     * @return \DateTime 
+     */
+    public function getDateDemande()
+    {
+        return $this->dateDemande;
+    }
+
+	/**
+     * Set dateRetour
+     *
+     * @param string $dateRetour
+     * @return Demande
+     */
+    public function setDateRetour($dateRetour)
+    {
+        $this->dateRetour = $dateRetour;
+
+        return $this;
+    }
+	/**
+     * Get dateRetour
+     *
+     * @return string 
+     */
+    public function getDateRetour()
+    {
+        return $this->dateRetour;
+    }
+    /**
+     * Set typeDemande
+     *
+     * @param string $typeDemande
+     * @return Demande
+     */
+    public function setTypeDemande($typeDemande)
+    {
+        $this->typeDemande = $typeDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get typeDemande
+     *
+     * @return string 
+     */
+    public function getTypeDemande()
+    {
+        return $this->typeDemande;
+    }
+
+    /**
+     * Set nbjoursOuvrables
+     *
+     * @param decimal $nbjoursOuvrables
+     * @return Demande
+     */
+    public function setNbjoursOuvrables($nbjoursOuvrables)
+    {
+        $this->nbjoursOuvrables = $nbjoursOuvrables;
+
+        return $this;
+    }
+
+    /**
+     * Get nbjoursOuvrables
+     *
+     * @return decimal 
+     */
+    public function getNbjoursOuvrables()
+    {
+        return $this->nbjoursOuvrables;
+    }
+
+    /**
+     * Set estEnCours
+     *
+     * @param boolean $estEnCours
+     * @return Demande
+     */
+    public function setEstEnCours($estEnCours)
+    {
+        $this->estEnCours = $estEnCours;
+
+        return $this;
+    }
+
+    /**
+     * Get estEnCours
+     *
+     * @return boolean 
+     */
+    public function getEstEnCours()
+    {
+        return $this->estEnCours;
+    }
+
+    /**
+     * Set estRefuse
+     *
+     * @param boolean $estRefuse
+     * @return Demande
+     */
+    public function setEstRefuse($estRefuse)
+    {
+        $this->estRefuse = $estRefuse;
+
+        return $this;
+    }
+
+    /**
+     * Get estRefuse
+     *
+     * @return boolean 
+     */
+    public function getEstRefuse()
+    {
+        return $this->estRefuse;
+    }
+
+    /**
+     * Set raisonRefus
+     *
+     * @param string $raisonRefus
+     * @return Demande
+     */
+    public function setRaisonRefus($raisonRefus)
+    {
+        $this->raisonRefus = $raisonRefus;
+
+        return $this;
+    }
+
+    /**
+     * Get raisonRefus
+     *
+     * @return string 
+     */
+    public function getRaisonRefus()
+    {
+        return $this->raisonRefus;
+    }
+
+    /**
+     * Set dateRefus
+     *
+     * @param \DateTime $dateRefus
+     * @return Demande
+     */
+    public function setDateRefus(\DateTime $dateRefus)
+    {
+        $this->dateRefus = $dateRefus;
+
+        return $this;
+    }
+
+    /**
+     * Get dateRefus
+     *
+     * @return \DateTime 
+     */
+    public function getDateRefus()
+    {
+        return $this->dateRefus;
+    }
+
+    /**
+     * Set estValideNiveau1
+     *
+     * @param boolean $estValideNiveau1
+     * @return Demande
+     */
+    public function setEstValideNiveau1($estValideNiveau1)
+    {
+        $this->estValideNiveau1 = $estValideNiveau1;
+
+        return $this;
+    }
+
+    /**
+     * Get estValideNiveau1
+     *
+     * @return boolean 
+     */
+    public function getEstValideNiveau1()
+    {
+        return $this->estValideNiveau1;
+    }
+
+    /**
+     * Set estValideNiveau2
+     *
+     * @param boolean $estValideNiveau2
+     * @return Demande
+     */
+    public function setEstValideNiveau2($estValideNiveau2)
+    {
+        $this->estValideNiveau2 = $estValideNiveau2;
+
+        return $this;
+    }
+
+    /**
+     * Get estValideNiveau2
+     *
+     * @return boolean 
+     */
+    public function getEstValideNiveau2()
+    {
+        return $this->estValideNiveau2;
+    }
+
+    /**
+     * Set dateValidation1
+     *
+     * @param \DateTime $dateValidation1
+     * @return Demande
+     */
+    public function setDateValidation1(\DateTime $dateValidation1)
+    {
+        $this->dateValidation1 = $dateValidation1;
+
+        return $this;
+    }
+
+    /**
+     * Get dateValidation1
+     *
+     * @return \DateTime 
+     */
+    public function getDateValidation1()
+    {
+        return $this->dateValidation1;
+    }
+
+    /**
+     * Set dateValidation2
+     *
+     * @param \DateTime $dateValidation2
+     * @return Demande
+     */
+    public function setDateValidation2(\DateTime $dateValidation2)
+    {
+        $this->dateValidation2 = $dateValidation2;
+
+        return $this;
+    }
+
+    /**
+     * Get dateValidation2
+     *
+     * @return \DateTime 
+     */
+    public function getDateValidation2()
+    {
+        return $this->dateValidation2;
+    }
+
+    /**
+     * Set nbNiveauxValidation
+     *
+     * @param integer $nbNiveauxValidation
+     * @return Demande
+     */
+    public function setNbNiveauxValidation($nbNiveauxValidation)
+    {
+        $this->nbNiveauxValidation = $nbNiveauxValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get nbNiveauxValidation
+     *
+     * @return integer 
+     */
+    public function getNbNiveauxValidation()
+    {
+        return $this->nbNiveauxValidation;
+    }
+
+    /**
+     * Set estCloture
+     *
+     * @param boolean $estCloture
+     * @return Demande
+     */
+    public function setEstCloture($estCloture)
+    {
+        $this->estCloture = $estCloture;
+
+        return $this;
+    }
+
+    /**
+     * Get estCloture
+     *
+     * @return boolean 
+     */
+    public function getEstCloture()
+    {
+        return $this->estCloture;
+    }
+
+    /**
+     * Set dateCloture
+     *
+     * @param \DateTime $dateCloture
+     * @return Demande
+     */
+    public function setDateCloture(\DateTime $dateCloture)
+    {
+        $this->dateCloture = $dateCloture;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCloture
+     *
+     * @return \DateTime 
+     */
+    public function getDateCloture()
+    {
+        return $this->dateCloture;
+    }
+
+    /**
+     * Set estValide
+     *
+     * @param boolean $estValide
+     * @return Demande
+     */
+    public function setEstValide($estValide)
+    {
+        $this->estValide = $estValide;
+
+        return $this;
+    }
+
+    /**
+     * Get estValide
+     *
+     * @return boolean 
+     */
+    public function getEstValide()
+    {
+        return $this->estValide;
+    }
+
+    /**
+     * Set dateValidation
+     *
+     * @param \DateTime $dateValidation
+     * @return Demande
+     */
+    public function setDateValidation(\DateTime $dateValidation)
+    {
+        $this->dateValidation = $dateValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateValidation
+     *
+     * @return \DateTime 
+     */
+    public function getDateValidation()
+    {
+        return $this->dateValidation;
+    }
+
+    /**
+     * Set refusePar
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $refusePar
+     * @return Demande
+     */
+    public function setRefusePar(\Kbh\GestionCongesBundle\Entity\Salarie $refusePar = null)
+    {
+        $this->refusePar = $refusePar;
+
+        return $this;
+    }
+
+    /**
+     * Get refusePar
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getRefusePar()
+    {
+        return $this->refusePar;
+    }
+
+    /**
+     * Set valideurFinal
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $valideurFinal
+     * @return Demande
+     */
+    public function setValideurFinal(\Kbh\GestionCongesBundle\Entity\Salarie $valideurFinal = null)
+    {
+        $this->valideurFinal = $valideurFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get valideurFinal
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getValideurFinal()
+    {
+        return $this->valideurFinal;
+    }
+
+    /**
+     * Set valideurEnCours
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $valideurEnCours
+     * @return Demande
+     */
+    public function setValideurEnCours(\Kbh\GestionCongesBundle\Entity\Salarie $valideurEnCours = null)
+    {
+        $this->valideurEnCours = $valideurEnCours;
+
+        return $this;
+    }
+
+    /**
+     * Get valideurEnCours
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getValideurEnCours()
+    {
+        return $this->valideurEnCours;
+    }
+
+    /**
+     * Set suppleantEnCours
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $suppleantEnCours
+     * @return Demande
+     */
+    public function setSuppleantEnCours(\Kbh\GestionCongesBundle\Entity\Salarie $suppleantEnCours = null)
+    {
+        $this->suppleantEnCours = $suppleantEnCours;
+
+        return $this;
+    }
+
+    /**
+     * Get suppleantEnCours
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getSuppleantEnCours()
+    {
+        return $this->suppleantEnCours;
+    }
+
+    /**
+     * Set valideurNiveau1
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $valideurNiveau1
+     * @return Demande
+     */
+    public function setValideurNiveau1(\Kbh\GestionCongesBundle\Entity\Salarie $valideurNiveau1 = null)
+    {
+        $this->valideurNiveau1 = $valideurNiveau1;
+
+        return $this;
+    }
+
+    /**
+     * Get valideurNiveau1
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getValideurNiveau1()
+    {
+        return $this->valideurNiveau1;
+    }
+
+    /**
+     * Set valideurNiveau2
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $valideurNiveau2
+     * @return Demande
+     */
+    public function setValideurNiveau2(\Kbh\GestionCongesBundle\Entity\Salarie $valideurNiveau2 = null)
+    {
+        $this->valideurNiveau2 = $valideurNiveau2;
+
+        return $this;
+    }
+
+    /**
+     * Get valideurNiveau2
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getValideurNiveau2()
+    {
+        return $this->valideurNiveau2;
+    }
+
+    /**
+     * Set salarie
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $salarie
+     * @return Demande
+     */
+    public function setSalarie(\Kbh\GestionCongesBundle\Entity\Salarie $salarie = null)
+    {
+        $this->salarie = $salarie;
+
+        return $this;
+    }
+
+    /**
+     * Get salarie
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getSalarie()
+    {
+        return $this->salarie;
+    }
+
+    /**
+     * Set motif
+     *
+     * @param string $motif
+     * @return Demande
+     */
+    public function setMotif($motif)
+    {
+        $this->motif = $motif;
+
+        return $this;
+    }
+
+    /**
+     * Get motif
+     *
+     * @return string 
+     */
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+        /**
+     * Get localite
+     *
+     * @return string 
+     */
+    public function getLocalite() {
+        return $this->localite;
+    }
+        /**
+     * Get distance
+     *
+     * @return string 
+     */
+    public function getDistance() {
+        return $this->distance;
+    }
+     /**
+     * Set localite
+     *
+     * @param string $localite
+     * @return Demande
+     */
+    public function setLocalite($localite) {
+        $this->localite = $localite;
+    }
+     /**
+     * Set distance
+     *
+     * @param string $distance
+     * @return Demande
+     */
+    public function setDistance($distance) {
+        $this->distance = $distance;
+    }
+
+            /**
+     * Get autreMotif
+     *
+     * @return string 
+     */
+    public function getAutreMotif() {
+        return $this->autreMotif;
+    }
+
+         /**
+     * Set autreMotif
+     *
+     * @param string $autreMotif
+     * @return Demande
+     */
+    public function setAutreMotif($autreMotif) {
+        $this->autreMotif = $autreMotif;
+    }
+	
+	
+	/**
+     * Get soldeDroits
+     *
+     * @return float 
+     */
+    public function getSoldeDroits() {
+        return $this->soldeDroits;
+    }
+	
+	/**
+     * Set soldeDroits
+     * @param float $soldeDroits
+     * @return Demande 
+     */
+    public function setSoldeDroits($soldeDroits) {
+        $this->soldeDroits = $soldeDroits;
+    }
+    
+    function getEstValideNiveau3() {
+        return $this->estValideNiveau3;
+    }
+
+    function getValideurNiveau3() {
+        return $this->valideurNiveau3;
+    }
+
+    function getDateValidation3() {
+        return $this->dateValidation3;
+    }
+
+    function setEstValideNiveau3($estValideNiveau3) {
+        $this->estValideNiveau3 = $estValideNiveau3;
+    }
+
+    function setValideurNiveau3(\Kbh\GestionCongesBundle\Entity\Salarie $valideurNiveau3) {
+        $this->valideurNiveau3 = $valideurNiveau3;
+    }
+
+    function setDateValidation3(\DateTime $dateValidation3) {
+        $this->dateValidation3 = $dateValidation3;
+    }
+
+    /**
+     * Set creeParSuperviseur
+     *
+     * @param boolean $creeParSuperviseur
+     * @return Demande
+     */
+    public function setCreeParSuperviseur($creeParSuperviseur)
+    {
+        $this->creeParSuperviseur = $creeParSuperviseur;
+
+        return $this;
+    }
+
+    /**
+     * Get creeParSuperviseur
+     *
+     * @return boolean 
+     */
+    public function getCreeParSuperviseur()
+    {
+        return $this->creeParSuperviseur;
+    }
+
+    /**
+     * Set auteurDemande
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\Salarie $auteurDemande
+     * @return Demande
+     */
+    public function setAuteurDemande(\Kbh\GestionCongesBundle\Entity\Salarie $auteurDemande = null)
+    {
+        $this->auteurDemande = $auteurDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get auteurDemande
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\Salarie 
+     */
+    public function getAuteurDemande()
+    {
+        return $this->auteurDemande;
+    }
+
+    /**
+     * Set pieceJointe
+     *
+     * @param \Kbh\GestionCongesBundle\Entity\PiecesJointes $pieceJointe
+     * @return Demande
+     */
+    public function setPieceJointe(\Kbh\GestionCongesBundle\Entity\PiecesJointes $pieceJointe = null)
+    {
+        $this->pieceJointe = $pieceJointe;
+
+        return $this;
+    }
+
+    /**
+     * Get pieceJointe
+     *
+     * @return \Kbh\GestionCongesBundle\Entity\PiecesJointes 
+     */
+    public function getPieceJointe()
+    {
+        return $this->pieceJointe;
+    }
+}

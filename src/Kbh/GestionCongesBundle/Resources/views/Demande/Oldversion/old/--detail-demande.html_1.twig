@@ -1,0 +1,313 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Détails <small>de la demandes</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                <div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <h3>THEME COLORS</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                                <ul class="theme-colors">
+                                                                                        <li class="theme-color theme-color-default" data-theme="default">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Default</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Blue Hoki</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-steel" data-theme="blue-steel">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Blue Steel</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Orange</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Yellow Crusta</span>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                                <ul class="theme-colors">
+                                                                                        <li class="theme-color theme-color-green-haze" data-theme="green-haze">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Green Haze</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-red-sunglo" data-theme="red-sunglo">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Red Sunglo</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-red-intense" data-theme="red-intense">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Red Intense</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-purple-plum" data-theme="purple-plum">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Purple Plum</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-purple-studio" data-theme="purple-studio">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Purple Studio</span>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12 seperator">
+                                                                <h3>LAYOUT</h3>
+                                                                <ul class="theme-settings">
+                                                                        <li>
+                                                                                 Theme Style
+                                                                                <select class="theme-setting theme-setting-style form-control input-sm input-small input-inline tooltips" data-original-title="Change theme style" data-container="body" data-placement="left">
+                                                                                        <option value="boxed" selected="selected">Square corners</option>
+                                                                                        <option value="rounded">Rounded corners</option>
+                                                                                </select>
+                                                                        </li>
+                                                                        <li>
+                                                                                 Layout
+                                                                                <select class="theme-setting theme-setting-layout form-control input-sm input-small input-inline tooltips" data-original-title="Change layout type" data-container="body" data-placement="left">
+                                                                                        <option value="boxed" selected="selected">Boxed</option>
+                                                                                        <option value="fluid">Fluid</option>
+                                                                                </select>
+                                                                        </li>
+                                                                        <li>
+                                                                                 Top Menu Style
+                                                                                <select class="theme-setting theme-setting-top-menu-style form-control input-sm input-small input-inline tooltips" data-original-title="Change top menu dropdowns style" data-container="body" data-placement="left">
+                                                                                        <option value="dark" selected="selected">Dark</option>
+                                                                                        <option value="light">Light</option>
+                                                                                </select>
+                                                                        </li>
+                                                                        <li>
+                                                                                 Top Menu Mode
+                                                                                <select class="theme-setting theme-setting-top-menu-mode form-control input-sm input-small input-inline tooltips" data-original-title="Enable fixed(sticky) top menu" data-container="body" data-placement="left">
+                                                                                        <option value="fixed">Fixed</option>
+                                                                                        <option value="not-fixed" selected="selected">Not Fixed</option>
+                                                                                </select>
+                                                                        </li>
+                                                                        <li>
+                                                                                 Mega Menu Style
+                                                                                <select class="theme-setting theme-setting-mega-menu-style form-control input-sm input-small input-inline tooltips" data-original-title="Change mega menu dropdowns style" data-container="body" data-placement="left">
+                                                                                        <option value="dark" selected="selected">Dark</option>
+                                                                                        <option value="light">Light</option>
+                                                                                </select>
+                                                                        </li>
+                                                                        <li>
+                                                                                 Mega Menu Mode
+                                                                                <select class="theme-setting theme-setting-mega-menu-mode form-control input-sm input-small input-inline tooltips" data-original-title="Enable fixed(sticky) mega menu" data-container="body" data-placement="left">
+                                                                                        <option value="fixed" selected="selected">Fixed</option>
+                                                                                        <option value="not-fixed">Not Fixed</option>
+                                                                                </select>
+                                                                        </li>
+                                                                </ul>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>
+        <!-- END PAGE HEAD -->
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+                <div class="container">
+                        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                        <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                        <div class="modal-content">
+                                                <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <h4 class="modal-title">Modal title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                         Widget settings form goes here
+                                                </div>
+                                                <div class="modal-footer">
+                                                        <button type="button" class="btn blue">Save changes</button>
+                                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                        <!-- BEGIN PAGE BREADCRUMB -->
+                        <ul class="page-breadcrumb breadcrumb">
+                                <li>
+                                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                                </li>
+                                <li>
+                                        <a href="{{ path('sa_demandes') }}">Historique demandes</a>
+                                        <i class="fa fa-circle"></i>
+                                </li>
+                                <li class="active">
+                                         Détail demande
+                                </li>
+                        </ul>
+                        <!-- END PAGE BREADCRUMB -->
+                        <!-- BEGIN PAGE CONTENT INNER -->
+                        <div class="portlet light">
+                                <div class="portlet-body">
+                                        <div class="invoice">
+                                                <div class="row invoice-logo">
+                                                        <div class="col-xs-6 invoice-logo-space">
+                                                                <img src="{{ asset('bundles/kbhgestionconges/assets/admin/pages/media/invoice/walmart.png') }}" class="img-responsive" alt=""/>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                                <p  style="float:right;">
+                                                                    Demande N° : <b/>{{ entity.id }}</b> / Le <b>{{ entity.dateDemande|date('d-m-Y H:i:s') }}</b>
+                                                                </p>
+                                                        </div>
+                                                </div>
+                                                <hr/>
+                                                <div class="row">
+                                                        <div class="col-xs-6">
+                                                                <h3>Information Salarié:</h3>
+                                                                <ul class="list-unstyled">
+                                                                        <li>
+                                                                        Nom & Prénoms : <strong>{{salarie.nomprenom}}</strong>
+                                                                        </li>
+                                                                        <li>
+                                                                        Unité : <strong>{{ salarie.unite }}</strong><br>
+                                                                        </li>
+                                                                        <li>
+                                                                        Poste :<strong>{{ salarie.poste }}</strong>
+                                                                        </li>
+                                                                        <li>
+                                                                        Téléphone: <strong>{{ salarie.telephone }}</strong>
+                                                                        </li>
+                                                                        <li>
+                                                                        Email: <strong>{{ salarie.email }}</strong>
+                                                                        </li>
+                                                                        <li>
+                                                                        <p>Matricule CNPS : <strong>{{ salarie.numeroCnps }}</strong>
+                                                                        </li>
+                                                                </ul>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                    <hr/>
+                                                        <div class="col-xs-12">
+              <p class="m-t m-b">Objet : <strong> {% if entity.typeDemande == 'Conge' %}Demande de Congé{% endif %}  {% if entity.typeDemande == 'Permission' %}Demande d'Absence{% endif %}</strong><br>
+              </p>
+              <p style="text-align: justify;">Madame, Monsieur,<br/>
+                  En tant que salarié dans votre entreprise depuis le <strong>{{ salarie.dateEmbauche|date('d-m-Y')  }}</strong>, j’ai acquis pour l’année de référence <strong>{{ entity.dateDemande|date('Y') }}</strong>, <strong>
+                  {% if entity.estValide == 1 %}{% set nbConge = droit.totalDroitsAprendre + entity.nbjoursOuvrables %}{{ nbConge }}{% endif %}
+                  {% if entity.estEnCours == 1 or entity.estRefuse == 1 %}{{ droit.totalDroitsAprendre }}{% endif %}</strong> jours ouvrables de congés. 
+              <br/><br/>    
+              C'est pourquoi j'ai l'honneur de solliciter, au titre des congés payés, une absence du <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong> au <strong>{{ entity.dateFin|date('d-m-Y') }}</strong> inclus, soit <strong>{{ entity.nbjoursOuvrables }}</strong> jours ouvrables de congés. 
+              <br/><br/>
+               En espérant que vous réserverez une suite favorable à cette demande, je vous serais reconnaissant de bien vouloir m'informer par écrit de votre accord.
+               <br/><br/>
+               Avec mes remerciements, je vous prie d’agréer, Madame, Monsieur, mes sincères salutations.
+               <br/>
+
+                <strong style="float:right;">{{salarie.nomprenom}}</strong><br/>
+                <hr/><br/>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                    {% if entity.estValideNiveau1 %}
+                                                        <div class="col-xs-4">
+                                                                <div class="well">
+                                                                        <address>
+                                                                         <strong>PREMIERE VALIDATION </strong><br/>
+                                                                        le  {{ entity.dateValidation1|date('d-m-Y H:i:s') }}<br/>
+                                                                        Par: {{ entity.valideurNiveau1  }}<br/>
+                                                                        <address>
+                                                                        <strong>Unite: {{ entity.valideurNiveau1.poste  }}</strong><br/>
+                                                                        <a href="mailto:#">
+                                                                       {{ entity.valideurNiveau1.email  }}</a>
+                                                                        </address>
+                                                                </div>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if entity.estValideNiveau2 %}
+                                                        <div class="col-xs-4">
+                                                                <div class="well">
+                                                                        <address>
+                                                                         <strong>DEUXIEME VALIDATION </strong><br/>
+                                                                        le  {{ entity.dateValidation2|date('d-m-Y H:i:s') }}<br/>
+                                                                        Par: {{ entity.valideurNiveau2  }}<br/>
+                                                                        <address>
+                                                                        <strong>Unite: {{ entity.valideurNiveau2.poste  }}</strong><br/>
+                                                                        <a href="mailto:#">
+                                                                       {{ entity.valideurNiveau2.email  }}</a>
+                                                                        </address>
+                                                                </div>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% if entity.estValide %}
+                                                        <div class="col-xs-4">
+                                                                <div class="well">
+                                                                        <address>
+                                                                         <strong>PREMIERE VALIDATION </strong><br/>
+                                                                        le  {{ entity.dateValidation|date('d-m-Y H:i:s') }}<br/>
+                                                                        Par: {{ entity.valideurFinal  }}<br/>
+                                                                        <address>
+                                                                        <strong>Unite: {{ entity.valideurFinal.poste  }}</strong><br/>
+                                                                        <a href="mailto:#">
+                                                                       {{ entity.valideurFinal.email  }}</a>
+                                                                        </address>
+                                                                </div>
+                                                        </div>
+                                                        {% endif %}
+                                                       {% if entity.estRefuse %} 
+                                                        <div class="col-xs-4 invoice-block">
+                                                                <ul class="list-unstyled amounts">
+                                                                        <li>
+                                                                                <strong>Demande REFUSEE </strong>
+                                                                        </li>
+                                                                        <li>
+                                                                                <strong>Le</strong> {{ entity.dateRefus|date('d-m-Y H:i:s') }}
+                                                                        </li>
+                                                                        <li>
+                                                                                <strong>Par:</strong> {{ entity.refusePar }}
+                                                                        </li>
+                                                                        <li>
+                                                                                <strong>Email:</strong> {{ entity.refusePar.email }}
+                                                                        </li>
+                                                                        <li>
+                                                                                <strong>Motif Refus:</strong> {{ entity.raisonRefus }}  
+                                                                        </li>
+                                                                </ul>
+                                                                <br/>
+                                                               {# <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                                                                Print <i class="fa fa-print"></i>
+                                                                </a>#}
+                                                        </div>
+                                                       {% endif %}
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- END PAGE CONTENT INNER -->
+                </div>
+        </div>
+        <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
+{% endblock %}

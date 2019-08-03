@@ -1,0 +1,95 @@
+<div class="col-md-12">    
+<table class="table font-blue-madison">
+    <thead>
+        <tr>
+            <td class="bold">
+               N° matricule
+            </td>
+            <td>
+                {{ salarie.matricule }}
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="bold">
+                N° CNPS
+            </td>
+            <td>
+                {{ salarie.numeroCnps }}
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                statut matrimoniale
+            </td>
+            <td>
+                {{ salarie.statutMarital }}
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                Responsable direct
+            </td>
+            <td>
+                {% if salarie.superviseur %}{{ salarie.superviseur.civilite }} {{ salarie.superviseur }} {% endif%}
+                {% if not salarie.superviseur %} Aucun {% endif%}
+            </td>
+        </tr>
+        {% if salarie.unite %} 
+        <tr>
+            <td class="bold">
+                Rattachement
+            </td>
+            <td>
+               <a class="tooltips" data-original-title="{{ salarie.unite.nom }}">{{ salarie.unite.sigle }}</a>
+            </td>
+        </tr>
+            <tr>
+                <td class="bold">
+                    Situation géographique unité
+                </td>
+                <td>
+                    {% if salarie.unite.situationGeographique %}{{ salarie.unite.situationGeographique }}{% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="bold">
+                    Lieu de travail
+                </td>
+                <td>
+                    {% if salarie.unite.lieuTravail %}{{ salarie.unite.lieuTravail }}{% endif %}
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="bold">
+                Email
+            </td>
+            <td>
+                {{ salarie.email }}
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                Derniers congés
+            </td>
+            <td>
+               {% if conge %}
+                {% set n = 1%}
+                {% for conge in conge%}
+                    {% if n == cp_conge%}
+                        <b>{{conge.dateDebut|date('d-m-Y')}} / {{conge.dateFin|date('d-m-Y')}}</b>
+                    {% endif %}
+                    {% set n = n+1%}  
+                {% endfor %}
+            {% endif %}
+
+            {% if cp_conge == 0%}
+               <b> Aucune information </b>
+            {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>            

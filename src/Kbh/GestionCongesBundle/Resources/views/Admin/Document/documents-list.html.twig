@@ -1,0 +1,180 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+<div class="page-container">
+        <!-- END PAGE HEAD -->       
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+            {% for entity in entities %}
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">ATTENTION !!</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-12 note note-danger">
+                                <h4 class="block">CONFIRMATION DE LA SUPPRESSION! </h4>
+                                <p>
+                                    Voulez-vous vraiment SUPPRIMER le document <b>{{ entity.name }}</b> ?
+                                </p>
+                            </div>
+                          </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('ad_document_delete', { 'id': entity.id }) }}"  class="btn btn-danger btn-md">Supprimer</a>
+                            <button type="button" class="btn default" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+              {% endfor %}   
+              <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="block" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-12 note note-danger">
+                                <center>
+                                    <i class="fa fa-warning fa-4x" style="padding-top: 15px;"></i>
+                                    <h4 class="block">CONTENU PROTEGER</h4>
+                                </center>
+                                
+                                <p>
+                                    Vous ne pouvez pas accéder au contenu de ce fichier, veuillez contacter le support pour<br/>
+                                    toutes informations !!</b> 
+                                </p>
+                            </div>
+                          </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <a href="mailto:support.ima@polesCompetences.com"  class="btn btn-primary btn-md">Contacter</a>
+                            <button type="button" class="btn default" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        {#<li>
+                                <a href="#">Demandes</a>
+                                <i class="fa fa-circle"></i>
+                        </li>#}
+                        <li class="active">
+                                Documents
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">Liste des documents importés ({{number}})</span>
+                                                </div>
+                                                <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="table-scrollable table-scrollable-borderless">
+                                                <div class="tab-content">
+                                                        <div class="tab-pane fade active in" id="tab_1">
+                                                              <div class="scroller" >   
+                                                                <div class="table-scrollable table-scrollable-borderless">
+                                                                   <table class="table table-hover table-light" >
+                                                                        <thead>
+                                                                        <tr>
+                                                                       {#<th>Id</th>#}
+                                                                        <th>Titre du document</th>
+                                                                        <th>Path</th>
+                                                                        <th>Date création</th>
+                                                                        <th>Dernière modification</th>
+                                                                        <th>Statut</th>
+                                                                        <th>Traitements</th>
+{#                                                                        <th>Action</th>#}
+                                                                        </tr>
+                                                                        </thead>
+                                                                        {% set Num = 0 %}
+                                                                       {% for entity in entities %}
+                                                                        <tr>
+                                                                        {% set Num = Num + 1 %}    
+                                                                       {#<td class="fit">{{ Num }}</td>#}
+                                                                       <td>{% if entity.name %}{{ entity.name }}{% endif %}</td>
+                                                                        <td>{% if entity.path %}{{ entity.path }}{% endif %}</td>
+                                                                        <td>{{ entity.dateCreation|date('d-m-Y') }}</td>
+                                                                        <td>{{ entity.updateAt|date('d-m-Y H:i:s') }}</td>
+                                                                        <td>
+                                                                            {% if entity.statut == "En attente" %}<i class="btn btn-circle btn-danger btn-sm">{{entity.statut}}</i><br/>{% endif %}
+                                                                            {% if entity.statut == "Traité" %}<i class="btn btn-circle btn-success btn-sm">{{entity.statut}}</i><br/>{% endif %}
+                                                                        </td>
+                                                                        <td>{% if entity.cible %}{{ entity.cible }}{% endif %}</td>
+                                                                       {#<td>
+                                                                        {% if entity.cible == "Salariés" %} 
+                                                                        <a href="#block" data-toggle="modal" class="btn btn-circle btn-primary btn-sm">contenu non autorisé</a>
+                                                                        {% endif %}
+                                                                        {% if entity.cible == "Unités" %} 
+                                                                        <a href="#block" data-toggle="modal"  class="btn btn-circle btn-primary btn-sm">contenu non autorisé</a>
+                                                                        {% endif %}
+                                                                        {% if entity.cible == "Calcul allocation" %} 
+                                                                      <a href="#{{ entity.id }}" data-toggle="modal"  class="btn btn-circle btn-danger btn-sm">Supprimer</a>
+                                                                        {% endif %}
+                                                                        </td>#}
+                                                                        </tr>
+                                                                       {% endfor %}
+                                                                        </table>
+                                                             </div>
+                                                           </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                     </div>                                   
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+    th,td{
+        text-align: center;
+        color:#345F98 !important;
+    }
+ .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  color: #fff;
+  background-color: #6838A5;
+}
+  body{
+        font-size: 14px;
+    }
+    .font-blue-madison {
+        color: #345F98 !important;
+    }
+</style>
+
+    {% endblock %}

@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Droits creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('droits') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

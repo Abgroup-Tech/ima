@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('collaborateur_conges', {'salarie_id': entity.salarie.id}) }}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Détail de l'annonce</h3>
+                </header>
+            <section id="content">
+          <section class="vbox bg-white">
+            <header class="header b-b b-light hidden-print" style="padding-left: 100px;padding-right: 132px;">
+              <button href="#" class="btn btn-sm btn-info pull-right" onClick="window.print();">Imprimer</button>
+              <p>Numéro Matricule : {{salarie.matricule}}</p>
+            </header>
+           <section class="scrollable wrapper" style="padding-left: 100px;padding-right: 132px;">
+              <img src="{{ asset ('bundles/kbhgestionconges/images/CNPS-logo.png') }}"/>
+              <div class="row">
+                <div class="col-xs-6">
+                  <br/>
+                  <p>Nom & Prénoms : <strong>{{salarie.nomprenom}}</strong><br>
+                   Unité : <strong>{{ salarie.unite }}</strong><br>
+                   Poste :<strong>{{ salarie.poste }}</strong>
+                  </p>
+                  <p>
+                    Téléphone: <strong>{{ salarie.telephone }}</strong><br>
+                    Email: <strong>{{ salarie.email }}</strong>
+                  </p>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <p>Matricule CNPS : <strong>{{ salarie.numeroCnps }}</strong><br>
+                     Demande N° : {{ entity.id }}<br>
+                  <h5>Date: Le {{ entity.dateDemande|date('d-m-Y H:i:s') }} </h5>  
+                  <strong>
+                    {% if entity.estValideNiveau1 %}<i class="fa fa-check text-success"></i><span class="" style="font-size: 15px;padding: 5px;color: forestgreen;"> 1ère validation le {{ entity.dateValidation1|date('d-m-Y H:i:s') }} - par {{ entity.valideurNiveau1  }}</span><br/>{% endif %}
+                    {% if entity.estValideNiveau2 %}<i class="fa fa-check text-success"></i><span class="" style="font-size: 15px;padding: 5px;color: forestgreen;"> 2ème validation le {{ entity.dateValidation2|date('d-m-Y H:i:s') }} - par {{ entity.valideurNiveau2 }}</span><br/>{% endif %}
+                    {% if entity.estValide %}<i class="fa fa-check text-success"></i><span class="" style="font-size: 15px;padding: 5px;color: forestgreen;"> Validation définitive le {{ entity.dateValidation|date('d-m-Y H:i:s') }} - par {{ entity.valideurFinal }}</span><br/>{% endif %}
+                    {% if entity.estRefuse %}<i class="fa fa-times text-danger"></i><span style="font-size: 15px;padding: 5px;color: red;">Demande REFUSEE le  {{ entity.dateRefus|date('d-m-Y H:i:s') }} - par {{ entity.refusePar }}</span><br/>{% endif %}                    
+                    {% if entity.estCloture %}<span class="" style="font-size: 15px;padding: 5px;color: forestgreen;">Demande Cloturée le {{ entity.dateCloture|date('d-m-Y') }}<br/>{% endif %}
+                  </strong><br>
+                </div>
+              </div>
+              <p class="m-t m-b">Objet : <strong>{% if entity.typeDemande == 'Congé' %}Demande de Congé{% endif %}  {% if entity.typeDemande == 'Permission' %}Demande de Permission{% endif %}</strong><br>
+              </p>
+              <div class="line"></div>
+              <p style="text-align: justify;">Madame, Monsieur,<br/>
+                  En tant que salarié dans votre entreprise depuis le <strong>{{ salarie.dateEmbauche|date('d-m-Y')  }}</strong>, j’ai acquis pour l’année de référence <strong>{{ entity.dateDemande|date('Y') }}</strong>, <strong>
+                  {% if entity.estValide == 1 %}{% set nbConge = droit.totalDroitsAprendre + entity.nbjoursOuvrables %}{{ nbConge }}{% endif %}
+                  {% if entity.estEnCours == 1 or entity.estRefuse == 1 %}{{ droit.totalDroitsAprendre }}{% endif %}</strong> jours ouvrables de congés. 
+              <br/><br/>    
+              C'est pourquoi j'ai l'honneur de solliciter, au titre des congés payés, une absence du <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong> au <strong>{{ entity.dateFin|date('d-m-Y') }}</strong> inclus, soit <strong>{{ entity.nbjoursOuvrables }}</strong> jours ouvrables de congés. 
+              <br/><br/>
+               En espérant que vous réserverez une suite favorable à cette demande, je vous serais reconnaissant de bien vouloir m'informer par écrit de votre accord.
+               <br/><br/>
+               Avec mes remerciements, je vous prie d’agréer, Madame, Monsieur, mes sincères salutations.
+               <br/>
+
+                <strong style="float:right;">{{salarie.nomprenom}}</strong><br/>
+                <hr/><br/>
+            {% if entity.estRefuse %}Motif du Refus : <br/>{{ entity.raisonRefus }}{% endif %}  
+                </p>
+              
+            </section>
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+        </section>
+        </section>
+        </section>
+      </section>
+    </section>
+    <style type="text/css">
+  th,tr {
+    text-align: center;
+  }
+  </style>
+{% endblock %}

@@ -1,0 +1,937 @@
+{% extends '::base-super-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="convention" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Article 69 : Durée du congé</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <p>
+                                    La durée du congé payé à la charge de l'employeur est déterminée, à raison de <b>2,2 jours</b> ouvrables par mois de service effectif pour l'ensemble des travailleurs.
+                                    Cette durée est augmentée par an de :
+                                <ul>
+                                    <li> <b>1 jour</b> ouvrable supplémentaire après 5 ans d'ancienneté dans l'entreprise ; </li>
+                                    <li> <b>2 jours</b> ouvrables supplémentaires après 10 ans  </li>
+                                    <li> <b>3 jours</b> ouvrables supplémentaires après 15 ans  </li>
+                                    <li> <b>5 jours</b> ouvrables supplémentaires après 20 ans  </li>
+                                    <li> <b>7 jours</b> ouvrables supplémentaires après 25 ans  </li>
+                                </ul>   
+                                    Les femmes salariées ou apprenties bénéficient d'un congé supplémentaire payé sur les bases suivantes :  
+                                <ul>
+                                    <li> <b>2 jours</b> de congé supplémentaires par enfant à charge si <b>elles ont moins de 21 ans</b> au dernier jour de la période de référence ; </li>
+                                    <li> <b>2 jours</b> de congé supplémentaires par enfant à charge à compter du 4ème si <b>elles ont plus de 21 ans</b> au dernier jour de la période de référence.  </li>
+                                </ul> 
+                                    Les travailleurs titulaires de la Médaille d’ Honneur du Travail bénéficieront de <b>1 jour</b> de congé supplémentaire par an en sus du congé légal.<br/> 
+                                    Les travailleurs logés dans l'établissement (ou à proximité) dont ils ont la garde et astreints à une durée de présence de 21 heures continues par jours, ont droit à un congé annuel payé de <b>2 semaines</b> par an en sus du congé légal et bénéficient des dispositions de l'alinéa 2 du présent article.<br/>
+                                    Les travailleurs recrutés hors du territoire de la République de Côte d'Ivoire, munis d'un contrat d'expatrié, auront droit, lors du premier séjour, à un congé dont la durée sera déterminée sur la base de <b>5 jours</b> calendaires par mois de servie effectif. A l'issue du second séjour, la durée du congé sera déterminée sur la base de <b>6 jours</b> calendaires.<br/>
+                                    Les travailleurs effectuant au moins un horaire de travail égal ou supérieur à 50 heures par semaine, pendant une période continue de 1 an précédant la date du départ en congé bénéficieront après 5 années de service continue ou non dans le même établissement ou entreprise de <b>1 jour</b> supplémentaire de congé par an en sus des dispositions prévues à l'alinéa 2 du présent article.   <br/>
+                                    Des contrats individuels de travail peuvent prévoir un régime plus favorable pour la détermination de la durée du congé.
+                                </p>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            </div>     
+            <!-- /.modal -->
+            {#  ################################## #}
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="new-ferie" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{ form_start(feriesForm,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Nouveau fériés</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Titre ferié</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.titreFeries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un férié"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de début</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.dateDebutFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de début"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de fin</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.dateFinFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date de fin"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nombre de jours</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(feriesForm.nbJoursFerie,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre de jours"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                        {{ form_end(feriesForm) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            {#  ################################ #}
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="new-permission" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{ form_start(permissionForm,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Nouvelle permission</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Motif permission</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(permissionForm.motif,{'attr': {'class':'form-control', 'placeholder':"Saisissez un motif"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>     
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Durée</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(permissionForm.duree,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre de jours"}}) }}
+                                        <span class="help-block">
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn green" value="Confirmer"/>
+                            <button type="button" class="btn default" data-dismiss="modal">Retour</button>
+                        </div>
+                        {{ form_end(permissionForm) }}
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Paramètre système
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="portlet light">
+                <div class="portlet-body">
+                    <div class="invoice">
+
+                        {#                        <hr/>#}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_1" data-toggle="tab">
+                                           Paramètre entreprise </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_2" data-toggle="tab">
+                                            Permissions exceptionnelles </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_3" tabindex="-1" data-toggle="tab">
+                                            Gestion des fériés </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_4" tabindex="-1" data-toggle="tab">
+                                            Paramètres calcul des droits </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_5" tabindex="-1" data-toggle="tab">
+                                            Données en base </a>
+                                    </li>
+                                    {#<li class="dropdown">
+                                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                            Dropdown <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="#tab_1_4" tabindex="-1" data-toggle="tab">
+                                                    Option 4 </a>
+                                            </li>
+                                        </ul>
+                                    </li>#}
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_1_1">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">Paramètres entreprise</span>
+                                                </div>
+                                                {#<div class="tools">
+                                                    <a href="javascript:;" class="collapse">
+                                                    </a>
+                                                    <a href="#portlet-config" data-toggle="modal" class="config">
+                                                    </a>
+                                                </div>#}
+                                            </div>
+                                        </div>   
+                                        {{ form_start(edit_form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                                        <div class="form-body">
+                                            <div class="form-group last">
+                                                <label class="control-label col-md-3">Logo de l'entreprise</label>
+                                                <div class="col-md-8">
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                            {% if entity.logo %} <img src="{{ asset('uploads/' ~ entity.logo.path) }}" class="img-responsive" alt="">{% endif %}
+                                                            {% if not entity.logo %} <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" class="img-responsive" alt="">{% endif %}
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                                        </div>
+                                                        <div>
+                                                            <span class="btn default btn-file">
+                                                                <span class="fileinput-new">
+                                                                    Choisir une image </span>
+                                                                <span class="fileinput-exists">
+                                                                    Changer </span>
+                                                                    {{ form_widget(edit_form.logo.file) }}
+                                                            </span>
+                                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                                Supprimer </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix margin-top-10">
+                                                        <span class="label label-danger" style="margin-right:8px;">
+                                                            NOTE! 
+                                                        </span> Pour un meilleur rendu veuillez insérer une belle image.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">titre logo</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.logo.name,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                            <hr/>        
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Nom entreprise</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.nom,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nom"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>        
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Nombre employés</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.nbSalaries,{'attr': {'class':'form-control', 'placeholder':"Saisissez un nombre"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                           <hr/>         
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Delais mise à jours des droits</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.delaisMiseAjours,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nombre de jours"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                            <hr/>         
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Delais mise à jours des droits supplémentaires</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.delaisMiseAjoursAnnuel,{'attr': {'class':'form-control', 'placeholder':"Saisissez le nombre de jours"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Prochaine mise à jours mensuel </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.dateUpdateMensuel,{'attr': {'class':'form-control', 'placeholder':"yyyy-mm-dd"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Prochaine mise à jours annuel </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.dateUpdateAnnuel,{'attr': {'class':'form-control', 'placeholder':"yyyy-mm-dd"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>        
+{#                                            <span style="display:none">#}
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Date implémentation</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.dateImplementation,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                           <hr/>         
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Date livraison</label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_form.dateLivraison,{'attr': {'class':'form-control', 'placeholder':"Saisissez une date"}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div> 
+{#                                            </span>         #}
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn green" value="Effectuer modification"/>
+                                        </div>
+                                        {{ form_end(edit_form) }}
+
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_1_2">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption" style="margin-top: 7px">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">Liste des permissions exceptionnelles</span>
+                                                </div>
+                                                <div class="tools">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default">Actions</button>
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href='#new-permission' data-toggle="modal">
+                                                                 <i class="fa fa-plus"></i> nouvelle permission </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        N°
+                                                    </th>
+                                                    <th>
+                                                        Motif
+                                                    </th>
+                                                    <th>
+                                                        Durée
+                                                    </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for param_permission in param_permission%}
+                                                    <tr>
+                                                        <td>
+                                                            {{param_permission.id}}
+                                                        </td>
+                                                        <td>
+                                                            {{param_permission.motif}}
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            {{param_permission.duree}} jour(s)
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path('sup_ad_permissions_edit', { 'id': param_permission.id }) }}" class="btn btn-sm btn red" >
+                                                                modifier
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_1_3">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption" style="margin-top: 7px">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">Gestion des fériés</span>
+                                                </div>
+                                               <div class="tools">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default">Actions</button>
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href='#new-ferie' data-toggle="modal">
+                                                                 <i class="fa fa-plus"></i> nouveau férie </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                N°
+                                                            </th>
+                                                            <th>
+                                                                Titre féries
+                                                            </th>
+                                                            <th class="hidden-480">
+                                                                Date début  
+                                                            </th>
+                                                            <th class="hidden-480">
+                                                                Date fin
+                                                            </th>
+                                                            <th class="hidden-480">
+                                                                Nombre jours
+                                                            </th>
+                                                            <th class="hidden-480">
+                                                                Action
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for ferie in feries%}
+                                                            <tr>
+                                                                <td>
+                                                                    {{ferie.id}}
+                                                                </td>
+                                                                <td>
+                                                                    {{ferie.titreFeries }}
+                                                                </td>
+                                                                <td class="hidden-480">
+                                                                    {{ferie.dateDebutFerie|date('d-m-Y')}}
+                                                                </td>
+                                                                <td class="hidden-480">
+                                                                    {{ferie.dateFinFerie|date('d-m-Y')}}
+                                                                </td>
+                                                                <td class="hidden-480">
+                                                                    {{ferie.nbJoursFerie}}
+                                                                </td>
+                                                                <td class="hidden-480">
+                                                                    <a href="{{ path('sup_ad_feries_edit', { 'id': ferie.id }) }}" class="btn btn-sm btn red" >
+                                                                        modifier
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_1_4">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">Paramètres entreprise</span>
+                                                </div>
+                                                {#<div class="tools">
+                                                    <a href="javascript:;" class="collapse">
+                                                    </a>
+                                                    <a href="#portlet-config" data-toggle="modal" class="config">
+                                                    </a>
+                                                </div>#}
+                                            </div>
+                                        </div>   
+                                        <div class="col-md-12 note note-info">
+                                            <p>
+                                                Les données utilisées pour les calculs des droits proviènnent de l'article 69 de la convention collective. <a href='#convention' data-toggle="modal">Clicquez pour consulter</a>
+                                            </p>
+                                        </div>
+                                        {{ form_start(edit_calculDroitForm,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}
+                                        <div class="form-body">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Base de calcul des droits </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.baseDroitsAcquis,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div> 
+                                            <hr/>        
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">5 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupAnciennete5ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">10 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupAnciennete10ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">15 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupAnciennete15ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">20 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupAnciennete20ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">25 ans d'ancienneté </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupAnciennete25ans,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Jours sup / enfant à charge  </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupFemmeParEnfantMineur,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Medaille d'honneur du travail  </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupMedailleHonneur,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">Logé(e) dans l'entreprise </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupAstreinte,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Droits expatrié(e) sejour 1 </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.droitsExpatSejour1,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Droits expatrié(e) de base </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.droitsExpatBase,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Travail au moins 200h/mois </label>
+                                                <div class="col-md-8">
+                                                    {{ form_widget(edit_calculDroitForm.joursSupPr200hmois,{'attr': {'class':'form-control', 'placeholder':"Saisissez un titre "}}) }}
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn green" value="Effectuer modification"/>
+                                        </div>
+                                        {{ form_end(edit_calculDroitForm) }}
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_1_5">
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-cogs"></i>
+                                                    <span class="caption-subject bold uppercase">données en base</span>
+                                                </div>
+                                               {# <div class="tools">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default">Actions</button>
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href='#new-permission' data-toggle="modal">
+                                                                 <i class="fa fa-plus"></i> nouvelle permission </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>#}
+                                            </div>
+                                        </div> 
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Table
+                                                    </th>
+                                                    <th>
+                                                        Détails
+                                                    </th>
+                                                    <th>
+                                                        voir
+                                                    </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                        <td>
+                                                          Absences à justifier
+                                                        </td>
+                                                        <td>
+                                                            Liste des absences maladies à justifier
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_absJustif")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#1-table"  data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Absences arrêt de travail
+                                                        </td>
+                                                        <td>
+                                                            Liste des absences liées à un arrêt de travail
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_absAT")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#2-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Absences 
+                                                        </td>
+                                                        <td>
+                                                            Liste de toutes les permissions et absences exceptionnelles enregistrées
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_abs")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#3-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Congés
+                                                        </td>
+                                                        <td>
+                                                            Liste de tous les congés enregistrées
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_conges")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#4-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Demandes
+                                                        </td>
+                                                        <td>
+                                                            Liste de toutes les demandes enregistrées
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_demandes")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#5-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Documents
+                                                        </td>
+                                                        <td>
+                                                            Liste des documents importés
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_documents_sys")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#6-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Pièces jointes
+                                                        </td>
+                                                        <td>
+                                                            Liste des pièces justificatives importées dans le système
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_piecesJointes")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#7-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Log update mensuel
+                                                        </td>
+                                                        <td>
+                                                            rapport des mise à jours mensuelles
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_logUpdate_mensuel")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#8-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Log update annuel
+                                                        </td>
+                                                        <td>
+                                                            rapport des mise à jours annuelles
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_logUpdate_annuel")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#9-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Notifications
+                                                        </td>
+                                                        <td>
+                                                            Liste des notifications du système
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_notifications")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#10-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Etats
+                                                        </td>
+                                                        <td>
+                                                            Statistiques des salariés
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_etats")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#11-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Historique des droits
+                                                        </td>
+                                                        <td>
+                                                            Historique des mouvements des droits des salariés
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_historique_droits")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#12-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Historique des activités
+                                                        </td>
+                                                        <td>
+                                                            Historique des activités des administrateurs
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_log_activites")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#13-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Reports de congés
+                                                        </td>
+                                                        <td>
+                                                            Historique des reports de congés
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_report")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#14-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                          Droits
+                                                        </td>
+                                                        <td>
+                                                           Réinitialisation annuelle des droits des salariés 
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="{{ path("sup_ad_droits_list")}}" class="btn btn-sm btn blue" >
+                                                                consulter 
+                                                            </a>
+                                                        </td>
+                                                        <td class="hidden-480">
+                                                            <a href="#15-table" data-toggle="modal" class="btn btn-sm btn red">
+                                                                réinitialiser les données
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>                       
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+        </div>
+    </div>
+    <!-- END PAGE CONTENT -->
+    {% include "::modules-super-admin/reinitialisation.html.twig" %}
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE HEAD -->
+    <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Report<small> congé</small></h1>
+            </div>
+
+        </div>
+    </div>     
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            Widget settings form goes here
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn blue">Save changes</button>
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('reports') }}">Report congé</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    report
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-note font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Congé reporté</span>
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <header class="panel-heading" style="background: ghostwhite;margin-bottom: 21px;">
+                                <h3><b>Report du congé de {{ entity.salarie.civilite }} {{ entity.salarie }}</b></h3>
+                                <h4><b>Par : {{ entity.salarie.superviseur.civilite }} {{ entity.salarie.superviseur }}</b></h4>
+                                <h4>N° du congé : {{ entity.conge.id }}</h4>
+                                <ul>
+                                    <li><b>Ancienne date de départ</b> : {{entity.ancienneDateDebut|date('d-m-Y')}}</li>
+                                    <li><b>Ancienne date de Fin</b> : {{entity.ancienneDateFin|date('d-m-Y')}}</li>
+                                </ul>
+                            </header>
+                            <!-- BEGIN FORM-->
+                            <div class="form-body" id="form-demande">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+
+                                            <label class="control-label col-md-2">Durée </label>
+                                            <div class="col-md-9">
+                                                <input id="nbJours" name="nbJours" min="1" type="number" class="form-control" value="{{entity.ancienneDuree}}" readonly="true" />
+                                                <span class="help-block"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Nouvelle date de départ</label>
+                                            <div class="col-md-9">
+                                                <input  min="1" type="datetime" class="form-control" value="{{ entity.dateDebut|date('d-m-Y')}}" readonly="true" />
+                                                <span class="help-block"></span> 
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Nouvelle date de Fin</label>
+                                            <div class="col-md-9">
+                                                <input  min="1" type="datetime" class="form-control" value="{{ entity.dateFin|date('d-m-Y') }}" readonly="true" />
+                                                <span class="help-block"></span> 
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>	
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Nouvelle date de Retour</label>
+                                            <div class="col-md-9">
+                                                <input  min="1" type="datetime" class="form-control" value="{{ entity.dateRetour|date('d-m-Y')}}" readonly="true" />
+                                                <span class="help-block"></span> 
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>	
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Motif du report</label>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" readonly="true">{{ entity.motifReport }}</textarea>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>         
+                                </div>                              
+                            </div>
+                            <div class="form-actions" style="padding-top:20px;">
+                                <div class="row">
+                                    <!-- <footer class="panel-footer text-right bg-light lter">
+                                    <!-- <input type="submit" class="btn btn-success btn-s-xs" value="Soumettre"/> 
+                                  </footer> -->
+                                </div>
+                            </div>
+
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}

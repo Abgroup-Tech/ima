@@ -1,0 +1,186 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content" style="min-height: 800px">
+        <div class="container">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Aide ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                            
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="{{ path('welcome') }}">Tableau de board</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="{{ path('ad_absencesat') }}">Arrêt de travail</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Confirmation absence
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered form-fit">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-calendar font-blue-hoki"></i>
+                                <span class="caption-subject font-blue-hoki bold uppercase">Page de confirmation</span>
+                                <span class="caption-helper">d'un arrêt de travail</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            {% if erreur %}
+                                <div class="note note-danger">
+                                    <h4 class="block">{{ erreur }}</h4>
+                                    <p>Une érreur c'est produite lors de la modification du salarié. Veulliez revérifier tous les champs</p>
+                                </div>
+                            {% endif %}
+                            <div class="note note-success">
+                                    <h4 class="block">SOUHAITEZ-VOUS VRAIMENT CONFIRMER L'ENREGISTREMENT</h4>
+                                    <p>Merci de relire avant de confirmer cet enregistrement !</p>
+                            </div>
+                            <!-- BEGIN FORM-->
+                            {{ form_start(form,{'attr': {'class':'form-horizontal form-bordered form-label-stripped'}}) }}  
+                            {#<form class="form-horizontal form-bordered form-label-stripped" action="{{ path('admin_salarie_create')}}" method="POST">#}
+                            <div class="form-body">
+                                 <div class="form-group">
+                                    <label class="control-label col-md-3">Salarié sélectionné
+                                        <span class="required">
+                                            * 
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="collab" class="form-control" value="{{entity.salarie}}" readonly="true">
+                                            <span class="help-block">
+                                            </span>
+                                    </div>
+                                </div>       
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Motif sélectionné
+                                        <span class="required">
+                                            * 
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="motif" class="form-control" value="{{entity.motif}}" readonly="true">
+                                            <span class="help-block">
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de départ sélectionné
+                                        <span class="required">
+                                            * 
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="collab" class="form-control" value="{{entity.dateDebut|date('d-m-Y')}}" readonly="true">
+                                            <span class="help-block">
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de fin sélectionné
+                                        <span class="required">
+                                            * 
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="collab" class="form-control" value="{{entity.dateFin|date('d-m-Y')}}" readonly="true">
+                                            <span class="help-block">
+                                            </span>
+                                    </div>
+                                </div>    
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Pièces justificatives</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.pieceJustificative.file, {'attr': {'class': 'form-control'}}) }}
+                                        <span class="help-block">
+                                            Merci de scanner et joindre la décision d'arrêt de travail du salarié</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Nommez le fichier importé</label>
+                                    <div class="col-md-8">
+                                        {{ form_widget(form.pieceJustificative.name, {'attr': {'class': 'form-control'}}) }}
+                                        <span style="display:none">
+                                            {{ form_widget(form.pieceJustificative.ajouterPar, {'attr': {'class': 'form-control',}}) }}
+                                        </span>
+                                    </div>
+                                </div>      
+                            </div>
+                            <div class="form-actions" style="background: rgba(249, 249, 249, 0.8) none repeat scroll 0% 0%;">
+                                <div class="row">
+                                    <div class="col-md-offset-10 col-md-3 pull-right">
+                                        <a href="{{ path('ad_absencesat_new')}}" class="btn red">Annuler</a>
+                                        <input type="submit" class="btn green" value="Valider"/>
+                                    </div>
+                                </div>
+                            </div>
+                        <span style="display:none">
+                            {{ form_rest(form) }}
+                        </span>    
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <style>
+
+        body{
+            font-size: 14px;
+        }
+        .font-blue-madison {
+            color: rgba(34, 96, 150, 0.88) !important;
+        }
+        .b-r{
+            border-right: 1px solid rgb(187, 188, 200);
+        }
+        .p-c{
+            text-align: center;
+        }
+        .scroll-to-top{
+            display: none !important;
+        }
+
+    </style>
+    <script>
+            $("document").ready(function () {
+                
+                $("#kbh_gestioncongesbundle_absencesat_pieceJustificative_ajouterPar").val({{ piece.AjouterPar }});
+                
+                console.log("id du salarie = "+$("#kbh_gestioncongesbundle_absencesat_salarie").val());
+                console.log("ajouter par = "+$("#kbh_gestioncongesbundle_absencesat_pieceJustificative_ajouterPar").val());
+
+            });
+        </script>
+{% endblock %}

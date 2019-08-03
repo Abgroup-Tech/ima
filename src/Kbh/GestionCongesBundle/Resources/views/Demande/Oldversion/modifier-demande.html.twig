@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>Validation Demande d'un collaborateur</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('collaborateurs_demandes') }}">
+            Liste des demandes
+        </a>
+    </li>
+</ul>
+{% endblock %}

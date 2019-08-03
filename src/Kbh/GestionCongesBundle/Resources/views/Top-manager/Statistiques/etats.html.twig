@@ -1,0 +1,355 @@
+{% extends '::base-top-manager.html.twig' %}
+
+{% block main %}
+    <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+            <div class="container">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>Etats <small>de l'entreprise</small></h1>
+                </div>
+                <!-- END PAGE TITLE -->
+                <!-- BEGIN PAGE TOOLBAR -->
+                <div class="page-toolbar">
+                    <!-- BEGIN THEME PANEL -->
+                    <div class="btn-group btn-theme-panel">
+                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-settings"></i>
+                        </a>
+                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>EXPORTER</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="theme-colors">
+                                                <li class="theme-color theme-color-default" data-theme="default" onclick="javascript:window.print();">
+                                                    <span class="fa fa-print"></span>
+                                                    <span class="theme-color-name">Imprimer</span>
+                                                </li>
+                                                <!-- <li class="theme-color theme-color-default" data-theme="default" onClick ="$('#details').tableExport({type:'excel',escape:'false',tableName:'Collaborateurs-droits'});">
+                                                                <span class="theme-color-view"></span>
+                                                                <span class="theme-color-name">Excel</span>
+                                                </li> -->
+                                                <!-- <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki" onClick ="$('#details').tableExport({type:'json',escape:'false'});">
+                                                                <span class="theme-color-view"></span>
+                                                                <span class="theme-color-name">Json</span>
+                                                </li> -->
+                                                <!-- <li class="theme-color theme-color-blue-steel" data-theme="blue-steel" onClick ="$('#details').tableExport({type:'doc',escape:'false',tableName:'Collaborateurs-droits'});">
+                                                                <span class="theme-color-view"></span>
+                                                                <span class="theme-color-name">Word</span>
+                                                </li>
+                                                <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange" onClick ="$('#details').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
+                                                                <span class="theme-color-view"></span>
+                                                                <span class="theme-color-name">PDF</span>
+                                                </li> -->
+                                                <!-- <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta" onClick ="$('#details').tableExport({type:'xml',escape:'false'});">
+                                                                <span class="theme-color-view"></span>
+                                                                <span class="theme-color-name">Xml</span>
+                                                </li>  -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END THEME PANEL -->
+                </div>
+                <!-- END PAGE TOOLBAR -->
+            </div>
+        </div>
+        <!-- END PAGE HEAD -->   
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content" style="min-height: 800px">
+            <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Widget settings form goes here
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                    </li>
+                    {#<li>
+                            <a href="#">Demandes</a>
+                            <i class="fa fa-circle"></i>
+                    </li>#}
+                    <li class="active">
+                        Etats de l'entreprise
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-equalizer font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Etats au {{ "now"|date('d-m-Y')}}</span>
+                                </div>
+                                <div class="tools">
+                                    {#<i class="fa fa-area-chart fa-2x"></i>#}
+                                    <a href="{{ path('top_manager_graph_statistiques') }}" class="btn btn-circle-right btn-success" style="height: 34px;"> 
+                                        voir graphiques
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body" id="details">
+                                <section id="content">
+                                    <section class="vbox">
+                                        <section class="scrollable padder">
+                                            <div class="row text-center no-gutter">
+                                                <div class="col-md-12">
+                                                    <section class="panel panel-default">
+                                                        <header class="panel-heading" style="background-color: rgba(229, 23, 39, 0.74);color: white;">ETAT DES DROITS</header>
+                                                        <div class="panel-body text-left">
+                                                            <div class="col-md-3 b-r b-light">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{totalCongesAnterieur}} jours</p>
+                                                                    <p class="text-muted">Reliquat congés<br> (Années antérieures)</p>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-md-3 b-r b-light">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{totalCongesAcquis}} jours</p>
+                                                                    <p class="text-muted">Droits acquis<br> {{"now"|date('Y')}}</p>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-md-3 b-r b-light">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{sommeTotalCongesConsomme}} jours</p>
+                                                                    <p class="text-muted">Congés consommés<br></p>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <center>
+                                                                    <p class="h3 m-t text-danger">{{totalStockConges}} jours</p>
+                                                                    <p class="text-danger">Solde de congés<br>(droits légaux)</p>
+                                                                </center>
+                                                            </div>
+                                                        </div>	
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <div class="row text-center no-gutter">  
+                                                <div class="col-md-12">
+                                                    <section class="panel panel-default">
+                                                        <header class="panel-heading" style="background-color: rgba(229, 23, 39, 0.74);color: white;">ETAT DES ABSENCES </header>
+                                                        <div class="panel-body text-left">
+                                                            <div class="col-md-3 b-r b-light">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{sommeTotalAbsences}} jours</p>
+                                                                    <p class="text-muted">d'absences</p>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-md-3 b-r b-light">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{totalCongesPris}} jours</p>
+                                                                    <p class="text-muted">de congés</p>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-md-3 b-r b-light">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{totalPermissions}} jours</p>
+                                                                    <p class="text-muted">de permissions exceptionnelles</p>
+                                                                </center>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <center>
+                                                                    <p class="h3 m-t">{{totalAbsencesEx}} jours</p>
+                                                                    <p class="text-muted">d'absences exceptionnelles</p>
+                                                                </center>
+                                                            </div>
+                                                        </div>	
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <!--########################## -->
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <section class="panel panel-default">
+                                                        <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;">CONGES</header>
+                                                        <div class="panel-body text-left">
+                                                            <div class="inline">
+                                                                <ul>
+                                                                    <li>Solde le plus élevé :<br/> <b>{{unite_conge_max.unite}} ({{unite_conge_max.stockConge}} jours)</b></li>
+                                                                    <li>Solde le plus bas :<br/> <b>{{unite_conge_min.unite}} ({{unite_conge_min.stockConge}} jours)</b></li>
+                                                                    <li>Solde moyen / Unité : <b>{{solde_moy_conge}} jours</b></li>
+                                                                    <!-- <li>Ratio (Jrs/salariés) le plus élevé :<br/> <b>ABENGOUROU (18,81)</b></li>
+                                                                    <li>Ratio (Jrs/salariés) le plus bas :<br/> <b>DIVO (8,71)</b></li>
+                                                                    <li>Ratio moyen (Jrs/salariés) : <b>14,44</b></li> -->
+                                                                </ul>
+                                                            </div>
+                                                        </div>                     
+                                                    </section>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <section class="panel panel-default" >
+                                                        <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;">PERMISSIONS EXCEPTIONNELLES</header>
+                                                        <div class="panel-body text-left">
+                                                            <div class="inline">
+                                                                <ul>
+                                                                    <li>Unité la plus consommatrice :<br/> <b>{{unite_permissions_max.unite}} ({{unite_permissions_max.permissions}} jours)</b></li>
+                                                                    <li>Unité la moins consommatrice :<br/> <b>{{unite_permissions_min.unite}} ({{unite_permissions_min.permissions}} jours)</b></li>
+                                                                    <li>Consommation moyenne / Unité :<b> {{consom_moy_permission}} jours</b></li>
+                                                                    <!--<br/>
+                               <li>Ratio (Jrs/salariés) le plus élevé :<br/> <b>ABENGOUROU (18,81)</b></li>
+                               <li>Ratio (Jrs/salariés) le plus bas :<br/> <b>DIVO (8,71)</b></li>
+                               <li>Ratio moyen (Jrs/salariés) : 14,44</b></li> -->
+                                                                </ul>
+                                                            </div>
+                                                        </div>                     
+                                                    </section>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <section class="panel panel-default">
+                                                        <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;">ABSENCES EXCEPTIONNELLES</header>
+                                                        <div class="panel-body text-left">
+                                                            <div class="inline">
+                                                                <ul>
+                                                                    <li>Unité la plus consommatrice :<br/> <b>{{unite_absences_max.unite}} ({{unite_absences_max.absencesEx}} jours)</b></li>
+                                                                    <li>Unité la moins consommatrice :<br/> <b>{{unite_absences_min.unite}} ({{unite_absences_min.absencesEx}} jours)</b></li>
+                                                                    <li>Consommation moyenne / Unité :<b> {{consom_moy_absence}} jours</b></li>
+                                                                    <!--  <br/>
+                                       <li>Ratio (Jrs/salariés) le plus élevé :<br/> <b>ABENGOUROU (18,81)</b></li>
+                                       <li>Ratio (Jrs/salariés) le plus bas :<br/> <b>DIVO (8,71)</b></li>
+                                       <li>Ratio moyen (Jrs/salariés) : <b>14,44 </b></li> -->
+                                                                </ul>
+                                                            </div>
+                                                        </div>                     
+                                                    </section>
+                                                </div>
+                                            </div>  
+                                            <div class="row">
+                                                <h1 style="padding-left: 15px;"> ABIDJAN </h1>
+                                                {% for etat in etats %}
+                                                    {% if etat.unite.situationGeographique == "Abidjan"%}
+                                                        <div class="col-lg-4">
+                                                            <section class="panel panel-default">
+                                                                <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">{{ etat.unite|slice(0, 35)}}<span title="{{ etat.unite}}">...</span> (effectif : {{ etat.unite.salaries|length}})</header>
+                                                                <div class="panel-body text-left">
+                                                                    <div class="inline">
+                                                                        <ul>
+                                                                            <li>Batiment: <b>{{etat.unite.lieuTravail}}</b> </li>
+                                                                            <li>Congés acquis en {{"now"|date('Y')}}: <b>{{etat.congesAcquis}} jours</b> </li>
+                                                                            <li>Congés années antérieures: <b>{{etat.congesAnterieur}} jours</b> </li>
+                                                                            <li>Total droits à congés acquis : <b>{{etat.totalDroitsAcquis}} jrs</b> </li>
+                                                                            <li>Congés consommés : <b>{{etat.totalCongesConsomme}} jours</b></li>
+                                                                            <li>Total absences : <b>{{etat.totalAbsences}} jours</b> </li>
+                                                                            <ul>
+                                                                                <li>Permissions exceptionnelles : <b>{{etat.permissions}} jours</b></li>
+                                                                                <li>Absences exceptionnelles : <b>{{etat.absencesEx}} jours</b></li>
+                                                                                <li>Congés : <b>{{etat.congesPris}} jours</b> </li>
+                                                                            </ul>
+                                                                            <li><strong class="text-danger">Stock de congés : {{etat.stockConge}} jours</strong></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>                     
+                                                            </section>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}                      
+                                            </div>
+                                            <div class="row">
+                                                <h1 style="padding-left: 15px;">HORS D'ABIDJAN</h1>
+                                                {% for etat in etats %}
+                                                    {% if etat.unite.situationGeographique != "Abidjan"%}
+                                                        <div class="col-lg-4">
+                                                            <section class="panel panel-default">
+                                                                <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">{{ etat.unite|slice(0, 35)}}<span title="{{ etat.unite}}">...</span> (effectif : {{ etat.unite.salaries|length}})</header>
+                                                                <div class="panel-body text-left">
+                                                                    <div class="inline">
+                                                                        <ul>
+                                                                            <li>Batiment: <b>{{etat.unite.lieuTravail}}</b> </li>
+                                                                            <li>Congés acquis en {{"now"|date('Y')}}: <b>{{etat.congesAcquis}} jours</b> </li>
+                                                                            <li>Congés années antérieures: <b>{{etat.congesAnterieur}} jours</b> </li>
+                                                                            <li>Total droits à congés acquis : <b>{{etat.totalDroitsAcquis}} jrs</b> </li>
+                                                                            <li>Congés consommés : <b>{{etat.totalCongesConsomme}} jours</b></li>
+                                                                            <li>Total absences : <b>{{etat.totalAbsences}} jours</b> </li>
+                                                                            <ul>
+                                                                                <li>Permissions exceptionnelles : <b>{{etat.permissions}} jours</b></li>
+                                                                                <li>Absences exceptionnelles : <b>{{etat.absencesEx}} jours</b></li>
+                                                                                <li>Congés : <b>{{etat.congesPris}} jours</b> </li>
+                                                                            </ul>
+                                                                            <li><strong class="text-danger">Stock de congés : {{etat.stockConge}} jours</strong></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>                     
+                                                            </section>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}      
+                                            </div>
+                                        </section>
+                                    </section>
+                                    <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+                                </section>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+            </div>
+            <!-- BEGIN PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTENT -->
+        {#<link href="{{ asset('bundles/kbhgestionconges/css/app.css') }}" type="text/css" rel="stylesheet" />#}
+        <link href="{{ asset('bundles/kbhgestionconges/css/font.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/kbhgestionconges/css/icon.css') }}" type="text/css" rel="stylesheet" /> 
+
+
+        <style type="text/css">
+            .col-md-6 {
+                width: 50%;
+                height: 100%; 
+            }
+            .dropdown-menu.pull-left {
+                left: 0% !important; 
+            }
+            .breadcrumb {
+                background-color: transparent;
+                border: 0px solid #eaeef1 !important;
+                padding-left: 10px;
+                margin-bottom: 10px;
+            }
+            .theme-panel {
+                z-index: 999;
+                min-width: 180px;
+                padding: 20px 10px;
+                font-family: "Open Sans", sans-serif;
+            }
+            ol ol, ol ul, ul ol, ul ul {
+                margin-bottom: 0;
+                margin-left: -25px;
+            }
+        </style>
+        <script src="{{ asset('bundles/kbhgestionconges/js/tableExport.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/jquery.base64.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/sprintf.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/jspdf.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/kbhgestionconges/js/base64.js') }}" type="text/javascript"></script>
+    {% endblock %}

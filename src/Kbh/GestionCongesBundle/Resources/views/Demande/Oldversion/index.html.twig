@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>Demande list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datedebut</th>
+                <th>Datefin</th>
+                <th>Datedemande</th>
+                <th>Typedemande</th>
+                <th>Nbjoursouvrables</th>
+                <th>Motif</th>
+                <th>Estencours</th>
+                <th>Estrefuse</th>
+                <th>Refusepar</th>
+                <th>Raisonrefus</th>
+                <th>Daterefus</th>
+                <th>valideurNiveau1</th>
+                <th>valideurNiveau2</th>
+                <th>dateValidation1</th>
+                <th>dateValidation2</th>
+                <th>Estcloture</th>
+                <th>Datecloture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('demande_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.dateDebut %}{{ entity.dateDebut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateFin %}{{ entity.dateFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateDemande %}{{ entity.dateDemande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.typeDemande }}</td>
+                <td>{{ entity.nbjoursOuvrables }}</td>
+                <td>{{ entity.motif }}</td>
+                <td>{{ entity.estEnCours }}</td>
+                <td>{{ entity.estRefuse }}</td>
+                <td>{{ entity.refusePar }}</td>
+                <td>{{ entity.raisonRefus }}</td>
+                <td>{% if entity.dateRefus %}{{ entity.dateRefus|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.estValideNiveau1 }}</td>
+                <td>{{ entity.estValideNiveau2 }}</td>
+                <td>{{ entity.valideurNiveau1 }}</td>
+                <td>{{ entity.valideurNiveau2 }}</td>
+                <td>{% if entity.dateValidation1 %}{{ entity.dateValidation1|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dateValidation2 %}{{ entity.dateValidation2|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.estCloture }}</td>
+                <td>{% if entity.dateCloture %}{{ entity.dateCloture|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('demande_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('demande_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('demande_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

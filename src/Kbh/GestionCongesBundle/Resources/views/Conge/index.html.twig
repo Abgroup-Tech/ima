@@ -1,0 +1,176 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+ <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                            <h1>Historique des absences collaborateurs</h1>
+                        </div>
+                        
+                </div>
+        </div>     
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                               Historique des absences collaborateur
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                               <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-note font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">Historique des absences collaborateur</span>
+                                                </div>
+                                                <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="table-scrollable table-scrollable-borderless">
+                                                <ul class="nav nav-pills">
+                                                        <li class="active">
+                                                            <a href="#tab_1" data-toggle="tab">
+                                                            Congés payés</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#tab_2" data-toggle="tab">
+                                                            Permissions exceptionnelles </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#tab_3" data-toggle="tab">
+                                                            Absences exceptionnelles</a>
+                                                        </li>
+                                                </ul>
+                                        
+                                                <div class="tab-content">
+                                                        <div class="tab-pane fade active in" id="tab_1">
+                                                            <br/><hr/>
+                                                                <div class="scroller">
+                                                                    <table class="table table-hover table-light" >
+                                                                        <thead>
+                                                                        <tr>
+                                                                        <th>Collaborateur</th>
+                                                                        <th>Début</th>
+                                                                        <th>Fin</th>
+                                                                        <th>Durée(jour ouvrable)</th>
+                                                                        {#<th>Statut</th>#}
+                                                                        <th>Actions</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                       {% for conge in conges %}
+                                                                            <tr> 
+                                                                                <td>{{ conge.salarie.nomprenom }}</td>
+                                                                                <td>{% if conge.dateDebut %}{{ conge.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                                                                                <td>{% if conge.dateFin %}{{ conge.dateFin|date('d-m-Y') }}{% endif %}</td>
+                                                                                <td>{{ conge.nbjoursOuvrables }}</td>
+                                                                            </tr>
+                                                                       {% endfor %}
+                                                                    </table>
+                                                              </div>
+                                                 
+                                                        </div>
+                                                       <div class="tab-pane fade" id="tab_2">
+                                                            <br/><hr/>
+                                                            <table class="table table-hover table-light" >
+                                                                <thead>
+                                                                    <tr>
+                                                                    <th>Collaborateur</th>
+                                                                    <th>Début</th>
+                                                                    <th>Fin</th>
+                                                                    <th>Durée(jour ouvrable)</th>
+                                                                    {#<th>Statut</th>#}
+                                                                    <th>Actions</th>
+                                                                    </tr>
+                                                                </thead>
+                                                               {% for permission in permissions %}
+                                                                    <tr> 
+                                                                        <td>{{ permission.salarie.nomprenom }}</td>
+                                                                        <td>{% if permission.dateDebut %}{{ permission.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                                                                        <td>{% if permission.dateFin %}{{ permission.dateFin|date('d-m-Y') }}{% endif %}</td>
+                                                                        <td>{{ permission.nbjoursOuvrables }}</td>
+                                                                    </tr>
+                                                               {% endfor %}
+                                                            </table>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="tab_2">
+                                                        <br/><hr/>
+                                                        <table class="table table-hover table-light" >
+                                                            <thead>
+                                                                <tr>
+                                                                <th>Collaborateur</th>
+                                                                <th>Début</th>
+                                                                <th>Fin</th>
+                                                                <th>Durée(jour ouvrable)</th>
+                                                                {#<th>Statut</th>#}
+                                                                <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                           {% for absenceExcep in absenceExceps %}
+                                                                <tr> 
+                                                                    <td>{{ absenceExcep.salarie.nomprenom }}</td>
+                                                                    <td>{% if absenceExcep.dateDebut %}{{ absenceExcep.dateDebut|date('d-m-Y') }}{% endif %}</td>
+                                                                    <td>{% if absenceExcep.dateFin %}{{ absenceExcep.dateFin|date('d-m-Y') }}{% endif %}</td>
+                                                                    <td>{{ absenceExcep.nbjoursOuvrables }}</td>
+                                                                </tr>
+                                                           {% endfor %}
+                                                        </table>
+                                                    </div>        
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+<style>
+th,td{
+        text-align: center;
+        color:#345F98 !important;
+    }
+</style>
+
+    {% endblock %}
+            
+                
+                
+    {% endblock %}

@@ -1,0 +1,313 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Statistiques <small>Du Salarié</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                <div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <h3>EXPORTER</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-12">
+                                                                                <ul class="theme-colors">
+                                                                                        <li class="theme-color theme-color-default" data-theme="default">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Excel</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Json</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-blue-steel" data-theme="blue-steel">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Word</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">PDF</span>
+                                                                                        </li>
+                                                                                        <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta">
+                                                                                                <span class="theme-color-view"></span>
+                                                                                                <span class="theme-color-name">Xml</span>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>
+        <!-- END PAGE HEAD -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        {#<li>
+                                <a href="#">Demandes</a>
+                                <i class="fa fa-circle"></i>
+                        </li>#}
+                        <li class="active">
+                                Mes statistiques
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="portlet light">
+                                        <div class="portlet-title">
+                                                <div class="caption">
+                                                        <i class="icon-equalizer font-green-sharp"></i>
+                                                        <span class="caption-subject font-green-sharp bold uppercase">Statistiques</span>
+                                                </div>
+                                                <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config">
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                                <section id="content">
+          <section class="vbox">
+            <section class="scrollable padder">
+                  <div class="row text-center no-gutter">
+                    <div class="col-xs-3 b-r b-light">
+                      <p class="h3 m-t">{{total_demandes}}</p>
+                      <p class="text-muted">Demandes formulées</p>
+                    </div>
+                    <div class="col-xs-3 b-r b-light">
+                      <p class="h3 m-t">{{demandes_type_conge}}</p>
+                      <p class="text-muted">Demandes de congés</p>
+                    </div>
+                    <div class="col-xs-3 b-r b-light">
+                      <p class="h3 m-t">{{demandes_type_absence}}</p>
+                      <p class="text-muted">Demandes de permission</p>
+                    </div>
+                    <div class="col-xs-3">
+                      <p class="h3 m-t">{{demande_encours}}</p>
+                      <p class="text-muted">Demandes en cours</p>                        
+                    </div>
+                  </div>
+             <hr/>
+               <!--########################## --> 
+              <div class="row">
+                <div class="col-lg-4">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                    Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{conges_pris}}<small> Congé(s) validé(s)</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{taux_conge}}" data-bar-color="#fcc633" data-line-width="16" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{taux_conge}}</span>%
+                            <div class="text text-sm">Congés Validés</div>
+                          </div>
+                        </div>
+                      </div>                      
+                    </div>
+                    <div class="panel-footer"><small><center>taux des demandés de Congés validés</center></small></div>
+                  </section>
+                </div>
+                <div class="col-lg-4">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                     Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{absences_autorisees}}<small> Absence(s) autorisée(s)</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{taux_absence}}" data-line-width="6" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{taux_absence}}</span>%
+                            <div class="text text-sm">Absences Autorisées</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-footer"><small><center>taux d'Absence Autorisées</center></small></div>
+                  </section>
+                </div>
+                <div class="col-lg-4">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                    Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{demande_encours}}<small> Demande(s) en cours</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{taux_demande_encours}}" data-bar-color="#CB240E" data-line-width="16" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{taux_demande_encours}}</span>%
+                            <div class="text text-sm">Congés Validés</div>
+                          </div>
+                        </div>
+                      </div>                      
+                    </div>
+                    <div class="panel-footer"><small><center> taux des demandés en cours</center></small></div>
+                  </section>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-lg-6">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                    Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{conges_refuse}}<small> Congé(s) Refusé(s)</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{taux_conge_refuse}}" data-bar-color="#3420E4" data-line-width="16" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{taux_conge_refuse}}</span>%
+                            <div class="text text-sm">Congés Refusés</div>
+                          </div>
+                        </div>
+                      </div>                      
+                    </div>
+                    <div class="panel-footer"><small><center>taux des demandés de Congés Refusés</center></small></div>
+                  </section>
+                </div>
+                <div class="col-lg-6">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                     Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{absences_refuse}}<small> Permission(s) rejetée(s)</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{taux_absence_refuse}}" data-bar-color="#B920E4" data-line-width="6" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{taux_absence_refuse}}</span>%
+                            <div class="text text-sm">Permission Rejetées</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-footer"><small><center>taux d'Absence Refusées</center></small></div>
+                  </section>
+                </div>
+            </div>
+            </section>
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+              
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+        <link href="{{ asset('bundles/kbhgestionconges/css/app.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/kbhgestionconges/css/font.css') }}" type="text/css" rel="stylesheet" /> 
+        <link href="{{ asset('bundles/kbhgestionconges/css/icon.css') }}" type="text/css" rel="stylesheet" /> 
+        {#<script src="{{ asset('bundles/kbhgestionconges/js/bootstrap.js') }}" type="text/javascript"></script>#}    
+        <script src="{{ asset('bundles/kbhgestionconges/js/app.js') }}" type="text/javascript"></script>
+
+        <!-- Easy Pie Chart -->
+        <script src="{{ asset('bundles/kbhgestionconges/js/charts/easypiechart/jquery.easy-pie-chart.js') }}"></script>
+        <!-- Flot -->
+
+  <style type="text/css">
+  .col-md-6 {
+    width: 50%;
+    height: 100%; 
+    }
+    .dropdown-menu.pull-left {
+  left: 0% !important; 
+}
+.breadcrumb {
+  background-color: transparent;
+  border: 0px solid #eaeef1 !important;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.theme-panel {
+  z-index: 999;
+  min-width: 180px;
+  padding: 20px 10px;
+  font-family: "Open Sans", sans-serif;
+}
+  </style>
+  <script>
+	// easypie
+	var easypie = function(){
+	$('.easypiechart').each(function(){
+		var $this = $(this), 
+		$data = $this.data(), 
+		$step = $this.find('.step'), 
+		$target_value = parseInt($($data.target).text()),
+		$value = 0;
+		$data.barColor || ( $data.barColor = function($percent) {
+	        $percent /= 100;
+	        return "rgb(" + Math.round(200 * $percent) + ", 200, " + Math.round(200 * (1 - $percent)) + ")";
+	    });
+		$data.onStep =  function(value){
+			$value = value;
+			$step.text(parseInt(value));
+			$data.target && $($data.target).text(parseInt(value) + $target_value);
+		};
+		$data.onStop =  function(){
+			$target_value = parseInt($($data.target).text());
+			$data.update && setTimeout(function() {
+		        $this.data('easyPieChart').update(100 - $value);
+		    }, $data.update);
+		};
+			$(this).easyPieChart($data);
+		});
+	};
+	easypie();      
+
+  </script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block main -%}
+    <h1>CalculAllocationConge</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ entity.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Salairemoyenjournalier</th>
+                <td>{{ entity.salaireMoyenJournalier }}</td>
+            </tr>
+            <tr>
+                <th>Droitslegaux</th>
+                <td>{{ entity.droitsLegaux }}</td>
+            </tr>
+            <tr>
+                <th>Droitsreels</th>
+                <td>{{ entity.droitsReels }}</td>
+            </tr>
+            <tr>
+                <th>Allocationconge</th>
+                <td>{{ entity.allocationConge }}</td>
+            </tr>
+            <tr>
+                <th>Datecalcul</th>
+                <td>{{ entity.dateCalcul|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('calculallocationconge') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('calculallocationconge_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

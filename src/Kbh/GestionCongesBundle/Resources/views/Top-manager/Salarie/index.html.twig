@@ -1,0 +1,71 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Liste des Salariés</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matricule</th>
+                <th>Numerocnps</th>
+                <th>Civilite</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Nomprenom</th>
+                <th>Datenaissance</th>
+                <th>Statutmarital</th>
+                <th>Poste</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Dateembauche</th>
+                <th>Typecontrattravail</th>
+                <th>Dureecontrat</th>
+                <th>Statutemploi</th>
+                <th>Datedepartentreprise</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('salarie_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.matricule }}</td>
+                <td>{{ entity.numeroCnps }}</td>
+                <td>{{ entity.civilite }}</td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.prenom }}</td>
+                <td>{{ entity.nomprenom }}</td>
+                <td>{% if entity.dateNaissance %}{{ entity.dateNaissance|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.statutMarital }}</td>
+                <td>{{ entity.poste }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.telephone }}</td>
+                <td>{% if entity.dateEmbauche %}{{ entity.dateEmbauche|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.typeContratTravail }}</td>
+                <td>{{ entity.dureeContrat }}</td>
+                <td>{{ entity.statutEmploi }}</td>
+                <td>{% if entity.dateDepartEntreprise %}{{ entity.dateDepartEntreprise|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('salarie_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('salarie_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('salarie_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

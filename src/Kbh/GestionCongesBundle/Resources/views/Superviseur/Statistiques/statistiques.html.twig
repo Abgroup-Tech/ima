@@ -1,0 +1,699 @@
+{% extends '::base-superviseur.html.twig' %}
+
+{% block main %}
+<div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-head">
+                <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                                <h1>Etats <small>de l'entreprise</small></h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                        <!-- BEGIN PAGE TOOLBAR -->
+                        <div class="page-toolbar">
+                                <!-- BEGIN THEME PANEL -->
+                                <div class="btn-group btn-theme-panel">
+                                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-settings"></i>
+                                        </a>
+                                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                                <div class="row">
+                                                        <div class="col-md-12">
+                                                                <h3>EXPORTER</h3>
+                                                                <div class="row">
+                                                                        <div class="col-md-12">
+                                                                                <ul class="theme-colors">
+                                                                                         <li class="theme-color theme-color-default" data-theme="default" onclick="javascript:window.print();">
+																								<span class="fa fa-print"></span>
+																								<span class="theme-color-name">Imprimer</span>
+																						</li>
+																						<!-- <li class="theme-color theme-color-default" data-theme="default" onClick ="$('#details').tableExport({type:'excel',escape:'false',tableName:'Collaborateurs-droits'});">
+																								<span class="theme-color-view"></span>
+																								<span class="theme-color-name">Excel</span>
+																						</li> -->
+																						<!-- <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki" onClick ="$('#details').tableExport({type:'json',escape:'false'});">
+																								<span class="theme-color-view"></span>
+																								<span class="theme-color-name">Json</span>
+																						</li> -->
+																						<!-- <li class="theme-color theme-color-blue-steel" data-theme="blue-steel" onClick ="$('#details').tableExport({type:'doc',escape:'false',tableName:'Collaborateurs-droits'});">
+																								<span class="theme-color-view"></span>
+																								<span class="theme-color-name">Word</span>
+																						</li>
+																						<li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange" onClick ="$('#details').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
+																								<span class="theme-color-view"></span>
+																								<span class="theme-color-name">PDF</span>
+																						</li> -->
+																						<!-- <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta" onClick ="$('#details').tableExport({type:'xml',escape:'false'});">
+																								<span class="theme-color-view"></span>
+																								<span class="theme-color-name">Xml</span>
+																						</li>  -->
+                                                                                </ul>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- END THEME PANEL -->
+                        </div>
+                        <!-- END PAGE TOOLBAR -->
+                </div>
+        </div>
+        <!-- END PAGE HEAD -->   
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content" style="min-height: 800px">
+        <div class="container">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                 Widget settings form goes here
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn blue">Save changes</button>
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                </div>
+                                <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                                <a href="{{ path('welcome') }}">Tableau de bord</a><i class="fa fa-circle"></i>
+                        </li>
+                        {#<li>
+                                <a href="#">Demandes</a>
+                                <i class="fa fa-circle"></i>
+                        </li>#}
+                        <li class="active">
+                                Etats de l'entreprise
+                        </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE CONTENT INNER -->
+<div class="row">
+		<div class="col-md-12">
+				<div class="portlet light">
+						<div class="portlet-title">
+								<div class="caption">
+										<i class="icon-equalizer font-green-sharp"></i>
+										<span class="caption-subject font-green-sharp bold uppercase">Etats au {{ "now"|date('d-m-Y')}}</span>
+								</div>
+								<div class="tools">
+										<a href="javascript:;" class="collapse">
+										</a>
+										<a href="#portlet-config" data-toggle="modal" class="config">
+										</a>
+								</div>
+						</div>
+						<div class="portlet-body" id="details">
+								<section id="content">
+          <section class="vbox">
+            <section class="scrollable padder">
+                  <div class="row text-center no-gutter">
+					<div class="col-md-12">
+                    <section class="panel panel-default">
+                        <header class="panel-heading" style="background-color: rgba(229, 23, 39, 0.74);color: white;">ETAT DES DROITS</header>
+                        <div class="panel-body text-left">
+                            <div class="col-md-3 b-r b-light">
+							<center>
+							 <p class="h3 m-t">9 350 jours</p>
+							 <p class="text-muted">Reliquat congés<br> (Années antérieures)</p>
+					        </center>
+							</div>
+							<div class="col-md-3 b-r b-light">
+							<center>
+							 <p class="h3 m-t">7 480 jours</p>
+							 <p class="text-muted">Droits acquis<br> {{"now"|date('Y')}}</p>
+							</center>
+							</div>
+							<div class="col-md-3 b-r b-light">
+							<center>
+							 <p class="h3 m-t">5 061 jours</p>
+							 <p class="text-muted">Congés consommés<br></p>
+							</center>
+							</div>
+							<div class="col-md-3">
+							<center>
+							 <p class="h3 m-t text-danger">11 781 jours</p>
+							 <p class="text-danger">Solde de congés<br>(droits légaux)</p>
+							</center>
+							</div>
+						</div>	
+                    </section>
+					</div>
+                  </div>
+                  <div class="row text-center no-gutter">  
+				  <div class="col-md-12">
+                    <section class="panel panel-default">
+                        <header class="panel-heading" style="background-color: rgba(229, 23, 39, 0.74);color: white;">ETAT DES ABSENCES </header>
+                        <div class="panel-body text-left">
+                            <div class="col-md-3 b-r b-light">
+							<center>
+								<p class="h3 m-t">7 882 jours</p>
+								<p class="text-muted">d'absences</p>
+					        </center>
+							</div>
+							<div class="col-md-3 b-r b-light">
+							<center>
+								<p class="h3 m-t">3 534 jours</p>
+								<p class="text-muted">de congés</p>
+					        </center>
+							</div>
+							<div class="col-md-3 b-r b-light">
+							<center>
+								<p class="h3 m-t">2 833 jours</p>
+								<p class="text-muted">de permissions exceptionnelles</p>
+					        </center>
+							</div>
+							<div class="col-md-3">
+							<center>
+								<p class="h3 m-t">1 515 jours</p>
+								<p class="text-muted">d'absences exceptionnelles</p>
+					        </center>
+							</div>
+						</div>	
+                    </section>
+					</div>
+                  </div>
+             <hr/>
+               <!--########################## -->
+              <div class="row">
+                <div class="col-lg-4">
+                    <section class="panel panel-default">
+                        <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;">CONGES</header>
+                        <div class="panel-body text-left">
+                            <div class="inline">
+                                <ul>
+                                    <li>Solde le plus élevé :<br/> <b>SIEGE (1 188 jours)</b></li>
+                                    <li>Solde le plus bas :<br/> <b>BONOUA (386 jours)</b></li>
+                                    <li>Solde moyen / Unité : <b>654 jours</b></li>
+                                    <!-- <li>Ratio (Jrs/salariés) le plus élevé :<br/> <b>ABENGOUROU (18,81)</b></li>
+                                    <li>Ratio (Jrs/salariés) le plus bas :<br/> <b>DIVO (8,71)</b></li>
+                                    <li>Ratio moyen (Jrs/salariés) : <b>14,44</b></li> -->
+                                </ul>
+                            </div>
+                        </div>                     
+                    </section>
+                </div>
+                <div class="col-lg-4">
+                    <section class="panel panel-default" >
+                        <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;">PERMISSIONS EXCEPTIONNELLES</header>
+                        <div class="panel-body text-left">
+                            <div class="inline">
+                                <ul>
+                                    <li>Unité la plus consommatrice :<br/> <b>SIEGE (333 jours)</b></li>
+                                    <li>Unité la moins consommatrice :<br/> <b>BONOUA (83 jours) </b></li>
+                                    <li>Consommation moyenne / Unité :<b> 157,41 jours</b></li>
+									 <!--<br/>
+                                    <li>Ratio (Jrs/salariés) le plus élevé :<br/> <b>ABENGOUROU (18,81)</b></li>
+                                    <li>Ratio (Jrs/salariés) le plus bas :<br/> <b>DIVO (8,71)</b></li>
+                                    <li>Ratio moyen (Jrs/salariés) : 14,44</b></li> -->
+                                </ul>
+                            </div>
+                        </div>                     
+                    </section>
+                </div>
+                <div class="col-lg-4">
+                  <section class="panel panel-default">
+                      <header class="panel-heading" style="background-color: rgba(116, 24, 169, 0.74);color: white;">ABSENCES EXCEPTIONNELLES</header>
+                      <div class="panel-body text-left">
+                          <div class="inline">
+                              <ul>
+                                  <li>Unité la plus consommatrice :<br/> <b>SIEGE (238 jours) </b></li>
+                                  <li>Unité la moins consommatrice :<br/> <b>ABENGOUROU (9 jours) </b></li>
+                                  <li>Consommation moyenne / Unité : <b> 84,35 jours</b></li>
+								 <!--  <br/>
+                                    <li>Ratio (Jrs/salariés) le plus élevé :<br/> <b>ABENGOUROU (18,81)</b></li>
+                                    <li>Ratio (Jrs/salariés) le plus bas :<br/> <b>DIVO (8,71)</b></li>
+                                    <li>Ratio moyen (Jrs/salariés) : <b>14,44 </b></li> -->
+                              </ul>
+                          </div>
+                      </div>                     
+                  </section>
+                </div>
+			 </div>  
+            <div class="row">
+             
+             <h1 style="padding-left: 15px;"> ABIDJAN </h1>
+              <div class="col-lg-4">
+                  <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">SIEGE (effectif : 100)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Congés acquis en 2015: <b>880 jours</b> </li>
+                                      <li>Congés années antérieures: <b>1100 jours</b> </li>
+                                      <li>Total droits à congés acquis : <b>1 980 jrs</b> </li>
+									  <li>Congés consommés : <b>792 jours</b></li>
+                                      <li>Total absences : <b>1 125 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>333 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>238 jours</b></li>
+                                        <li>Congés : <b>554 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 1 188 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                      </section>
+              </div>
+              <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">ABOBO (effectif : 45)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>396 jours</b> </li>
+                                      <li>Congés consommés : <b>267 jours</b></li>
+                                      <li>Reliquat congés : <b>495 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>891 jours</b> </li>
+                                      <li>Total absences : <b>417 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>150 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>80 jours</b></li>
+                                        <li>Congés : <b>187 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 624 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+              </div>
+              <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">ADJAME (effectif : 50)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>440 jours</b> </li>
+                                      <li>Congés consommés : <b>198 jours</b></li>
+                                      <li>Reliquat congés : <b>550 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>990 jours</b> </li>
+                                      <li>Total absences : <b>365 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>167 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>59 jours</b></li>
+                                        <li>Congés : <b>139 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 792 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">Agence APPEX (effectif : 40)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>352 jours</b> </li>
+                                      <li>Congés consommés : <b>79 jours</b></li>
+                                      <li>Reliquat congés : <b>440 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>792 jours</b> </li>
+                                      <li>Total absences : <b>213 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>133 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>24 jours</b></li>
+                                        <li>Congés : <b>55 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 713 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">COCODY (effectif : 55)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>484 jours</b> </li>
+                                      <li>Congés consommés : <b>381 jours</b></li>
+                                      <li>Reliquat congés : <b>605 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>1 089 jours</b> </li>
+                                      <li>Total absences : <b>564 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>183 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>114 jrs</b></li>
+                                        <li>Congés : <b>267 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 708 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">KOUMASSI (effectif : 40)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>352 jours</b> </li>
+                                      <li>Congés consommés : <b>95 jours</b></li>
+                                      <li>Reliquat congés : <b>440 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>792 jours</b> </li>
+                                      <li>Total absences : <b>228 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>133 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>29 jours</b></li>
+                                        <li>Congés : <b>67 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 697 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">PLATEAU (effectif : 30)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>264 jours</b> </li>
+                                      <li>Congés consommés : <b>48 jours</b></li>
+                                      <li>Reliquat congés : <b>330 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>594 jours</b> </li>
+                                      <li>Total absences : <b>148 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>100 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>14 jours</b></li>
+                                        <li>Congés : <b>33 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 546 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">TREICHVILLE (effectif : 40)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>352 jours</b> </li>
+                                      <li>Congés consommés : <b>48 jours</b></li>
+                                      <li>Reliquat congés : <b>440 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>792 jours</b> </li>
+                                      <li>Total absences : <b>181 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>133 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>14 jours</b></li>
+                                        <li>Congés : <b>33 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 744 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 146, 210, 0.74);color: white;">YOPOUGON (effectif : 50)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>440 jours</b> </li>
+                                      <li>Congés consommés : <b>386 jours</b></li>
+                                      <li>Reliquat congés : <b>550 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>990 jours</b> </li>
+                                      <li>Total absences : <b>553 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>167 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>116 jours</b></li>
+                                        <li>Congés : <b>270 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 604 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>
+                                  
+            </div>
+             <div class="row">
+                 <h1 style="padding-left: 15px;">INTERIEUR DU PAYS</h1>
+              <div class="col-lg-4">
+                  <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">AGBOVILLE (effectif : 30)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>264 jours</b> </li>
+                                      <li>Congés consommés : <b>137 jours</b></li>
+                                      <li>Reliquat congés : <b>330 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>594 jours</b> </li>
+                                      <li>Total absences : <b>237 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>100 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>41 jours</b></li>
+                                        <li>Congés : <b>96 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 457 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                      </section>
+              </div>
+              <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">BONOUA (effectif : 25)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>220 jours</b> </li>
+                                      <li>Congés consommés : <b>109 jours</b></li>
+                                      <li>Reliquat congés : <b>275 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>495 jours</b> </li>
+                                      <li>Total absences : <b>192 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>83 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>33 jours</b></li>
+                                        <li>Congés : <b>76 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 386 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+              </div>
+              <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">ABENGOUROU (effectif : 30)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                 <ul>
+                                      <li>Droits à congés acquis : <b>264 jours</b> </li>
+                                      <li>Congés consommés : <b>30 jours</b></li>
+                                      <li>Reliquat congés : <b>330 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>594 jours</b> </li>
+                                      <li>Total absences : <b>130 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>100 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>09 jours</b></li>
+                                        <li>Congés : <b>21 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 564 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+                </div>   
+              <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">BOUAKE (effectif : 50)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>440 jours</b> </li>
+                                      <li>Congés consommés : <b>168 jours</b></li>
+                                      <li>Reliquat congés : <b>550 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>990 jours</b> </li>
+                                      <li>Total absences : <b>335 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>167 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>50 jours</b></li>
+                                        <li>Congés : <b>118 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 822 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">DALOA (effectif : 50)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>440 jours</b> </li>
+                                      <li>Congés consommés : <b>198 jours</b></li>
+                                      <li>Reliquat congés : <b>550 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>990 jours</b> </li>
+                                      <li>Total absences : <b>365 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>167 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>59 jours</b></li>
+                                        <li>Congés : <b>139 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 792 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">DIVO (effectif : 50)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>440 jours</b> </li>
+                                      <li>Congés consommés : <b>554 jours</b></li>
+                                      <li>Reliquat congés : <b>550 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>990 jours</b> </li>
+                                      <li>Total absences : <b>721 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>167 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>166 jours</b></li>
+                                        <li>Congés : <b>388 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 436 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">GAGNOA (effectif : 50)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                  <ul>
+                                      <li>Droits à congés acquis : <b>440 jours</b> </li>
+                                      <li>Congés consommés : <b>485 jours</b></li>
+                                      <li>Reliquat congés : <b>550 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>990 jours</b> </li>
+                                      <li>Total absences : <b>652 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>167 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>146 jours</b></li>
+                                        <li>Congés : <b>340 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 505 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">SAN PEDRO (effectif : 55)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                   <ul>
+                                      <li>Droits à congés acquis : <b>484 jours</b> </li>
+                                      <li>Congés consommés : <b>468 jours</b></li>
+                                      <li>Reliquat congés : <b>605 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>1 089 jrs</b> </li>
+                                      <li>Total absences : <b>652 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>183 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>140 jours</b></li>
+                                        <li>Congés : <b>328 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 621 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>
+             <div class="col-lg-4">
+                    <section class="panel panel-default">
+                          <header class="panel-heading" style="background-color: rgba(23, 210, 103, 0.74);color: white;">YAMOUSSOUKRO(effectif : 60)</header>
+                          <div class="panel-body text-left">
+                              <div class="inline">
+                                   <ul>
+                                      <li>Droits à congés acquis : <b>528 jours</b> </li>
+                                      <li>Congés consommés : <b>618 jours</b></li>
+                                      <li>Reliquat congés : <b>660 jours</b> </li>
+                                      <li>Cumul droits à congés acquis : <b>1 188 jrs</b> </li>
+                                      <li>Total absences : <b>818 jours</b> </li>
+                                      <ul>
+                                        <li>Permissions exceptionnelles : <b>200 jours</b></li>
+                                        <li>Absences exceptionnelles : <b>185 jours</b></li>
+                                        <li>Congés : <b>432 jours</b> </li>
+                                      </ul>
+                                      <li><strong class="text-danger">Stock de congés : 570 jours</strong></li>
+                                  </ul>
+                              </div>
+                          </div>                     
+                    </section>
+             </div>   
+            </div>
+            </section>
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+              
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- BEGIN PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTENT -->
+        <link href="{{ asset('bundles/kbhgestionconges/css/app.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/kbhgestionconges/css/font.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/kbhgestionconges/css/icon.css') }}" type="text/css" rel="stylesheet" /> 
+        
+
+  <style type="text/css">
+  .col-md-6 {
+    width: 50%;
+    height: 100%; 
+    }
+    .dropdown-menu.pull-left {
+  left: 0% !important; 
+}
+.breadcrumb {
+  background-color: transparent;
+  border: 0px solid #eaeef1 !important;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.theme-panel {
+  z-index: 999;
+  min-width: 180px;
+  padding: 20px 10px;
+  font-family: "Open Sans", sans-serif;
+}
+ol ol, ol ul, ul ol, ul ul {
+  margin-bottom: 0;
+  margin-left: -25px;
+}
+</style>
+<script src="{{ asset('bundles/kbhgestionconges/js/tableExport.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/jquery.base64.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/sprintf.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/jspdf.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/kbhgestionconges/js/base64.js') }}" type="text/javascript"></script>
+{% endblock %}

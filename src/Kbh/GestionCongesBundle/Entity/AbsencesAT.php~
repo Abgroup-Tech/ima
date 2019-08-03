@@ -1,0 +1,91 @@
+<?php
+
+namespace Kbh\GestionCongesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AbsencesAT
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Kbh\GestionCongesBundle\Entity\AbsencesATRepository")
+ */
+class AbsencesAT
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="salarie", referencedColumnName="id")
+     * 
+     */
+    private $salarie;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="motif", type="string", length=255)
+     */
+    private $motif;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDebut", type="datetime")
+     */
+    private $dateDebut;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFin", type="datetime")
+     */
+    private $dateFin;
+
+    /**
+     * @var \Salarie
+     *
+     * @ORM\ManyToOne(targetEntity="Salarie")
+     * @ORM\JoinColumn(name="admin", referencedColumnName="id")
+     * 
+     */
+    private $admin;
+    
+     /**
+     * @var \Kbh\GestionCongesBundle\Entity\PiecesJointes
+     * @ORM\ManyToOne(targetEntity="PiecesJointes") 
+     * @ORM\JoinColumn(name="pieceJustificative", referencedColumnName="id" , nullable=true)
+     */
+    private $pieceJustificative;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="medecin", type="string", length=255)
+     */
+    private $medecin;
+    
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="infoCabinetMedical", type="string", length=255)
+     */
+    private $infoCabinetMedical;
+
+   }

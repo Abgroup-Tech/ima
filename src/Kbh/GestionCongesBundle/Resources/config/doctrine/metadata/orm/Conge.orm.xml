@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Conge" table="conge">
+    <indexes>
+      <index name="IDX_EF19BC4C828E3A1A" columns="salarie"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="datedebut" type="date" column="dateDebut" nullable="false"/>
+    <field name="datefin" type="date" column="dateFin" nullable="false"/>
+    <field name="nbjoursouvrables" type="decimal" column="nbJoursOuvrables" precision="10" scale="0" nullable="false"/>
+    <field name="commentairessuperviseur" type="string" column="commentairesSuperviseur" length="255" nullable="false"/>
+    <field name="estencours" type="boolean" column="estEncours" nullable="false"/>
+    <field name="estvalide" type="boolean" column="estValide" nullable="false"/>
+    <field name="datevalidation" type="date" column="dateValidation" nullable="true"/>
+    <field name="estcloture" type="boolean" column="estCloture" nullable="false"/>
+    <field name="datecloture" type="date" column="dateCloture" nullable="true"/>
+    <field name="datedemande" type="date" column="dateDemande" nullable="false"/>
+    <many-to-one field="salarie" target-entity="Salarie">
+      <join-columns>
+        <join-column name="salarie" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

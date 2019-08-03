@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+    <h1>Conge creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('conge') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

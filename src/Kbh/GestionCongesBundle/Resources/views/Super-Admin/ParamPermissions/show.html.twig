@@ -1,0 +1,36 @@
+{% extends '::base-admin.html.twig' %}
+
+{% block main %}
+    <h1>ParamPermissions</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ entity.motif }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ entity.duree }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('parampermissions') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('parampermissions_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}

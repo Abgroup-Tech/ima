@@ -1,0 +1,136 @@
+{% extends '::base.html.twig' %}
+
+{% block main %}
+        <section>
+      <section class="hbox stretch">
+        <!-- .aside -->
+        
+        <!-- /.aside -->
+        <section id="content">
+          <section class="wrapper">
+          <section class="panel panel-default">
+                <header class="panel-heading">
+                  <a href="{{ path('collab_statistiques') }}"><i class="fa fa-arrow-circle-left fa-4x text"></i></a>
+                  <h3>Statistiques de {{ salarie.civilite }} {{ salarie.nomprenom }} 
+                  <span style="float:right;">
+                       <a class="btn btn-s-md btn-success" href="{{ path('collaborateurs_demandes') }}">Export PDF</a> 
+                    </span>
+                  </h3>
+                </header>
+
+                <div class="row">
+                 <div class="col-lg-12">
+                  <section class="panel panel-default" id="progressbar">
+                    <header class="panel-heading">
+                      <ul class="nav nav-pills pull-right">
+                      {#  <li><a href="#" data-toggle="progress" data-target="#progressbar">Random</a></li>#}
+                      </ul>
+                      Taux par rapport à la Demande
+                   {% for stats in stats%}
+                    </header>
+                    <footer class="panel-footer bg-white">
+                        <div class="row text-center no-gutter">
+                          <div class="col-xs-3 b-r b-light">
+                            <p class="h3 font-bold m-t">{{ stats.nombreDemandes }}</p>
+                            <p class="text-muted">Nombre total de demandes Formulées</p>
+                          </div>
+                          <div class="col-xs-3 b-r b-light">
+                            <p class="h3 font-bold m-t">{{ stats.nbDemandesConges }}</p>
+                            <p class="text-muted">Nombre total de demandes de Congés</p>
+                          </div>
+                          <div class="col-xs-3 b-r b-light">
+                            <p class="h3 font-bold m-t">{{ stats.nbDemandesPermissions }}</p>
+                            <p class="text-muted">Nombre total de demandes de Permission</p>
+                          </div>
+                          <div class="col-xs-3">
+                            <p class="h3 font-bold m-t">{{ stats.nbDemandesEnCours }}</p>
+                            <p class="text-muted">Nombre de Demandes En Cours</p>                        
+                          </div>
+                        </div>
+                      </footer>
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <label> Taux de congés Validés </label> | 
+                          <div class="progress progress-sm m-t-sm">
+                           <div class="progress-bar bg-primary" data-toggle="tooltip" data-original-title="{{stats.taux_conge }}%" style="width: {{stats.taux_conge }}%"></div>
+                          </div>
+                        <label> Taux de permissions validés </label> | 
+                        <div class="progress progress-sm progress-striped  active">
+                          <div class="progress-bar bg-info lter" data-toggle="tooltip" data-original-title="{{stats.taux_absence }}%" style="width: {{stats.taux_absence }}%"></div>
+                        </div>
+                        <label> Taux de demandes en cours </label> | 
+                        <div class="progress progress-sm progress-striped">
+                          <div class="progress-bar bg-warning" data-toggle="tooltip" data-original-title="{{ stats.taux_demande_encours }}%" style="width:{{ stats.taux_demande_encours }}%"></div>
+                        </div>
+                        <label> Taux de demandes refusées</label> | 
+                        <div class="progress progress-sm progress-striped">
+                          <div class="progress-bar bg-danger" data-toggle="tooltip" data-original-title="{{ stats.taux_demande_refusee }}%" style="width: {{ stats.taux_demande_refusee }}%"></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+                </div>
+                    <div class="row">
+                <div class="col-lg-6">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                    Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{stats.nbDemandesCongesRefuses}}<small> Congé(s) Refusé(s)</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{stats.taux_conge_refuse}}" data-bar-color="#fcc633" data-line-width="16" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{stats.taux_conge_refuse}}</span>%
+                            <div class="text text-sm">Congés Refusés</div>
+                          </div>
+                        </div>
+                      </div>                      
+                    </div>
+                    <div class="panel-footer"><small><center>pourcentage du taux des demandés de Congés Refusés</center></small></div>
+                  </section>
+                </div>
+                <div class="col-lg-6">
+                  <section class="panel panel-default">
+                    <header class="panel-heading">
+                     Taux en % année en cours
+                    </header>
+                    <div class="panel-body text-center">
+                      <h4>{{stats.nbDemandesPermissionsRefuses}}<small> Permission(s) rejetée(s)</small></h4>
+                      <div class="inline">
+                        <div class="easypiechart" data-percent="{{ stats.taux_absence_refuse}}" data-line-width="6" data-loop="false" data-size="188">
+                          <div>
+                            <span class="h2 m-l-sm step">{{ stats.taux_absence_refuse}}</span>%
+                            <div class="text text-sm">Permission Rejetées</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-footer"><small><center>pourcentage du taux d'Absence Refusées</center></small></div>
+                  </section>
+                </div>
+            {% endfor %}
+            </div>      
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                 
+                    </div>
+                    <div class="col-sm-4 text-center">
+                     
+                    </div>
+                  </div>
+                </footer>
+              </section>
+        </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+      </section>
+    </section>
+    <style>
+        th,td{
+            text-align: center;
+        }
+</style>
+    {% endblock %}
