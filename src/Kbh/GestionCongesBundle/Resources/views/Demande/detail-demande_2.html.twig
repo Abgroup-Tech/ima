@@ -130,7 +130,7 @@
                             <hr/>
                             <div class="row">
                                  <div class="col-md-4" style="border-left: 6px solid rgb(238, 130, 238); margin-left: 14px;">
-                                    <h3>Informations demandeur:</h3>
+                                    <h3>Demandeur:</h3>
                                     <ul class="list-unstyled">
                                         <li>
                                             <strong>{{entity.salarie.civilite}} {{entity.salarie.nomprenom}}</strong>
@@ -151,19 +151,19 @@
                                 </div>
                                   {% if entity.CreeParSuperviseur == 1%}      
                                  <div class=" pull-right col-md-4" style="border-left: 6px solid violet;">
-                                    <h3>Informations sur la demande:</h3>
+                                    <h3>Demande:</h3>
                                     <ul class="list-unstyled">
                                         <li>
-                                            Auteur de la demande :<strong>{{entity.auteurDemande.civilite}} {{entity.auteurDemande.nomprenom}}</strong>
+                                            Auteur :<strong>{{entity.auteurDemande.civilite}} {{entity.auteurDemande.nomprenom}}</strong>
                                         </li>
                                         <li>
                                             Unité : <strong>{{ entity.auteurDemande.unite }}</strong>
                                         </li>
                                         <li>
-                                            Motif de la demande : <strong>{{entity.autreMotif}}</strong>
+                                            Motif : <strong>{{entity.autreMotif}}</strong>
                                         </li>
                                         <li>
-                                            <i class="fa fa-paperclip"></i> Pièce jointe à la demande : <a href="{{ asset(entity.pieceJointe.downloadPath) }}" download="{{entity.pieceJointe.path}}" title="Telecharger"><strong>{{ entity.pieceJointe.name  }}</strong></a><br><br>
+                                            <i class="fa fa-paperclip"></i> Pièce jointe : <a href="{{ asset(entity.pieceJointe.downloadPath) }}" download="{{entity.pieceJointe.path}}" title="Telecharger"><strong>{{ entity.pieceJointe.name  }}</strong></a><br><br>
                                         </li>
 
                                     </ul>
@@ -200,19 +200,18 @@
                                             {% if entity.salarie.unite.estService or entity.salarie.unite.estDepartement %}
                                                 du {{ entity.salarie.unite }},
                                             {% else %}
-                                                de la
-                                                {{ entity.salarie.unite }} ,
+                                                ({{ entity.salarie.unite }}) ,
                                             {% endif %}<br>
                                             je viens, par la présente, solliciter
                                             <strong>{{ entity.nbjoursOuvrables }} jour(s)</strong>
-                                            de congés, du
+                                            de congé, du
                                             <strong>{{ entity.dateDebut|date('d-m-Y') }}</strong>
                                             (date effective de début), au
                                             <strong> {{ entity.dateFin|date('d-m-Y') }}</strong>
                                             (date de fin de congé) ; je reprendrai le service le
                                             <strong>{{ entity.dateRetour|date('d-m-Y') }}</strong>
                                             matin.<br><br>
-                                            Je voudrais, à toutes fins utiles, porter à votre connaissance que mes droits à congé des années précédentes s'établissent à {{entity.salarie.droits.reliquatDroitsAnterieur}} jour(s), majorés de {{entity.salarie.droits.droitsAcquisAnneeEnCours}} jour(s) acquis au titre de l'année {{ entity.dateDemande|date('Y')}}. Je dispose à ce jour, de <strong>{{ entity.soldeDroits}} jour(s)</strong> de droits à congé.
+                                            Je voudrais, à toutes fins utiles, porter à votre connaissance que mes droits à congé des années précédentes s'établissent à {{entity.salarie.droits.reliquatDroitsAnterieur}} jour(s), majorés de {{entity.salarie.droits.droitsAcquisAnneeEnCours}} jour(s) acquis au titre de l'année {{ entity.dateDemande|date('Y')}}.<br/> Je dispose à ce jour, de <strong>{{ entity.soldeDroits}} jour(s)</strong> de droits à congé.
                                             <br>
                                         {% endif %}
                                         {% if entity.typeDemande == 'Permission' %}
